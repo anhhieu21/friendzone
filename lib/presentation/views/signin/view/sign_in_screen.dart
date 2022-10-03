@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/views/signin/view/widgets/button_sigin.dart';
 import 'package:go_router/go_router.dart';
 import 'package:friendzone/presentation/views/signin/view/widgets/social_button.dart';
@@ -21,19 +22,26 @@ class SignInScreen extends StatelessWidget {
             children: [
               const TitleSignIn(),
               CustomTextField(
-                  controller: nameController,
-                  label: 'Tên đăng nhập',
-                  hint: 'tên hoặc số điện thoại'),
+                controller: nameController,
+                label: 'Tên đăng nhập',
+                hint: 'email',
+                error: 'Vui lòng nhập email',
+              ),
               CustomTextField(
-                  controller: passController,
-                  label: 'Mật khẩu',
-                  hint: '6 kí tự trở lên'),
+                controller: passController,
+                label: 'Mật khẩu',
+                hint: '6 kí tự trở lên',
+                error: 'Vui lòng nhập mật khẩu',
+              ),
               Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
                       onPressed: () {}, child: const Text('Quên mật khẩu'))),
               const SizedBox(height: 10),
-              const SiginButton(),
+              SiginButton(
+                onPress: () => GoRouter.of(context).go(RoutePath.main),
+                label: 'Đăng nhập',
+              ),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 40),
                 child: Text('Hoặc đăng nhập với'),
@@ -45,7 +53,9 @@ class SignInScreen extends StatelessWidget {
                 children: [
                   const Text('Bạn chưa có tài khoản?'),
                   TextButton(
-                      onPressed: () {}, child: const Text('Đăng ký ngay'))
+                      onPressed: () =>
+                          GoRouter.of(context).go(RoutePath.signup),
+                      child: const Text('Đăng ký ngay'))
                 ],
               )
             ],

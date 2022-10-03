@@ -4,11 +4,12 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
   final String hint;
+  final String error;
   const CustomTextField(
       {super.key,
       required this.controller,
       required this.label,
-      required this.hint});
+      required this.hint, required this.error});
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,12 @@ class CustomTextField extends StatelessWidget {
               borderSide: BorderSide.none,
             ),
           ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return error;
+            }
+            return null;
+          },
         ),
       ],
     );

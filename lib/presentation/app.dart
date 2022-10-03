@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/themes/theme.dart';
-import 'package:friendzone/presentation/views/home/view/home_screen.dart';
+import 'package:friendzone/presentation/views/main_screen.dart';
+import 'package:friendzone/presentation/views/signin/sign_up_screen.dart';
 import 'package:friendzone/presentation/views/signin/view/sign_in_screen.dart';
+import 'package:friendzone/presentation/views/view.dart';
 import 'package:go_router/go_router.dart';
 
 class App extends StatelessWidget {
@@ -18,17 +21,35 @@ class App extends StatelessWidget {
   }
 
   final GoRouter _router = GoRouter(
-    routes: <GoRoute>[
+    routes: [
       GoRoute(
-        path: '/',
+          path: RoutePath.main,
+          builder: (BuildContext context, GoRouterState state) {
+            return const MainScreen();
+          },
+          routes: [
+            GoRoute(
+              path: RoutePath.home,
+              builder: (BuildContext context, GoRouterState state) {
+                return const HomeScreen();
+              },
+            ),
+            GoRoute(
+                path: RoutePath.profile,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const ProfileScreen();
+                })
+          ]),
+      GoRoute(
+        path: RoutePath.signin,
         builder: (BuildContext context, GoRouterState state) {
-          return const HomeScreen();
+          return SignInScreen();
         },
       ),
       GoRoute(
-        path: '/signin',
+        path: RoutePath.signup,
         builder: (BuildContext context, GoRouterState state) {
-          return SignInScreen();
+          return SignUpScreen();
         },
       ),
     ],

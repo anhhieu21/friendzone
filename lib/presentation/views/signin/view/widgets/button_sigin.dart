@@ -3,7 +3,9 @@ import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 
 class SiginButton extends StatelessWidget {
-  const SiginButton({super.key});
+  final Function() onPress;
+  final String label;
+  const SiginButton({super.key, required this.onPress, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +21,15 @@ class SiginButton extends StatelessWidget {
             offset: const Offset(0, 5)),
       ]),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPress,
         style: ElevatedButton.styleFrom(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             elevation: 0,
             backgroundColor: colorPinkButton.shade300),
-        child: const Text(
-          'Đăng nhập',
-          style: TextStyle(fontWeight: FontWeight.bold, color: colorWhite),
+        child:  Text(
+          label,
+          style:const TextStyle(fontWeight: FontWeight.bold, color: colorWhite),
         ),
       ),
     );

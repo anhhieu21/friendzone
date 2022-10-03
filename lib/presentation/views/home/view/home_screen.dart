@@ -1,79 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:friendzone/presentation/views/home/view/widgets/app_bar.dart';
+import 'package:go_router/go_router.dart';
+import 'package:latlong2/latlong.dart';
 
-class HomeScreen extends StatefulWidget {
+const urlImg =
+    'https://images.unsplash.com/photo-1664574654700-75f1c1fad74e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80';
+
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  // This widget is the home Screen of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
+      appBar: const CustomAppBar(),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+        child: Stack(
+          children: [
+            // FlutterMap(
+            //   mapController: MapController(),
+            //   options: MapOptions(
+            //     center: LatLng(51.5, -0.09),
+            //     zoom: 1,
+            //   ),
+            //   children: [
+            //     TileLayer(
+            //       urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+            //       userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+            //     ),
+            //     MarkerLayer(
+            //       markers: [
+            //         Marker(
+            //           point: LatLng(16.049680, 108.213287),
+            //           width: 120,
+            //           height: 100,
+            //           builder: (context) => Row(
+            //             children: const [
+            //               CircleAvatar(
+            //                 radius: 20,
+            //                 backgroundImage: NetworkImage(urlImg),
+            //               ),
+            //               Text(
+            //                 'UserName',
+            //                 style: TextStyle(fontWeight: FontWeight.w600),
+            //               )
+            //             ],
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+
+            //     PolylineLayer(
+            //       polylineCulling: false,
+            //       polylines: [
+            //         Polyline(
+            //           points: [
+            //             LatLng(16.049680 + 1, 108.213287 + 1),
+            //             LatLng(16.049680, 108.213287 + 2),
+            //             LatLng(16.049680 + 2, 108.213287 + 3),
+            //           ],
+            //           color: Colors.blue,
+            //         ),
+            //       ],
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
