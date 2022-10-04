@@ -50,11 +50,17 @@ class App extends StatelessWidget {
           builder: (BuildContext context, GoRouterState state) {
             return const MainScreen();
           },
-          routes: [
+          routes: <RouteBase>[
             GoRoute(
               path: RoutePath.home,
               builder: (BuildContext context, GoRouterState state) {
                 return const HomeScreen();
+              },
+            ),
+            GoRoute(
+              path: RoutePath.writepost,
+              builder: (BuildContext context, GoRouterState state) {
+                return const WritePost();
               },
             ),
             GoRoute(

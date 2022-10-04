@@ -41,8 +41,8 @@ class ItemPost extends StatelessWidget {
             ))),
         Positioned(
             bottom: 0,
-            left: 20,
-            right: 20,
+            left: 0,
+            right: 0,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

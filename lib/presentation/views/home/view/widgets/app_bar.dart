@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/themes/color.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
@@ -18,14 +20,14 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
           SizedBox(
             width: 6,
           ),
-          Text('Hello Hieu'),
+          Text('Good morning Hieu'),
         ],
       ),
       actions: [
         IconButton(
-            onPressed: () {},
+            onPressed: () => context.go(RoutePath.writepost),
             icon: Icon(
-              Ionicons.person_add,
+              Ionicons.create_outline,
               color: colorGrey.shade700,
             )),
         IconButton(
@@ -33,7 +35,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             icon: Stack(
               children: [
                 Icon(
-                  Ionicons.notifications,
+                  Ionicons.notifications_outline,
                   color: colorGrey.shade700,
                 ),
                 Positioned(
