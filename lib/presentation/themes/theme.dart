@@ -12,4 +12,10 @@ final ThemeData themeData = ThemeData.light().copyWith(
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedItemColor: Color.fromARGB(255, 200, 34, 175),
       unselectedItemColor: Color.fromARGB(255, 68, 68, 68),
-    ));
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+            foregroundColor: colorWhite,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            elevation: 0)));

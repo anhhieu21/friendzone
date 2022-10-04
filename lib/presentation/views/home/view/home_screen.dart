@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
+import 'package:friendzone/common/constants/list_img_fake.dart';
+import 'package:friendzone/common/extentions/size_extention.dart';
+import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/home/view/widgets/app_bar.dart';
-import 'package:go_router/go_router.dart';
-import 'package:latlong2/latlong.dart';
 
 const urlImg =
     'https://images.unsplash.com/photo-1664574654700-75f1c1fad74e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80';
@@ -12,60 +12,90 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = BuildContextX(context).screenSize;
     return Scaffold(
       appBar: const CustomAppBar(),
       body: Center(
-        child: Stack(
-          children: [
-            // FlutterMap(
-            //   mapController: MapController(),
-            //   options: MapOptions(
-            //     center: LatLng(51.5, -0.09),
-            //     zoom: 1,
-            //   ),
-            //   children: [
-            //     TileLayer(
-            //       urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-            //       userAgentPackageName: 'dev.fleaflet.flutter_map.example',
-            //     ),
-            //     MarkerLayer(
-            //       markers: [
-            //         Marker(
-            //           point: LatLng(16.049680, 108.213287),
-            //           width: 120,
-            //           height: 100,
-            //           builder: (context) => Row(
-            //             children: const [
-            //               CircleAvatar(
-            //                 radius: 20,
-            //                 backgroundImage: NetworkImage(urlImg),
-            //               ),
-            //               Text(
-            //                 'UserName',
-            //                 style: TextStyle(fontWeight: FontWeight.w600),
-            //               )
-            //             ],
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-
-            //     PolylineLayer(
-            //       polylineCulling: false,
-            //       polylines: [
-            //         Polyline(
-            //           points: [
-            //             LatLng(16.049680 + 1, 108.213287 + 1),
-            //             LatLng(16.049680, 108.213287 + 2),
-            //             LatLng(16.049680 + 2, 108.213287 + 3),
-            //           ],
-            //           color: Colors.blue,
-            //         ),
-            //       ],
-            //     ),
-            //   ],
-            // ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: size.width / 4,
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: listPost.length,
+                    itemBuilder: (context, index) {
+                      final item = listPost[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Container(
+                            width: size.width / 4,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 2, color: colorPinkButton.shade300),
+                                borderRadius: BorderRadius.circular(25)),
+                            child: Container(
+                              margin: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                      image: NetworkImage(item),
+                                      fit: BoxFit.cover)),
+                            )),
+                      );
+                    }),
+              ),
+              ListView.builder(
+                  itemCount: listPost.length,
+                  itemBuilder: (context, index) {
+                    final item = listPost[index];
+                    return Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 24,
+                                    backgroundImage: NetworkImage(item),
+                                  ),
+                                  const Expanded(
+                                    child: ListTile(
+                                      contentPadding: EdgeInsets.only(left: 5),
+                                      title: Text(
+                                        'UserName',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      subtitle: Text('19-10-2022'),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: size.width,
+                              height: size.width / 1.5,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  image: DecorationImage(
+                                      image: NetworkImage(item),
+                                      fit: BoxFit.cover)),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
+            ],
+          ),
         ),
       ),
     );

@@ -5,3 +5,4 @@ const colorWhite = Colors.white;
 const colorGrey = Colors.grey;
 const colorRed = Colors.red;
 const colorBlack = Colors.black;
+const colorBlue = Colors.blue;
