@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/domain/repositories/auth_repository.dart';
+import 'package:friendzone/domain/repositories/post_repository.dart';
 import 'package:friendzone/presentation/bloc/auth_bloc.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/themes/theme.dart';
@@ -11,13 +12,18 @@ import 'package:friendzone/presentation/views/signin/view/sign_in_screen.dart';
 import 'package:friendzone/presentation/views/view.dart';
 import 'package:go_router/go_router.dart';
 
+import 'views/post/cubit/write_post_cubit.dart';
+
 class App extends StatelessWidget {
   App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => AuthRepository(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (context) => AuthRepository()),
+        RepositoryProvider(create: (context) => PostRepository()),
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -27,7 +33,10 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 SignUpBloc(RepositoryProvider.of<AuthRepository>(context)),
-          )
+          ),
+          BlocProvider(
+              create: (context) => WritePostCubit(
+                  RepositoryProvider.of<PostRepository>(context))),
         ],
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,

@@ -7,7 +7,6 @@ part 'friendzone_state.dart';
 class FriendzoneBloc extends Bloc<FriendzoneEvent, FriendzoneState> {
   FriendzoneBloc() : super(FriendzoneInitial()) {
     on<FriendzoneEvent>((event, emit) {
-      // TODO: implement event handler
     });
   }
 }

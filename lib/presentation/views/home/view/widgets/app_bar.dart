@@ -25,7 +25,10 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-            onPressed: () => context.go(RoutePath.writepost),
+            onPressed: () {
+              
+              context.go('/${RoutePath.writepost}');
+            },
             icon: Icon(
               Ionicons.create_outline,
               color: colorGrey.shade700,
