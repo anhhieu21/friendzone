@@ -9,15 +9,25 @@ abstract class WritePostState extends Equatable {
 
 class WritePostInitial extends WritePostState {}
 
+class WritePostChoseImage extends WritePostState {
+  final File file;
+  const WritePostChoseImage(this.file);
+  @override
+  List<Object> get props => [file];
+}
+
 class WritePostUploading extends WritePostState {
   const WritePostUploading();
   @override
   List<Object> get props => [];
-}class WritePostUploadSucces extends WritePostState {
+}
+
+class WritePostUploadSucces extends WritePostState {
   const WritePostUploadSucces();
   @override
   List<Object> get props => [];
 }
+
 class WritePostFaild extends WritePostState {
   const WritePostFaild();
   @override

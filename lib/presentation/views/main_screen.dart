@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/presentation/views/signin/view/sign_in_screen.dart';
 import 'package:friendzone/presentation/views/view.dart';
 import 'package:ionicons/ionicons.dart';
+
+import 'home/bloc/allpost/all_post_cubit.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -14,6 +17,12 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   final PageController _pageController = PageController();
   int _selectedIndex = 0;
+  @override
+  void initState() {
+    BlocProvider.of<AllPostCubit>(context).getAllPost();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(

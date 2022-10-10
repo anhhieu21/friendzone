@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/common/constants/list_img_fake.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friendzone/presentation/views/home/bloc/allpost/all_post_cubit.dart';
 import 'package:friendzone/presentation/views/home/view/widgets/post_item.dart';
 
 class ListPost extends StatelessWidget {
@@ -7,13 +8,28 @@ class ListPost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        shrinkWrap: true,
-        itemCount: listPost.length,
-        physics: const ScrollPhysics(),
-        itemBuilder: (context, index) {
-          final item = listPost[index];
-          return PostItem(item: item);
-        });
+    return BlocBuilder<AllPostCubit, AllPostState>(
+      builder: (context, state) {
+        if (state is AllPostShow) {
+          if (state.listPost.isEmpty) {
+            return const Center(
+              child: Text('Không có bài viết nào cả'),
+            );
+          }
+          return ListView.builder(
+              shrinkWrap: true,
+              itemCount: state.listPost.length,
+              physics: const ScrollPhysics(),
+              itemBuilder: (context, index) {
+                final item = state.listPost[index];
+                return PostItem(item: item);
+              });
+        } else {
+          return const Center(
+            child: Text('Không có bài viết nào cả'),
+          );
+        }
+      },
+    );
   }
 }

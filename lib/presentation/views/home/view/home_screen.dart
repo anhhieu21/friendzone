@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/presentation/themes/color.dart';
+import 'package:friendzone/presentation/views/home/bloc/allpost/all_post_cubit.dart';
 import 'package:friendzone/presentation/views/home/view/widgets/app_bar.dart';
 import 'package:friendzone/presentation/views/home/view/widgets/list_post.dart';
 
@@ -16,7 +18,8 @@ class HomeScreen extends StatelessWidget {
     final size = BuildContextX(context).screenSize;
     return Scaffold(
       appBar: const CustomAppBar(),
-      body: Center(
+      body: RefreshIndicator(
+        onRefresh: () => BlocProvider.of<AllPostCubit>(context).getAllPost(),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -25,7 +28,7 @@ class HomeScreen extends StatelessWidget {
                 height: size.width / 2.5,
                 child: ListView.builder(
                     shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
+                    scrollDirection: Axis.horizontal, 
                     itemCount: listPost.length,
                     itemBuilder: (context, index) {
                       final item = listPost[index];

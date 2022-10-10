@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
+import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:ionicons/ionicons.dart';
 
 class PostItem extends StatelessWidget {
-  final String item;
+  final Post item;
   const PostItem({
     Key? key,
     required this.item,
@@ -29,16 +30,16 @@ class PostItem extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 24,
-                      backgroundImage: NetworkImage(item),
+                      backgroundImage: NetworkImage(item.imageUrl),
                     ),
-                    const Expanded(
+                    Expanded(
                       child: ListTile(
-                        contentPadding: EdgeInsets.only(left: 5),
+                        contentPadding: const EdgeInsets.only(left: 5),
                         title: Text(
-                          'UserName',
-                          style: TextStyle(fontWeight: FontWeight.w600),
+                          item.email,
+                          style: const TextStyle(fontWeight: FontWeight.w600),
                         ),
-                        subtitle: Text('19-10-2022'),
+                        subtitle: const Text('19-10-2022'),
                       ),
                     ),
                     IconButton(
@@ -53,7 +54,7 @@ class PostItem extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     image: DecorationImage(
-                        image: NetworkImage(item), fit: BoxFit.cover)),
+                        image: NetworkImage(item.imageUrl), fit: BoxFit.cover)),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,7 +67,7 @@ class PostItem extends StatelessWidget {
                             Ionicons.heart_outline,
                             color: colorBlue.shade400,
                           ),
-                          const Text('124')
+                          Text(item.like)
                         ],
                       )),
                   IconButton(

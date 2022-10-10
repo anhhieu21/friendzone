@@ -12,6 +12,7 @@ import 'package:friendzone/presentation/views/signin/view/sign_in_screen.dart';
 import 'package:friendzone/presentation/views/view.dart';
 import 'package:go_router/go_router.dart';
 
+import 'views/home/bloc/allpost/all_post_cubit.dart';
 import 'views/post/cubit/write_post_cubit.dart';
 
 class App extends StatelessWidget {
@@ -37,6 +38,10 @@ class App extends StatelessWidget {
           BlocProvider(
               create: (context) => WritePostCubit(
                   RepositoryProvider.of<PostRepository>(context))),
+          BlocProvider(
+              create: (context) =>
+                  AllPostCubit(RepositoryProvider.of<PostRepository>(context))
+                    ),
         ],
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
@@ -69,7 +74,7 @@ class App extends StatelessWidget {
             GoRoute(
               path: RoutePath.writepost,
               builder: (BuildContext context, GoRouterState state) {
-                return const WritePost();
+                return WritePost();
               },
             ),
             GoRoute(
