@@ -44,40 +44,43 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBJ1m9lUMCLGj6nDrdPTAvPaYnfBXnCMv8',
-    appId: '1:285615136885:web:99da2cb224a442570e183c',
-    messagingSenderId: '285615136885',
-    projectId: 'friendzone-3545a',
-    authDomain: 'friendzone-3545a.firebaseapp.com',
-    storageBucket: 'friendzone-3545a.appspot.com',
-    measurementId: 'G-GW9JKNHYKF',
+    apiKey: 'AIzaSyDqauoeMPgD_XscBHLGk92WH36xfufxr38',
+    appId: '1:910759694385:web:2f18c95883dd6972070510',
+    messagingSenderId: '910759694385',
+    projectId: 'asm-mob403-5ba29',
+    authDomain: 'asm-mob403-5ba29.firebaseapp.com',
+    databaseURL: 'https://asm-mob403-5ba29-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'asm-mob403-5ba29.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCA2BWbymVtj_8jK0mFQY5jE0iysITj6yM',
-    appId: '1:285615136885:android:296faa4a9dc886ad0e183c',
-    messagingSenderId: '285615136885',
-    projectId: 'friendzone-3545a',
-    storageBucket: 'friendzone-3545a.appspot.com',
+    apiKey: 'AIzaSyDlY4DJJIbxJ-wdCruJwmpRTzU8eYEzSzs',
+    appId: '1:910759694385:android:94daceecf5e4b664070510',
+    messagingSenderId: '910759694385',
+    projectId: 'asm-mob403-5ba29',
+    databaseURL: 'https://asm-mob403-5ba29-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'asm-mob403-5ba29.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC1vAaMbdb4u-nGGr1HyPyABwhUfnWuh1k',
-    appId: '1:285615136885:ios:a1ae401d833b6c720e183c',
-    messagingSenderId: '285615136885',
-    projectId: 'friendzone-3545a',
-    storageBucket: 'friendzone-3545a.appspot.com',
-    iosClientId: '285615136885-c67lsdt6a8n0gmjrtcptg59ujhfp40ee.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBkxjMbJcvyy0cvD0knRQbbyoIW9tZ5bhE',
+    appId: '1:910759694385:ios:337feda97928857d070510',
+    messagingSenderId: '910759694385',
+    projectId: 'asm-mob403-5ba29',
+    databaseURL: 'https://asm-mob403-5ba29-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'asm-mob403-5ba29.appspot.com',
+    iosClientId: '910759694385-l0sg5s3m9khhes7je0r2evolvruah10r.apps.googleusercontent.com',
     iosBundleId: 'com.example.friendzone',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyC1vAaMbdb4u-nGGr1HyPyABwhUfnWuh1k',
-    appId: '1:285615136885:ios:a1ae401d833b6c720e183c',
-    messagingSenderId: '285615136885',
-    projectId: 'friendzone-3545a',
-    storageBucket: 'friendzone-3545a.appspot.com',
-    iosClientId: '285615136885-c67lsdt6a8n0gmjrtcptg59ujhfp40ee.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBkxjMbJcvyy0cvD0knRQbbyoIW9tZ5bhE',
+    appId: '1:910759694385:ios:337feda97928857d070510',
+    messagingSenderId: '910759694385',
+    projectId: 'asm-mob403-5ba29',
+    databaseURL: 'https://asm-mob403-5ba29-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'asm-mob403-5ba29.appspot.com',
+    iosClientId: '910759694385-l0sg5s3m9khhes7je0r2evolvruah10r.apps.googleusercontent.com',
     iosBundleId: 'com.example.friendzone',
   );
 }
