@@ -2,15 +2,15 @@ class Post {
   String idUser;
   String content;
   String imageUrl;
-  String email;
+  String author;
   String like;
-  DateTime createdAt;
+  String createdAt;
 
   Post(
       {required this.idUser,
       required this.content,
       required this.imageUrl,
-      required this.email,
+      required this.author,
       required this.like,
       required this.createdAt});
 
@@ -19,7 +19,7 @@ class Post {
         idUser: map['idUser'],
         content: map["content"],
         imageUrl: map["imageUrl"],
-        email: map["email"],
+        author: map["author"],
         like: map["like"],
         createdAt: map["createdAt"]);
   }

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friendzone/presentation/views/home/bloc/cubit/new_feeds_cubit.dart';
 import 'package:friendzone/presentation/views/signin/view/sign_in_screen.dart';
 import 'package:friendzone/presentation/views/view.dart';
 import 'package:ionicons/ionicons.dart';
@@ -20,6 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     BlocProvider.of<AllPostCubit>(context).getAllPost();
+    BlocProvider.of<NewFeedsCubit>(context).getAllPost();
     super.initState();
   }
 
@@ -34,11 +36,11 @@ class _MainScreenState extends State<MainScreen> {
               body: PageView(
                 physics: const NeverScrollableScrollPhysics(),
                 controller: _pageController,
-                children: const [
-                  HomeScreen(),
-                  ProfileScreen(),
-                  HomeScreen(),
-                  ProfileScreen()
+                children: [
+                  const HomeScreen(),
+                  const ChatsScreen(),
+                  FriendZoneScreen(),
+                  const ProfileScreen()
                 ],
               ),
               bottomNavigationBar: BottomNavigationBar(

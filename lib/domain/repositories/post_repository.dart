@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:friendzone/data/models/post.dart';
+import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -18,9 +19,9 @@ class PostRepository {
         'idUser': doc["idUser"],
         "content": doc["content"],
         "imageUrl": doc["imageUrl"],
-        "email": doc["email"],
+        "author": doc["author"],
         "like": doc["like"],
-        "createdAt": doc["createdAt"].toDate()
+        "createdAt": Formatter.dateTime(doc["createdAt"].toDate())
       });
       listPost.add(post);
     }
@@ -68,7 +69,8 @@ class PostRepository {
     try {
       firestore.doc(firestore.doc().id).set({
         "idUser": auth!.uid,
-        "email": auth!.email,
+        "author": auth?.displayName ??
+            auth!.email!.replaceAll(RegExp('[^A-Za-z0-9]'), ''),
         "content": content,
         "imageUrl": urlImage,
         "like": like.toString(),

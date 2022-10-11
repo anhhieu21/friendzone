@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
-import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/home/bloc/allpost/all_post_cubit.dart';
 import 'package:friendzone/presentation/views/home/view/widgets/app_bar.dart';
+import 'package:friendzone/presentation/views/home/view/widgets/list_new_feed.dart';
 import 'package:friendzone/presentation/views/home/view/widgets/list_post.dart';
 
 const urlImg =
@@ -21,36 +20,11 @@ class HomeScreen extends StatelessWidget {
       body: RefreshIndicator(
         onRefresh: () => BlocProvider.of<AllPostCubit>(context).getAllPost(),
         child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                height: size.width / 2.5,
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal, 
-                    itemCount: listPost.length,
-                    itemBuilder: (context, index) {
-                      final item = listPost[index];
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: Container(
-                            width: size.width / 4,
-                            margin: const EdgeInsets.only(top: 10),
-                            decoration: BoxDecoration(
-                                border: Border.all(width: 2, color: colorWhite),
-                                borderRadius: BorderRadius.circular(25)),
-                            child: Container(
-                              margin: const EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  image: DecorationImage(
-                                      image: NetworkImage(item),
-                                      fit: BoxFit.cover)),
-                            )),
-                      );
-                    }),
-              ),
+              ListNewFeed(size: size),
               const ListPost(),
             ],
           ),

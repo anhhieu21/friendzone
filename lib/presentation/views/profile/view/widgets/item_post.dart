@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:ionicons/ionicons.dart';
@@ -17,7 +18,10 @@ class ItemPost extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
-                  image: NetworkImage(item), fit: BoxFit.cover)),
+                  image: CachedNetworkImageProvider(
+                    item,
+                  ),
+                  fit: BoxFit.cover)),
         ),
         Positioned(
             top: 0,

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/data/models/post.dart';
@@ -30,16 +31,17 @@ class PostItem extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 24,
-                      backgroundImage: NetworkImage(item.imageUrl),
+                      backgroundImage:
+                          CachedNetworkImageProvider(item.imageUrl),
                     ),
                     Expanded(
                       child: ListTile(
                         contentPadding: const EdgeInsets.only(left: 5),
                         title: Text(
-                          item.email,
+                          item.author,
                           style: const TextStyle(fontWeight: FontWeight.w600),
                         ),
-                        subtitle: const Text('19-10-2022'),
+                        subtitle: Text(item.createdAt),
                       ),
                     ),
                     IconButton(
@@ -54,7 +56,8 @@ class PostItem extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     image: DecorationImage(
-                        image: NetworkImage(item.imageUrl), fit: BoxFit.cover)),
+                        image: CachedNetworkImageProvider(item.imageUrl),
+                        fit: BoxFit.cover)),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

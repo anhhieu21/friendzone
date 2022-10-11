@@ -1,15 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
+import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/profile/view/widgets/header_profile.dart';
+import 'package:friendzone/presentation/views/profile/view/widgets/my_posts.dart';
 
-import 'package:friendzone/presentation/views/profile/view/widgets/item_post.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
-const kMaxCrossAxisExtent = 350.0;
-
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen>
+    with TickerProviderStateMixin {
+  List<String> myTabs = [
+    'Tất cả bài viết',
+    'Chỉ mình tôi',
+    'Lưu trữ',
+  ];
+  late TabController _tabController;
+  @override
+  void initState() {
+    _tabController = TabController(length: 3, vsync: this);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = BuildContextX(context).screenSize;
@@ -21,34 +37,31 @@ class ProfileScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             HeaderProfile(size: size),
-            const Padding(
-              padding: EdgeInsets.only(top: 10, bottom: 5),
-              child: Text('All Post',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            const SizedBox(
+              height: 10,
+            ),
+            TabBar(
+                unselectedLabelColor: colorGrey,
+                indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: colorBlack.withOpacity(0.8)),
+                controller: _tabController,
+                tabs: List.generate(
+                    myTabs.length,
+                    (index) => Tab(
+                          height: 30,
+                          text: myTabs[index],
+                        ))),
+            const SizedBox(
+              height: 10,
             ),
             Expanded(
-              child: MasonryGridView.extent(
-                  maxCrossAxisExtent: kMaxCrossAxisExtent,
-                  itemCount: listPost.length,
-                  shrinkWrap: true,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  itemBuilder: (context, index) {
-                    final item = listPost[index];
-                    return ItemPost(size: size, item: item);
-                  }),
+              child: TabBarView(controller: _tabController, children: [
+                MyPosts(size: size),
+                MyPosts(size: size),
+                MyPosts(size: size)
+              ]),
             )
-            // ElevatedButton(
-            //     onPressed: () => GoRouter.of(context).go(RoutePath.signin),
-            //     style: ElevatedButton.styleFrom(
-            //         elevation: 0,
-            //         backgroundColor: colorPinkButton.shade400,
-            //         shape: RoundedRectangleBorder(
-            //             borderRadius: BorderRadius.circular(12))),
-            //     child: const Text(
-            //       'Login',
-            //       style: TextStyle(color: colorWhite),
-            //     ))
           ],
         ),
       ),
