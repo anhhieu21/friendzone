@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:friendzone/data/models/post.dart';
-import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -13,16 +12,12 @@ class PostRepository {
   final auth = FirebaseAuth.instance.currentUser;
   Future<List<Post>> getAllPost() async {
     List<Post> listPost = [];
-    QuerySnapshot querySnapshot = await firestore.get();
+    QuerySnapshot querySnapshot = await firestore
+        .where("visible", isEqualTo: true)
+        .orderBy("createdAt", descending: true)
+        .get();
     for (var doc in querySnapshot.docs) {
-      Post post = Post.fromMap({
-        'idUser': doc["idUser"],
-        "content": doc["content"],
-        "imageUrl": doc["imageUrl"],
-        "author": doc["author"],
-        "like": doc["like"],
-        "createdAt": Formatter.dateTime(doc["createdAt"].toDate())
-      });
+      Post post = Post.fromFirestore(doc);
       listPost.add(post);
     }
     return listPost;

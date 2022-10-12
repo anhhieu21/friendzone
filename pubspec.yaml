@@ -56,7 +56,8 @@ dependencies:
   permission_handler: ^10.0.2
   cached_network_image: ^3.2.2
   intl: ^0.17.0
-  dropdown_search: ^5.0.3
+  dropdown_button2: ^1.8.5
+  path: ^1.8.2
 
 dev_dependencies:
   flutter_test:

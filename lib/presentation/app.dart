@@ -4,11 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:friendzone/domain/repositories/auth_repository.dart';
 import 'package:friendzone/domain/repositories/post_repository.dart';
+import 'package:friendzone/domain/repositories/user_repository.dart';
 import 'package:friendzone/presentation/bloc/auth_bloc.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/themes/theme.dart';
 import 'package:friendzone/presentation/views/home/bloc/cubit/new_feeds_cubit.dart';
 import 'package:friendzone/presentation/views/main_screen.dart';
+import 'package:friendzone/presentation/views/profile/myaccount/my_account_cubit.dart';
 import 'package:friendzone/presentation/views/profile/view/update_profile.dart';
 import 'package:friendzone/presentation/views/signin/view/bloc/signup_bloc.dart';
 import 'package:friendzone/presentation/views/signin/view/sign_up_screen.dart';
@@ -29,6 +31,7 @@ class App extends StatelessWidget {
       providers: [
         RepositoryProvider(create: (context) => AuthRepository()),
         RepositoryProvider(create: (context) => PostRepository()),
+        RepositoryProvider(create: (context) => UserRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -44,14 +47,16 @@ class App extends StatelessWidget {
               create: (context) => WritePostCubit(
                   RepositoryProvider.of<PostRepository>(context))),
           BlocProvider(
-              create: (context) =>
-                  AllPostCubit(RepositoryProvider.of<PostRepository>(context))),
+              create: (context) => AllPostCubit(
+                  RepositoryProvider.of<PostRepository>(context),
+                  RepositoryProvider.of<UserRepository>(context))),
           BlocProvider(
               create: (context) => NewFeedsCubit(
                   RepositoryProvider.of<PostRepository>(context))),
           BlocProvider(
               create: (context) => UpdateProfileCubit(
                   RepositoryProvider.of<AuthRepository>(context))),
+          BlocProvider(create: (context) => MyAccountCubit()),
         ],
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
@@ -65,7 +70,7 @@ class App extends StatelessWidget {
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
             ],
-            supportedLocales: const [Locale('en', 'US'), Locale('vi', 'VN')],
+            supportedLocales: const [Locale('en', 'US')],
           ),
         ),
       ),

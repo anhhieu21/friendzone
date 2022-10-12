@@ -20,7 +20,7 @@ class NewFeedsCubit extends Cubit<NewFeedsState> {
             imageUrl: '0',
             author: '0',
             like: '0',
-            createdAt: ''));
+            createdAt: '', visible: true));
     emit(NewFeedsShow(allPost));
   }
 }

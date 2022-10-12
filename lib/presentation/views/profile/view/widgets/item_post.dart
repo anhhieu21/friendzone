@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:ionicons/ionicons.dart';
 
 class ItemPost extends StatelessWidget {
   final Size size;
-  final String item;
+  final Post item;
   const ItemPost({super.key, required this.size, required this.item});
 
   @override
@@ -19,7 +20,7 @@ class ItemPost extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
                   image: CachedNetworkImageProvider(
-                    item,
+                    item.imageUrl,
                   ),
                   fit: BoxFit.cover)),
         ),

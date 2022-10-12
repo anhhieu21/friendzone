@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/post/cubit/write_post_cubit.dart';
+import 'package:friendzone/presentation/views/post/view/widgets/menu_options.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -42,6 +44,11 @@ class WritePost extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Align(
+                    alignment: Alignment.centerRight, child: MenuOptions()),
+              ),
               TextField(
                 maxLength: 1000,
                 controller: contentController,

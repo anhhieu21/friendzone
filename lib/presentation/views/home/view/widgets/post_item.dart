@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/presentation/themes/color.dart';
+import 'package:friendzone/presentation/views/profile/view/widgets/header_profile.dart';
 import 'package:ionicons/ionicons.dart';
 
 class PostItem extends StatelessWidget {
@@ -31,8 +32,8 @@ class PostItem extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 24,
-                      backgroundImage:
-                          CachedNetworkImageProvider(item.imageUrl),
+                      backgroundImage: CachedNetworkImageProvider(
+                          item.avartarAuthor ?? urlAvatar),
                     ),
                     Expanded(
                       child: ListTile(

@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzone/presentation/routes/path.dart';
-import 'package:friendzone/presentation/views/profile/view/widgets/menu_more.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:friendzone/presentation/themes/color.dart';
@@ -72,15 +71,10 @@ class HeaderProfile extends StatelessWidget {
                                       color: colorBlue.shade500,
                                       fontWeight: FontWeight.w600),
                                 )),
-                            // IconButton(
-                            //     onPressed: () {},
-                            //     style: IconButton.styleFrom(
-                            //         backgroundColor: colorGrey.shade300),
-                            //     icon: Icon(
-                            //       Ionicons.ellipsis_horizontal,
-                            //       color: colorBlue.shade500,
-                            //     )),
-                            Expanded(child: MenuDrop())
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            // const MenuDrop()
                           ],
                         )
                       ],
