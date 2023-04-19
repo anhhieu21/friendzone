@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>285615136885-c67lsdt6a8n0gmjrtcptg59ujhfp40ee.apps.googleusercontent.com</string>
+	<string>817118585641-62v0c4i2jebegi1p529eu9isp7npnrrk.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.285615136885-c67lsdt6a8n0gmjrtcptg59ujhfp40ee</string>
+	<string>com.googleusercontent.apps.817118585641-62v0c4i2jebegi1p529eu9isp7npnrrk</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>817118585641-2ekgan795urfdfvd7mt31ar5supo3cfn.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyC1vAaMbdb4u-nGGr1HyPyABwhUfnWuh1k</string>
+	<string>AIzaSyAEzTwtlc2XHDQDE5CqHX88-RDA8Q8yr2Q</string>
 	<key>GCM_SENDER_ID</key>
-	<string>285615136885</string>
+	<string>817118585641</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.friendzone</string>
 	<key>PROJECT_ID</key>
-	<string>friendzone-3545a</string>
+	<string>travelzone-908f0</string>
 	<key>STORAGE_BUCKET</key>
-	<string>friendzone-3545a.appspot.com</string>
+	<string>travelzone-908f0.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:285615136885:ios:a1ae401d833b6c720e183c</string>
+	<string>1:817118585641:ios:7b23daffab904b3b02cd38</string>
 </dict>
 </plist>

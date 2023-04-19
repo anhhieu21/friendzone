@@ -44,43 +44,42 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDqauoeMPgD_XscBHLGk92WH36xfufxr38',
-    appId: '1:910759694385:web:2f18c95883dd6972070510',
-    messagingSenderId: '910759694385',
-    projectId: 'asm-mob403-5ba29',
-    authDomain: 'asm-mob403-5ba29.firebaseapp.com',
-    databaseURL: 'https://asm-mob403-5ba29-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'asm-mob403-5ba29.appspot.com',
+    apiKey: 'AIzaSyDAxYGXyK3NrVrEXeIIGNPGUDKNfoDsUyo',
+    appId: '1:817118585641:web:38b31217e02959be02cd38',
+    messagingSenderId: '817118585641',
+    projectId: 'travelzone-908f0',
+    authDomain: 'travelzone-908f0.firebaseapp.com',
+    storageBucket: 'travelzone-908f0.appspot.com',
+    measurementId: 'G-J36XJKJ1S9',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDlY4DJJIbxJ-wdCruJwmpRTzU8eYEzSzs',
-    appId: '1:910759694385:android:94daceecf5e4b664070510',
-    messagingSenderId: '910759694385',
-    projectId: 'asm-mob403-5ba29',
-    databaseURL: 'https://asm-mob403-5ba29-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'asm-mob403-5ba29.appspot.com',
+    apiKey: 'AIzaSyDKUGbs4pTgZUf7kjvI5XjWLbWafZrh3ZU',
+    appId: '1:817118585641:android:c735fd6fc095c3f202cd38',
+    messagingSenderId: '817118585641',
+    projectId: 'travelzone-908f0',
+    storageBucket: 'travelzone-908f0.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBkxjMbJcvyy0cvD0knRQbbyoIW9tZ5bhE',
-    appId: '1:910759694385:ios:337feda97928857d070510',
-    messagingSenderId: '910759694385',
-    projectId: 'asm-mob403-5ba29',
-    databaseURL: 'https://asm-mob403-5ba29-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'asm-mob403-5ba29.appspot.com',
-    iosClientId: '910759694385-l0sg5s3m9khhes7je0r2evolvruah10r.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAEzTwtlc2XHDQDE5CqHX88-RDA8Q8yr2Q',
+    appId: '1:817118585641:ios:7b23daffab904b3b02cd38',
+    messagingSenderId: '817118585641',
+    projectId: 'travelzone-908f0',
+    storageBucket: 'travelzone-908f0.appspot.com',
+    androidClientId: '817118585641-2ekgan795urfdfvd7mt31ar5supo3cfn.apps.googleusercontent.com',
+    iosClientId: '817118585641-62v0c4i2jebegi1p529eu9isp7npnrrk.apps.googleusercontent.com',
     iosBundleId: 'com.example.friendzone',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBkxjMbJcvyy0cvD0knRQbbyoIW9tZ5bhE',
-    appId: '1:910759694385:ios:337feda97928857d070510',
-    messagingSenderId: '910759694385',
-    projectId: 'asm-mob403-5ba29',
-    databaseURL: 'https://asm-mob403-5ba29-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'asm-mob403-5ba29.appspot.com',
-    iosClientId: '910759694385-l0sg5s3m9khhes7je0r2evolvruah10r.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAEzTwtlc2XHDQDE5CqHX88-RDA8Q8yr2Q',
+    appId: '1:817118585641:ios:7b23daffab904b3b02cd38',
+    messagingSenderId: '817118585641',
+    projectId: 'travelzone-908f0',
+    storageBucket: 'travelzone-908f0.appspot.com',
+    androidClientId: '817118585641-2ekgan795urfdfvd7mt31ar5supo3cfn.apps.googleusercontent.com',
+    iosClientId: '817118585641-62v0c4i2jebegi1p529eu9isp7npnrrk.apps.googleusercontent.com',
     iosBundleId: 'com.example.friendzone',
   );
 }
