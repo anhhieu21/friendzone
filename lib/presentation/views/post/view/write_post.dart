@@ -1,8 +1,10 @@
 import 'dart:io';
 
+// import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
+import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/post/cubit/write_post_cubit.dart';
 import 'package:friendzone/presentation/views/post/view/widgets/menu_options.dart';
@@ -11,9 +13,12 @@ import 'package:ionicons/ionicons.dart';
 
 class WritePost extends StatelessWidget {
   WritePost({super.key});
-  _uploadPost(BuildContext context, File? file, String content) {
+  final privateNotifi = ValueNotifier<bool?>(null);
+
+  _uploadPost(BuildContext context, File? file, String content, bool visible) {
     if (file != null && content != "") {
-      BlocProvider.of<WritePostCubit>(context).upPost(file, content, 0);
+      BlocProvider.of<WritePostCubit>(context)
+          .upPost(file, content, 0, visible);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Hay viết gì đó và chọn 1 bức ảnh thật đẹp nào !')));
@@ -25,10 +30,9 @@ class WritePost extends StatelessWidget {
   }
 
   final TextEditingController contentController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    final size = BuildContextX(context).screenSize;
+    final size = SizeEx(context).screenSize;
     return Scaffold(
         appBar: AppBar(title: const Text('Post')),
         body: BlocListener<WritePostCubit, WritePostState>(
@@ -43,10 +47,17 @@ class WritePost extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Align(
-                    alignment: Alignment.centerRight, child: MenuOptions()),
+                    alignment: Alignment.centerRight,
+                    child: MenuOptions(
+                      onChanged: (Enum? value) {
+                        if (value != null) {
+                          privateNotifi.value = getOptionPost(value);
+                        }
+                      },
+                    )),
               ),
               TextField(
                 maxLength: 1000,
@@ -75,17 +86,25 @@ class WritePost extends StatelessWidget {
                             alignment: Alignment.centerRight,
                             child: Padding(
                               padding: const EdgeInsets.all(15.0),
-                              child: ElevatedButton(
-                                onPressed: () => _uploadPost(context,
-                                    state.file, contentController.text),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: colorBlue.shade200,
-                                ),
-                                child: const Text(
-                                  'Đăng bài viết',
-                                  style: TextStyle(color: colorWhite),
-                                ),
-                              ),
+                              child: ValueListenableBuilder<bool?>(
+                                  valueListenable: privateNotifi,
+                                  builder: (context, value, child) {
+                                    print(value);
+                                    return ElevatedButton(
+                                      onPressed: () => _uploadPost(
+                                          context,
+                                          state.file,
+                                          contentController.text,
+                                          value ?? true),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: colorBlue.shade200,
+                                      ),
+                                      child: const Text(
+                                        'Đăng bài viết',
+                                        style: TextStyle(color: colorWhite),
+                                      ),
+                                    );
+                                  }),
                             ),
                           )
                         ],

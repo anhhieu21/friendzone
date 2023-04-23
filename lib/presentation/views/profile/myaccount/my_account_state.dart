@@ -11,9 +11,10 @@ class MyAccountInitial extends MyAccountState {}
 
 class MyAccountInfo extends MyAccountState {
   final Users user;
-  final List<Post> myPosts;
-  const MyAccountInfo(this.user,this.myPosts);
+  final List<Post> myPostsPublic;
+  final List<Post> myPostsPrivate;
+  const MyAccountInfo(this.user,this.myPostsPublic,this.myPostsPrivate);
 
   @override
-  List<Object> get props => [user,myPosts];
+  List<Object> get props => [user,myPostsPublic,myPostsPrivate];
 }

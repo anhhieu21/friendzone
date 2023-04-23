@@ -1,15 +1,18 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/presentation/themes/color.dart';
+import 'package:ionicons/ionicons.dart';
 
 class MenuOptions extends StatelessWidget {
-  const MenuOptions({super.key});
+  final Function(Enum? value) onChanged;
+  const MenuOptions({super.key, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
-      child: DropdownButton2(
-          onChanged: (value) {},
+      child: DropdownButton2<Enum>(
+          onChanged: (value) =>onChanged(value),
           iconDisabledColor: Colors.grey,
           buttonHeight: 25,
           buttonWidth: 130,
@@ -29,16 +32,16 @@ class MenuOptions extends StatelessWidget {
           isExpanded: true,
           hint: const Text('Tuỳ chọn'),
           items: [
-            DropdownMenuItem<String>(
-              value: 'sfdsd',
+            DropdownMenuItem<Enum>(
+              value: OptionPost.public,
               child: Row(
-                children: const [Text('Công khai'), Icon(Icons.public)],
+                children: const [Text('Công khai'), Icon(Ionicons.earth)],
               ),
             ),
-            DropdownMenuItem<String>(
-              value: 'sfdsd',
+            DropdownMenuItem<Enum>(
+              value: OptionPost.private,
               child: Row(
-                children: const [Text('Công khai'), Icon(Icons.public)],
+                children: const [Text('Riêng tư'), Icon(Ionicons.lock_closed)],
               ),
             ),
           ]),

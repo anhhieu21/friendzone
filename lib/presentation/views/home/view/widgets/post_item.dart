@@ -15,7 +15,7 @@ class PostItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = BuildContextX(context).screenSize;
+    final size = SizeEx(context).screenSize;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -49,6 +49,12 @@ class PostItem extends StatelessWidget {
                         onPressed: () {},
                         icon: const Icon(Ionicons.ellipsis_horizontal)),
                   ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  item.content,
                 ),
               ),
               Container(

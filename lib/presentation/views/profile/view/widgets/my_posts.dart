@@ -13,18 +13,23 @@ class MyPosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MyAccountCubit, MyAccountState>(
+      buildWhen: (previous, current) {
+        return previous != current;
+      },
       builder: (context, state) {
         if (state is MyAccountInfo) {
-          return MasonryGridView.extent(
-              maxCrossAxisExtent: kMaxCrossAxisExtent,
-              itemCount: state.myPosts.length,
-              shrinkWrap: true,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              itemBuilder: (context, index) {
-                final item = state.myPosts[index];
-                return ItemPost(size: size, item: item);
-              });
+          return RefreshIndicator(
+              onRefresh: () => context.read<MyAccountCubit>().myAccountInfo(),
+              child: MasonryGridView.extent(
+                  maxCrossAxisExtent: kMaxCrossAxisExtent,
+                  itemCount: state.myPostsPublic.length,
+                  shrinkWrap: true,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  itemBuilder: (context, index) {
+                    final item = state.myPostsPublic[index];
+                    return ItemPost(size: size, item: item);
+                  }));
         } else {
           return const SizedBox.shrink();
         }

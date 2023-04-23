@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:friendzone/domain/repositories/post_repository.dart';
@@ -11,10 +12,15 @@ class WritePostCubit extends Cubit<WritePostState> {
   final PostRepository _postRepository;
   WritePostCubit(this._postRepository) : super(WritePostInitial());
 
-  upPost(File file, String content, int like) async {
-    final success = await _postRepository.upPost(file, content, like: like);
+  upPost(File file, String content, int like, bool visible) async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    final success = await _postRepository.upPost(file, content,
+        like: like,
+        avartarAuthor: currentUser?.photoURL ?? '',
+        idUser: currentUser!.uid,
+        visible: visible);
     emit(const WritePostUploading());
-    if ( success) {
+    if (success) {
       emit(const WritePostUploadSucces());
     } else {
       emit(const WritePostFaild());

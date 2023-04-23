@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Users {
   String idUser;
   String avartar;
@@ -11,13 +13,14 @@ class Users {
       required this.name,
       this.post});
 
-  factory Users.fromMap(Map<String, dynamic> map) {
+  factory Users.fromFirestore(DocumentSnapshot doc) {
+    Map postFromDB = doc.data() as Map;
     return Users(
-        idUser: map["idUser"],
-        avartar: map["avartar"],
-        email: map["email"],
-        name: map["name"],
-        post: map["post"]);
+        idUser: postFromDB["idUser"],
+        avartar: postFromDB["avartar"],
+        email: postFromDB["email"],
+        name: postFromDB["name"],
+        post: postFromDB["posts"]);
   }
 }
 

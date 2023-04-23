@@ -56,7 +56,9 @@ class App extends StatelessWidget {
           BlocProvider(
               create: (context) => UpdateProfileCubit(
                   RepositoryProvider.of<AuthRepository>(context))),
-          BlocProvider(create: (context) => MyAccountCubit()),
+          BlocProvider(
+              create: (context) => MyAccountCubit(
+                  RepositoryProvider.of<UserRepository>(context))),
         ],
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,

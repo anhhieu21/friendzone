@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = BuildContextX(context).screenSize;
+    final size = SizeEx(context).screenSize;
     return Scaffold(
       appBar: const CustomAppBar(),
       body: RefreshIndicator(

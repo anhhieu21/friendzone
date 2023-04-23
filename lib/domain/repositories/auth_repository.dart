@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:path/path.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -7,11 +8,19 @@ import 'package:firebase_storage/firebase_storage.dart';
 class AuthRepository {
   final _firebaseAuth = FirebaseAuth.instance;
   final storageRef = FirebaseStorage.instance.ref();
+  final fireStore = FirebaseFirestore.instance.collection('users');
   Future<User?> signUpWithFireBase(String email, String pass) async {
     try {
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: pass);
       final user = await sendVerify(userCredential.user);
+      await fireStore.doc(user!.uid).set({
+        "idUser": user.uid,
+        "avartar": user.photoURL ?? '',
+        "email": user.email,
+        "name": user.displayName ?? user.email,
+        "posts": [],
+      });
       return user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -30,19 +39,21 @@ class AuthRepository {
     return user;
   }
 
-  Future<void> signInWithFireBase(
+  Future<bool> signInWithFireBase(
     String email,
     String password,
   ) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
+      return true;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
+      if (e.code == 'user-not-found' || e.code == "unknown") {
         throw Exception('No user found for that email.');
       } else if (e.code == 'wrong-password') {
         throw Exception('Wrong password provided for that user.');
       }
+      return false;
     }
   }
 
@@ -54,13 +65,15 @@ class AuthRepository {
     }
   }
 
+
+
   Future<bool> updateProfile(
       {String? displayName, String? phone, File? file}) async {
     try {
       String? urlImage;
       if (file != null) {
         final upLoad =
-            storageRef.child('images/${basename(file.path)}').putFile(file);
+            storageRef.child('avatar/${basename(file.path)}').putFile(file);
 
         upLoad.snapshotEvents.listen((event) async {
           switch (event.state) {
@@ -93,7 +106,7 @@ class AuthRepository {
       // if (phone!.isNotEmpty) {
       //   await _firebaseAuth.currentUser!.updatePhoneNumber(ph);
       // }
-  
+
       return true;
     } catch (e) {
       log(e.toString());

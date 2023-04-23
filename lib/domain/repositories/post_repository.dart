@@ -8,11 +8,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 class PostRepository {
   final storageRef = FirebaseStorage.instance.ref();
-  final firestore = FirebaseFirestore.instance.collection("post");
+  final firestore = FirebaseFirestore.instance;
   final auth = FirebaseAuth.instance.currentUser;
   Future<List<Post>> getAllPost() async {
     List<Post> listPost = [];
     QuerySnapshot querySnapshot = await firestore
+        .collection("post")
         .where("visible", isEqualTo: true)
         .orderBy("createdAt", descending: true)
         .get();
@@ -23,9 +24,11 @@ class PostRepository {
     return listPost;
   }
 
-  Future<bool> upPost(File file, String content, {int like = 0}) async {
-    //Tạo một tham chiếui
-
+  Future<bool> upPost(File file, String content,
+      {int like = 0,
+      bool? visible,
+      String? avartarAuthor,
+      required String idUser}) async {
     try {
       //Upload to Firebase
       final upLoad =
@@ -42,7 +45,13 @@ class PostRepository {
             break;
           case TaskState.success:
             final url = await event.ref.getDownloadURL();
-            await upFireStore(url, content, like);
+            await upFireStore(
+                urlImage: url,
+                content: content,
+                like: like,
+                visible: visible ?? true,
+                idUser: idUser,
+                avartarAuthor: avartarAuthor);
             break;
 
           case TaskState.canceled:
@@ -60,21 +69,43 @@ class PostRepository {
     }
   }
 
-  Future<bool> upFireStore(String urlImage, String content, int like) async {
+  Future<bool> upFireStore(
+      {required String urlImage,
+      String? avartarAuthor,
+      required String content,
+      required int like,
+      required String idUser,
+      bool? visible}) async {
     try {
-      firestore.doc(firestore.doc().id).set({
+      final idPost = firestore.collection("post").doc().id;
+      List<dynamic> postPath = [];
+      await firestore.collection("post").doc(idPost).set({
         "idUser": auth!.uid,
         "author": auth?.displayName ??
             auth!.email!.replaceAll(RegExp('[^A-Za-z0-9]'), ''),
         "content": content,
+        "avartarAuthor": avartarAuthor,
         "imageUrl": urlImage,
         "like": like.toString(),
-        "createdAt": DateTime.now()
+        "createdAt": DateTime.now(),
+        "visible": true
       });
+      final path = firestore.collection("post").doc(idPost).path;
+      postPath.add(path);
+      await updateMeFirestore(
+          idDoc: idUser, avartar: avartarAuthor, posts: postPath);
       return true;
     } catch (e) {
       log(e.toString());
       return false;
     }
+  }
+
+  updateMeFirestore(
+      {required String idDoc,
+      String? avartar,
+      required List<dynamic> posts}) async {
+    await firestore.collection("users").doc(idDoc).update(
+        {'avartar': avartar ?? '', 'posts': FieldValue.arrayUnion(posts)});
   }
 }

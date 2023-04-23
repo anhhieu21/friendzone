@@ -1,5 +1,5 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:friendzone/data/models/user_model.dart';
 
 class UserRepository {
@@ -8,16 +8,16 @@ class UserRepository {
     List<Users> listUser = [];
     QuerySnapshot querySnapshot = await firestore.get();
     for (var doc in querySnapshot.docs) {
-      
-      Users user = Users.fromMap({
-        "idUser": doc["idUser"],
-        'avartar': doc["avartar"],
-        "email": doc["email"],
-        "name": doc["name"],
-        "post":doc["posts"]
-      });
+      Users user = Users.fromFirestore(doc);
       listUser.add(user);
     }
     return listUser;
+  }
+
+  Future<Users> findMe() async {
+    final querySnapshot =
+        await firestore.doc(FirebaseAuth.instance.currentUser!.uid).get();
+    Users user = Users.fromFirestore(querySnapshot);
+    return user;
   }
 }

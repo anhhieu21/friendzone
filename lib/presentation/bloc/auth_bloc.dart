@@ -11,15 +11,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignInEvent>((event, emit) async {
       emit(Loading());
       try {
-        await _repository.signInWithFireBase(event.email, event.password);
-        emit(Authenticated());
+        final res =
+            await _repository.signInWithFireBase(event.email, event.password);
+        if (res) {
+          emit(Authenticated());
+        } else {
+          emit(UnAuthenticated());
+        }
       } on Exception catch (e) {
         emit(AuthError(e.toString()));
         emit(UnAuthenticated());
       }
     });
     //
-   
 
     on<SignOutRequested>((event, emit) async {
       emit(Loading());

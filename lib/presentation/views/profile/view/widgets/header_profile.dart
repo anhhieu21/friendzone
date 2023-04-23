@@ -7,6 +7,8 @@ import 'package:friendzone/presentation/themes/color.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:friendzone/presentation/views/profile/view/widgets/info_view.dart';
 
+import 'menu_more.dart';
+
 const urlAvatar =
     'https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80';
 
@@ -74,7 +76,7 @@ class HeaderProfile extends StatelessWidget {
                             const SizedBox(
                               width: 10,
                             ),
-                            // const MenuDrop()
+                            const MenuDrop()
                           ],
                         )
                       ],

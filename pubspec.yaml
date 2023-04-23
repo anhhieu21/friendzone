@@ -57,6 +57,7 @@ dependencies:
   intl: ^0.17.0
   dropdown_button2: ^1.8.5
   path: ^1.8.2
+  firebase_messaging: ^13.1.0
 
 dev_dependencies:
   flutter_test:

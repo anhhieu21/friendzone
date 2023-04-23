@@ -12,7 +12,7 @@ class ListPost extends StatelessWidget {
     return BlocListener<AllPostCubit, AllPostState>(
       listener: (context, state) {
         if (state is AllPostShow) {
-          context.read<MyAccountCubit>().myAccountInfo(state.listUser);
+          context.read<MyAccountCubit>().myAccountInfo();
         }
       },
       child: BlocBuilder<AllPostCubit, AllPostState>(

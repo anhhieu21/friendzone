@@ -22,9 +22,9 @@ class MenuDrop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      width: 50,
+    return CircleAvatar(
+      radius: 18,
+      backgroundColor: colorGrey.shade300,
       child: DropdownButtonHideUnderline(
           child: DropdownButton2(
         customButton: Icon(

@@ -14,7 +14,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(50);
   @override
   Widget build(BuildContext context) {
-    final size = BuildContextX(context).screenSize;
+    final size = SizeEx(context).screenSize;
     return AppBar(
       title: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.userChanges(),

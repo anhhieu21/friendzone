@@ -9,7 +9,7 @@ class SiginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = BuildContextX(context).screenSize;
+    final size = SizeEx(context).screenSize;
 
     return Container(
       width: size.width,
@@ -27,9 +27,10 @@ class SiginButton extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             elevation: 0,
             backgroundColor: colorPinkButton.shade300),
-        child:  Text(
+        child: Text(
           label,
-          style:const TextStyle(fontWeight: FontWeight.bold, color: colorWhite),
+          style:
+              const TextStyle(fontWeight: FontWeight.bold, color: colorWhite),
         ),
       ),
     );

@@ -27,8 +27,21 @@ class Post {
         content: postFromDB['content'],
         imageUrl: postFromDB['imageUrl'],
         author: postFromDB['author'],
+        avartarAuthor: postFromDB['avartarAuthor'],
         like: postFromDB['like'] ?? '0',
         visible: postFromDB['visible'],
         createdAt: Formatter.dateTime(postFromDB["createdAt"].toDate()));
+  }
+}
+
+enum OptionPost { private, public }
+
+getOptionPost(Enum value) {
+  switch (value) {
+    case OptionPost.private:
+      return false;
+    case OptionPost.public:
+      return true;
+    default:
   }
 }
