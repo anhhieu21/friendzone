@@ -7,7 +7,8 @@ import 'package:friendzone/presentation/views/profile/cubit/update/update_profil
 import 'package:friendzone/presentation/views/widgets/custom_textfield.dart';
 import 'package:ionicons/ionicons.dart';
 
-import 'widgets/header_profile.dart';
+import '../../../../common/constants/list_img_fake.dart';
+
 
 class UpdateProfileScreen extends StatelessWidget {
   final User userDetail;

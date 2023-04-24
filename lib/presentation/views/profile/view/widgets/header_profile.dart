@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
@@ -9,8 +10,6 @@ import 'package:friendzone/presentation/views/profile/view/widgets/info_view.dar
 
 import 'menu_more.dart';
 
-const urlAvatar =
-    'https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80';
 
 class HeaderProfile extends StatelessWidget {
   final Size size;

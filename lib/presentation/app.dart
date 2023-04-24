@@ -10,7 +10,7 @@ import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/themes/theme.dart';
 import 'package:friendzone/presentation/views/home/bloc/cubit/new_feeds_cubit.dart';
 import 'package:friendzone/presentation/views/main_screen.dart';
-import 'package:friendzone/presentation/views/profile/myaccount/my_account_cubit.dart';
+import 'package:friendzone/presentation/views/profile/cubit/myaccount/my_account_cubit.dart';
 import 'package:friendzone/presentation/views/profile/view/update_profile.dart';
 import 'package:friendzone/presentation/views/signin/view/bloc/signup_bloc.dart';
 import 'package:friendzone/presentation/views/signin/view/sign_up_screen.dart';
@@ -29,7 +29,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (context) => AuthRepository()),
+        RepositoryProvider(create: (context) => AuthRepository.instance),
         RepositoryProvider(create: (context) => PostRepository()),
         RepositoryProvider(create: (context) => UserRepository()),
       ],

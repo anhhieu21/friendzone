@@ -1,55 +1,52 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/data/models/user_model.dart';
+import 'package:friendzone/domain/repositories/auth_repository.dart';
 
 class UserRepository {
   final firestore = FirebaseFirestore.instance;
-  Future<List<Users>> getAllUser() async {
-    List<Users> listUser = [];
+  final userFromFireBase = AuthRepository.instance.user;
+  Future<List<UserModel>> getAllUser() async {
+    List<UserModel> listUser = [];
     QuerySnapshot querySnapshot = await firestore.collection("users").get();
     for (var doc in querySnapshot.docs) {
-      Users user = Users.fromMap(doc);
+      UserModel user = UserModel.fromDocFireStore(doc);
       listUser.add(user);
     }
     return listUser;
   }
 
-  Future<Users> findMe() async {
-    final querySnapshot =
-        await firestore.doc(FirebaseAuth.instance.currentUser!.uid).get();
-    Users user = Users.fromMap(querySnapshot);
-    return user;
-  }
   Future<void> insertUserToFireStore(User user) async {
     try {
-      await firestore.doc(user.uid).set({
+      await firestore.collection('users').doc(user.uid).set({
         "idUser": user.uid,
-        "avartar": user.photoURL,
+        "avartar": user.photoURL ?? urlAvatar,
         "email": user.email,
-        "name": user.displayName,
-        "followed": false,
+        "name": user.displayName ?? user.email,
+        "phone": user.phoneNumber,
+        "posts": [],
       });
     } on FirebaseAuthException catch (e) {
       log(e.message.toString());
     }
   }
 
-  Future<Users> getUser() async {
-    final doc = await firestore.collection("users").doc("idUser").get();
-    Users user = Users.fromMap(doc);
-    return user;
+  Future<UserModel> findMe() async {
+    final user = FirebaseAuth.instance.currentUser!;
+    final doc = await firestore.collection("users").doc(user.uid).get();
+    final res = UserModel.fromDocFireStore(doc);
+    return res;
   }
 
-  Future<List<Post>> getMyPost(String id) async {
+  Future<List<Post>> getMyPost() async {
     List<Post> list = [];
     QuerySnapshot querySnapshot = await firestore
         .collection("post")
-        .where("idUser", isEqualTo: id)
+        .where("idUser", isEqualTo: userFromFireBase!.uid)
         .orderBy("createdAt")
         .get();
     for (var doc in querySnapshot.docs) {

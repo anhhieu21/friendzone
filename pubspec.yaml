@@ -49,6 +49,7 @@ dependencies:
   firebase_analytics: ^10.2.1
   equatable: ^2.0.5
   cloud_firestore: ^4.5.2
+  firebase_messaging: ^14.4.1
   # gridview
   flutter_staggered_grid_view: ^0.6.2
   image_picker: ^0.8.5+3
@@ -57,7 +58,6 @@ dependencies:
   intl: ^0.17.0
   dropdown_button2: ^1.8.5
   path: ^1.8.2
-  firebase_messaging: ^13.1.0
 
 dev_dependencies:
   flutter_test:

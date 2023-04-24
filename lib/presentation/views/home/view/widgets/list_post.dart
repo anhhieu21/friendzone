@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/presentation/views/home/bloc/allpost/all_post_cubit.dart';
 import 'package:friendzone/presentation/views/home/view/widgets/post_item.dart';
-import 'package:friendzone/presentation/views/profile/myaccount/my_account_cubit.dart';
+import 'package:friendzone/presentation/views/profile/cubit/myaccount/my_account_cubit.dart';
 
 class ListPost extends StatelessWidget {
   const ListPost({super.key});

@@ -4,7 +4,6 @@ import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/presentation/bloc/auth_bloc.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:friendzone/presentation/views/profile/myaccount/my_account_cubit.dart';
 import 'package:friendzone/presentation/views/profile/view/widgets/header_profile.dart';
 import 'package:friendzone/presentation/views/profile/view/widgets/my_posts.dart';
 import 'package:go_router/go_router.dart';

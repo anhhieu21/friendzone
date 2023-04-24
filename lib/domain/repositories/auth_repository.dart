@@ -7,22 +7,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class AuthRepository {
+  static final instance = AuthRepository._();
+
   final _firebaseAuth = FirebaseAuth.instance;
   final storageRef = FirebaseStorage.instance.ref();
   final fireStore = FirebaseFirestore.instance.collection('users');
+  User? user;
+  AuthRepository._() {
+    final userFromFireBaseAuth = FirebaseAuth.instance.currentUser;
+    if (userFromFireBaseAuth != null) {
+      user = userFromFireBaseAuth;
+    }
+  }
   Future<User?> signUpWithFireBase(String email, String pass) async {
     try {
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: pass);
-      await UserRepository().insertUserToFireStore(userCredential.user!);
-      final user = await sendVerify(userCredential.user);
-      await fireStore.doc(user!.uid).set({
-        "idUser": user.uid,
-        "avartar": user.photoURL ?? '',
-        "email": user.email,
-        "name": user.displayName ?? user.email,
-        "posts": [],
-      });
+      final res = await sendVerify(userCredential.user);
+      user = res;
+      await UserRepository().insertUserToFireStore(user!);
+
       return user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -67,8 +71,6 @@ class AuthRepository {
     }
   }
 
-
-
   Future<bool> updateProfile(
       {String? displayName, String? phone, File? file}) async {
     try {
@@ -104,6 +106,10 @@ class AuthRepository {
       }
       if (displayName!.isNotEmpty) {
         await _firebaseAuth.currentUser!.updateDisplayName(displayName);
+        await fireStore.doc(user!.uid).update({
+          'name': displayName,
+          'phone': phone,
+        });
       }
       // if (phone!.isNotEmpty) {
       //   await _firebaseAuth.currentUser!.updatePhoneNumber(ph);

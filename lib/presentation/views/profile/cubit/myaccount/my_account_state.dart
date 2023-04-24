@@ -10,11 +10,11 @@ abstract class MyAccountState extends Equatable {
 class MyAccountInitial extends MyAccountState {}
 
 class MyAccountInfo extends MyAccountState {
-  final Users user;
+  final UserModel user;
   final List<Post> myPostsPublic;
   final List<Post> myPostsPrivate;
-  const MyAccountInfo(this.user,this.myPostsPublic,this.myPostsPrivate);
+  const MyAccountInfo(this.user, this.myPostsPublic, this.myPostsPrivate);
 
   @override
-  List<Object> get props => [user,myPostsPublic,myPostsPrivate];
+  List<Object> get props => [user, myPostsPublic, myPostsPrivate];
 }

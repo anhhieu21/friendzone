@@ -12,24 +12,12 @@ class MyAccountCubit extends Cubit<MyAccountState> {
   MyAccountCubit(this._repository) : super(MyAccountInitial());
 
   myAccountInfo() async {
-    List<Post> posts = [];
     List<Post> postsPrivate = [];
     List<Post> postsPublic = [];
-    Post? post;
-    final fireStore = FirebaseFirestore.instance;
     final user = await _repository.findMe();
-
-    if (user.post != null) {
-      for (var path in user.post!) {
-        final docRef = await fireStore.doc(path).get();
-        post = Post.fromFirestore(docRef);
-        posts.add(post);
-      }
-    }
-    postsPrivate = posts.where((e) => e.visible = false).toList();
-    postsPublic = posts.where((e) => e.visible = true).toList();
+    final myPost = await _repository.getMyPost();
+    postsPrivate = myPost.where((e) => e.visible = false).toList();
+    postsPublic = myPost.where((e) => e.visible = true).toList();
     emit(MyAccountInfo(user, postsPublic, postsPrivate));
   }
-
-  getMyPost(String id) async {}
 }

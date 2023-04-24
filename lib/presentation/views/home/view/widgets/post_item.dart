@@ -6,6 +6,8 @@ import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/profile/view/widgets/header_profile.dart';
 import 'package:ionicons/ionicons.dart';
 
+import '../../../../../common/constants/list_img_fake.dart';
+
 class PostItem extends StatelessWidget {
   final Post item;
   const PostItem({

@@ -11,7 +11,7 @@ class AllPostInitial extends AllPostState {}
 
 class AllPostShow extends AllPostState {
   final List<Post> listPost;
-  final List<Users> listUser;
+  final List<UserModel> listUser;
   const AllPostShow(this.listPost, this.listUser);
 
   @override

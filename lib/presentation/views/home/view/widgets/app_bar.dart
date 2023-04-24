@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:friendzone/presentation/views/profile/view/widgets/header_profile.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
+
+import '../../../../../common/constants/list_img_fake.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({super.key});

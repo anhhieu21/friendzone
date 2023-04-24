@@ -1,38 +1,37 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Users {
+class UserModel {
   String idUser;
   String avartar;
   String email;
   List<dynamic>? post;
   String name;
-  bool followed;
-  Users(
+  // bool followed;
+  UserModel(
       {required this.idUser,
       required this.avartar,
       required this.email,
       required this.name,
-      required this.followed,
+      // required this.followed,
       this.post});
 
-  factory Users.fromMap(DocumentSnapshot doc) {
+  factory UserModel.fromDocFireStore(DocumentSnapshot doc) {
     Map userFromDB = doc.data() as Map;
-    return Users(
+    return UserModel(
       idUser: userFromDB["idUser"],
       avartar: userFromDB["avartar"],
       email: userFromDB["email"],
       name: userFromDB["name"],
       post: userFromDB["post"],
-      followed: userFromDB["followed"],
+      // followed: userFromDB["followed"],
     );
   }
   Map<String, dynamic> toMap() {
     return {
-      "idUser": idUser,
       "avartar": avartar,
       "email": email,
       "name": name,
-      "followed": followed,
+      // "followed": followed,
     };
   }
 }

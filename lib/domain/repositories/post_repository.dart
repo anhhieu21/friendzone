@@ -15,7 +15,7 @@ class PostRepository {
     QuerySnapshot querySnapshot = await firestore
         .collection("post")
         .where("visible", isEqualTo: true)
-        .orderBy("createdAt")
+        .orderBy("createdAt", descending: true)
         .get();
     for (var doc in querySnapshot.docs) {
       Post post = Post.fromFirestore(doc);
@@ -87,7 +87,7 @@ class PostRepository {
         "avartarAuthor": avartarAuthor,
         "imageUrl": urlImage,
         "like": like.toString(),
-        "visible":visible,
+        "visible": visible,
         "createdAt": DateTime.now()
       });
       final path = firestore.collection("post").doc(idPost).path;
