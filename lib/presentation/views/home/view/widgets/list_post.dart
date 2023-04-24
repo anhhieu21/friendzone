@@ -1,43 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendzone/presentation/views/home/bloc/allpost/all_post_cubit.dart';
 import 'package:friendzone/presentation/views/home/view/widgets/post_item.dart';
-import 'package:friendzone/presentation/views/profile/cubit/myaccount/my_account_cubit.dart';
+import '../../../../../data/models/post.dart';
 
 class ListPost extends StatelessWidget {
-  const ListPost({super.key});
+  final List<Post> listPost;
+  const ListPost({super.key, required this.listPost});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AllPostCubit, AllPostState>(
-      listener: (context, state) {
-        if (state is AllPostShow) {
-          context.read<MyAccountCubit>().myAccountInfo();
-        }
-      },
-      child: BlocBuilder<AllPostCubit, AllPostState>(
-        builder: (context, state) {
-          if (state is AllPostShow) {
-            if (state.listPost.isEmpty) {
-              return const Center(
-                child: Text('Không có bài viết nào cả'),
-              );
-            }
-            return ListView.builder(
-                shrinkWrap: true,
-                itemCount: state.listPost.length,
-                physics: const ScrollPhysics(),
-                itemBuilder: (context, index) {
-                  final item = state.listPost[index];
-                  return PostItem(item: item);
-                });
-          } else {
-            return const Center(
-              child: Text('Không có bài viết nào cả'),
-            );
-          }
-        },
-      ),
-    );
+    return SliverList(
+        delegate: SliverChildBuilderDelegate(childCount: listPost.length,
+            (context, index) {
+      final item = listPost[index];
+      return listPost.isNotEmpty ? PostItem(item: item) : const SizedBox();
+    }));
   }
 }

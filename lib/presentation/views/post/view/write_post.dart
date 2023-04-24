@@ -89,7 +89,6 @@ class WritePost extends StatelessWidget {
                               child: ValueListenableBuilder<bool?>(
                                   valueListenable: privateNotifi,
                                   builder: (context, value, child) {
-                                    print(value);
                                     return ElevatedButton(
                                       onPressed: () => _uploadPost(
                                           context,

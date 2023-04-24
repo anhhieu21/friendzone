@@ -28,7 +28,7 @@ class FriendZoneScreen extends StatelessWidget {
         ),
       ),
       body: Column(
-        children: [],
+        children: const[],
       ),
     );
   }

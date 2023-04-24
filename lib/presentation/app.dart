@@ -90,7 +90,7 @@ class App extends StatelessWidget {
             GoRoute(
               path: RoutePath.home,
               builder: (BuildContext context, GoRouterState state) {
-                return const HomeScreen();
+                return  HomeScreen();
               },
             ),
             GoRoute(

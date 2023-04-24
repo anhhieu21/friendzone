@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friendzone/data/models/menu.dart';
 import 'package:friendzone/presentation/views/home/bloc/cubit/new_feeds_cubit.dart';
 import 'package:friendzone/presentation/views/signin/view/sign_in_screen.dart';
 import 'package:friendzone/presentation/views/view.dart';
-import 'package:ionicons/ionicons.dart';
 
 import 'home/bloc/allpost/all_post_cubit.dart';
 
@@ -27,6 +27,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final listNav = menuBottomNavBar.map((e) => Menu.fromMap(e)).toList();
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
@@ -37,7 +38,7 @@ class _MainScreenState extends State<MainScreen> {
                 physics: const NeverScrollableScrollPhysics(),
                 controller: _pageController,
                 children: [
-                  const HomeScreen(),
+                   HomeScreen(),
                   const ChatsScreen(),
                   FriendZoneScreen(),
                   const ProfileScreen()
@@ -49,16 +50,10 @@ class _MainScreenState extends State<MainScreen> {
                     setState(() => _selectedIndex = value);
                     _pageController.jumpToPage(value);
                   },
-                  items: const [
-                    BottomNavigationBarItem(
-                        icon: Icon(Ionicons.home), label: 'Home'),
-                    BottomNavigationBarItem(
-                        icon: Icon(Ionicons.chatbubble), label: 'Chat'),
-                    BottomNavigationBarItem(
-                        icon: Icon(Ionicons.people), label: 'Friend'),
-                    BottomNavigationBarItem(
-                        icon: Icon(Ionicons.person), label: 'Profile'),
-                  ]),
+                  items: listNav
+                      .map((e) => BottomNavigationBarItem(
+                          icon: Icon(e.iconData), label: e.title))
+                      .toList()),
             );
           }
           return SignInScreen();

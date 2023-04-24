@@ -6,10 +6,11 @@ final ThemeData themeData = ThemeData.light().copyWith(
     scaffoldBackgroundColor: colorGrey.shade200,
     useMaterial3: true,
     textTheme: GoogleFonts.nunitoTextTheme(),
-    appBarTheme:  AppBarTheme(
-      backgroundColor: colorGrey.shade200,
-        titleTextStyle:
-            const TextStyle(color: colorPinkButton, fontWeight: FontWeight.bold),
+    appBarTheme: AppBarTheme(
+        backgroundColor: colorGrey.shade200,
+        scrolledUnderElevation: 0,
+        titleTextStyle: const TextStyle(
+            color: colorPinkButton, fontWeight: FontWeight.bold),
         elevation: 0),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedItemColor: Color.fromARGB(255, 200, 34, 175),

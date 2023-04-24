@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:friendzone/presentation/views/profile/view/widgets/header_profile.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../../../../../common/constants/list_img_fake.dart';

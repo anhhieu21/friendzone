@@ -9,31 +9,31 @@ class ListNewFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 10),
-      height: size.width / 2.5,
-      child: BlocBuilder<NewFeedsCubit, NewFeedsState>(
-        builder: (context, state) {
-          if (state is NewFeedsShow) {
-            if (state.listPost.isEmpty) {
+    return SliverToBoxAdapter(
+      child: Container(
+        margin: const EdgeInsets.only(top: 10),
+        height: size.width * 0.4,
+        child: BlocBuilder<NewFeedsCubit, NewFeedsState>(
+          builder: (context, state) {
+            if (state is NewFeedsShow) {
+              if (state.listPost.isEmpty) {
+                return const Center(
+                  child: Text('Không có bài viết nào cả'),
+                );
+              }
+              return ListView(
+                scrollDirection: Axis.horizontal,
+                children: state.listPost
+                    .map((e) => ItemNewFeed(size: size, item: e))
+                    .toList(),
+              );
+            } else {
               return const Center(
                 child: Text('Không có bài viết nào cả'),
               );
             }
-            return ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: state.listPost.length,
-                itemBuilder: (context, index) {
-                  final item = state.listPost[index];
-                  return ItemNewFeed(size: size, item: item);
-                });
-          } else {
-            return const Center(
-              child: Text('Không có bài viết nào cả'),
-            );
-          }
-        },
+          },
+        ),
       ),
     );
   }
