@@ -20,7 +20,7 @@ import 'package:go_router/go_router.dart';
 
 import 'views/home/bloc/allpost/all_post_cubit.dart';
 import 'views/post/cubit/write_post_cubit.dart';
-import 'views/profile/bloc/update/update_profile_cubit.dart';
+import 'views/profile/cubit/update/update_profile_cubit.dart';
 
 class App extends StatelessWidget {
   App({super.key});

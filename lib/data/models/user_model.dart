@@ -6,21 +6,34 @@ class Users {
   String email;
   List<dynamic>? post;
   String name;
+  bool followed;
   Users(
       {required this.idUser,
       required this.avartar,
       required this.email,
       required this.name,
+      required this.followed,
       this.post});
 
-  factory Users.fromFirestore(DocumentSnapshot doc) {
-    Map postFromDB = doc.data() as Map;
+  factory Users.fromMap(DocumentSnapshot doc) {
+    Map userFromDB = doc.data() as Map;
     return Users(
-        idUser: postFromDB["idUser"],
-        avartar: postFromDB["avartar"],
-        email: postFromDB["email"],
-        name: postFromDB["name"],
-        post: postFromDB["posts"]);
+      idUser: userFromDB["idUser"],
+      avartar: userFromDB["avartar"],
+      email: userFromDB["email"],
+      name: userFromDB["name"],
+      post: userFromDB["post"],
+      followed: userFromDB["followed"],
+    );
+  }
+  Map<String, dynamic> toMap() {
+    return {
+      "idUser": idUser,
+      "avartar": avartar,
+      "email": email,
+      "name": name,
+      "followed": followed,
+    };
   }
 }
 

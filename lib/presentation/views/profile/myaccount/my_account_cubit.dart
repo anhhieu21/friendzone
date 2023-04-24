@@ -30,4 +30,6 @@ class MyAccountCubit extends Cubit<MyAccountState> {
     postsPublic = posts.where((e) => e.visible = true).toList();
     emit(MyAccountInfo(user, postsPublic, postsPrivate));
   }
+
+  getMyPost(String id) async {}
 }

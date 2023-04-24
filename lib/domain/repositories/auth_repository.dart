@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:friendzone/domain/repositories/user_repository.dart';
 import 'package:path/path.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -13,6 +14,7 @@ class AuthRepository {
     try {
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: pass);
+      await UserRepository().insertUserToFireStore(userCredential.user!);
       final user = await sendVerify(userCredential.user);
       await fireStore.doc(user!.uid).set({
         "idUser": user.uid,
