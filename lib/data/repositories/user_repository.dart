@@ -5,7 +5,7 @@ import 'dart:developer';
 
 import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/data/models/user_model.dart';
-import 'package:friendzone/domain/repositories/auth_repository.dart';
+import 'package:friendzone/data/repositories/auth_repository.dart';
 
 class UserRepository {
   final firestore = FirebaseFirestore.instance;

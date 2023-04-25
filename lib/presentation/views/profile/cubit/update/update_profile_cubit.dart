@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:friendzone/domain/repositories/auth_repository.dart';
+import 'package:friendzone/data/repositories/auth_repository.dart';
 import 'package:image_picker/image_picker.dart';
 
 part 'update_profile_state.dart';

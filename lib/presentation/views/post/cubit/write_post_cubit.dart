@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:friendzone/domain/repositories/post_repository.dart';
+import 'package:friendzone/data/repositories/post_repository.dart';
 import 'package:image_picker/image_picker.dart';
 
 part 'write_post_state.dart';

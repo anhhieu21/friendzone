@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:friendzone/domain/repositories/auth_repository.dart';
+import 'package:friendzone/data/repositories/auth_repository.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

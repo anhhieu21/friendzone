@@ -12,6 +12,7 @@ import 'package:ionicons/ionicons.dart';
 import '../../../../../common/constants/list_img_fake.dart';
 
 const expandedHeight = 120.0;
+const collapsedHeight = 60.0;
 
 class CustomSliverAppBar extends StatefulWidget {
   final ScrollController scrollController;
@@ -28,7 +29,7 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
   void initState() {
     super.initState();
     widget.scrollController.addListener(() {
-      _streamController.sink.add(widget.scrollController.position.pixels >= 20);
+      _streamController.sink.add(widget.scrollController.position.pixels >= 30);
     });
   }
 
@@ -39,7 +40,8 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
         builder: (context, snapshot) {
           final user = snapshot.data;
           return SliverAppBar(
-            floating: true,
+            pinned: true,
+            stretch: true,
             title: Row(
               children: [
                 Column(

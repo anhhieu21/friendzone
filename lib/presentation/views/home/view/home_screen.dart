@@ -32,6 +32,11 @@ class HomeScreen extends StatelessWidget {
                   CustomSliverAppBar(scrollController: scrollController),
                   ListNewFeed(size: size),
                   ListPost(listPost: listPost),
+                  SliverToBoxAdapter(
+                    child: Container(
+                      height: kBottomNavigationBarHeight*2,
+                    ),
+                  )
                 ],
               );
             },
