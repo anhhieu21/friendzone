@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
 final menuBottomNavBar = [
-  {'title': 'Home','iconData':Ionicons.home},
-  {'title': 'Chat','iconData':Ionicons.chatbubble},
-  {'title': 'Friend','iconData':Ionicons.people},
-  {'title': 'Profile','iconData':Ionicons.home},
+  {'title': 'Home', 'iconData': Ionicons.home},
+  {'title': 'Chat', 'iconData': Ionicons.chatbubble},
+  {'title': 'Friend', 'iconData': Ionicons.people},
+  {'title': 'Profile', 'iconData': Ionicons.person_circle},
 ];
 
 class Menu {

@@ -28,6 +28,7 @@ class UserRepository {
         "email": user.email,
         "name": user.displayName ?? user.email,
         "phone": user.phoneNumber,
+        "backgroun": '',
         "posts": [],
       });
     } on FirebaseAuthException catch (e) {

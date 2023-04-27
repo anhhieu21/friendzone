@@ -12,43 +12,31 @@ class ChatsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = SizeEx(context).screenSize;
-    return StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.userChanges(),
-        builder: (context, snapshot) {
-          final user = snapshot.data;
-          return Scaffold(
-              appBar: AppBar(
-                title: Text(user?.displayName.toString() ?? ""),
-                actions: [
-                  IconButton(
-                      onPressed: () {}, icon: const Icon(Ionicons.videocam)),
-                  IconButton(
-                      onPressed: () {}, icon: const Icon(Ionicons.add_outline))
-                ],
-                bottom: const PreferredSize(
-                    preferredSize: Size.fromHeight(40),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: CustomTextField(
-                        hint: 'tìm kiếm',
-                        error: 'error',
-                        padding: 6,
-                      ),
-                    )),
-              ),
-              body: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: listPost.length,
-                        itemBuilder: (context, index) {
-                          return ItemChat(size: size, item: listPost[index]);
-                        }),
-                  ),
-                ],
-              ));
-        });
+
+    return Scaffold(
+        appBar: AppBar(
+          title: const CustomTextField(
+            hint: 'tìm kiếm',
+            error: 'error',
+            padding: 6,
+          ),
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Ionicons.videocam)),
+            IconButton(onPressed: () {}, icon: const Icon(Ionicons.add_outline))
+          ],
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: listPost.length,
+                  itemBuilder: (context, index) {
+                    return ItemChat(size: size, item: listPost[index]);
+                  }),
+            ),
+          ],
+        ));
   }
 }

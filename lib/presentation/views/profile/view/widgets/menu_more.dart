@@ -53,7 +53,7 @@ class MenuDrop extends StatelessWidget {
         dropdownDecoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12), color: colorWhite),
         dropdownElevation: 8,
-        offset: const Offset(-100, -20),
+        offset: const Offset(0, -20),
       )),
     );
   }

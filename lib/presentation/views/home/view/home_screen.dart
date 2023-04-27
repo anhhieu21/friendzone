@@ -9,9 +9,16 @@ import 'package:friendzone/presentation/views/home/view/widgets/list_post.dart';
 import '../../profile/cubit/myaccount/my_account_cubit.dart';
 import 'widgets/custom_app_bar.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final ScrollController scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     final size = SizeEx(context).screenSize;

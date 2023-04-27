@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
@@ -8,6 +10,9 @@ import 'package:friendzone/presentation/views/profile/view/widgets/header_profil
 import 'package:friendzone/presentation/views/profile/view/widgets/my_posts.dart';
 import 'package:go_router/go_router.dart';
 
+const expandedHeight = 180.0;
+const collapsedHeight = 120.0;
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -17,11 +22,6 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen>
     with TickerProviderStateMixin {
-  List<String> myTabs = [
-    'Tất cả bài viết',
-    'Chỉ mình tôi',
-    'Lưu trữ',
-  ];
   late TabController _tabController;
   @override
   void initState() {
@@ -32,39 +32,37 @@ class _ProfileScreenState extends State<ProfileScreen>
   @override
   Widget build(BuildContext context) {
     final size = SizeEx(context).screenSize;
-    return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
-        if (state is UnAuthenticated) {
-          GoRouter.of(context).replace(RoutePath.signin);
-        }
-      },
-      child: Scaffold(
-          body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              HeaderProfile(size: size),
-              const SizedBox(
-                height: 10,
+    return SafeArea(
+      child: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is UnAuthenticated) {
+            GoRouter.of(context).replace(RoutePath.signin);
+          }
+        },
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              centerTitle: false,
+              pinned: false,
+              stretch: true,
+              toolbarHeight: 280,
+              flexibleSpace: SizedBox(
+                width: size.width,
+                child: HeaderProfile(size: size),
               ),
-              TabBar(
-                  unselectedLabelColor: colorGrey,
-                  indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: colorBlack.withOpacity(0.8)),
-                  controller: _tabController,
-                  tabs: List.generate(
-                      myTabs.length,
-                      (index) => Tab(
-                            height: 30,
-                            text: myTabs[index],
-                          ))),
-              const SizedBox(
-                height: 10,
+            ),
+            SliverPersistentHeader(
+              pinned: true,
+              floating: true,
+              delegate: MySliverPersitentHeader(
+                tabController: _tabController,
+                maxSize: 40,
+                minSize: 40,
               ),
-              Expanded(
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: size.height + 160,
                 child: TabBarView(
                     physics: const NeverScrollableScrollPhysics(),
                     controller: _tabController,
@@ -73,11 +71,54 @@ class _ProfileScreenState extends State<ProfileScreen>
                       MyPosts(size: size),
                       MyPosts(size: size)
                     ]),
-              )
-            ],
-          ),
+              ),
+            ),
+          ],
         ),
-      )),
+      ),
     );
+  }
+}
+
+class MySliverPersitentHeader extends SliverPersistentHeaderDelegate {
+  final TabController tabController;
+  final double maxSize;
+  final double minSize;
+  MySliverPersitentHeader(
+      {required this.tabController,
+      required this.maxSize,
+      required this.minSize});
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    List<String> myTabs = [
+      'Tất cả bài viết',
+      'Chỉ mình tôi',
+      'Lưu trữ',
+    ];
+    return ColoredBox(
+      color: colorGrey.shade100,
+      child: TabBar(
+        unselectedLabelColor: colorGrey,
+        controller: tabController,
+        dividerColor: Colors.transparent,
+        tabs: List.generate(
+            myTabs.length,
+            (index) => Tab(
+                  text: myTabs[index],
+                )),
+      ),
+    );
+  }
+
+  @override
+  double get maxExtent => maxSize;
+
+  @override
+  double get minExtent => minSize;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return true;
   }
 }
