@@ -7,6 +7,11 @@ final menuBottomNavBar = [
   {'title': 'Friend', 'iconData': Ionicons.people},
   {'title': 'Profile', 'iconData': Ionicons.person_circle},
 ];
+final profileTabBar = [
+  'Tất cả bài viết',
+  'Chỉ mình tôi',
+  'Lưu trữ',
+];
 
 class Menu {
   String title;

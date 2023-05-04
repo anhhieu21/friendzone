@@ -3,9 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'dart:developer';
 
-import 'package:friendzone/data/models/post.dart';
-import 'package:friendzone/data/models/user_model.dart';
-import 'package:friendzone/data/repositories/auth_repository.dart';
+import 'package:friendzone/data.dart';
+import 'package:friendzone/presentation/utils/formatter.dart';
 
 class UserRepository {
   final firestore = FirebaseFirestore.instance;
@@ -26,7 +25,7 @@ class UserRepository {
         "idUser": user.uid,
         "avartar": user.photoURL ?? urlAvatar,
         "email": user.email,
-        "name": user.displayName ?? user.email,
+        "name": user.displayName ?? Formatter.emailtoDisplayName(user.email!),
         "phone": user.phoneNumber,
         "backgroun": '',
         "posts": [],

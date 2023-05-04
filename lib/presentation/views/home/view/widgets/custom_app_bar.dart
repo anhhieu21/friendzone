@@ -107,7 +107,7 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
                           ),
                           IconButton(
                               onPressed: () {
-                                context.go('/${RoutePath.writepost}');
+                                context.push(RoutePath.writepost);
                               },
                               icon: Icon(
                                 Ionicons.create_outline,

@@ -24,7 +24,7 @@ class UserModel {
       avartar:
           userFromDB["avartar"].isEmpty ? urlAvatar : userFromDB["avartar"],
       email: userFromDB["email"],
-      name: userFromDB["name"] ?? 'User name',
+      name: userFromDB["name"],
       post: userFromDB["post"],
       background: userFromDB["background"].isEmpty
           ? urlAvatar

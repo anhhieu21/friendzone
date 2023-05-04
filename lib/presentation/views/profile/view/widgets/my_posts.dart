@@ -18,11 +18,12 @@ class MyPosts extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is MyAccountInfo) {
-          final x = [
+          final listPost = [
             ...state.myPostsPublic,
             ...state.myPostsPublic,
             ...state.myPostsPublic,
-            ...state.myPostsPublic
+            ...state.myPostsPublic,
+            ...state.myPostsPublic,
           ];
           return RefreshIndicator(
               onRefresh: () => context.read<MyAccountCubit>().myAccountInfo(),
@@ -30,12 +31,11 @@ class MyPosts extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: MasonryGridView.count(
                     crossAxisCount: 2,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: x.length,
+                    itemCount: listPost.length,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                     itemBuilder: (context, index) {
-                      final item = x[index];
+                      final item = listPost[index];
                       return ItemPost(size: size, item: item);
                     }),
               ));

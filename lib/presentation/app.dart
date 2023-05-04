@@ -2,13 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:friendzone/data/repositories/auth_repository.dart';
-import 'package:friendzone/data/repositories/post_repository.dart';
-import 'package:friendzone/data/repositories/user_repository.dart';
-import 'package:friendzone/presentation/shared/bloc/auth/auth_bloc.dart';
+import 'package:friendzone/data.dart';
 import 'package:friendzone/presentation/routes/path.dart';
+import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/themes/theme.dart';
+import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:friendzone/presentation/view.dart';
+import 'package:friendzone/presentation/views/splash/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'views/view.dart';
 
@@ -72,47 +72,33 @@ class App extends StatelessWidget {
   final GoRouter _router = GoRouter(
     routes: [
       GoRoute(
+          path: RoutePath.splash,
+          builder: (BuildContext context, GoRouterState state) =>
+              const SplashScreen()),
+      GoRoute(
+          path: RoutePath.signin,
+          builder: (BuildContext context, GoRouterState state) =>
+              SignInScreen()),
+      GoRoute(
+          path: RoutePath.signup,
+          builder: (BuildContext context, GoRouterState state) =>
+              const SignUpScreen()),
+      GoRoute(
           path: RoutePath.main,
-          builder: (BuildContext context, GoRouterState state) {
-            return const MainScreen();
-          },
-          routes: <RouteBase>[
+          builder: (BuildContext context, GoRouterState state) =>
+              const MainScreen(),
+          routes: [
             GoRoute(
-              path: RoutePath.home,
-              builder: (BuildContext context, GoRouterState state) {
-                return const HomeScreen();
-              },
-            ),
-            GoRoute(
-              path: RoutePath.writepost,
-              builder: (BuildContext context, GoRouterState state) {
-                return WritePost();
-              },
-            ),
-            GoRoute(
-              path: RoutePath.profile,
-              builder: (BuildContext context, GoRouterState state) {
-                return const ProfileScreen();
-              },
-            ),
+                path: RoutePath.writepost,
+                name: Formatter.nameRoute(RoutePath.writepost),
+                builder: (BuildContext context, GoRouterState state) =>
+                    WritePost()),
             GoRoute(
                 path: RoutePath.updateProfile,
-                builder: (BuildContext context, GoRouterState state) {
-                  return UpdateProfileScreen(userDetail: state.extra as User);
-                })
+                name: Formatter.nameRoute(RoutePath.updateProfile),
+                builder: (BuildContext context, GoRouterState state) =>
+                    UpdateProfileScreen(userDetail: state.extra as UserModel))
           ]),
-      GoRoute(
-        path: RoutePath.signin,
-        builder: (BuildContext context, GoRouterState state) {
-          return SignInScreen();
-        },
-      ),
-      GoRoute(
-        path: RoutePath.signup,
-        builder: (BuildContext context, GoRouterState state) {
-          return const SignUpScreen();
-        },
-      ),
     ],
   );
 }

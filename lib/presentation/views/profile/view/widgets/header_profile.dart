@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/profile/view/widgets/info_view.dart';
+import '../../../../utils/formatter.dart';
 import 'menu_more.dart';
 
 class HeaderProfile extends StatelessWidget {
@@ -49,7 +50,7 @@ class HeaderProfile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        user.name,
+                        Formatter.emailtoDisplayName(user.name),
                         style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w600),
                       ),
@@ -65,8 +66,9 @@ class HeaderProfile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton.icon(
-                          onPressed: () => GoRouter.of(context)
-                              .push('/${RoutePath.updateProfile}', extra: user),
+                          onPressed: () => context.pushNamed(
+                              Formatter.nameRoute(RoutePath.updateProfile),
+                              extra: user),
                           style: ElevatedButton.styleFrom(
                               backgroundColor: colorGrey.shade300),
                           icon: Icon(Ionicons.key_outline,

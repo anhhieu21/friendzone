@@ -118,11 +118,8 @@ index_generator:
     - '{_,**/_}*.dart'
   indexes:
     - path: lib
-      include: ['data/models/**']
-      name: models
-    - path: lib
-      include: ['data/repositories/**']
-      name: repositories
+      include: ['data/**']
+      name: data
     - path: lib/presentation
       include: ['shared/**']
       name: shared
