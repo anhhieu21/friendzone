@@ -5,7 +5,6 @@ import 'package:friendzone/data/models/menu.dart';
 import 'package:friendzone/presentation/views/home/bloc/cubit/new_feeds_cubit.dart';
 import 'package:friendzone/presentation/views/signin/view/sign_in_screen.dart';
 import 'package:friendzone/presentation/views/view.dart';
-import 'package:friendzone/presentation/views/widgets/bottom_nav_bar.dart';
 
 import 'chats/view/chats_screen.dart';
 import 'home/bloc/allpost/all_post_cubit.dart';

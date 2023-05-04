@@ -5,7 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:friendzone/data/repositories/auth_repository.dart';
 import 'package:friendzone/data/repositories/post_repository.dart';
 import 'package:friendzone/data/repositories/user_repository.dart';
-import 'package:friendzone/presentation/bloc/auth_bloc.dart';
+import 'package:friendzone/presentation/shared/bloc/auth/auth_bloc.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/themes/theme.dart';
 import 'package:friendzone/presentation/views/home/bloc/cubit/new_feeds_cubit.dart';
@@ -90,7 +90,7 @@ class App extends StatelessWidget {
             GoRoute(
               path: RoutePath.home,
               builder: (BuildContext context, GoRouterState state) {
-                return  HomeScreen();
+                return const HomeScreen();
               },
             ),
             GoRoute(

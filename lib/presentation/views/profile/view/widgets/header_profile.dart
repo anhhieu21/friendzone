@@ -1,15 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/views/profile/cubit/myaccount/my_account_cubit.dart';
-import 'package:friendzone/presentation/views/widgets/avatar_profile.dart';
-import 'package:friendzone/presentation/views/widgets/background_profile.dart';
+import 'package:friendzone/presentation/shared/widgets/avatar_profile.dart';
+import 'package:friendzone/presentation/shared/widgets/background_profile.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:friendzone/presentation/views/profile/view/widgets/info_view.dart';
 import 'menu_more.dart';
 
