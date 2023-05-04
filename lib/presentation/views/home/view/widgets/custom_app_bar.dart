@@ -4,8 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzone/presentation/routes/path.dart';
+import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 

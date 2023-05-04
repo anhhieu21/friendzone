@@ -8,19 +8,9 @@ import 'package:friendzone/data/repositories/user_repository.dart';
 import 'package:friendzone/presentation/shared/bloc/auth/auth_bloc.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/themes/theme.dart';
-import 'package:friendzone/presentation/views/home/bloc/cubit/new_feeds_cubit.dart';
-import 'package:friendzone/presentation/views/main_screen.dart';
-import 'package:friendzone/presentation/views/profile/cubit/myaccount/my_account_cubit.dart';
-import 'package:friendzone/presentation/views/profile/view/update_profile.dart';
-import 'package:friendzone/presentation/views/signin/view/bloc/signup_bloc.dart';
-import 'package:friendzone/presentation/views/signin/view/sign_up_screen.dart';
-import 'package:friendzone/presentation/views/signin/view/sign_in_screen.dart';
-import 'package:friendzone/presentation/views/view.dart';
+import 'package:friendzone/presentation/view.dart';
 import 'package:go_router/go_router.dart';
-
-import 'views/home/bloc/allpost/all_post_cubit.dart';
-import 'views/post/cubit/write_post_cubit.dart';
-import 'views/profile/cubit/update/update_profile_cubit.dart';
+import 'views/view.dart';
 
 class App extends StatelessWidget {
   App({super.key});

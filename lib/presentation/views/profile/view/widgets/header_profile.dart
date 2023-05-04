@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/presentation/routes/path.dart';
+import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/views/profile/cubit/myaccount/my_account_cubit.dart';
-import 'package:friendzone/presentation/shared/widgets/avatar_profile.dart';
-import 'package:friendzone/presentation/shared/widgets/background_profile.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:friendzone/presentation/themes/color.dart';

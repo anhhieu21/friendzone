@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/data/models/menu.dart';
 import 'package:friendzone/presentation/views/home/bloc/cubit/new_feeds_cubit.dart';
-import 'package:friendzone/presentation/views/signin/view/sign_in_screen.dart';
 import 'package:friendzone/presentation/views/view.dart';
 
+import 'auth/view/sign_in_screen.dart';
 import 'chats/view/chats_screen.dart';
 import 'home/bloc/allpost/all_post_cubit.dart';
 

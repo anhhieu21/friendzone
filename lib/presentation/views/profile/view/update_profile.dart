@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
+import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/profile/cubit/update/update_profile_cubit.dart';
-import 'package:friendzone/presentation/shared/widgets/custom_textfield.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../../../../common/constants/list_img_fake.dart';

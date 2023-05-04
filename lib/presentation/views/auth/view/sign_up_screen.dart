@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/presentation/routes/path.dart';
+import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:friendzone/presentation/shared/widgets/custom_textfield.dart';
-import 'package:friendzone/presentation/shared/widgets/dialog_custom.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 

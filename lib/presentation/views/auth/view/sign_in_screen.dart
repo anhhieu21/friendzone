@@ -1,14 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendzone/presentation/shared/bloc/auth/auth_bloc.dart';
+import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/routes/path.dart';
-import 'package:friendzone/presentation/views/signin/view/widgets/button_sigin.dart';
-import 'package:friendzone/presentation/shared/widgets/dialog_custom.dart';
+import 'package:friendzone/presentation/views/auth/view/widgets/title_signin.dart';
 import 'package:go_router/go_router.dart';
-import 'package:friendzone/presentation/views/signin/view/widgets/social_button.dart';
-import 'package:friendzone/presentation/views/signin/view/widgets/title_signin.dart';
-import 'package:friendzone/presentation/shared/widgets/custom_textfield.dart';
+
+import 'widgets/button_sigin.dart';
+import 'widgets/social_button.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});

@@ -58,6 +58,7 @@ dependencies:
   intl: ^0.17.0
   dropdown_button2: ^1.8.5
   path: ^1.8.2
+  index_generator: ^3.4.0
 
 dev_dependencies:
   flutter_test:
@@ -111,3 +112,20 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+index_generator:
+  exclude:
+    - '**.g.dart'
+    - '{_,**/_}*.dart'
+  indexes:
+    - path: lib
+      include: ['data/models/**']
+      name: models
+    - path: lib
+      include: ['data/repositories/**']
+      name: repositories
+    - path: lib/presentation
+      include: ['shared/**']
+      name: shared
+    - path: lib/presentation
+      include: ['views/**']
+      name: view       
