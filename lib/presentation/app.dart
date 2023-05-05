@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,7 +9,6 @@ import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:friendzone/presentation/view.dart';
 import 'package:friendzone/presentation/views/splash/splash_screen.dart';
 import 'package:go_router/go_router.dart';
-import 'views/view.dart';
 
 class App extends StatelessWidget {
   App({super.key});

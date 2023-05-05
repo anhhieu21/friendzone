@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friendzone/common/constants/list_img_fake.dart';
+import 'package:friendzone/data.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
-import 'package:friendzone/presentation/views/profile/cubit/myaccount/my_account_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:friendzone/presentation/themes/color.dart';
@@ -12,14 +12,12 @@ import 'menu_more.dart';
 
 class HeaderProfile extends StatelessWidget {
   final Size size;
-  const HeaderProfile({super.key, required this.size});
+  final UserModel? user;
+  const HeaderProfile({super.key, required this.size,  this.user});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MyAccountCubit, MyAccountState?>(
-        builder: (context, state) {
-      if (state is MyAccountInfo) {
-        final user = state.user;
+   
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +26,7 @@ class HeaderProfile extends StatelessWidget {
             Stack(children: [
               SizedBox(height: 140 + size.width / 7.5 - 16.0),
               BackgroundProfile(
-                url: user.background,
+                url: user?.background??urlAvatar,
                 width: size.width,
                 height: 140,
               ),
@@ -36,7 +34,7 @@ class HeaderProfile extends StatelessWidget {
                 bottom: 0,
                 left: 16.0,
                 child: AvatarProfile(
-                  url: user.avartar,
+                  url: user?.avartar??urlAvatar,
                   radius: size.width / 7.5,
                 ),
               )
@@ -50,7 +48,7 @@ class HeaderProfile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        Formatter.emailtoDisplayName(user.name),
+                        Formatter.emailtoDisplayName(user?.name??''),
                         style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w600),
                       ),
@@ -110,8 +108,6 @@ class HeaderProfile extends StatelessWidget {
             ),
           ],
         );
-      }
-      return const SizedBox();
-    });
+    
   }
 }

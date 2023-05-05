@@ -12,23 +12,23 @@ class MenuOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
       child: DropdownButton2<Enum>(
-          onChanged: (value) =>onChanged(value),
-          iconDisabledColor: Colors.grey,
-          buttonHeight: 25,
-          buttonWidth: 130,
-          buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-          buttonDecoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(14),
-              color: colorGrey.shade300),
-          itemPadding: const EdgeInsets.all(10),
-          dropdownDecoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(14),
-              color: colorGrey.shade300),
-          dropdownElevation: 8,
-          scrollbarRadius: const Radius.circular(40),
-          scrollbarThickness: 6,
-          scrollbarAlwaysShow: true,
-          offset: const Offset(-20, 0),
+          onChanged: (value) => onChanged(value),
+          // iconDisabledColor: Colors.grey,
+          // buttonHeight: 25,
+          // buttonWidth: 130,
+          // buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+          // buttonDecoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(14),
+          //     color: colorGrey.shade300),
+          // itemPadding: const EdgeInsets.all(10),
+          // dropdownDecoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(14),
+          //     color: colorGrey.shade300),
+          // dropdownElevation: 8,
+          // scrollbarRadius: const Radius.circular(40),
+          // scrollbarThickness: 6,
+          // scrollbarAlwaysShow: true,
+          // offset: const Offset(-20, 0),
           isExpanded: true,
           hint: const Text('Tuỳ chọn'),
           items: [

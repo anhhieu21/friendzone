@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:ionicons/ionicons.dart';
 

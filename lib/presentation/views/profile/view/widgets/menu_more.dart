@@ -46,14 +46,14 @@ class MenuDrop extends StatelessWidget {
               )),
         ],
         onChanged: (value) => _onChanged(value, context),
-        itemHeight: 48,
-        itemPadding: const EdgeInsets.only(left: 16, right: 16),
-        dropdownWidth: 160,
-        dropdownPadding: const EdgeInsets.symmetric(vertical: 6),
-        dropdownDecoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12), color: colorWhite),
-        dropdownElevation: 8,
-        offset: const Offset(0, -20),
+        // itemHeight: 48,
+        // itemPadding: const EdgeInsets.only(left: 16, right: 16),
+        // dropdownWidth: 160,
+        // dropdownPadding: const EdgeInsets.symmetric(vertical: 6),
+        // dropdownDecoration: BoxDecoration(
+        //     borderRadius: BorderRadius.circular(12), color: colorWhite),
+        // dropdownElevation: 8,
+        // offset: const Offset(0, -20),
       )),
     );
   }
