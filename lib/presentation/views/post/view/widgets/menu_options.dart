@@ -1,7 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzone/data/models/post.dart';
-import 'package:friendzone/presentation/themes/color.dart';
 import 'package:ionicons/ionicons.dart';
 
 class MenuOptions extends StatelessWidget {

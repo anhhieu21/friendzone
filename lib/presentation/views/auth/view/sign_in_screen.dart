@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/routes/path.dart';
-import 'package:friendzone/presentation/views/auth/view/widgets/title_signin.dart';
+import 'package:friendzone/presentation/view.dart';
 import 'package:go_router/go_router.dart';
 
-import 'widgets/button_sigin.dart';
-import 'widgets/social_button.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -18,11 +16,14 @@ class SignInScreen extends StatelessWidget {
     if (_keyForm.currentState!.validate()) {
       BlocProvider.of<AuthBloc>(context).add(
           SignInEvent(nameController.text.trim(), passController.text.trim()));
+
     }
   }
 
   _checkVerify(BuildContext context) {
-    if (FirebaseAuth.instance.currentUser!.emailVerified) {
+    final user =FirebaseAuth.instance.currentUser;
+    if (user!.emailVerified) {
+      BlocProvider.of<MyAccountCubit>(context).myAccountInfo(user.uid);
       GoRouter.of(context).go(RoutePath.main);
     } else {
       DialogCustom.instance.showLoading(context, false);

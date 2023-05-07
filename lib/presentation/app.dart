@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:friendzone/common/constants/constants.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
@@ -26,10 +27,6 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 AuthBloc(RepositoryProvider.of<AuthRepository>(context)),
-          ),
-          BlocProvider(
-            create: (context) =>
-                SignUpBloc(RepositoryProvider.of<AuthRepository>(context)),
           ),
           BlocProvider(
               create: (context) => WritePostCubit(
@@ -68,6 +65,7 @@ class App extends StatelessWidget {
   }
 
   final GoRouter _router = GoRouter(
+    // navigatorKey: navigatorKey,
     routes: [
       GoRoute(
           path: RoutePath.splash,

@@ -35,18 +35,17 @@ class UserRepository {
     }
   }
 
-  Future<UserModel> findMe() async {
-    final user = FirebaseAuth.instance.currentUser!;
-    final doc = await firestore.collection("users").doc(user.uid).get();
+  Future<UserModel> findMe(String idUser) async {
+    final doc = await firestore.collection("users").doc(idUser).get();
     final res = UserModel.fromDocFireStore(doc);
     return res;
   }
 
-  Future<List<Post>> getMyPost() async {
+  Future<List<Post>> getMyPost(String idUser) async {
     List<Post> list = [];
     QuerySnapshot querySnapshot = await firestore
         .collection("post")
-        .where("idUser", isEqualTo: userFromFireBase!.uid)
+        .where("idUser", isEqualTo: idUser)
         .orderBy("createdAt")
         .get();
     for (var doc in querySnapshot.docs) {

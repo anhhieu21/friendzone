@@ -21,6 +21,14 @@ class Authenticated extends AuthState {
   List<Object> get props => [];
 }
 
+class SignUpSuccess extends AuthState {
+  final User user;
+
+  const SignUpSuccess(this.user);
+  @override
+  List<Object> get props => [];
+}
+
 // This is the initial state of the bloc. When the user is not authenticated the state is changed to Unauthenticated.
 class UnAuthenticated extends AuthState {
   @override

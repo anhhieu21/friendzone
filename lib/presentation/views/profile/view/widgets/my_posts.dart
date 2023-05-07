@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -14,8 +15,9 @@ class MyPosts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
     return RefreshIndicator(
-        onRefresh: () => context.read<MyAccountCubit>().myAccountInfo(),
+        onRefresh: () => context.read<MyAccountCubit>().myAccountInfo(user.uid),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: MasonryGridView.count(

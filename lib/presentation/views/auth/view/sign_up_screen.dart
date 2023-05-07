@@ -6,7 +6,6 @@ import 'package:friendzone/presentation/themes/color.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
-import 'bloc/signup_bloc.dart';
 import 'widgets/button_sigin.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -30,7 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   _signUp() {
     if (_keyForm.currentState!.validate()) {
-      BlocProvider.of<SignUpBloc>(context)
+      BlocProvider.of<AuthBloc>(context)
           .add(SignUpReq(nameController.text, passController.text));
     }
   }
@@ -66,13 +65,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
-          child: BlocListener<SignUpBloc, SignUpState>(
+          child: BlocListener<AuthBloc, AuthState>(
               listener: (ctx, state) {
-                if (state is SignUpLoading) {
+                if (state is Loading) {
                   DialogCustom.instance.showLoading(context, true);
                 }
                 if (state is SignUpSuccess) dialogSuccess();
-                if (state is SignUpError) dialogFailed(ctx);
+                if (state is AuthError) dialogFailed(ctx);
               },
               child: Form(
                 key: _keyForm,

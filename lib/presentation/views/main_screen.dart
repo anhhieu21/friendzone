@@ -6,7 +6,6 @@ import 'package:friendzone/presentation/views/view.dart';
 
 import 'chats/view/chats_screen.dart';
 import 'home/bloc/allpost/all_post_cubit.dart';
-import 'profile/cubit/myaccount/my_account_cubit.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -23,7 +22,6 @@ class _MainScreenState extends State<MainScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       BlocProvider.of<AllPostCubit>(context).getAllPost();
       BlocProvider.of<NewFeedsCubit>(context).getAllPost();
-      BlocProvider.of<MyAccountCubit>(context).myAccountInfo();
     });
 
     super.initState();

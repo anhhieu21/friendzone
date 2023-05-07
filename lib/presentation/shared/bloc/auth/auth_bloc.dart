@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:friendzone/data/repositories/auth_repository.dart';
@@ -13,7 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         final res =
             await _repository.signInWithFireBase(event.email, event.password);
-        if (res) {
+        if (res != null) {
           emit(Authenticated());
         } else {
           emit(UnAuthenticated());
@@ -29,6 +30,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(Loading());
       await _repository.signOut();
       emit(UnAuthenticated());
+    });
+
+    on<SignUpReq>((event, emit) async {
+      emit(Loading());
+      try {
+        final user =
+            await _repository.signUpWithFireBase(event.email, event.password);
+        if (user != null) {
+          emit(SignUpSuccess(user));
+        } else {
+          emit(const AuthError('erro'));
+        }
+      } catch (e) {
+        emit(AuthError(e.toString()));
+      }
     });
   }
 }

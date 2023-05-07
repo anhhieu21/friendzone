@@ -2,8 +2,6 @@
 
 library view;
 
-export 'views/auth/bloc/signin_bloc.dart';
-export 'views/auth/view/bloc/signup_bloc.dart';
 export 'views/auth/view/sign_in_screen.dart';
 export 'views/auth/view/sign_up_screen.dart';
 export 'views/auth/view/widgets/button_sigin.dart';

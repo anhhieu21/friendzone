@@ -9,11 +9,11 @@ class MyAccountCubit extends Cubit<MyAccountState> {
   final UserRepository _repository;
   MyAccountCubit(this._repository) : super(MyAccountInitial());
 
-  myAccountInfo() async {
+  myAccountInfo(String idUser) async {
     List<Post> postsPrivate = [];
     List<Post> postsPublic = [];
-    final user = await _repository.findMe();
-    final myPost = await _repository.getMyPost();
+    final user = await _repository.findMe(idUser);
+    final myPost = await _repository.getMyPost(idUser);
     postsPrivate = myPost.where((e) => e.visible = false).toList();
     postsPublic = myPost.where((e) => e.visible = true).toList();
     emit(MyAccountInfo(user, postsPublic, postsPrivate));

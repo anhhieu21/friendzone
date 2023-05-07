@@ -45,21 +45,21 @@ class AuthRepository {
     return user;
   }
 
-  Future<bool> signInWithFireBase(
+  Future<User?> signInWithFireBase(
     String email,
     String password,
   ) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      final res = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      return true;
+      return res.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found' || e.code == "unknown") {
         throw Exception('No user found for that email.');
       } else if (e.code == 'wrong-password') {
         throw Exception('Wrong password provided for that user.');
       }
-      return false;
+      return null;
     }
   }
 
