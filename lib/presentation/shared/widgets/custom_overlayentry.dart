@@ -1,22 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/common/constants/constants.dart';
+import 'package:friendzone/presentation/themes/color.dart';
 
 class CustomOverlayEntry {
   static final instance = CustomOverlayEntry._();
   CustomOverlayEntry._();
+
   OverlayEntry? _overlayEntry;
-  final _overlay = Overlay.of(navigatorKey.currentContext!);
-  void showOverlay() {
+
+  /// Creates an overlay entry.
+  ///
+  /// [child] is children of stack
+  /// Call [hideOverlay] to close
+  void showOverlay(BuildContext context, {required Widget child}) {
+    final overlay = Overlay.of(context);
     _overlayEntry = OverlayEntry(
-      builder: (context) => const Positioned(
-        top: 100.0,
-        left: 100.0,
-        child: Material(
-          child: Text('Hello world!'),
+      builder: (context) => Material(
+        color: Colors.transparent,
+        child: Stack(
+          children: [
+            Positioned.fill(
+                child: GestureDetector(
+              onTap: hideOverlay,
+              child: Material(color: colorBlack.withOpacity(0.3)),
+            )),
+            child
+          ],
         ),
       ),
     );
-    _overlay.insert(_overlayEntry!);
+    overlay.insert(_overlayEntry!);
   }
 
   void hideOverlay() {

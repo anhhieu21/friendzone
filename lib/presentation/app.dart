@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:friendzone/common/constants/constants.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
@@ -52,7 +51,7 @@ class App extends StatelessWidget {
             title: 'FriendZone',
             debugShowCheckedModeBanner: false,
             theme: themeData,
-            routerConfig: _router,
+            routerConfig: router,
             localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
@@ -64,7 +63,7 @@ class App extends StatelessWidget {
     );
   }
 
-  final GoRouter _router = GoRouter(
+  final GoRouter router = GoRouter(
     // navigatorKey: navigatorKey,
     routes: [
       GoRoute(
