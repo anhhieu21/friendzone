@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendzone/presentation/views/home/bloc/cubit/new_feeds_cubit.dart';
+import 'package:friendzone/presentation/views/home/bloc/feed_cubit/new_feeds_cubit.dart';
 import 'package:friendzone/presentation/views/home/view/widgets/new_feed_item.dart';
 
 class ListNewFeed extends StatelessWidget {

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
 
 class Post {
+  String id;
   String idUser;
   String content;
   String imageUrl;
@@ -11,7 +12,8 @@ class Post {
   String? avartarAuthor;
   bool visible;
   Post(
-      {required this.idUser,
+      {required this.id,
+      required this.idUser,
       required this.content,
       required this.imageUrl,
       required this.author,
@@ -23,6 +25,7 @@ class Post {
   factory Post.fromFirestore(DocumentSnapshot doc) {
     Map postFromDB = doc.data() as Map;
     return Post(
+        id: postFromDB['id'],
         idUser: postFromDB['idUser'],
         content: postFromDB['content'],
         imageUrl: postFromDB['imageUrl'],

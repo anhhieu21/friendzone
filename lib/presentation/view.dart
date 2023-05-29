@@ -13,7 +13,7 @@ export 'views/chats/view/widgets/item_chat.dart';
 export 'views/friendzone/bloc/friendzone_bloc.dart';
 export 'views/friendzone/view/friend_zone_screen.dart';
 export 'views/home/bloc/allpost/all_post_cubit.dart';
-export 'views/home/bloc/cubit/new_feeds_cubit.dart';
+export 'views/home/bloc/feed_cubit/new_feeds_cubit.dart';
 export 'views/home/bloc/home_bloc.dart';
 export 'views/home/view/home_screen.dart';
 export 'views/home/view/widgets/app_bar.dart';

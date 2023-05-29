@@ -15,6 +15,7 @@ class NewFeedsCubit extends Cubit<NewFeedsState> {
     allPost.insert(
         0,
         Post(
+            id: '0',
             idUser: '0',
             content: '0',
             imageUrl: '0',

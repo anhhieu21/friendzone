@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:friendzone/data/models/post.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -15,6 +16,8 @@ class PostRepository {
     QuerySnapshot querySnapshot = await firestore
         .collection("post")
         .where("visible", isEqualTo: true)
+        .where("idUser", isNotEqualTo: auth!.uid)
+        .orderBy("idUser")
         .orderBy("createdAt", descending: true)
         .get();
     for (var doc in querySnapshot.docs) {
@@ -80,6 +83,7 @@ class PostRepository {
       final idPost = firestore.collection("post").doc().id;
       List<dynamic> postPath = [];
       await firestore.collection("post").doc(idPost).set({
+        "id": idPost,
         "idUser": auth!.uid,
         "author": auth?.displayName ??
             auth!.email!.replaceAll(RegExp('[^A-Za-z0-9]'), ''),
@@ -92,12 +96,27 @@ class PostRepository {
       });
       final path = firestore.collection("post").doc(idPost).path;
       postPath.add(path);
+      firestore.collection("like").doc(idPost).set({"ids": []});
+
       await updateMeFirestore(
           idDoc: idUser, avartar: avartarAuthor, posts: postPath);
       return true;
     } catch (e) {
       log(e.toString());
       return false;
+    }
+  }
+
+  Future likePost(Post post) async {
+    final like = int.parse(post.like) + 1;
+    try {
+      await firestore.collection("post").doc(post.id).update({"like": '$like'});
+      post.like = like.toString();
+      return post;
+    } on FirebaseException catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
   }
 
