@@ -14,6 +14,7 @@ class UpdateProfileScreen extends StatelessWidget {
   UpdateProfileScreen({super.key, required this.userDetail});
   final TextEditingController controllerName = TextEditingController();
   final TextEditingController controllerPhone = TextEditingController();
+  final TextEditingController controllerBio = TextEditingController();
   final stream = FirebaseAuth.instance.authStateChanges();
   _updatedUser(BuildContext context) async {
     BlocProvider.of<UpdateProfileCubit>(context).updateProfile(
@@ -84,6 +85,13 @@ class UpdateProfileScreen extends StatelessWidget {
               CustomTextField(
                 label: 'Email',
                 hint: userDetail.email.toString(),
+                error: 'error',
+                readOnly: true,
+              ),
+              CustomTextField(
+                controller: controllerBio,
+                label: 'Bio',
+                hint: userDetail.bio.toString(),
                 error: 'error',
                 readOnly: true,
               )

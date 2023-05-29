@@ -1,8 +1,5 @@
-import 'dart:developer';
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:friendzone/data/repositories/user_repository.dart';
-import 'package:path/path.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -71,54 +68,4 @@ class AuthRepository {
     }
   }
 
-  Future<bool> updateProfile(
-      {String? displayName, String? phone, File? file}) async {
-    try {
-      String? urlImage;
-      if (file != null) {
-        final upLoad =
-            storageRef.child('avatar/${basename(file.path)}').putFile(file);
-
-        upLoad.snapshotEvents.listen((event) async {
-          switch (event.state) {
-            case TaskState.paused:
-              log("Upload is paused.");
-              break;
-            case TaskState.running:
-              final progress =
-                  100.0 * (event.bytesTransferred / event.totalBytes);
-              log("Upload is $progress% complete.");
-              break;
-            case TaskState.success:
-              urlImage = await event.ref.getDownloadURL();
-              if (urlImage != null) {
-                await _firebaseAuth.currentUser!.updatePhotoURL(urlImage);
-              }
-              break;
-
-            case TaskState.canceled:
-              log("Upload was canceled");
-              break;
-            case TaskState.error:
-              break;
-          }
-        });
-      }
-      if (displayName!.isNotEmpty) {
-        await _firebaseAuth.currentUser!.updateDisplayName(displayName);
-        await fireStore.doc(user!.uid).update({
-          'name': displayName,
-          'phone': phone,
-        });
-      }
-      // if (phone!.isNotEmpty) {
-      //   await _firebaseAuth.currentUser!.updatePhoneNumber(ph);
-      // }
-
-      return true;
-    } catch (e) {
-      log(e.toString());
-      return false;
-    }
   }
-}

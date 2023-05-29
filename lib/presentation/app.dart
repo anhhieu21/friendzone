@@ -39,7 +39,7 @@ class App extends StatelessWidget {
                   RepositoryProvider.of<PostRepository>(context))),
           BlocProvider(
               create: (context) => UpdateProfileCubit(
-                  RepositoryProvider.of<AuthRepository>(context))),
+                  RepositoryProvider.of<UserRepository>(context))),
           BlocProvider(
               create: (context) => MyAccountCubit(
                   RepositoryProvider.of<UserRepository>(context))),

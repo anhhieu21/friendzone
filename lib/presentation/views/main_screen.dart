@@ -14,40 +14,42 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
-  final PageController _pageController = PageController();
-  int _selectedIndex = 0;
+class _MainScreenState extends State<MainScreen>
+    with SingleTickerProviderStateMixin {
+  late final TabController _tabController;
+  List<Menu> listNav = [];
+  List<Widget> _listView = [];
   @override
   void initState() {
+    listNav = menuBottomNavBar.map((e) => Menu.fromMap(e)).toList();
+    _tabController = TabController(length: listNav.length, vsync: this);
+    _listView = [
+      const HomeScreen(),
+      const ChatsScreen(),
+      FriendZoneScreen(),
+      const ProfileScreen()
+    ];
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       BlocProvider.of<AllPostCubit>(context).getAllPost();
       BlocProvider.of<NewFeedsCubit>(context).getAllPost();
     });
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final listNav = menuBottomNavBar.map((e) => Menu.fromMap(e)).toList();
-
     return Scaffold(
       extendBody: true,
-      body: PageView(
+      body: TabBarView(
         physics: const NeverScrollableScrollPhysics(),
-        controller: _pageController,
-        children: [
-          const HomeScreen(),
-          const ChatsScreen(),
-          FriendZoneScreen(),
-          const ProfileScreen()
-        ],
+        controller: _tabController,
+        children: _listView,
       ),
       bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
+          currentIndex: _tabController.index,
           onTap: (value) {
-            setState(() => _selectedIndex = value);
-            _pageController.jumpToPage(value);
+            _tabController.index = value;
+            setState(() {});
           },
           items: listNav
               .map((e) => BottomNavigationBarItem(

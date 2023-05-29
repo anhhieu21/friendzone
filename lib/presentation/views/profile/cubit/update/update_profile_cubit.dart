@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:friendzone/data/repositories/auth_repository.dart';
+import 'package:friendzone/data.dart';
 import 'package:image_picker/image_picker.dart';
 
 part 'update_profile_state.dart';
 
 class UpdateProfileCubit extends Cubit<UpdateProfileState> {
-  final AuthRepository _repository;
+  final UserRepository _repository;
   UpdateProfileCubit(this._repository) : super(UpdateProfileInitial());
 
   updateProfile({String? displayName, String? phone}) async {

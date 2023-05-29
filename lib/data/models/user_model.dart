@@ -8,6 +8,7 @@ class UserModel {
   List<dynamic>? post;
   String name;
   String background;
+  String? bio;
   // bool followed;
   UserModel(
       {required this.idUser,
@@ -15,7 +16,8 @@ class UserModel {
       required this.email,
       required this.name,
       required this.background,
-      this.post});
+      this.post,
+      this.bio});
 
   factory UserModel.fromDocFireStore(DocumentSnapshot doc) {
     Map userFromDB = doc.data() as Map;
@@ -26,9 +28,9 @@ class UserModel {
       email: userFromDB["email"],
       name: userFromDB["name"],
       post: userFromDB["post"],
-      background: userFromDB["background"].isEmpty
-          ? urlAvatar
-          : userFromDB["background"],
+      background:userFromDB["background"],
+      bio: userFromDB["bio"],
+
     );
   }
   Map<String, dynamic> toMap() {
