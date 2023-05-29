@@ -19,10 +19,10 @@ class ItemChat extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 8),
-        Expanded(
+        const Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Text(
                 'Name your friend',
                 style: TextStyle(fontWeight: FontWeight.w600),

@@ -30,17 +30,17 @@ class MenuOptions extends StatelessWidget {
           // offset: const Offset(-20, 0),
           isExpanded: true,
           hint: const Text('Tuỳ chọn'),
-          items: [
+          items: const [
             DropdownMenuItem<Enum>(
               value: OptionPost.public,
               child: Row(
-                children: const [Text('Công khai'), Icon(Ionicons.earth)],
+                children: [Text('Công khai'), Icon(Ionicons.earth)],
               ),
             ),
             DropdownMenuItem<Enum>(
               value: OptionPost.private,
               child: Row(
-                children: const [Text('Riêng tư'), Icon(Ionicons.lock_closed)],
+                children: [Text('Riêng tư'), Icon(Ionicons.lock_closed)],
               ),
             ),
           ]),
