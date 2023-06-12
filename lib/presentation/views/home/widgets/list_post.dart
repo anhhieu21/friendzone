@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/presentation/views/home/view/widgets/post_item.dart';
-import '../../../../../data/models/post.dart';
+import 'package:friendzone/presentation/views/home/widgets/post_item.dart';
+import '../../../../data/models/post.dart';
 
 class ListPost extends StatelessWidget {
   final List<Post> listPost;

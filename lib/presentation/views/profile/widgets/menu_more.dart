@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/presentation/routes/path.dart';
-import 'package:friendzone/presentation/shared/bloc/auth/auth_bloc.dart';
 import 'package:friendzone/presentation/shared/widgets/custom_overlayentry.dart';
 import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
 import 'package:friendzone/presentation/themes/color.dart';
+import 'package:friendzone/state.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 

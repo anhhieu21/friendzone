@@ -2,6 +2,7 @@
 
 library data;
 
+export 'data/models/like.dart';
 export 'data/models/menu.dart';
 export 'data/models/post.dart';
 export 'data/models/user_model.dart';

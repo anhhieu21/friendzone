@@ -5,6 +5,7 @@ import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/view.dart';
 import 'package:friendzone/data.dart' hide MyPosts;
+import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
 
 
 const expandedHeight = 180.0;

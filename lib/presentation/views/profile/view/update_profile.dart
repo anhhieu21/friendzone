@@ -6,7 +6,7 @@ import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:friendzone/presentation/views/profile/cubit/update/update_profile_cubit.dart';
+import 'package:friendzone/state/profile/update/update_profile_cubit.dart';
 import 'package:ionicons/ionicons.dart';
 
 class UpdateProfileScreen extends StatelessWidget {

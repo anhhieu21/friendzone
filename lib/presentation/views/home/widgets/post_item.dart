@@ -4,11 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:friendzone/presentation/views/home/bloc/post_cubit/post_cubit_cubit.dart';
-import 'package:friendzone/presentation/views/home/bloc/post_cubit/post_cubit_state.dart';
+import 'package:friendzone/state.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../../../../../common/constants/list_img_fake.dart';
+import '../../../../common/constants/list_img_fake.dart';
 
 class PostItem extends StatelessWidget {
   final Post item;

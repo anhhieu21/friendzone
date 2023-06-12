@@ -9,7 +9,7 @@ import 'package:friendzone/presentation/themes/color.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../../../../../common/constants/list_img_fake.dart';
+import '../../../../common/constants/list_img_fake.dart';
 
 const expandedHeight = 120.0;
 const collapsedHeight = 60.0;

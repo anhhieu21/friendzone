@@ -5,8 +5,8 @@ import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
 import 'package:go_router/go_router.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:friendzone/presentation/views/profile/view/widgets/info_view.dart';
-import '../../../../utils/formatter.dart';
+import 'package:friendzone/presentation/views/profile/widgets/info_view.dart';
+import '../../../utils/formatter.dart';
 import 'menu_more.dart';
 
 class HeaderProfile extends StatelessWidget {

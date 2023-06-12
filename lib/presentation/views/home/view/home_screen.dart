@@ -4,7 +4,8 @@ import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/data/repositories/post_repository.dart';
 import 'package:friendzone/presentation/view.dart';
-import 'package:friendzone/presentation/views/home/bloc/post_cubit/post_cubit_cubit.dart';
+import 'package:friendzone/state/home/allpost/all_post_cubit.dart';
+import 'package:friendzone/state/home/post_cubit/post_cubit_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

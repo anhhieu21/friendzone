@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/data/models/menu.dart';
-import 'package:friendzone/presentation/views/home/bloc/feed_cubit/new_feeds_cubit.dart';
 import 'package:friendzone/presentation/views/view.dart';
+import 'package:friendzone/state/home/allpost/all_post_cubit.dart';
+import 'package:friendzone/state/home/feed_cubit/new_feeds_cubit.dart';
 
 import 'chats/view/chats_screen.dart';
-import 'home/bloc/allpost/all_post_cubit.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

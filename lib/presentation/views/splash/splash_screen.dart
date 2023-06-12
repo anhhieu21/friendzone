@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:friendzone/presentation/views/profile/cubit/myaccount/my_account_cubit.dart';
+import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:go_router/go_router.dart';
 

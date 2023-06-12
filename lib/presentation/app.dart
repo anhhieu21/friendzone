@@ -3,11 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/presentation/routes/path.dart';
-import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/themes/theme.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:friendzone/presentation/view.dart';
-import 'package:friendzone/presentation/views/splash/splash_screen.dart';
+import 'package:friendzone/state.dart';
 import 'package:go_router/go_router.dart';
 
 class App extends StatelessWidget {
