@@ -59,6 +59,7 @@ dependencies:
   dropdown_button2: ^2.1.0
   path: ^1.8.2
   index_generator: ^3.4.0
+  flutter_local_notifications: ^14.1.1
 
 dev_dependencies:
   flutter_test:
