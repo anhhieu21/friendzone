@@ -1,20 +1,12 @@
 part of 'my_account_cubit.dart';
 
-abstract class MyAccountState extends Equatable {
-  const MyAccountState();
+class MyAccountState {
+  final UserModel? user;
+  final List<Post>? myPostsPublic;
+  final List<Post>? myPostsPrivate;
+  const MyAccountState({this.user, this.myPostsPublic, this.myPostsPrivate});
 
-  @override
-  List<Object> get props => [];
-}
-
-class MyAccountInitial extends MyAccountState {}
-
-class MyAccountInfo extends MyAccountState {
-  final UserModel user;
-  final List<Post> myPostsPublic;
-  final List<Post> myPostsPrivate;
-  const MyAccountInfo(this.user, this.myPostsPublic, this.myPostsPrivate);
-
-  @override
-  List<Object> get props => [user, myPostsPublic, myPostsPrivate];
+  MyAccountState copyWith({required UserModel user,required List<Post> myPostsPublic,required List<Post> myPostsPrivate}) {
+    return MyAccountState(user:user, myPostsPublic:myPostsPublic, myPostsPrivate:myPostsPrivate);
+  }
 }

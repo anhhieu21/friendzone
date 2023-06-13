@@ -1,34 +1,27 @@
-import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Like {
   String id;
-  String idUser;
-  int idPost;
+  List<String> idsUser;
   Like({
     required this.id,
-    required this.idUser,
-    required this.idPost,
+    required this.idsUser,
   });
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
     result.addAll({'id': id});
-    result.addAll({'idUser': idUser});
-    result.addAll({'idPost': idPost});
+    result.addAll({'idsUser': idsUser});
 
     return result;
   }
 
-  factory Like.fromMap(Map<String, dynamic> map) {
+  factory Like.fromFirestore(DocumentSnapshot doc) {
+    Map map = doc.data() as Map;
     return Like(
       id: map['id'] ?? '',
-      idUser: map['idUser'] ?? '',
-      idPost: map['idPost']?.toInt() ?? 0,
+      idsUser: List<String>.from(map['idsUser']),
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Like.fromJson(String source) => Like.fromMap(json.decode(source));
 }

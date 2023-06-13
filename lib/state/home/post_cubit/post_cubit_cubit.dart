@@ -8,11 +8,11 @@ class PostCubitCubit extends Cubit<PostCubitState> {
   PostRepository postRepository;
   PostCubitCubit(
     this.postRepository,
-  ) : super( const PostCubitState());
+  ) : super(const PostCubitState());
 
-  Future<void> likePost(Post post) async {
+  Future<void> likePost(Post post, UserModel userModel) async {
     try {
-    final res=  await postRepository.likePost(post);
+      final res = await postRepository.likePost(post, userModel);
       emit(state.copyWith(post: res));
     } catch (error) {
       emit(state.copyWith(error: error.toString()));

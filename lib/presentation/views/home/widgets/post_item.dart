@@ -16,7 +16,9 @@ class PostItem extends StatelessWidget {
     required this.item,
   }) : super(key: key);
   _likePost(BuildContext context) {
-    BlocProvider.of<PostCubitCubit>(context).likePost(item);
+    final user =
+        BlocProvider.of<MyAccountCubit>(context, listen: false).state.user;
+    BlocProvider.of<PostCubitCubit>(context).likePost(item, user!);
   }
 
   @override

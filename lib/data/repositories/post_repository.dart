@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:friendzone/data.dart';
 import 'package:friendzone/data/models/post.dart';
+import 'package:collection/collection.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -15,10 +17,10 @@ class PostRepository {
     List<Post> listPost = [];
     QuerySnapshot querySnapshot = await firestore
         .collection("post")
-        .where("visible", isEqualTo: true)
-        .where("idUser", isNotEqualTo: auth!.uid)
-        .orderBy("idUser")
-        .orderBy("createdAt", descending: true)
+        // .where("visible", isEqualTo: true)
+        // .where("idUser", isNotEqualTo: auth!.uid)
+        // .orderBy("idUser")
+        // .orderBy("createdAt", descending: true)
         .get();
     for (var doc in querySnapshot.docs) {
       Post post = Post.fromFirestore(doc);
@@ -107,16 +109,49 @@ class PostRepository {
     }
   }
 
-  Future likePost(Post post) async {
-    final like = int.parse(post.like) + 1;
+  Future likePost(Post post, UserModel user) async {
+    final likeCount = int.parse(post.like) + 1;
     try {
-      await firestore.collection("post").doc(post.id).update({"like": '$like'});
-      post.like = like.toString();
+      final docLike = firestore.collection("like").doc(post.id);
+      final getDocLike = await docLike.get();
+      final like = await getLikePost(post);
+      final x = like!.idsUser.firstWhereOrNull((e) => e == user.idUser);
+      if (!getDocLike.exists) {
+        final like = Like(id: post.id, idsUser: [user.idUser]);
+        await docLike.set(like.toMap());
+      } else {
+        if (x == null) {
+          await docLike.update({
+            "idsUser": FieldValue.arrayUnion([user.idUser]),
+          });
+        }
+      }
+      if (x == null) {
+        await firestore
+            .collection("post")
+            .doc(post.id)
+            .update({"like": '$likeCount'});
+        post.like = likeCount.toString();
+      }
+
       return post;
     } on FirebaseException catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
+    }
+  }
+
+  Future<Like?> getLikePost(Post post) async {
+    try {
+      final docLike = await firestore.collection("like").doc(post.id).get();
+      final res = Like.fromFirestore(docLike);
+      return res;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return null;
     }
   }
 

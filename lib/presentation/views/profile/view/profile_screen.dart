@@ -41,8 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen>
       //   },
       child: BlocBuilder<MyAccountCubit, MyAccountState>(
         builder: (context, state) {
-          final data = state is MyAccountInfo ? state : null;
-          final listPost = data?.myPostsPublic ?? [];
+          final listPost = state.myPostsPublic ?? [];
           return NestedScrollView(
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
@@ -56,7 +55,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                     width: size.width,
                     child: HeaderProfile(
                       size: size,
-                      user: data?.user,
+                      user: state.user,
                     ),
                   ),
                   forceElevated: innerBoxIsScrolled,
