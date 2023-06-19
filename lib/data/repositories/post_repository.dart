@@ -114,32 +114,36 @@ class PostRepository {
     try {
       final docLike = firestore.collection("like").doc(post.id);
       final getDocLike = await docLike.get();
-      final like = await getLikePost(post);
-      final x = like!.idsUser.firstWhereOrNull((e) => e == user.idUser);
       if (!getDocLike.exists) {
         final like = Like(id: post.id, idsUser: [user.idUser]);
         await docLike.set(like.toMap());
+        await _updateLike(post, likeCount);
+        post.like = likeCount.toString();
       } else {
+        final x = Like.fromFirestore(getDocLike)
+            .idsUser
+            .firstWhereOrNull((e) => e == user.idUser);
         if (x == null) {
           await docLike.update({
             "idsUser": FieldValue.arrayUnion([user.idUser]),
           });
+          await _updateLike(post, likeCount);
+          post.like = likeCount.toString();
         }
       }
-      if (x == null) {
-        await firestore
-            .collection("post")
-            .doc(post.id)
-            .update({"like": '$likeCount'});
-        post.like = likeCount.toString();
-      }
-
       return post;
     } on FirebaseException catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
     }
+  }
+
+  Future _updateLike(Post post, int likeCount) async {
+    await firestore
+        .collection("post")
+        .doc(post.id)
+        .update({"like": '$likeCount'});
   }
 
   Future<Like?> getLikePost(Post post) async {

@@ -6,6 +6,7 @@ import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/themes/theme.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:friendzone/presentation/view.dart';
+import 'package:friendzone/presentation/views/home/widgets/post_detail.dart';
 import 'package:friendzone/state.dart';
 import 'package:go_router/go_router.dart';
 
@@ -91,7 +92,12 @@ class App extends StatelessWidget {
                 path: RoutePath.updateProfile,
                 name: Formatter.nameRoute(RoutePath.updateProfile),
                 builder: (BuildContext context, GoRouterState state) =>
-                    UpdateProfileScreen(userDetail: state.extra as UserModel))
+                    UpdateProfileScreen(userDetail: state.extra as UserModel)),
+            GoRoute(
+                path: RoutePath.postDetail,
+                name: Formatter.nameRoute(RoutePath.postDetail),
+                builder: (BuildContext context, GoRouterState state) =>
+                    PostDetailScreen(post: state.extra as Post))
           ]),
     ],
   );
