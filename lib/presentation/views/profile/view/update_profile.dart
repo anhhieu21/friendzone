@@ -1,20 +1,20 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
+import 'package:friendzone/data.dart';
+import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:friendzone/presentation/views/profile/cubit/update/update_profile_cubit.dart';
-import 'package:friendzone/presentation/views/widgets/custom_textfield.dart';
+import 'package:friendzone/state/profile/update/update_profile_cubit.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../../../../common/constants/list_img_fake.dart';
-
-
 class UpdateProfileScreen extends StatelessWidget {
-  final User userDetail;
+  final UserModel userDetail;
   UpdateProfileScreen({super.key, required this.userDetail});
   final TextEditingController controllerName = TextEditingController();
   final TextEditingController controllerPhone = TextEditingController();
+  final TextEditingController controllerBio = TextEditingController();
   final stream = FirebaseAuth.instance.authStateChanges();
   _updatedUser(BuildContext context) async {
     BlocProvider.of<UpdateProfileCubit>(context).updateProfile(
@@ -48,13 +48,14 @@ class UpdateProfileScreen extends StatelessWidget {
                       builder: (_, state) {
                     if (state is UpdateProfileChoseImage) {
                       return CircleAvatar(
-                          radius: size.width / 8,
-                          backgroundImage: FileImage(state.file));
+                        radius: size.width / 8,
+                        backgroundImage: FileImage(state.file),
+                      );
                     } else {
                       return CircleAvatar(
                         radius: size.width / 8,
                         backgroundImage:
-                            NetworkImage(userDetail.photoURL ?? urlAvatar),
+                            CachedNetworkImageProvider(userDetail.avartar),
                       );
                     }
                   }),
@@ -74,7 +75,7 @@ class UpdateProfileScreen extends StatelessWidget {
               CustomTextField(
                   controller: controllerName,
                   label: 'Tên người dùng',
-                  hint: userDetail.displayName ?? 'tên hiển thị',
+                  hint: userDetail.name,
                   error: 'error'),
               CustomTextField(
                   controller: controllerPhone,
@@ -84,6 +85,13 @@ class UpdateProfileScreen extends StatelessWidget {
               CustomTextField(
                 label: 'Email',
                 hint: userDetail.email.toString(),
+                error: 'error',
+                readOnly: true,
+              ),
+              CustomTextField(
+                controller: controllerBio,
+                label: 'Bio',
+                hint: userDetail.bio.toString(),
                 error: 'error',
                 readOnly: true,
               )

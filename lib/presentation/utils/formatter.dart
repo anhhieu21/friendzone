@@ -1,4 +1,6 @@
+import 'package:friendzone/presentation/routes/path.dart';
 import 'package:intl/intl.dart';
+
 class Formatter {
   static String dateTime(DateTime dateTime) {
     final formatter = DateFormat('dd-MM-yyyy', 'vi_VN');
@@ -15,14 +17,22 @@ class Formatter {
     }
     return hour;
   }
+
   static double? hourD(DateTime? dateTime) {
     final formatter = DateFormat.H();
     double? hour;
     if (dateTime == null) {
       hour = double.tryParse(formatter.format(DateTime.now()));
     } else {
-      hour =  double.tryParse(formatter.format(dateTime));
+      hour = double.tryParse(formatter.format(dateTime));
     }
     return hour;
+  }
+
+  static String emailtoDisplayName(String value) {
+    return value.split('@')[0];
+  }
+  static String nameRoute(String path) {
+    return '/${RoutePath.main}/$path';
   }
 }

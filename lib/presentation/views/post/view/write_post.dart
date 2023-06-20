@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:friendzone/presentation/views/post/cubit/write_post_cubit.dart';
-import 'package:friendzone/presentation/views/post/view/widgets/menu_options.dart';
+import 'package:friendzone/presentation/views/post/widgets/menu_options.dart';
+import 'package:friendzone/state/post/write_post_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -89,7 +89,6 @@ class WritePost extends StatelessWidget {
                               child: ValueListenableBuilder<bool?>(
                                   valueListenable: privateNotifi,
                                   builder: (context, value, child) {
-                                    print(value);
                                     return ElevatedButton(
                                       onPressed: () => _uploadPost(
                                           context,

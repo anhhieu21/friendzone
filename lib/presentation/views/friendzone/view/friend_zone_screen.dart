@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/presentation/views/widgets/custom_textfield.dart';
+import 'package:friendzone/presentation/shared.dart';
 import 'package:ionicons/ionicons.dart';
 
 class FriendZoneScreen extends StatelessWidget {
@@ -27,7 +27,7 @@ class FriendZoneScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: Column(
+      body: const Column(
         children: [],
       ),
     );
