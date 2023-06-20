@@ -18,4 +18,13 @@ class PostCubitCubit extends Cubit<PostCubitState> {
       emit(state.copyWith(error: error.toString()));
     }
   }
+
+  Future<void> commentPost(String idPost) async {
+    try {
+      final res = await postRepository.getComments(idPost);
+      emit(state.copyWith(comments: res));
+    } catch (error) {
+      emit(state.copyWith(error: error.toString()));
+    }
+  }
 }

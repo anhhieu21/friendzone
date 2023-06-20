@@ -43,6 +43,10 @@ class App extends StatelessWidget {
           BlocProvider(
               create: (context) => MyAccountCubit(
                   RepositoryProvider.of<UserRepository>(context))),
+          BlocProvider(
+            create: (context) =>
+                PostCubitCubit(RepositoryProvider.of<PostRepository>(context)),
+          )
         ],
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,

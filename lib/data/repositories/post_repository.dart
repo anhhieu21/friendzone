@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:friendzone/data.dart';
+import 'package:friendzone/data/models/comment.dart';
 import 'package:friendzone/data/models/post.dart';
 import 'package:collection/collection.dart';
 import 'package:path/path.dart';
@@ -165,5 +166,19 @@ class PostRepository {
       required List<dynamic> posts}) async {
     await firestore.collection("users").doc(idDoc).update(
         {'avartar': avartar ?? '', 'posts': FieldValue.arrayUnion(posts)});
+  }
+
+  Future<List<Comment>> getComments(String idPost) async {
+    List<Comment> comments = [];
+    QuerySnapshot querySnapshot = await firestore
+        .collection("comment")
+        .where("id", isEqualTo: idPost)
+        .orderBy("createdAt", descending: false)
+        .get();
+    for (var e in querySnapshot.docs) {
+      final comment = Comment.fromFirestore(e);
+      comments.add(comment);
+    }
+    return comments;
   }
 }
