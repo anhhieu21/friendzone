@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/data/models/comment.dart';
-import 'package:friendzone/data/models/post.dart';
 import 'package:collection/collection.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -170,15 +169,33 @@ class PostRepository {
 
   Future<List<Comment>> getComments(String idPost) async {
     List<Comment> comments = [];
+    // QuerySnapshot querySnapshot = await firestore
+    //     .collection("comment")
+    //     .where("id", isEqualTo: idPost)
+    //     .orderBy("createdAt", descending: false)
+    //     .get();
     QuerySnapshot querySnapshot = await firestore
-        .collection("comment")
-        .where("id", isEqualTo: idPost)
-        .orderBy("createdAt", descending: false)
+        .collection("post")
+        .doc(idPost)
+        .collection('comment')
         .get();
     for (var e in querySnapshot.docs) {
       final comment = Comment.fromFirestore(e);
       comments.add(comment);
     }
     return comments;
+  }
+
+  Future<Comment> insertComments(String idPost, Comment comment) async {
+    final autoID =
+        firestore.collection("post").doc(idPost).collection('comment').doc().id;
+    comment.id = autoID;
+    await firestore
+        .collection("post")
+        .doc(idPost)
+        .collection('comment')
+        .doc(comment.id)
+        .set(comment.toMap());
+    return comment;
   }
 }

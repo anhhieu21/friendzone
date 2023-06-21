@@ -25,6 +25,12 @@ class PostItem extends StatelessWidget {
     BlocProvider.of<PostCubitCubit>(context).likePost(item, user!);
   }
 
+  _postDetail(BuildContext context) {
+    context.read<PostCubitCubit>().commentPost(item.id).then((value) {
+      context.pushNamed(Formatter.nameRoute(RoutePath.postDetail), extra: item);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = SizeEx(context).screenSize;
@@ -37,10 +43,7 @@ class PostItem extends StatelessWidget {
             post = state.post!;
           }
           return GestureDetector(
-            onTap: () {
-              context.pushNamed(Formatter.nameRoute(RoutePath.postDetail),
-                  extra: item);
-            },
+            onTap: () => _postDetail(context),
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16), color: colorWhite),
@@ -87,8 +90,7 @@ class PostItem extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
                           image: DecorationImage(
-                              image:
-                                  CachedNetworkImageProvider(post.imageUrl),
+                              image: CachedNetworkImageProvider(post.imageUrl),
                               fit: BoxFit.cover)),
                     ),
                     PostButtonBar(post: post, callBack: _likePost)

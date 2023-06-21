@@ -2,14 +2,12 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:friendzone/presentation/utils/formatter.dart';
-
 class Comment {
   String id;
   String content;
   String idUser;
   String nameAuthor;
-  String createdAt;
+  DateTime createdAt;
   Comment({
     required this.id,
     required this.content,
@@ -23,6 +21,8 @@ class Comment {
     result.addAll({'id': id});
     result.addAll({'content': content});
     result.addAll({'idUser': idUser});
+    result.addAll({'nameAuthor': nameAuthor});
+    result.addAll({'createdAt': DateTime.now()});
     return result;
   }
 
@@ -33,7 +33,7 @@ class Comment {
         content: map['content'] ?? '',
         idUser: map['idUser'] ?? '',
         nameAuthor: map['nameAuthor'] ?? '',
-        createdAt: Formatter.dateTime(map["createdAt"].toDate()));
+        createdAt: map["createdAt"].toDate());
   }
 
   String toJson() => json.encode(toMap());

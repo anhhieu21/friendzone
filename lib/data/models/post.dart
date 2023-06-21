@@ -11,6 +11,7 @@ class Post {
   String createdAt;
   String? avartarAuthor;
   bool visible;
+  int totalComment = 0;
   Post(
       {required this.id,
       required this.idUser,
