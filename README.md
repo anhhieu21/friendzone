@@ -1,6 +1,6 @@
 # Friendzone
 
-Friendzone is an app social media like the facebook but it is small app.
+Friendzone is an app social media like the facebook but it is small app. :shipit:
 
 ## Getting Started
 ### Set up firebase
