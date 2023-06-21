@@ -3,6 +3,14 @@
 Friendzone is an app social media like the facebook but it is small app. :shipit:
 
 ## Getting Started
+
+### Flutter
+- Version : v3.10.4
+- Dart : v3.0.3
+- State management :
+            _Bloc
+- Router :
+       _Go router
 ### Set up firebase
 - https://console.firebase.google.com
 - Add project.
