@@ -32,7 +32,7 @@ class PostButtonBar extends StatelessWidget {
                   Ionicons.chatbubble_ellipses_outline,
                   color: colorBlue.shade400,
                 ),
-                const Text('12 comments')
+                Text('${post.totalComment} comments')
               ],
             )),
         IconButton(

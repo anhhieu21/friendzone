@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'package:friendzone/presentation/themes/color.dart';
+import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:friendzone/state/home/post_cubit/post_cubit_cubit.dart';
 import 'package:friendzone/state/home/post_cubit/post_cubit_state.dart';
 
@@ -12,14 +13,14 @@ class PostComments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
       sliver: BlocBuilder<PostCubitCubit, PostCubitState>(
         builder: (context, state) {
           final list = state.comments ?? [];
           return SliverList.builder(
-            itemCount: [...list, ...list, ...list].length,
+            itemCount: list.length,
             itemBuilder: (_, i) {
-              final item = [...list, ...list, ...list][i];
+              final item = list[i];
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
                 child: Row(
@@ -56,7 +57,7 @@ class PostComments extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                item.createdAt,
+                                Formatter.dateTime(item.createdAt),
                                 style: const TextStyle(fontSize: 12),
                               ),
                             ],
