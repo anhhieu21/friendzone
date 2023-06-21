@@ -8,9 +8,9 @@ Friendzone is an app social media like the facebook but it is small app. :shipit
 - Version : v3.10.4
 - Dart : v3.0.3
 - State management :
-   _Bloc : https://bloclibrary.dev/#/
+  _ Bloc : https://bloclibrary.dev/#/
 - Router :
-   _Go router : https://docs.page/csells/go_router/getting-started
+  _ Go router : https://docs.page/csells/go_router/getting-started
 ### Set up firebase
 - https://console.firebase.google.com
 - Add project.
