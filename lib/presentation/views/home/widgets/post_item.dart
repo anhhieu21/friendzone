@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/presentation/routes/path.dart';
+import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:friendzone/presentation/views/home/widgets/post_button_bar.dart';
@@ -54,28 +55,34 @@ class PostItem extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 24,
-                            backgroundImage: CachedNetworkImageProvider(
-                                post.avartarAuthor ?? urlAvatar),
-                          ),
-                          Expanded(
-                            child: ListTile(
-                              contentPadding: const EdgeInsets.only(left: 5),
-                              title: Text(
-                                post.author,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              subtitle: Text(post.createdAt),
+                      child: OnTapEffect(
+                        radius: 16,
+                        onTap: () => context.pushNamed(
+                            Formatter.nameRoute(RoutePath.profileDetail),
+                            extra: post.idUser),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 24,
+                              backgroundImage: CachedNetworkImageProvider(
+                                  post.avartarAuthor ?? urlAvatar),
                             ),
-                          ),
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Ionicons.ellipsis_horizontal)),
-                        ],
+                            Expanded(
+                              child: ListTile(
+                                contentPadding: const EdgeInsets.only(left: 5),
+                                title: Text(
+                                  post.author,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                subtitle: Text(post.createdAt),
+                              ),
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Ionicons.ellipsis_horizontal)),
+                          ],
+                        ),
                       ),
                     ),
                     Padding(

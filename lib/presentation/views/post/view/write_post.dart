@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/data/models/post.dart';
+import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/post/widgets/menu_options.dart';
 import 'package:friendzone/state/post/write_post_cubit.dart';
+import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -17,8 +19,10 @@ class WritePost extends StatelessWidget {
 
   _uploadPost(BuildContext context, File? file, String content, bool visible) {
     if (file != null && content != "") {
+      final user =
+          BlocProvider.of<MyAccountCubit>(context, listen: false).state.user;
       BlocProvider.of<WritePostCubit>(context)
-          .upPost(file, content, 0, visible);
+          .upPost(file, content, 0, visible, user!);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Hay viết gì đó và chọn 1 bức ảnh thật đẹp nào !')));
@@ -137,6 +141,33 @@ class WritePost extends StatelessWidget {
                   },
                 ),
               ),
+              Expanded(
+                child: Scrollbar(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SingleChildScrollView(
+                      child: Wrap(
+                          children: List.generate(
+                              iconList.length,
+                              (index) => Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: OnTapEffect(
+                                      radius: 100,
+                                      onTap: () => contentController.text =
+                                          '${contentController.text} ${iconList[index]}',
+                                      child: Text(
+                                        iconList[index],
+                                        style: const TextStyle(fontSize: 30),
+                                      ),
+                                    ),
+                                  ))),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: kBottomNavigationBarHeight,
+              )
             ],
           ),
         ));
