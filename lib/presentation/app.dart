@@ -6,9 +6,13 @@ import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/themes/theme.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:friendzone/presentation/view.dart';
+import 'package:friendzone/presentation/views/chats/view/conversation_screen.dart';
 import 'package:friendzone/presentation/views/home/widgets/post_detail.dart';
 import 'package:friendzone/state.dart';
+import 'package:friendzone/state/profile/user/user_cubit.dart';
 import 'package:go_router/go_router.dart';
+
+import 'views/profile/view/user_profile_detail_screen.dart';
 
 class App extends StatelessWidget {
   App({super.key});
@@ -46,6 +50,10 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 PostCubitCubit(RepositoryProvider.of<PostRepository>(context)),
+          ),
+            BlocProvider(
+            create: (context) =>
+                UserPreviewCubit(RepositoryProvider.of<UserRepository>(context)),
           )
         ],
         child: GestureDetector(
@@ -101,7 +109,19 @@ class App extends StatelessWidget {
                 path: RoutePath.postDetail,
                 name: Formatter.nameRoute(RoutePath.postDetail),
                 builder: (BuildContext context, GoRouterState state) =>
-                    PostDetailScreen(post: state.extra as Post))
+                    PostDetailScreen(post: state.extra as Post)),
+            GoRoute(
+                path: RoutePath.profileDetail,
+                name: Formatter.nameRoute(RoutePath.profileDetail),
+                builder: (BuildContext context, GoRouterState state) =>
+                     ProfileDetailScreen(id:state.extra as String)),
+            GoRoute(
+                path: RoutePath.conversentation,
+                name: Formatter.nameRoute(RoutePath.conversentation),
+                builder: (BuildContext context, GoRouterState state) =>
+                    ConversationScreen(
+                      userModel: state.extra as UserModel,
+                    ))
           ]),
     ],
   );

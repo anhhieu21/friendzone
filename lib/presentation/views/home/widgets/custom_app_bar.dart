@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/themes/color.dart';
+import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -107,7 +108,8 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
                           ),
                           IconButton(
                               onPressed: () {
-                                context.push(RoutePath.writepost);
+                                context.pushNamed(
+                                    Formatter.nameRoute((RoutePath.writepost)));
                               },
                               icon: Icon(
                                 Ionicons.create_outline,

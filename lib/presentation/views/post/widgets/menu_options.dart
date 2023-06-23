@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzone/data/models/post.dart';
+import 'package:friendzone/presentation/themes/color.dart';
 import 'package:ionicons/ionicons.dart';
 
 class MenuOptions extends StatelessWidget {
@@ -12,24 +13,18 @@ class MenuOptions extends StatelessWidget {
     return DropdownButtonHideUnderline(
       child: DropdownButton2<Enum>(
           onChanged: (value) => onChanged(value),
-          // iconDisabledColor: Colors.grey,
-          // buttonHeight: 25,
-          // buttonWidth: 130,
-          // buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-          // buttonDecoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(14),
-          //     color: colorGrey.shade300),
-          // itemPadding: const EdgeInsets.all(10),
-          // dropdownDecoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(14),
-          //     color: colorGrey.shade300),
-          // dropdownElevation: 8,
-          // scrollbarRadius: const Radius.circular(40),
-          // scrollbarThickness: 6,
-          // scrollbarAlwaysShow: true,
-          // offset: const Offset(-20, 0),
+          buttonStyleData: ButtonStyleData(
+              width: 150,
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.0),
+                  color: colorGrey.shade200)),
+          dropdownStyleData: DropdownStyleData(
+              offset: const Offset(0, -10),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(16.0))),
           isExpanded: true,
-          hint: const Text('Tuỳ chọn'),
+          hint: const Text('Tuỳ chọn '),
           items: const [
             DropdownMenuItem<Enum>(
               value: OptionPost.public,

@@ -7,10 +7,14 @@ class InforView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Column(
       children: [
-        Text(value,style:const TextStyle(fontWeight: FontWeight.w600),),
-        Text(label),
+        Text(
+          value,
+          style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600),
+        ),
+        Text(label, style: textTheme.bodyLarge),
       ],
     );
   }

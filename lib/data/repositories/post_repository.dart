@@ -17,10 +17,10 @@ class PostRepository {
     List<Post> listPost = [];
     QuerySnapshot querySnapshot = await firestore
         .collection("post")
-        // .where("visible", isEqualTo: true)
-        // .where("idUser", isNotEqualTo: auth!.uid)
-        // .orderBy("idUser")
-        // .orderBy("createdAt", descending: true)
+        .where("visible", isEqualTo: true)
+        .where("idUser", isNotEqualTo: auth!.uid)
+        .orderBy("idUser")
+        .orderBy("createdAt", descending: true)
         .get();
     for (var doc in querySnapshot.docs) {
       Post post = Post.fromFirestore(doc);
@@ -30,10 +30,7 @@ class PostRepository {
   }
 
   Future<bool> upPost(File file, String content,
-      {int like = 0,
-      bool? visible,
-      String? avartarAuthor,
-      required String idUser}) async {
+      {int like = 0, bool? visible, required UserModel userModel}) async {
     try {
       //Upload to Firebase
       final upLoad =
@@ -55,8 +52,7 @@ class PostRepository {
                 content: content,
                 like: like,
                 visible: visible ?? true,
-                idUser: idUser,
-                avartarAuthor: avartarAuthor);
+                userModel: userModel);
             break;
 
           case TaskState.canceled:
@@ -76,21 +72,19 @@ class PostRepository {
 
   Future<bool> upFireStore(
       {required String urlImage,
-      String? avartarAuthor,
       required String content,
       required int like,
-      required String idUser,
+      required UserModel userModel,
       bool? visible}) async {
     try {
       final idPost = firestore.collection("post").doc().id;
       List<dynamic> postPath = [];
       await firestore.collection("post").doc(idPost).set({
         "id": idPost,
-        "idUser": auth!.uid,
-        "author": auth?.displayName ??
-            auth!.email!.replaceAll(RegExp('[^A-Za-z0-9]'), ''),
+        "idUser": userModel.idUser,
+        "author": userModel.name,
         "content": content,
-        "avartarAuthor": avartarAuthor,
+        "avartarAuthor": userModel.avartar,
         "imageUrl": urlImage,
         "like": like.toString(),
         "visible": visible,
@@ -101,7 +95,7 @@ class PostRepository {
       firestore.collection("like").doc(idPost).set({"ids": []});
 
       await updateMeFirestore(
-          idDoc: idUser, avartar: avartarAuthor, posts: postPath);
+          idDoc: userModel.idUser, avartar: userModel.avartar, posts: postPath);
       return true;
     } catch (e) {
       log(e.toString());
