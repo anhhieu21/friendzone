@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/common/constants/list_img_fake.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/views/chats/widgets/item_chat.dart';
+import 'package:friendzone/state/chat/chats_cubit.dart';
 import 'package:ionicons/ionicons.dart';
 
 class ChatsScreen extends StatelessWidget {
@@ -24,18 +25,24 @@ class ChatsScreen extends StatelessWidget {
             IconButton(onPressed: () {}, icon: const Icon(Ionicons.add_outline))
           ],
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: listPost.length,
+        body: BlocBuilder<ChatsCubit, ChatsState>(
+          buildWhen: (previous, current) {
+            if (current is ListConversationState) {
+              return true;
+            }
+            return false;
+          },
+          builder: (_, state) {
+            if (state is ListConversationState) {
+              return ListView.builder(
+                  itemCount: state.listConversation.length,
                   itemBuilder: (context, index) {
-                    return ItemChat(size: size, item: listPost[index]);
-                  }),
-            ),
-          ],
+                    return ItemChat(
+                        size: size, item: state.listConversation[index]);
+                  });
+            }
+            return const SizedBox();
+          },
         ));
   }
 }

@@ -8,7 +8,7 @@ class UserPreviewCubit extends Cubit<UserpreviewState> {
   UserPreviewCubit(this._repository)
       : super(const UserpreviewState(isLoading: true));
 
-  Future<void> loadInitialData(String idUser) async {
+  Future<UserModel?> loadInitialData(String idUser) async {
     final stableState = state;
     try {
       emit(state.copyWith(isLoading: true));
@@ -18,9 +18,11 @@ class UserPreviewCubit extends Cubit<UserpreviewState> {
       postsPublic = post.where((e) => e.visible = true).toList();
       emit(state.copyWith(user: user, post: postsPublic));
       emit(state.copyWith(isLoading: false));
+      return user;
     } catch (error) {
       emit(state.copyWith(error: error.toString()));
       emit(stableState.copyWith(isLoading: false));
+      return null;
     }
   }
 }

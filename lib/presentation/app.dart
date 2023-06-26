@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:friendzone/data.dart';
+import 'package:friendzone/data/repositories/conversation_repository.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/themes/theme.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
@@ -24,6 +25,7 @@ class App extends StatelessWidget {
         RepositoryProvider(create: (context) => AuthRepository.instance),
         RepositoryProvider(create: (context) => PostRepository()),
         RepositoryProvider(create: (context) => UserRepository()),
+        RepositoryProvider(create: (context) => ConversationRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -51,9 +53,13 @@ class App extends StatelessWidget {
             create: (context) =>
                 PostCubitCubit(RepositoryProvider.of<PostRepository>(context)),
           ),
-            BlocProvider(
-            create: (context) =>
-                UserPreviewCubit(RepositoryProvider.of<UserRepository>(context)),
+          BlocProvider(
+            create: (context) => UserPreviewCubit(
+                RepositoryProvider.of<UserRepository>(context)),
+          ),
+          BlocProvider(
+            create: (context) => ChatsCubit(
+                RepositoryProvider.of<ConversationRepository>(context)),
           )
         ],
         child: GestureDetector(
@@ -114,7 +120,7 @@ class App extends StatelessWidget {
                 path: RoutePath.profileDetail,
                 name: Formatter.nameRoute(RoutePath.profileDetail),
                 builder: (BuildContext context, GoRouterState state) =>
-                     ProfileDetailScreen(id:state.extra as String)),
+                    ProfileDetailScreen(id: state.extra as String)),
             GoRoute(
                 path: RoutePath.conversentation,
                 name: Formatter.nameRoute(RoutePath.conversentation),
