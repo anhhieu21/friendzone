@@ -7,7 +7,6 @@ import 'package:friendzone/presentation/view.dart';
 import 'package:friendzone/data.dart' hide MyPosts;
 import 'package:friendzone/presentation/views/profile/widgets/header_profile_user.dart';
 import 'package:friendzone/state/profile/user/user_cubit.dart';
-import 'package:friendzone/state/profile/user/user_state.dart';
 
 const expandedHeight = 280.0;
 const collapsedHeight = 120.0;
@@ -36,36 +35,43 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: BlocBuilder<UserPreviewCubit, UserpreviewState>(
+        buildWhen: (previous, current) {
+          if (current is LoadingState || current is UserDataState) return true;
+          return false;
+        },
         builder: (context, state) {
-          if (state.isLoading) {
+          if (state is LoadingState) {
             return const Center(child: CircularProgressIndicator());
           }
-          final listPost = state.post ?? [];
-          return CustomScrollView(slivers: [
-            SliverToBoxAdapter(
-              child: SizedBox(
-                width: size.width,
-                child: HeaderProfileUser(
-                  size: size,
-                  user: state.user,
+          if (state is UserDataState) {
+            final listPost = state.post;
+            return CustomScrollView(slivers: [
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  width: size.width,
+                  child: HeaderProfileUser(
+                    size: size,
+                    user: state.user,
+                  ),
                 ),
               ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              sliver: SliverToBoxAdapter(
-                  child: Container(
-                      width: size.width,
-                      height: 10,
-                      color: colorGrey.shade300)),
-            ),
-            SliverList.builder(
-                itemCount: listPost.length,
-                itemBuilder: (context, index) {
-                  final item = listPost[index];
-                  return PostItem(item: item);
-                })
-          ]);
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                sliver: SliverToBoxAdapter(
+                    child: Container(
+                        width: size.width,
+                        height: 10,
+                        color: colorGrey.shade300)),
+              ),
+              SliverList.builder(
+                  itemCount: listPost.length,
+                  itemBuilder: (context, index) {
+                    final item = listPost[index];
+                    return PostItem(item: item);
+                  })
+            ]);
+          }
+          return const SizedBox();
         },
       ),
     );

@@ -9,15 +9,21 @@ class UserModel {
   String name;
   String background;
   String? bio;
-  // bool followed;
-  UserModel(
-      {required this.idUser,
-      required this.avartar,
-      required this.email,
-      required this.name,
-      required this.background,
-      this.post,
-      this.bio});
+  int follower;
+  int following;
+  String phone;
+  UserModel({
+    required this.idUser,
+    required this.avartar,
+    required this.email,
+    required this.name,
+    required this.background,
+    this.post,
+    this.bio,
+    required this.follower,
+    required this.following,
+    required this.phone,
+  });
 
   factory UserModel.fromDocFireStore(DocumentSnapshot doc) {
     Map userFromDB = doc.data() as Map;
@@ -28,9 +34,11 @@ class UserModel {
       email: userFromDB["email"],
       name: userFromDB["name"],
       post: userFromDB["post"],
-      background:userFromDB["background"],
+      background: userFromDB["background"],
       bio: userFromDB["bio"],
-
+      follower: userFromDB['follower'],
+      following: userFromDB['following'],
+      phone: userFromDB['phone'] ?? '0',
     );
   }
   Map<String, dynamic> toMap() {
@@ -38,7 +46,9 @@ class UserModel {
       "avartar": avartar,
       "email": email,
       "name": name,
-      // "followed": followed,
+      // "follower": follower,
+      // "following": following,
+      "phone": phone,
     };
   }
 }

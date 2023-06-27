@@ -6,6 +6,7 @@ import 'package:friendzone/data/models/conversation.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/state/chat/chats_cubit.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class ConversationScreen extends StatefulWidget {
   final UserModel userModel;
@@ -141,9 +142,18 @@ class _ConversationScreenState extends State<ConversationScreen> {
                           ? const Radius.circular(16)
                           : Radius.zero,
                     )),
-                child: Text(
-                  item.message,
-                  style: TextStyle(color: _colorText(item)),
+                child: Column(
+                  crossAxisAlignment: _crossAxisAlignment(item),
+                  children: [
+                    Text(
+                      item.message,
+                      style: TextStyle(color: _colorText(item)),
+                    ),
+                    Text(
+                      timeago.format(item.createdAt),
+                      style: TextStyle(color: _colorText(item)),
+                    ),
+                  ],
                 )),
           ],
         ),
