@@ -7,7 +7,6 @@ import 'package:friendzone/presentation/view.dart';
 import 'package:friendzone/data.dart' hide MyPosts;
 import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
 
-
 const expandedHeight = 180.0;
 const collapsedHeight = 120.0;
 
@@ -50,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   centerTitle: false,
                   pinned: false,
                   stretch: true,
-                  toolbarHeight: 280,
+                  toolbarHeight: 285,
                   flexibleSpace: SizedBox(
                     width: size.width,
                     child: HeaderProfile(

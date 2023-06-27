@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
+import 'package:friendzone/presentation/views/profile/widgets/show_follower.dart';
+import 'package:friendzone/state.dart';
+import 'package:friendzone/state/profile/user/user_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:ionicons/ionicons.dart';
@@ -10,10 +14,30 @@ import '../../../utils/formatter.dart';
 import 'info_view.dart';
 import 'menu_more.dart';
 
-class HeaderProfileUser extends StatelessWidget {
+class HeaderProfileUser extends StatefulWidget {
   final Size size;
   final UserModel? user;
   const HeaderProfileUser({super.key, required this.size, this.user});
+
+  @override
+  State<HeaderProfileUser> createState() => _HeaderProfileUserState();
+}
+
+class _HeaderProfileUserState extends State<HeaderProfileUser>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
+  @override
+  void initState() {
+    tabController = TabController(length: 2, vsync: this);
+
+    super.initState();
+  }
+
+  _follow(BuildContext context) {
+    final state = BlocProvider.of<MyAccountCubit>(context, listen: false).state;
+    BlocProvider.of<UserPreviewCubit>(context, listen: false)
+        .followUser(widget.user!, state.user!);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +46,10 @@ class HeaderProfileUser extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Stack(children: [
-          SizedBox(height: 140 + size.width / 7.5 - 16.0),
+          SizedBox(height: 140 + widget.size.width / 7.5 - 16.0),
           BackgroundProfile(
-            url: user?.background ?? urlAvatar,
-            width: size.width,
+            url: widget.user?.background ?? urlAvatar,
+            width: widget.size.width,
             height: 140,
             isViewer: true,
           ),
@@ -33,8 +57,8 @@ class HeaderProfileUser extends StatelessWidget {
             bottom: 0,
             left: 16.0,
             child: AvatarProfile(
-              url: user?.avartar ?? urlAvatar,
-              radius: size.width / 7.5,
+              url: widget.user?.avartar ?? urlAvatar,
+              radius: widget.size.width / 7.5,
               isViewer: true,
             ),
           )
@@ -50,9 +74,7 @@ class HeaderProfileUser extends StatelessWidget {
             children: [
               Expanded(
                 child: ElevatedButton(
-                    onPressed: () => context.pushNamed(
-                        Formatter.nameRoute(RoutePath.updateProfile),
-                        extra: user),
+                    onPressed: () => _follow(context),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: colorBlue.shade500,
                     ),
@@ -70,7 +92,7 @@ class HeaderProfileUser extends StatelessWidget {
               IconButton(
                   onPressed: () => context.pushNamed(
                       Formatter.nameRoute(RoutePath.conversentation),
-                      extra: user),
+                      extra: widget.user),
                   style: IconButton.styleFrom(
                     backgroundColor: colorGrey.shade300,
                   ),
@@ -89,14 +111,14 @@ class HeaderProfileUser extends StatelessWidget {
   Widget _bodyHeader(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
-    final hobbies = [
-      'Âm nhạc',
-      'Game',
-      'Đi dạo',
-      'Cú đêm',
-      'Không hút thuốc',
-      'Chiêm tinh',
-    ];
+    // final hobbies = [
+    //   'Âm nhạc',
+    //   'Game',
+    //   'Đi dạo',
+    //   'Cú đêm',
+    //   'Không hút thuốc',
+    //   'Chiêm tinh',
+    // ];
     return Column(
       children: [
         Row(
@@ -108,7 +130,7 @@ class HeaderProfileUser extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      Formatter.emailtoDisplayName(user?.name ?? ''),
+                      Formatter.emailtoDisplayName(widget.user?.name ?? ''),
                       style: textTheme.bodyLarge!
                           .copyWith(fontWeight: FontWeight.w600),
                     ),
@@ -118,22 +140,25 @@ class HeaderProfileUser extends StatelessWidget {
                     ),
                   ],
                 )),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   InforView(
-                    value: '100+',
-                    label: 'Connections',
-                  ),
-                  InforView(
-                    value: '688',
+                    value: widget.user!.follower.toString(),
                     label: 'Followers',
+                    callback: () {
+                      BlocProvider.of<UserPreviewCubit>(context, listen: false)
+                          .getListFollower(widget.user!.idUser);
+                      _showFollower(context);
+                    },
                   ),
+                  const SizedBox(width: 12),
                   InforView(
-                    value: '178',
+                    value: widget.user!.following.toString(),
                     label: 'Following',
+                    callback: () {},
                   ),
                 ],
               ),
@@ -155,5 +180,14 @@ class HeaderProfileUser extends StatelessWidget {
         // )
       ],
     );
+  }
+
+  _showFollower(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    showBottomSheet(
+        context: context,
+        backgroundColor: colorWhite.withOpacity(0.98),
+        constraints: BoxConstraints(maxHeight: size.height * 0.8),
+        builder: (_) => const ShowFollower());
   }
 }

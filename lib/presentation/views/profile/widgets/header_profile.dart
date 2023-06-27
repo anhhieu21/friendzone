@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
+import 'package:friendzone/state/profile/user/user_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/profile/widgets/info_view.dart';
 import '../../../utils/formatter.dart';
 import 'menu_more.dart';
+import 'show_follower.dart';
 
 class HeaderProfile extends StatelessWidget {
   final Size size;
@@ -40,28 +43,40 @@ class HeaderProfile extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: _bodyHeader(context),
         ),
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              InforView(
-                value: '100+',
-                label: 'Connections',
-              ),
-              InforView(
-                value: '688',
-                label: 'Followers',
-              ),
-              InforView(
-                value: '178',
-                label: 'Following',
-              ),
-            ],
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            InforView(
+              value: user!.follower.toString(),
+              label: 'Followers',
+              callback: () async {
+                BlocProvider.of<UserPreviewCubit>(context, listen: false)
+                    .getListFollower(user!.idUser);
+                _showFollower(context);
+              },
+            ),
+            InforView(
+              value: user!.following.toString(),
+              label: 'Following',
+              callback: () async {
+                BlocProvider.of<UserPreviewCubit>(context, listen: false)
+                    .getListFollower(user!.idUser);
+                _showFollower(context);
+              },
+            ),
+          ],
         ),
       ],
     );
+  }
+
+  _showFollower(BuildContext context) async {
+    final size = MediaQuery.of(context).size;
+    showBottomSheet(
+        context: context,
+        backgroundColor: colorWhite.withOpacity(0.98),
+        constraints: BoxConstraints(maxHeight: size.height * 0.8),
+        builder: (_) => const ShowFollower());
   }
 
   Widget _bodyHeader(BuildContext context) {
