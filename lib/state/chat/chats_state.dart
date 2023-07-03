@@ -26,6 +26,7 @@ class ConversationState extends ChatsState {
   @override
   List<Object> get props => [messages];
 }
+
 class MessageState extends ChatsState {
   final ChatMessage message;
   const MessageState(
@@ -34,6 +35,7 @@ class MessageState extends ChatsState {
   @override
   List<Object> get props => [message];
 }
+
 class LoadingState extends ChatsState {
   final bool isLoading;
 

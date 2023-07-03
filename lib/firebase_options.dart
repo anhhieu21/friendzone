@@ -67,8 +67,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '817118585641',
     projectId: 'travelzone-908f0',
     storageBucket: 'travelzone-908f0.appspot.com',
-    androidClientId: '817118585641-2ekgan795urfdfvd7mt31ar5supo3cfn.apps.googleusercontent.com',
-    iosClientId: '817118585641-62v0c4i2jebegi1p529eu9isp7npnrrk.apps.googleusercontent.com',
+    androidClientId:
+        '817118585641-2ekgan795urfdfvd7mt31ar5supo3cfn.apps.googleusercontent.com',
+    iosClientId:
+        '817118585641-62v0c4i2jebegi1p529eu9isp7npnrrk.apps.googleusercontent.com',
     iosBundleId: 'com.example.friendzone',
   );
 
@@ -78,8 +80,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '817118585641',
     projectId: 'travelzone-908f0',
     storageBucket: 'travelzone-908f0.appspot.com',
-    androidClientId: '817118585641-2ekgan795urfdfvd7mt31ar5supo3cfn.apps.googleusercontent.com',
-    iosClientId: '817118585641-62v0c4i2jebegi1p529eu9isp7npnrrk.apps.googleusercontent.com',
+    androidClientId:
+        '817118585641-2ekgan795urfdfvd7mt31ar5supo3cfn.apps.googleusercontent.com',
+    iosClientId:
+        '817118585641-62v0c4i2jebegi1p529eu9isp7npnrrk.apps.googleusercontent.com',
     iosBundleId: 'com.example.friendzone',
   );
 }

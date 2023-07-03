@@ -28,7 +28,12 @@ class UserPreviewCubit extends Cubit<UserpreviewState> {
         Following(idUser: user.idUser, avatar: user.avartar, name: user.name);
     final follower =
         Follower(idUser: me.idUser, avatar: me.avartar, name: me.name);
-    final success = await _repository.followUser(following, follower);
+    int countFollower = user.follower;
+    int countFollowing = me.following;
+    countFollower++;
+    countFollowing++;
+    final success = await _repository.followUser(
+        following, follower, countFollower, countFollowing);
     return success;
   }
 

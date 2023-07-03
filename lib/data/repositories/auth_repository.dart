@@ -67,5 +67,4 @@ class AuthRepository {
       throw Exception(e);
     }
   }
-
-  }
+}

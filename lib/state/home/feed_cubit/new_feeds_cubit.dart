@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:friendzone/data.dart';
 
-
 part 'new_feeds_state.dart';
 
 class NewFeedsCubit extends Cubit<NewFeedsState> {
@@ -21,7 +20,8 @@ class NewFeedsCubit extends Cubit<NewFeedsState> {
             imageUrl: '0',
             author: '0',
             like: '0',
-            createdAt: '', visible: true));
+            createdAt: '',
+            visible: true));
     emit(NewFeedsShow(allPost));
   }
 }

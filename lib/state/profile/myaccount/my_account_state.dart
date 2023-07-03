@@ -6,7 +6,13 @@ class MyAccountState {
   final List<Post>? myPostsPrivate;
   const MyAccountState({this.user, this.myPostsPublic, this.myPostsPrivate});
 
-  MyAccountState copyWith({required UserModel user,required List<Post> myPostsPublic,required List<Post> myPostsPrivate}) {
-    return MyAccountState(user:user, myPostsPublic:myPostsPublic, myPostsPrivate:myPostsPrivate);
+  MyAccountState copyWith(
+      {required UserModel user,
+      required List<Post> myPostsPublic,
+      required List<Post> myPostsPrivate}) {
+    return MyAccountState(
+        user: user,
+        myPostsPublic: myPostsPublic,
+        myPostsPrivate: myPostsPrivate);
   }
 }

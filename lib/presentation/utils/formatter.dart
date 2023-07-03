@@ -32,6 +32,7 @@ class Formatter {
   static String emailtoDisplayName(String value) {
     return value.split('@')[0];
   }
+
   static String nameRoute(String path) {
     return '/${RoutePath.main}/$path';
   }

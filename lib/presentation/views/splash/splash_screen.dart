@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _checkAuth() {
-    final user=FirebaseAuth.instance.currentUser;
+    final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       BlocProvider.of<MyAccountCubit>(context).myAccountInfo(user.uid);
       context.replace(RoutePath.main);

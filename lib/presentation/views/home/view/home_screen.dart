@@ -18,26 +18,25 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final size = SizeEx(context).screenSize;
-    return  RefreshIndicator(
-          onRefresh: () => BlocProvider.of<AllPostCubit>(context).getAllPost(),
-          child: BlocBuilder<AllPostCubit, AllPostState>(
-            builder: (context, state) {
-              final listPost = state is AllPostShow ? state.listPost : <Post>[];
-              return CustomScrollView(
-                controller: scrollController,
-                slivers: [
-                  CustomSliverAppBar(scrollController: scrollController),
-                  ListNewFeed(size: size),
-                  ListPost(listPost: listPost),
-                  SliverToBoxAdapter(
-                    child: Container(
-                      height: kBottomNavigationBarHeight * 2,
-                    ),
-                  )
-                ],
-              );
-            },
-          )
-    );
+    return RefreshIndicator(
+        onRefresh: () => BlocProvider.of<AllPostCubit>(context).getAllPost(),
+        child: BlocBuilder<AllPostCubit, AllPostState>(
+          builder: (context, state) {
+            final listPost = state is AllPostShow ? state.listPost : <Post>[];
+            return CustomScrollView(
+              controller: scrollController,
+              slivers: [
+                CustomSliverAppBar(scrollController: scrollController),
+                ListNewFeed(size: size),
+                ListPost(listPost: listPost),
+                SliverToBoxAdapter(
+                  child: Container(
+                    height: kBottomNavigationBarHeight * 2,
+                  ),
+                )
+              ],
+            );
+          },
+        ));
   }
 }

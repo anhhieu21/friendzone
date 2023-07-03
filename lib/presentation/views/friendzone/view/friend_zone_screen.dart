@@ -10,7 +10,6 @@ class FriendZoneScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Row(
-          
           children: [
             Expanded(
               child: CustomTextField(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class OnTapEffect extends StatelessWidget {
   final Function() onTap;
   final Widget child;

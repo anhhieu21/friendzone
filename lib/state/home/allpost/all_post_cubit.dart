@@ -12,6 +12,6 @@ class AllPostCubit extends Cubit<AllPostState> {
   getAllPost() async {
     final allPost = await _repoPost.getAllPost();
     final allUser = await _userRepository.getAllUser();
-    emit(AllPostShow(allPost,allUser));
+    emit(AllPostShow(allPost, allUser));
   }
 }

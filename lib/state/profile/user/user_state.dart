@@ -27,7 +27,7 @@ class FollowState extends UserpreviewState {}
 class ListFollowerState extends UserpreviewState {
   final List<Follower> listFollower;
   final List<Follower> listFollowing;
-  const ListFollowerState(this.listFollower,this.listFollowing);
+  const ListFollowerState(this.listFollower, this.listFollowing);
   @override
-  List<Object> get props => [listFollower,listFollowing];
+  List<Object> get props => [listFollower, listFollowing];
 }

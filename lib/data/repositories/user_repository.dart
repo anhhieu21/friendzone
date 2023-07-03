@@ -130,7 +130,8 @@ class UserRepository {
     }
   }
 
-  Future<bool> followUser(Following following, Follower follower) async {
+  Future<bool> followUser(Following following, Follower follower,
+      int countFollower, int countFollowing) async {
     final docMe = firestore
         .collection('users')
         .doc(_firebaseAuth.currentUser!.uid)
@@ -150,6 +151,16 @@ class UserRepository {
     docUser.set(follower.toMap());
     //
     await docMe.set(following.toMap());
+
+    // update qty following and follower
+    await firestore
+        .collection('users')
+        .doc(_firebaseAuth.currentUser!.uid)
+        .update({kFollowing: countFollowing});
+    await firestore
+        .collection('users')
+        .doc(following.idUser)
+        .update({kFollower: countFollower});
 
     return true;
   }

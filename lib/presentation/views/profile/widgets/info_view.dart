@@ -8,7 +8,7 @@ class InforView extends StatelessWidget {
     Key? key,
     required this.value,
     required this.label,
-     this.callback,
+    this.callback,
   }) : super(key: key);
 
   @override

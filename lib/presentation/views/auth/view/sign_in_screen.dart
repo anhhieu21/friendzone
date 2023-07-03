@@ -8,7 +8,6 @@ import 'package:friendzone/state/auth/auth_bloc.dart';
 import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
 import 'package:go_router/go_router.dart';
 
-
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
   final TextEditingController nameController = TextEditingController();
@@ -18,12 +17,11 @@ class SignInScreen extends StatelessWidget {
     if (_keyForm.currentState!.validate()) {
       BlocProvider.of<AuthBloc>(context).add(
           SignInEvent(nameController.text.trim(), passController.text.trim()));
-
     }
   }
 
   _checkVerify(BuildContext context) {
-    final user =FirebaseAuth.instance.currentUser;
+    final user = FirebaseAuth.instance.currentUser;
     if (user!.emailVerified) {
       BlocProvider.of<MyAccountCubit>(context).myAccountInfo(user.uid);
       GoRouter.of(context).go(RoutePath.main);

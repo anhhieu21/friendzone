@@ -13,9 +13,9 @@ final ThemeData themeData = ThemeData.light().copyWith(
             color: colorPinkButton, fontWeight: FontWeight.bold),
         elevation: 0),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      selectedItemColor: Color.fromARGB(255, 200, 34, 175),
-      unselectedItemColor: Color.fromARGB(255, 68, 68, 68),elevation: 0
-    ),
+        selectedItemColor: Color.fromARGB(255, 200, 34, 175),
+        unselectedItemColor: Color.fromARGB(255, 68, 68, 68),
+        elevation: 0),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
             foregroundColor: colorWhite,

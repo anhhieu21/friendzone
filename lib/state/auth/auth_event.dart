@@ -13,12 +13,12 @@ class SignInEvent extends AuthEvent {
 
   const SignInEvent(this.email, this.password);
 }
+
 class SignUpReq extends AuthEvent {
   final String email;
   final String password;
 
   const SignUpReq(this.email, this.password);
 }
-
 
 class SignOutRequested extends AuthEvent {}
