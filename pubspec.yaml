@@ -61,6 +61,7 @@ dependencies:
   index_generator: ^3.4.0
   flutter_local_notifications: ^14.1.1
   timeago: ^3.4.0
+  video_player: ^2.6.1
 
 dev_dependencies:
   flutter_test:

@@ -67,7 +67,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                   itemCount: listPost.length,
                   itemBuilder: (context, index) {
                     final item = listPost[index];
-                    return PostItem(item: item);
+                    return PostItem(item: item, isPreviewUser: true);
                   })
             ]);
           }

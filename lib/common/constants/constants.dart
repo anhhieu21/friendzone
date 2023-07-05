@@ -13,3 +13,4 @@ const kLike = 'like';
 const kConversation = 'conversation';
 const kFollower = 'follower';
 const kFollowing = 'following';
+const kPostSave = 'postSave';

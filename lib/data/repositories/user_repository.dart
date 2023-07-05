@@ -165,6 +165,16 @@ class UserRepository {
     return true;
   }
 
+  Future<bool> checkFollower(String idUser) async {
+    final exists = await firestore
+        .collection(kUser)
+        .doc(idUser)
+        .collection(kFollower)
+        .doc(_firebaseAuth.currentUser!.uid)
+        .get();
+    return exists.exists;
+  }
+
   Future<List<Follower>> getFollower(String docId) async {
     final list = <Follower>[];
     final res = await firestore
@@ -189,6 +199,38 @@ class UserRepository {
     for (var element in res.docs) {
       final x = Follower.fromMap(element.data());
       list.add(x);
+    }
+    return list;
+  }
+
+  Future savePost(Post post) async {
+    await firestore
+        .collection(kUser)
+        .doc(_firebaseAuth.currentUser!.uid)
+        .collection(kPostSave)
+        .doc(post.id)
+        .set(post.toMap());
+  }
+
+  Future unSavePost(Post post) async {
+    await firestore
+        .collection(kUser)
+        .doc(_firebaseAuth.currentUser!.uid)
+        .collection(kPostSave)
+        .doc(post.id)
+        .delete();
+  }
+
+  Future<List<Post>> getPostSave() async {
+    List<Post> list = [];
+    final querySnapshot = await firestore
+        .collection(kUser)
+        .doc(_firebaseAuth.currentUser!.uid)
+        .collection(kPostSave)
+        .get();
+    for (var doc in querySnapshot.docs) {
+      final res = Post.fromFirestore(doc);
+      list.add(res);
     }
     return list;
   }

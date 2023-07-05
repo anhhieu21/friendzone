@@ -4,6 +4,7 @@ import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
+import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
 import 'package:friendzone/state/profile/user/user_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:friendzone/presentation/themes/color.dart';
@@ -14,59 +15,63 @@ import 'show_follower.dart';
 
 class HeaderProfile extends StatelessWidget {
   final Size size;
-  final UserModel? user;
-  const HeaderProfile({super.key, required this.size, this.user});
+  const HeaderProfile({super.key, required this.size});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Stack(children: [
-          SizedBox(height: 140 + size.width / 7.5 - 16.0),
-          BackgroundProfile(
-            url: user?.background ?? urlAvatar,
-            width: size.width,
-            height: 140,
-          ),
-          Positioned(
-            bottom: 0,
-            left: 16.0,
-            child: AvatarProfile(
-              url: user?.avartar ?? urlAvatar,
-              radius: size.width / 7.5,
-            ),
-          )
-        ]),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: _bodyHeader(context),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return BlocSelector<MyAccountCubit, MyAccountState, UserModel?>(
+      selector: (state) => state is MyDataState ? state.user : null,
+      builder: (context, user) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            InforView(
-              value: user!.follower.toString(),
-              label: 'Followers',
-              callback: () async {
-                BlocProvider.of<UserPreviewCubit>(context, listen: false)
-                    .getListFollower(user!.idUser);
-                _showFollower(context);
-              },
+            Stack(children: [
+              SizedBox(height: 140 + size.width / 7.5 - 16.0),
+              BackgroundProfile(
+                url: user?.background ?? urlAvatar,
+                width: size.width,
+                height: 140,
+              ),
+              Positioned(
+                bottom: 0,
+                left: 16.0,
+                child: AvatarProfile(
+                  url: user?.avartar ?? urlAvatar,
+                  radius: size.width / 7.5,
+                ),
+              )
+            ]),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: _bodyHeader(context, user!),
             ),
-            InforView(
-              value: user!.following.toString(),
-              label: 'Following',
-              callback: () async {
-                BlocProvider.of<UserPreviewCubit>(context, listen: false)
-                    .getListFollower(user!.idUser);
-                _showFollower(context);
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                InforView(
+                  value: user.follower.toString(),
+                  label: 'Followers',
+                  callback: () async {
+                    BlocProvider.of<UserPreviewCubit>(context, listen: false)
+                        .getListFollower(user.idUser);
+                    _showFollower(context);
+                  },
+                ),
+                InforView(
+                  value: user.following.toString(),
+                  label: 'Following',
+                  callback: () async {
+                    BlocProvider.of<UserPreviewCubit>(context, listen: false)
+                        .getListFollower(user.idUser);
+                    _showFollower(context);
+                  },
+                ),
+              ],
             ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 
@@ -79,7 +84,7 @@ class HeaderProfile extends StatelessWidget {
         builder: (_) => const ShowFollower());
   }
 
-  Widget _bodyHeader(BuildContext context) {
+  Widget _bodyHeader(BuildContext context, UserModel user) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -89,7 +94,7 @@ class HeaderProfile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  Formatter.emailtoDisplayName(user?.name ?? ''),
+                  Formatter.emailtoDisplayName(user.name),
                   style: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.w600),
                 ),

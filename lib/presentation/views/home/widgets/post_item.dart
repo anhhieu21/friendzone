@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/data/models/post.dart';
+import 'package:friendzone/data/models/user_model.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
 import 'package:friendzone/presentation/themes/color.dart';
@@ -16,13 +17,10 @@ import '../../../../common/constants/list_img_fake.dart';
 
 class PostItem extends StatelessWidget {
   final Post item;
-  const PostItem({
-    Key? key,
-    required this.item,
-  }) : super(key: key);
-  _likePost(BuildContext context) {
-    final user =
-        BlocProvider.of<MyAccountCubit>(context, listen: false).state.user;
+  final bool isPreviewUser;
+  const PostItem({Key? key, required this.item, this.isPreviewUser = false})
+      : super(key: key);
+  _likePost(BuildContext context, UserModel? user) {
     BlocProvider.of<PostCubitCubit>(context).likePost(item, user!);
   }
 
@@ -57,9 +55,11 @@ class PostItem extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 8),
                       child: OnTapEffect(
                         radius: 16,
-                        onTap: () => context.pushNamed(
-                            Formatter.nameRoute(RoutePath.profileDetail),
-                            extra: post.idUser),
+                        onTap: isPreviewUser
+                            ? () {}
+                            : () => context.pushNamed(
+                                Formatter.nameRoute(RoutePath.profileDetail),
+                                extra: post.idUser),
                         child: Row(
                           children: [
                             CircleAvatar(
@@ -100,7 +100,14 @@ class PostItem extends StatelessWidget {
                               image: CachedNetworkImageProvider(post.imageUrl),
                               fit: BoxFit.cover)),
                     ),
-                    PostButtonBar(post: post, callBack: _likePost)
+                    BlocSelector<MyAccountCubit, MyAccountState, UserModel?>(
+                        selector: (state) {
+                      if (state is MyDataState) return state.user;
+                      return null;
+                    }, builder: (_, state) {
+                      return PostButtonBar(
+                          post: post, callBack: (_) => _likePost(_, state));
+                    })
                   ],
                 ),
               ),

@@ -5,7 +5,7 @@ import 'package:friendzone/data.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/views/profile/widgets/show_follower.dart';
-import 'package:friendzone/state.dart';
+import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
 import 'package:friendzone/state/profile/user/user_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:friendzone/presentation/themes/color.dart';
@@ -33,10 +33,9 @@ class _HeaderProfileUserState extends State<HeaderProfileUser>
     super.initState();
   }
 
-  _follow(BuildContext context) {
-    final state = BlocProvider.of<MyAccountCubit>(context, listen: false).state;
+  _follow(BuildContext context, UserModel? user) {
     BlocProvider.of<UserPreviewCubit>(context, listen: false)
-        .followUser(widget.user!, state.user!);
+        .followUser(widget.user!, user!);
   }
 
   @override
@@ -73,21 +72,41 @@ class _HeaderProfileUserState extends State<HeaderProfileUser>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                child: ElevatedButton(
-                    onPressed: () => _follow(context),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: colorBlue.shade500,
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Ionicons.person_add),
-                        Text(
-                          'Theo dõi',
-                          style: TextStyle(fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    )),
+                child: BlocBuilder<UserPreviewCubit, UserpreviewState>(
+                  builder: (context, state) {
+                    final isFollowed =
+                        state is CheckFollowState ? state.isFollow : false;
+                    return BlocSelector<MyAccountCubit, MyAccountState,
+                        UserModel?>(
+                      selector: (state) {
+                        if (state is MyDataState) return state.user;
+                        return null;
+                      },
+                      builder: (_, user) {
+                        return ElevatedButton(
+                            onPressed: isFollowed
+                                ? () {}
+                                : () => _follow(context, user),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: colorBlue.shade500,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(isFollowed
+                                    ? Ionicons.person_remove
+                                    : Ionicons.person_add),
+                                Text(
+                                  isFollowed ? 'Huỷ theo dõi' : 'Theo dõi',
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ));
+                      },
+                    );
+                  },
+                ),
               ),
               IconButton(
                   onPressed: () => context.pushNamed(

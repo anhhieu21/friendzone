@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
+import 'package:friendzone/data.dart';
 import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
 import 'package:friendzone/presentation/themes/color.dart';
@@ -17,10 +18,9 @@ class WritePost extends StatelessWidget {
   WritePost({super.key});
   final privateNotifi = ValueNotifier<bool?>(null);
 
-  _uploadPost(BuildContext context, File? file, String content, bool visible) {
+  _uploadPost(BuildContext context, File? file, String content, bool visible,
+      UserModel? user) {
     if (file != null && content != "") {
-      final user =
-          BlocProvider.of<MyAccountCubit>(context, listen: false).state.user;
       BlocProvider.of<WritePostCubit>(context)
           .upPost(file, content, 0, visible, user!);
     } else {
@@ -93,19 +93,30 @@ class WritePost extends StatelessWidget {
                               child: ValueListenableBuilder<bool?>(
                                   valueListenable: privateNotifi,
                                   builder: (context, value, child) {
-                                    return ElevatedButton(
-                                      onPressed: () => _uploadPost(
-                                          context,
-                                          state.file,
-                                          contentController.text,
-                                          value ?? true),
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: colorBlue.shade200,
-                                      ),
-                                      child: const Text(
-                                        'Đăng bài viết',
-                                        style: TextStyle(color: colorWhite),
-                                      ),
+                                    return BlocSelector<MyAccountCubit,
+                                        MyAccountState, UserModel?>(
+                                      selector: (state) {
+                                        if (state is MyDataState)
+                                          return state.user;
+                                        return null;
+                                      },
+                                      builder: (_, user) {
+                                        return ElevatedButton(
+                                          onPressed: () => _uploadPost(
+                                              context,
+                                              state.file,
+                                              contentController.text,
+                                              value ?? true,
+                                              user),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: colorBlue.shade200,
+                                          ),
+                                          child: const Text(
+                                            'Đăng bài viết',
+                                            style: TextStyle(color: colorWhite),
+                                          ),
+                                        );
+                                      },
                                     );
                                   }),
                             ),

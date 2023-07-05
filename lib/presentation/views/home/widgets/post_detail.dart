@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/constants/list_img_fake.dart';
+import 'package:friendzone/data.dart';
 import 'package:friendzone/data/models/comment.dart';
 import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/presentation/themes/color.dart';
@@ -9,6 +10,7 @@ import 'package:friendzone/presentation/views/home/widgets/post_button_bar.dart'
 import 'package:friendzone/presentation/views/home/widgets/post_comments.dart';
 import 'package:friendzone/state/home/post_cubit/post_cubit_cubit.dart';
 import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
+import 'package:ionicons/ionicons.dart';
 
 class PostDetailScreen extends StatefulWidget {
   final Post post;
@@ -31,6 +33,10 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     super.initState();
   }
 
+  _savePost() {
+    context.read<MyAccountCubit>().savePost(widget.post);
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -40,10 +46,15 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
           Expanded(
             child: CustomScrollView(
               slivers: [
-                const SliverAppBar(
-                  title: Text('Post'),
+                SliverAppBar(
+                  title: const Text('Post'),
                   stretch: true,
                   floating: true,
+                  actions: [
+                    IconButton(
+                        onPressed: _savePost,
+                        icon: const Icon(Ionicons.bookmark_outline))
+                  ],
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
@@ -136,9 +147,17 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                     ),
                   ),
                 ),
-                IconButton(
-                    onPressed: () => _insertComment(context),
-                    icon: const Icon(Icons.send))
+                BlocSelector<MyAccountCubit, MyAccountState, UserModel?>(
+                  selector: (state) {
+                    if (state is MyDataState) return state.user;
+                    return null;
+                  },
+                  builder: (_, state) {
+                    return IconButton(
+                        onPressed: () => _insertComment(context, state),
+                        icon: const Icon(Icons.send));
+                  },
+                )
               ],
             ),
           ),
@@ -147,16 +166,15 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     );
   }
 
-  _insertComment(BuildContext context) async {
+  _insertComment(BuildContext context, UserModel? user) async {
     if (textEditingController.text.isEmpty) return;
-    final user =
-        BlocProvider.of<MyAccountCubit>(context, listen: false).state.user!;
+
     await context.read<PostCubitCubit>().insertCommentPost(
         widget.post.id,
         Comment(
             id: '',
             content: textEditingController.text,
-            idUser: user.idUser,
+            idUser: user!.idUser,
             nameAuthor: user.name,
             createdAt: DateTime.now()));
     textEditingController.clear();

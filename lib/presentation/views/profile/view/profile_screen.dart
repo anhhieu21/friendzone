@@ -7,6 +7,8 @@ import 'package:friendzone/presentation/view.dart';
 import 'package:friendzone/data.dart' hide MyPosts;
 import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
 
+import '../widgets/tab_post_save.dart';
+
 const expandedHeight = 180.0;
 const collapsedHeight = 120.0;
 
@@ -32,57 +34,53 @@ class _ProfileScreenState extends State<ProfileScreen>
   Widget build(BuildContext context) {
     final size = SizeEx(context).screenSize;
     return SafeArea(
-      // child: BlocListener<AuthBloc, AuthState>(
-      //   listener: (context, state) {
-      //     if (state is UnAuthenticated) {
-      //       context.replace(RoutePath.splash);
-      //     }
-      //   },
-      child: BlocBuilder<MyAccountCubit, MyAccountState>(
+        child: NestedScrollView(
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return [
+          SliverAppBar(
+            centerTitle: false,
+            pinned: false,
+            stretch: true,
+            toolbarHeight: 285,
+            flexibleSpace: SizedBox(
+              width: size.width,
+              child: HeaderProfile(
+                size: size,
+              ),
+            ),
+            forceElevated: innerBoxIsScrolled,
+          ),
+          SliverPersistentHeader(
+            pinned: true,
+            floating: true,
+            delegate: MySliverPersitentHeader(
+              tabController: _tabController,
+              maxSize: 40,
+              minSize: 40,
+            ),
+          ),
+        ];
+      },
+      body: BlocBuilder<MyAccountCubit, MyAccountState>(
         builder: (context, state) {
-          final listPost = state.myPostsPublic ?? [];
-          return NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return [
-                SliverAppBar(
-                  centerTitle: false,
-                  pinned: false,
-                  stretch: true,
-                  toolbarHeight: 285,
-                  flexibleSpace: SizedBox(
-                    width: size.width,
-                    child: HeaderProfile(
-                      size: size,
-                      user: state.user,
-                    ),
-                  ),
-                  forceElevated: innerBoxIsScrolled,
-                ),
-                SliverPersistentHeader(
-                  pinned: true,
-                  floating: true,
-                  delegate: MySliverPersitentHeader(
-                    tabController: _tabController,
-                    maxSize: 40,
-                    minSize: 40,
-                  ),
-                ),
-              ];
-            },
-            body: TabBarView(
+          if (state is ListPostState) {
+            final listPostPublic = state.myPostsPublic;
+            final listPostPrivate = state.myPostsPrivate;
+            final listPostSave = state.myPostsSave;
+            return TabBarView(
                 physics: const NeverScrollableScrollPhysics(),
                 controller: _tabController,
                 children: [
-                  MyPosts(size: size, listPost: listPost),
-                  MyPosts(size: size, listPost: listPost),
-                  MyPosts(size: size, listPost: listPost)
-                ]),
-          );
+                  MyPosts(size: size, listPost: listPostPublic),
+                  MyPosts(size: size, listPost: listPostPrivate),
+                  TabPostSave(listPost: listPostSave)
+                ]);
+          }
+          return const SizedBox();
         },
       ),
       // ),
-    );
+    ));
   }
 }
 

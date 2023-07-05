@@ -15,8 +15,11 @@ class UserPreviewCubit extends Cubit<UserpreviewState> {
       List<Post> postsPublic = [];
       final user = await _repository.findMe(idUser);
       final post = await _repository.getMyPost(idUser);
+      final exists = await _repository.checkFollower(idUser);
       postsPublic = post.where((e) => e.visible = true).toList();
+
       emit(UserDataState(user, postsPublic));
+      emit(CheckFollowState(exists));
       return user;
     } catch (error) {
       return null;
@@ -34,6 +37,12 @@ class UserPreviewCubit extends Cubit<UserpreviewState> {
     countFollowing++;
     final success = await _repository.followUser(
         following, follower, countFollower, countFollowing);
+    if (success) {
+      me.following = countFollowing;
+      // emit(UserInfoState(me));
+      emit(CheckFollowState(success));
+    }
+
     return success;
   }
 

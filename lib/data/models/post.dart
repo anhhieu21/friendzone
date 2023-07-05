@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:friendzone/presentation/utils/formatter.dart';
 
 class Post {
@@ -35,6 +36,18 @@ class Post {
         like: postFromDB['like'] ?? '0',
         visible: postFromDB['visible'],
         createdAt: Formatter.dateTime(postFromDB["createdAt"].toDate()));
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      'idUser': idUser,
+      'content': content,
+      'imageUrl': imageUrl,
+      'author': author,
+      'visible': visible,
+      'createdAt': DateTime.now()
+    };
   }
 }
 
