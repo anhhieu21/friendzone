@@ -18,13 +18,13 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController nameController =
-      TextEditingController(text: 'nhuanhhieu21@gmail.com');
+      TextEditingController(text: 'xxxx@gmail.com');
 
   final TextEditingController passController =
-      TextEditingController(text: '1908Hieu');
+      TextEditingController(text: 'x');
 
   final TextEditingController passConfirmController =
-      TextEditingController(text: '1908Hieu');
+      TextEditingController(text: 'x');
 
   final _keyForm = GlobalKey<FormState>();
 
