@@ -1,11 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:friendzone/presentation/themes/color.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
 class DialogCustom {
   DialogCustom._dialogConstructor();
   static final DialogCustom _instance = DialogCustom._dialogConstructor();
   static DialogCustom get instance => _instance;
+
+  showDialogDuration(
+          {required BuildContext context,
+          required String content,
+          Duration? duration}) =>
+      showDialog(
+          context: context,
+          barrierColor: Colors.transparent,
+          builder: (_) {
+            Future.delayed(
+                duration ?? const Duration(seconds: 3), () => context.pop());
+            return AlertDialog(
+              backgroundColor:
+                  const Color.fromARGB(255, 231, 231, 231).withOpacity(0.8),
+              titleTextStyle: Theme.of(context).textTheme.bodyMedium,
+              titlePadding: const EdgeInsets.symmetric(vertical: 10.0),
+              title: Text(content, textAlign: TextAlign.center),
+            );
+          });
 
   showDialogCustom(
     BuildContext context,

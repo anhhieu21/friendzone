@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friendzone/common/constants/constants.dart';
 import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/view.dart';
@@ -36,7 +37,7 @@ class SignInScreen extends StatelessWidget {
     DialogCustom.instance.showLoading(context, false);
     DialogCustom.instance.showDialogCustom(
         context,
-        'Đăng nhập không thành công',
+        loginFailMsg,
         'Vui lòng kiểm tra lại email và mật khẩu !',
         'Thử lại',
         null,

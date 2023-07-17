@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friendzone/common/constants/constants.dart';
 import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/data/models/comment.dart';
-import 'package:friendzone/data/models/post.dart';
+import 'package:friendzone/presentation/shared/widgets/dialog_custom.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/home/widgets/post_button_bar.dart';
 import 'package:friendzone/presentation/views/home/widgets/post_comments.dart';
@@ -34,7 +35,9 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   }
 
   _savePost() {
-    context.read<MyAccountCubit>().savePost(widget.post);
+    context.read<MyAccountCubit>().savePost(widget.post).then((isSaved) =>
+        DialogCustom.instance.showDialogDuration(
+            context:context,content: isSaved ? savePostMsg : unSavePostMsg));
   }
 
   @override

@@ -11,23 +11,15 @@ class MyAccountInitial extends MyAccountState {}
 
 class MyDataState extends MyAccountState {
   final UserModel user;
-
-  const MyDataState({required this.user});
-  @override
-  List<Object> get props => [user];
-}
-
-class ListPostState extends MyAccountState {
   final List<Post> myPostsPublic;
   final List<Post> myPostsPrivate;
   final List<Post> myPostsSave;
 
-  const ListPostState(
-      {required this.myPostsPublic,
+  const MyDataState({required this.user,required this.myPostsPublic,
       required this.myPostsPrivate,
       required this.myPostsSave});
   @override
-  List<Object> get props => [myPostsPublic, myPostsPrivate, myPostsSave];
+  List<Object> get props => [user,myPostsPublic, myPostsPrivate, myPostsSave];
 }
 
-class UnSavePostState extends MyAccountState {}
+

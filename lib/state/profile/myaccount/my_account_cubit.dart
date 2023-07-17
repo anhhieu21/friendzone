@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/data.dart';
@@ -9,40 +7,39 @@ part 'my_account_state.dart';
 class MyAccountCubit extends Cubit<MyAccountState> {
   final UserRepository _repository;
   MyAccountCubit(this._repository) : super(MyAccountInitial());
-  StreamController<Map<String, dynamic>> listenSavePost =
-      StreamController<Map<String, dynamic>>.broadcast();
-  List<Post> postsPrivate = [];
-  List<Post> postsPublic = [];
-  List<Post> postsSave = [];
+  List<Post> _postsPrivate = [];
+  List<Post> _postsPublic = [];
+  List<Post> _postsSave = [];
+  UserModel? _user;
 
   myAccountInfo(String idUser) async {
-    final user = await _repository.findMe(idUser);
+    _user = await _repository.findMe(idUser);
     final myPost = await _repository.getMyPost(idUser);
-    postsSave = await _repository.getPostSave();
-    postsPrivate = myPost.where((e) => e.visible = false).toList();
-    postsPublic = myPost.where((e) => e.visible = true).toList();
-    emit(MyDataState(user: user));
-    listPost(idUser);
+    _postsSave = await _repository.getPostSave();
+    _postsPrivate = myPost.where((e) => e.visible = false).toList();
+    _postsPublic = myPost.where((e) => e.visible = true).toList();
+    _emitData();
   }
 
-  listPost(String idUser) async {
-    final myPost = await _repository.getMyPost(idUser);
-    postsSave = await _repository.getPostSave();
-    postsPrivate = myPost.where((e) => e.visible = false).toList();
-    postsPublic = myPost.where((e) => e.visible = true).toList();
-    emit(ListPostState(
-        myPostsPublic: postsPublic,
-        myPostsPrivate: postsPrivate,
-        myPostsSave: postsSave));
+  Future<bool> savePost(Post post) async {
+    final isSaved = await _repository.savePost(post);
+    _handleSavePost();
+    return isSaved;
   }
 
-  savePost(Post post) async {
-    await _repository.savePost(post);
-    listenSavePost.sink.add({'save': true, 'post': post});
-  }
-
-  unSavePost(Post post) async {
+  Future unSavePost(Post post) async {
     await _repository.unSavePost(post);
-    listenSavePost.sink.add({'save': false, 'post': post});
+    _handleSavePost();
   }
+
+  _handleSavePost() async {
+    _postsSave = await _repository.getPostSave();
+    _emitData();
+  }
+
+  _emitData() => emit(MyDataState(
+      user: _user!,
+      myPostsPublic: _postsPublic,
+      myPostsPrivate: _postsPrivate,
+      myPostsSave: _postsSave));
 }

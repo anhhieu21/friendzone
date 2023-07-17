@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/data/models/menu.dart';
@@ -20,6 +22,7 @@ class _MainScreenState extends State<MainScreen>
   late final TabController _tabController;
   List<Menu> listNav = [];
   List<Widget> _listView = [];
+  StreamController<int> navStream = StreamController<int>();
   @override
   void initState() {
     listNav = menuBottomNavBar.map((e) => Menu.fromMap(e)).toList();
@@ -47,17 +50,20 @@ class _MainScreenState extends State<MainScreen>
         controller: _tabController,
         children: _listView,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _tabController.index,
-          onTap: (value) {
-            _tabController.index = value;
-            setState(() {});
-          },
-          items: listNav
-              .map((e) => BottomNavigationBarItem(
-                  icon: Icon(e.iconData), label: e.title))
-              .toList()),
-      // bottomNavigationBar: const BottomNavBar(),
+      bottomNavigationBar: StreamBuilder<int>(
+          stream: navStream.stream,
+          builder: (context, snapshot) {
+            return BottomNavigationBar(
+                currentIndex: snapshot.data ?? _tabController.index,
+                onTap: (value) {
+                  _tabController.index = value;
+                  navStream.sink.add(value);
+                },
+                items: listNav
+                    .map((e) => BottomNavigationBarItem(
+                        icon: Icon(e.iconData), label: e.title))
+                    .toList());
+          }),
     );
   }
 }

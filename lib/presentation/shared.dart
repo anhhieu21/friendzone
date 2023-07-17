@@ -4,7 +4,6 @@ library shared;
 
 export 'shared/widgets/avatar_profile.dart';
 export 'shared/widgets/background_profile.dart';
-export 'shared/widgets/bottom_nav_bar.dart';
 export 'shared/widgets/custom_overlayentry.dart';
 export 'shared/widgets/custom_textfield.dart';
 export 'shared/widgets/dialog_custom.dart';

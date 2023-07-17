@@ -1,15 +1,16 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friendzone/data.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
+import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
-
 import '../../../../common/constants/list_img_fake.dart';
 
 const expandedHeight = 120.0;
@@ -59,67 +60,68 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
           ),
         ],
       ),
-      flexibleSpace: StreamBuilder<User?>(
-          stream: FirebaseAuth.instance.userChanges(),
+      flexibleSpace: StreamBuilder<bool>(
+          stream: _streamController.stream,
           builder: (context, snapshot) {
-            final user = snapshot.data;
-            return StreamBuilder<bool>(
-                stream: _streamController.stream,
-                builder: (context, snapshot) {
-                  final isExpand = snapshot.data ?? false;
-                  return AnimatedOpacity(
-                    duration: const Duration(milliseconds: 300),
-                    opacity: isExpand ? 0 : 1,
-                    child: FlexibleSpaceBar(
-                      expandedTitleScale: 1.2,
-                      centerTitle: true,
-                      collapseMode: CollapseMode.pin,
-                      titlePadding: const EdgeInsets.only(top: 8.0),
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: CachedNetworkImage(
-                              imageUrl: user?.photoURL ?? urlAvatar,
-                              fit: BoxFit.cover,
-                              imageBuilder: (context, imageProvider) =>
-                                  CircleAvatar(
-                                radius: 20,
-                                backgroundImage: imageProvider,
-                              ),
+            final isExpand = snapshot.data ?? false;
+            return AnimatedOpacity(
+              duration: const Duration(milliseconds: 300),
+              opacity: isExpand ? 0 : 1,
+              child: FlexibleSpaceBar(
+                expandedTitleScale: 1.2,
+                centerTitle: true,
+                collapseMode: CollapseMode.pin,
+                titlePadding: const EdgeInsets.only(top: 8.0),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: BlocSelector<MyAccountCubit, MyAccountState,
+                          UserModel?>(
+                        selector: (state) =>
+                            state is MyDataState ? state.user : null,
+                        builder: (context, user) {
+                          return CachedNetworkImage(
+                            imageUrl: user?.avartar ?? urlAvatar,
+                            fit: BoxFit.cover,
+                            imageBuilder: (context, imageProvider) =>
+                                CircleAvatar(
+                              radius: 20,
+                              backgroundImage: imageProvider,
                             ),
-                          ),
-                          Expanded(
-                            child: OnTapEffect(
-                              onTap: () {},
-                              radius: 16,
-                              child: Container(
-                                height: 40,
-                                alignment: Alignment.centerLeft,
-                                padding: const EdgeInsets.only(left: 8.0),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(16.0),
-                                    color: colorWhite),
-                                child: const Text('Today,how do you feel ?'),
-                              ),
-                            ),
-                          ),
-                          IconButton(
-                              onPressed: () {
-                                context.pushNamed(
-                                    Formatter.nameRoute((RoutePath.writepost)));
-                              },
-                              icon: Icon(
-                                Ionicons.create_outline,
-                                color: colorGrey.shade700,
-                              )),
-                        ],
+                          );
+                        },
                       ),
                     ),
-                  );
-                });
+                    Expanded(
+                      child: OnTapEffect(
+                        onTap: () {},
+                        radius: 16,
+                        child: Container(
+                          height: 40,
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.only(left: 8.0),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16.0),
+                              color: colorWhite),
+                          child: const Text('Today,how do you feel ?'),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          context.pushNamed(
+                              Formatter.nameRoute((RoutePath.writepost)));
+                        },
+                        icon: Icon(
+                          Ionicons.create_outline,
+                          color: colorGrey.shade700,
+                        )),
+                  ],
+                ),
+              ),
+            );
           }),
       actions: [
         IconButton(

@@ -20,8 +20,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController nameController =
       TextEditingController(text: 'xxxx@gmail.com');
 
-  final TextEditingController passController =
-      TextEditingController(text: 'x');
+  final TextEditingController passController = TextEditingController(text: 'x');
 
   final TextEditingController passConfirmController =
       TextEditingController(text: 'x');

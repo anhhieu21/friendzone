@@ -203,13 +203,19 @@ class UserRepository {
     return list;
   }
 
-  Future savePost(Post post) async {
-    await firestore
+  Future<bool> savePost(Post post) async {
+    final doc = firestore
         .collection(kUser)
         .doc(_firebaseAuth.currentUser!.uid)
         .collection(kPostSave)
-        .doc(post.id)
-        .set(post.toMap());
+        .doc(post.id);
+    final getDoc = await doc.get();
+    if (getDoc.exists) {
+      unSavePost(post);
+      return false;
+    }
+    await doc.set(post.toMap());
+    return true;
   }
 
   Future unSavePost(Post post) async {
