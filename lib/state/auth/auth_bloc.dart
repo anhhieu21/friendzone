@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:friendzone/data/repositories/auth_repository.dart';
+import 'package:friendzone/presentation/view.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -12,8 +14,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignInEvent>((event, emit) async {
       emit(Loading());
       try {
-        final res =
-            await _repository.signInWithFireBase(event.email, event.password);
+        User? res;
+
+        if (event.socialLoginMethod != null) {
+          res = await _socialLogin(event.socialLoginMethod!);
+        } else {
+          res =
+              await _repository.signInWithFireBase(event.email, event.password);
+        }
+
         if (res != null) {
           emit(Authenticated());
         } else {
@@ -46,5 +55,38 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthError(e.toString()));
       }
     });
+  }
+  Future<User?> _socialLogin(SocialLoginMethod socialLoginMethod) async {
+    switch (socialLoginMethod) {
+      case SocialLoginMethod.google:
+        final res = await signInWithGoogle();
+        await _repository.signInWithSocial(res.user!);
+        return res.user;
+      case SocialLoginMethod.facebook:
+        break;
+      case SocialLoginMethod.apple:
+        break;
+      default:
+        return null;
+    }
+    return null;
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }

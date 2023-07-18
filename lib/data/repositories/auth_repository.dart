@@ -37,6 +37,10 @@ class AuthRepository {
     return null;
   }
 
+  Future signInWithSocial(User user) async {
+    await UserRepository().insertUserToFireStore(user);
+  }
+
   Future<User?> sendVerify(User? user) async {
     await user?.sendEmailVerification();
     return user;
