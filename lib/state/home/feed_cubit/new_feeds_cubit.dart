@@ -17,7 +17,7 @@ class NewFeedsCubit extends Cubit<NewFeedsState> {
             id: '0',
             idUser: '0',
             content: '0',
-            imageUrl: '0',
+            imagesUrl: ['0'],
             author: '0',
             like: '0',
             createdAt: '',

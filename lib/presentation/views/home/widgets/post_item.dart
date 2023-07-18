@@ -5,6 +5,7 @@ import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/data/models/user_model.dart';
 import 'package:friendzone/presentation/routes/path.dart';
+import 'package:friendzone/presentation/shared/widgets/layout_images.dart';
 import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
@@ -95,10 +96,9 @@ class PostItem extends StatelessWidget {
                       width: size.width,
                       height: size.width / 1.5,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          image: DecorationImage(
-                              image: CachedNetworkImageProvider(post.imageUrl),
-                              fit: BoxFit.cover)),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: LayoutImages(images: post.imagesUrl),
                     ),
                     BlocSelector<MyAccountCubit, MyAccountState, UserModel?>(
                         selector: (state) {

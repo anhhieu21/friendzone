@@ -63,6 +63,7 @@ dependencies:
   timeago: ^3.4.0
   video_player: ^2.6.1
   google_sign_in: ^6.1.4
+  flutter_facebook_auth: ^6.0.0
 
 dev_dependencies:
   flutter_test:

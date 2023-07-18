@@ -21,7 +21,7 @@ class ItemPostSave extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
                 image: DecorationImage(
-                    image: CachedNetworkImageProvider(post.imageUrl),
+                    image: CachedNetworkImageProvider(post.imagesUrl.first),
                     fit: BoxFit.cover)),
           ),
           Expanded(

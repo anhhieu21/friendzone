@@ -30,7 +30,12 @@ class UserRepository {
 
   Future<void> insertUserToFireStore(User user) async {
     try {
-      await firestore.collection('users').doc(user.uid).set({
+      final doc = firestore.collection('users').doc(user.uid);
+
+      final getDoc = await doc.get();
+      if (!getDoc.exists) return;
+
+      await doc.set({
         "idUser": user.uid,
         "avartar": user.photoURL ?? urlAvatar,
         "email": user.email,

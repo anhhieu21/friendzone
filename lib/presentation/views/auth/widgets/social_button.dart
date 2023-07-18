@@ -1,11 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/state.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 enum SocialLoginMethod { google, facebook, apple }
 

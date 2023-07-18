@@ -20,7 +20,7 @@ class ItemPost extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
                   image: CachedNetworkImageProvider(
-                    item.imageUrl,
+                    item.imagesUrl.first,
                   ),
                   fit: BoxFit.cover)),
         ),

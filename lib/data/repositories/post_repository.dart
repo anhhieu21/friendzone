@@ -48,7 +48,7 @@ class PostRepository {
           case TaskState.success:
             final url = await event.ref.getDownloadURL();
             await upFireStore(
-                urlImage: url,
+                urlImage: [url],
                 content: content,
                 like: like,
                 visible: visible ?? true,
@@ -71,7 +71,7 @@ class PostRepository {
   }
 
   Future<bool> upFireStore(
-      {required String urlImage,
+      {required List<String> urlImage,
       required String content,
       required int like,
       required UserModel userModel,

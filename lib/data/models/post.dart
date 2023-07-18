@@ -6,7 +6,7 @@ class Post {
   String id;
   String idUser;
   String content;
-  String imageUrl;
+  List<String> imagesUrl;
   String author;
   String like;
   String createdAt;
@@ -17,7 +17,7 @@ class Post {
       {required this.id,
       required this.idUser,
       required this.content,
-      required this.imageUrl,
+      required this.imagesUrl,
       required this.author,
       required this.like,
       this.avartarAuthor,
@@ -30,7 +30,7 @@ class Post {
         id: postFromDB['id'],
         idUser: postFromDB['idUser'],
         content: postFromDB['content'],
-        imageUrl: postFromDB['imageUrl'],
+        imagesUrl: List<String>.from(postFromDB['imageUrl']),
         author: postFromDB['author'],
         avartarAuthor: postFromDB['avartarAuthor'],
         like: postFromDB['like'] ?? '0',
@@ -43,7 +43,7 @@ class Post {
       "id": id,
       'idUser': idUser,
       'content': content,
-      'imageUrl': imageUrl,
+      'imageUrl': imagesUrl,
       'author': author,
       'visible': visible,
       'createdAt': DateTime.now()

@@ -6,6 +6,7 @@ import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/data/models/comment.dart';
 import 'package:friendzone/presentation/shared/widgets/dialog_custom.dart';
+import 'package:friendzone/presentation/shared/widgets/layout_images.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/home/widgets/post_button_bar.dart';
 import 'package:friendzone/presentation/views/home/widgets/post_comments.dart';
@@ -37,7 +38,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   _savePost() {
     context.read<MyAccountCubit>().savePost(widget.post).then((isSaved) =>
         DialogCustom.instance.showDialogDuration(
-            context:context,content: isSaved ? savePostMsg : unSavePostMsg));
+            context: context, content: isSaved ? savePostMsg : unSavePostMsg));
   }
 
   @override
@@ -69,11 +70,9 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                           width: size.width,
                           height: size.width / 1.5,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              image: DecorationImage(
-                                  image: CachedNetworkImageProvider(
-                                      widget.post.imageUrl),
-                                  fit: BoxFit.cover)),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: LayoutImages(images: widget.post.imagesUrl),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),

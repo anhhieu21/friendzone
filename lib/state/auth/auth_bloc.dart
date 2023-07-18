@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:friendzone/data/repositories/auth_repository.dart';
 import 'package:friendzone/presentation/view.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -63,11 +64,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await _repository.signInWithSocial(res.user!);
         return res.user;
       case SocialLoginMethod.facebook:
-        break;
+        final res = await signInWithFacebook();
+        if (res == null) return null;
+        await _repository.signInWithSocial(res.user!);
+        return res.user;
       case SocialLoginMethod.apple:
         break;
       default:
         return null;
+    }
+    return null;
+  }
+
+  Future<UserCredential?> signInWithFacebook() async {
+    final LoginResult result = await FacebookAuth.instance.login();
+    if (result.status == LoginStatus.success) {
+      // Create a credential from the access token
+      final OAuthCredential credential =
+          FacebookAuthProvider.credential(result.accessToken!.token);
+      // Once signed in, return the UserCredential
+      return await FirebaseAuth.instance.signInWithCredential(credential);
     }
     return null;
   }
