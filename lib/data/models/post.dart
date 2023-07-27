@@ -1,28 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:friendzone/data/models/story.dart';
 
 import 'package:friendzone/presentation/utils/formatter.dart';
 
-class Post {
-  String id;
-  String idUser;
+class Post extends Story{
   String content;
-  List<String> imagesUrl;
-  String author;
   String like;
-  String createdAt;
-  String? avartarAuthor;
   bool visible;
   int totalComment = 0;
-  Post(
-      {required this.id,
-      required this.idUser,
-      required this.content,
-      required this.imagesUrl,
-      required this.author,
-      required this.like,
-      this.avartarAuthor,
-      required this.visible,
-      required this.createdAt});
+  Post({
+    required super.id,
+    required super.idUser,
+    required super.imagesUrl,
+    required super.author,
+    required super.createdAt,
+    required super.avartarAuthor,
+    required this.content,
+    required this.like,
+    required this.visible,
+  });
 
   factory Post.fromFirestore(DocumentSnapshot doc) {
     Map postFromDB = doc.data() as Map;
@@ -38,6 +34,7 @@ class Post {
         createdAt: Formatter.dateTime(postFromDB["createdAt"].toDate()));
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return {
       "id": id,
@@ -127,3 +124,4 @@ final iconList = [
   '😰',
   '😥',
 ];
+

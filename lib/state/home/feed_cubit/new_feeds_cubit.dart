@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'package:friendzone/data.dart';
 
 part 'new_feeds_state.dart';
@@ -21,7 +22,8 @@ class NewFeedsCubit extends Cubit<NewFeedsState> {
             author: '0',
             like: '0',
             createdAt: '',
-            visible: true));
+            visible: true,
+            avartarAuthor: urlAvatar));
     emit(NewFeedsShow(allPost));
   }
 }
