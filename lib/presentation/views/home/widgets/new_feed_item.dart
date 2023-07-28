@@ -1,22 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:friendzone/common/constants/list_img_fake.dart';
-import 'package:friendzone/data/models/post.dart';
+import 'package:friendzone/data/models/feed.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/themes/color.dart';
+import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
 class ItemNewFeed extends StatelessWidget {
   final Size size;
-  final Post item;
+  final Feed item;
   const ItemNewFeed({super.key, required this.size, required this.item});
 
   @override
   Widget build(BuildContext context) {
-    return item.idUser == '0'
-        ? ItemAddFeed(size: size)
-        : Padding(
+    return  Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
             child: Container(
               width: size.width / 4,
@@ -31,7 +29,7 @@ class ItemNewFeed extends StatelessWidget {
                     image: DecorationImage(
                         fit: BoxFit.cover,
                         image: CachedNetworkImageProvider(
-                          urlAvatar,
+                          item.imagesUrl.first,
                         )),
                   )),
             ));
@@ -47,9 +45,11 @@ class ItemAddFeed extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4),
         child: GestureDetector(
-          onTap: () => GoRouter.of(context).push('/${RoutePath.writepost}'),
+          onTap: () =>
+              context.pushNamed(Formatter.nameRoute(RoutePath.upStory)),
           child: Container(
               width: size.width / 4,
+              height: size.height,
               margin: const EdgeInsets.only(top: 10),
               decoration: BoxDecoration(
                   color: colorBlue.shade300.withOpacity(0.8),

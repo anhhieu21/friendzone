@@ -6,7 +6,7 @@ import 'package:friendzone/data/models/menu.dart';
 import 'package:friendzone/presentation/views/view.dart';
 import 'package:friendzone/state/chat/chats_cubit.dart';
 import 'package:friendzone/state/home/allpost/all_post_cubit.dart';
-import 'package:friendzone/state/home/feed_cubit/new_feeds_cubit.dart';
+import 'package:friendzone/state/home/feed/feed_cubit.dart';
 
 import 'chats/view/chats_screen.dart';
 
@@ -35,7 +35,7 @@ class _MainScreenState extends State<MainScreen>
     ];
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       BlocProvider.of<AllPostCubit>(context).getAllPost();
-      BlocProvider.of<NewFeedsCubit>(context).getAllPost();
+      BlocProvider.of<FeedCubit>(context).getFeeds();
       BlocProvider.of<ChatsCubit>(context).getListConversation();
     });
     super.initState();

@@ -96,8 +96,9 @@ class WritePost extends StatelessWidget {
                                     return BlocSelector<MyAccountCubit,
                                         MyAccountState, UserModel?>(
                                       selector: (state) {
-                                        if (state is MyDataState)
+                                        if (state is MyDataState) {
                                           return state.user;
+                                        }
                                         return null;
                                       },
                                       builder: (_, user) {

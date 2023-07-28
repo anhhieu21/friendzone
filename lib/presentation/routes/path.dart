@@ -6,6 +6,7 @@ class RoutePath {
   static const String postDetail = 'postDetail';
   static const String profileDetail = 'profileDetail';
   static const String conversentation = 'conversentation';
+  static const String upStory = 'upStory';
   static const String signin = '/signin';
   static const String signup = '/signup';
 }

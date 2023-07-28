@@ -5,7 +5,7 @@ final navigatorKey = GlobalKey<NavigatorState>();
 // key colection
 const kUser = 'users';
 const kPost = 'post';
-const kStories = 'stories';
+const kFeed = 'feed';
 
 //key sub-colection
 const kComment = 'comment';

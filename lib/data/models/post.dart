@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:friendzone/data/models/story.dart';
+import 'package:friendzone/data/models/feed.dart';
 
 import 'package:friendzone/presentation/utils/formatter.dart';
 
-class Post extends Story{
+class Post extends Feed {
   String content;
   String like;
   bool visible;
@@ -124,4 +124,3 @@ final iconList = [
   '😰',
   '😥',
 ];
-

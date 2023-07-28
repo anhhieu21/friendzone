@@ -14,8 +14,6 @@ import 'package:friendzone/state.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../../../../common/constants/list_img_fake.dart';
-
 class PostItem extends StatelessWidget {
   final Post item;
   final bool isPreviewUser;
@@ -66,7 +64,7 @@ class PostItem extends StatelessWidget {
                             CircleAvatar(
                               radius: 24,
                               backgroundImage: CachedNetworkImageProvider(
-                                  post.avartarAuthor ?? urlAvatar),
+                                  post.avartarAuthor),
                             ),
                             Expanded(
                               child: ListTile(

@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/constants/constants.dart';
-import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/data/models/comment.dart';
 import 'package:friendzone/presentation/shared/widgets/dialog_custom.dart';
@@ -92,7 +91,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                               CircleAvatar(
                                 radius: 14,
                                 backgroundImage: CachedNetworkImageProvider(
-                                    widget.post.avartarAuthor ?? urlAvatar),
+                                    widget.post.avartarAuthor),
                               ),
                             ],
                           ),

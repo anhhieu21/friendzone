@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/data/repositories/conversation_repository.dart';
+import 'package:friendzone/data/repositories/feed_repository.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/themes/theme.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:friendzone/presentation/view.dart';
 import 'package:friendzone/presentation/views/chats/view/conversation_screen.dart';
+import 'package:friendzone/presentation/views/home/view/up_new_feed.dart';
 import 'package:friendzone/presentation/views/home/widgets/post_detail.dart';
 import 'package:friendzone/state.dart';
 import 'package:friendzone/state/profile/user/user_cubit.dart';
@@ -26,6 +28,7 @@ class App extends StatelessWidget {
         RepositoryProvider(create: (context) => PostRepository()),
         RepositoryProvider(create: (context) => UserRepository()),
         RepositoryProvider(create: (context) => ConversationRepository()),
+        RepositoryProvider(create: (context) => FeedRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -41,8 +44,8 @@ class App extends StatelessWidget {
                   RepositoryProvider.of<PostRepository>(context),
                   RepositoryProvider.of<UserRepository>(context))),
           BlocProvider(
-              create: (context) => NewFeedsCubit(
-                  RepositoryProvider.of<PostRepository>(context))),
+              create: (context) => FeedCubit(
+                  RepositoryProvider.of<FeedRepository>(context))),
           BlocProvider(
               create: (context) => UpdateProfileCubit(
                   RepositoryProvider.of<UserRepository>(context))),
@@ -127,7 +130,12 @@ class App extends StatelessWidget {
                 builder: (BuildContext context, GoRouterState state) =>
                     ConversationScreen(
                       userModel: state.extra as UserModel,
-                    ))
+                    )),
+            GoRoute(
+                path: RoutePath.upStory,
+                name: Formatter.nameRoute(RoutePath.upStory),
+                builder: (BuildContext context, GoRouterState state) =>
+                    const UpNewFeedScreen())
           ]),
     ],
   );
