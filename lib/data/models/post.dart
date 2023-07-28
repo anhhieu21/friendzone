@@ -28,7 +28,7 @@ class Post extends Feed {
         content: postFromDB['content'],
         imagesUrl: List<String>.from(postFromDB['imageUrl']),
         author: postFromDB['author'],
-        avartarAuthor: postFromDB['avartarAuthor'],
+        avartarAuthor: postFromDB['avartarAuthor'] ?? '',
         like: postFromDB['like'] ?? '0',
         visible: postFromDB['visible'],
         createdAt: Formatter.dateTime(postFromDB["createdAt"].toDate()));

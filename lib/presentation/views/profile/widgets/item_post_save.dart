@@ -13,6 +13,7 @@ class ItemPostSave extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0)),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
           Container(
