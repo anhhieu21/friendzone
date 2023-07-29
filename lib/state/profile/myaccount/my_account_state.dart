@@ -15,11 +15,11 @@ class MyDataState extends MyAccountState {
   final List<Post> myPostsPrivate;
   final List<Post> myPostsSave;
 
-  const MyDataState({required this.user,required this.myPostsPublic,
+  const MyDataState(
+      {required this.user,
+      required this.myPostsPublic,
       required this.myPostsPrivate,
       required this.myPostsSave});
   @override
-  List<Object> get props => [user,myPostsPublic, myPostsPrivate, myPostsSave];
+  List<Object> get props => [user, myPostsPublic, myPostsPrivate, myPostsSave];
 }
-
-

@@ -1,7 +1,13 @@
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class Formatter {
+  static String timeAgo(String dateTime) {
+    final date = DateTime.tryParse(dateTime)!;
+    return timeago.format(date);
+  }
+
   static String dateTime(DateTime dateTime) {
     final formatter = DateFormat('dd-MM-yyyy', 'vi_VN');
     return formatter.format(dateTime);

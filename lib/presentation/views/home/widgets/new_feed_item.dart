@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzone/data/models/feed.dart';
 import 'package:friendzone/presentation/routes/path.dart';
+import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:go_router/go_router.dart';
@@ -10,29 +11,37 @@ import 'package:ionicons/ionicons.dart';
 class ItemNewFeed extends StatelessWidget {
   final Size size;
   final Feed item;
-  const ItemNewFeed({super.key, required this.size, required this.item});
+  final int index;
+  const ItemNewFeed(
+      {super.key, required this.size, required this.item, required this.index});
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
+    return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        child: Container(
+          width: size.width / 4,
+          margin: const EdgeInsets.only(top: 10),
+          decoration: BoxDecoration(
+              border: Border.all(width: 2, color: colorWhite),
+              borderRadius: BorderRadius.circular(25)),
+          child: OnTapEffect(
+            onTap: () => context.pushNamed(
+                Formatter.nameRoute(RoutePath.detailFeed),
+                extra: index),
+            radius: 20,
             child: Container(
-              width: size.width / 4,
-              margin: const EdgeInsets.only(top: 10),
-              decoration: BoxDecoration(
-                  border: Border.all(width: 2, color: colorWhite),
-                  borderRadius: BorderRadius.circular(25)),
-              child: Container(
-                  margin: const EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: CachedNetworkImageProvider(
-                          item.imagesUrl.first,
-                        )),
-                  )),
-            ));
+                margin: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: CachedNetworkImageProvider(
+                        item.imagesUrl.first,
+                      )),
+                )),
+          ),
+        ));
   }
 }
 
@@ -45,8 +54,7 @@ class ItemAddFeed extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4),
         child: GestureDetector(
-          onTap: () =>
-              context.pushNamed(Formatter.nameRoute(RoutePath.upStory)),
+          onTap: () => context.pushNamed(Formatter.nameRoute(RoutePath.upFeed)),
           child: Container(
               width: size.width / 4,
               height: size.height,

@@ -35,7 +35,9 @@ class ListNewFeed extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemCount: state.listFeed.length,
                             itemBuilder: (context, index) => ItemNewFeed(
-                                size: size, item: state.listFeed[index]),
+                                size: size,
+                                item: state.listFeed[index],
+                                index: index),
                           ),
                         ),
                       ],

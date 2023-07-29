@@ -9,6 +9,7 @@ import 'package:friendzone/presentation/themes/theme.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:friendzone/presentation/view.dart';
 import 'package:friendzone/presentation/views/chats/view/conversation_screen.dart';
+import 'package:friendzone/presentation/views/home/view/feed_detail_screen.dart';
 import 'package:friendzone/presentation/views/home/view/up_new_feed.dart';
 import 'package:friendzone/presentation/views/home/widgets/post_detail.dart';
 import 'package:friendzone/state.dart';
@@ -24,45 +25,44 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (context) => AuthRepository.instance),
-        RepositoryProvider(create: (context) => PostRepository()),
-        RepositoryProvider(create: (context) => UserRepository()),
-        RepositoryProvider(create: (context) => ConversationRepository()),
-        RepositoryProvider(create: (context) => FeedRepository()),
+        RepositoryProvider(create: (_) => AuthRepository.instance),
+        RepositoryProvider(create: (_) => PostRepository()),
+        RepositoryProvider(create: (_) => UserRepository()),
+        RepositoryProvider(create: (_) => ConversationRepository()),
+        RepositoryProvider(create: (_) => FeedRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) =>
-                AuthBloc(RepositoryProvider.of<AuthRepository>(context)),
+            create: (_) => AuthBloc(RepositoryProvider.of<AuthRepository>(_)),
           ),
           BlocProvider(
-              create: (context) => WritePostCubit(
-                  RepositoryProvider.of<PostRepository>(context))),
+              create: (_) =>
+                  WritePostCubit(RepositoryProvider.of<PostRepository>(_))),
           BlocProvider(
-              create: (context) => AllPostCubit(
-                  RepositoryProvider.of<PostRepository>(context),
-                  RepositoryProvider.of<UserRepository>(context))),
+              create: (_) => AllPostCubit(
+                  RepositoryProvider.of<PostRepository>(_),
+                  RepositoryProvider.of<UserRepository>(_))),
           BlocProvider(
-              create: (context) => FeedCubit(
-                  RepositoryProvider.of<FeedRepository>(context))),
+              create: (_) =>
+                  FeedCubit(RepositoryProvider.of<FeedRepository>(_))),
           BlocProvider(
-              create: (context) => UpdateProfileCubit(
-                  RepositoryProvider.of<UserRepository>(context))),
+              create: (_) =>
+                  UpdateProfileCubit(RepositoryProvider.of<UserRepository>(_))),
           BlocProvider(
-              create: (context) => MyAccountCubit(
-                  RepositoryProvider.of<UserRepository>(context))),
+              create: (_) =>
+                  MyAccountCubit(RepositoryProvider.of<UserRepository>(_))),
           BlocProvider(
-            create: (context) =>
-                PostCubitCubit(RepositoryProvider.of<PostRepository>(context)),
+            create: (_) =>
+                PostCubitCubit(RepositoryProvider.of<PostRepository>(_)),
           ),
           BlocProvider(
-            create: (context) => UserPreviewCubit(
-                RepositoryProvider.of<UserRepository>(context)),
+            create: (_) =>
+                UserPreviewCubit(RepositoryProvider.of<UserRepository>(_)),
           ),
           BlocProvider(
-            create: (context) => ChatsCubit(
-                RepositoryProvider.of<ConversationRepository>(context)),
+            create: (_) =>
+                ChatsCubit(RepositoryProvider.of<ConversationRepository>(_)),
           )
         ],
         child: GestureDetector(
@@ -84,6 +84,7 @@ class App extends StatelessWidget {
     );
   }
 
+  final multiblocProvider = [];
   final GoRouter router = GoRouter(
     // navigatorKey: navigatorKey,
     routes: [
@@ -132,10 +133,17 @@ class App extends StatelessWidget {
                       userModel: state.extra as UserModel,
                     )),
             GoRoute(
-                path: RoutePath.upStory,
-                name: Formatter.nameRoute(RoutePath.upStory),
+                path: RoutePath.upFeed,
+                name: Formatter.nameRoute(RoutePath.upFeed),
                 builder: (BuildContext context, GoRouterState state) =>
-                    const UpNewFeedScreen())
+                    const UpNewFeedScreen()),
+            GoRoute(
+                path: RoutePath.detailFeed,
+                name: Formatter.nameRoute(RoutePath.detailFeed),
+                builder: (BuildContext context, GoRouterState state) =>
+                    FeedDetailScreen(
+                      currentPage: (state.extra ?? 0) as int,
+                    ))
           ]),
     ],
   );

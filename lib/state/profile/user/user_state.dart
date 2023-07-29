@@ -20,9 +20,8 @@ class UserDataState extends UserpreviewState {
     this.post,
   );
   @override
-  List<Object> get props => [user,post];
+  List<Object> get props => [user, post];
 }
-
 
 class CheckFollowState extends UserpreviewState {
   final bool isFollow;
@@ -42,4 +41,3 @@ class ListFollowerState extends UserpreviewState {
   @override
   List<Object> get props => [listFollower, listFollowing];
 }
-

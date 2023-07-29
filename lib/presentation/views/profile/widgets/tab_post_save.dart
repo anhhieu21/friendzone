@@ -3,10 +3,9 @@ import 'package:friendzone/data.dart';
 
 import 'package:friendzone/presentation/views/profile/widgets/item_post_save.dart';
 
-
 class TabPostSave extends StatelessWidget {
   final List<Post> listPost;
-  const TabPostSave({super.key,  required this.listPost});
+  const TabPostSave({super.key, required this.listPost});
 
   @override
   Widget build(BuildContext context) {
