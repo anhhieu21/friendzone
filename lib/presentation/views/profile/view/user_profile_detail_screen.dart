@@ -4,12 +4,10 @@ import 'package:friendzone/common/extentions/size_extention.dart';
 
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/view.dart';
-import 'package:friendzone/data.dart' hide MyPosts;
 import 'package:friendzone/presentation/views/profile/widgets/header_profile_user.dart';
 import 'package:friendzone/state/profile/user/user_cubit.dart';
 
-const expandedHeight = 280.0;
-const collapsedHeight = 120.0;
+const expandedHeight = 340.0;
 
 class ProfileDetailScreen extends StatefulWidget {
   final String id;
@@ -32,9 +30,8 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final size = SizeEx(context).screenSize;
-    return Scaffold(
-      appBar: AppBar(),
-      body: BlocBuilder<UserPreviewCubit, UserpreviewState>(
+    return Material(
+      child: BlocBuilder<UserPreviewCubit, UserpreviewState>(
         buildWhen: (previous, current) {
           if (current is LoadingState || current is UserDataState) return true;
           return false;
@@ -45,14 +42,16 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
           }
           if (state is UserDataState) {
             final listPost = state.post;
-            return CustomScrollView(slivers: [
-              SliverToBoxAdapter(
-                child: SizedBox(
-                  width: size.width,
-                  child: HeaderProfileUser(
-                    size: size,
-                    user: state.user,
-                  ),
+            return CustomScrollView(controller: scrollController, slivers: [
+              CustomSliverAppBar(
+                scrollController: scrollController,
+                expandedHeight: expandedHeight,
+                collapsedHeight: kToolbarHeight,
+                expandedTitleScale: 1,
+                titlePadding: EdgeInsets.zero,
+                flexTitle: HeaderProfileUser(
+                  size: size,
+                  user: state.user,
                 ),
               ),
               SliverPadding(
@@ -75,43 +74,5 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
         },
       ),
     );
-  }
-}
-
-class MySliverPersitentHeader extends SliverPersistentHeaderDelegate {
-  final TabController tabController;
-  final double maxSize;
-  final double minSize;
-  MySliverPersitentHeader(
-      {required this.tabController,
-      required this.maxSize,
-      required this.minSize});
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return ColoredBox(
-      color: colorGrey.shade100,
-      child: TabBar(
-        unselectedLabelColor: colorGrey,
-        controller: tabController,
-        dividerColor: Colors.transparent,
-        tabs: List.generate(
-            profileTabBar.length,
-            (index) => Tab(
-                  text: profileTabBar[index],
-                )),
-      ),
-    );
-  }
-
-  @override
-  double get maxExtent => maxSize;
-
-  @override
-  double get minExtent => minSize;
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return true;
   }
 }

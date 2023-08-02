@@ -5,8 +5,8 @@ import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/presentation/view.dart';
 import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
 
+import '../widgets/my_sliver_presitent_header.dart';
 import '../widgets/tab_post_save.dart';
-import 'user_profile_detail_screen.dart';
 
 const expandedHeight = 180.0;
 const collapsedHeight = 120.0;
@@ -53,7 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                     toolbarHeight: 285,
                     flexibleSpace: SizedBox(
                       width: size.width,
-                      child: HeaderProfile(
+                      child: HeaderMyProfile(
                         size: size,
                         user: state.user,
                       ),

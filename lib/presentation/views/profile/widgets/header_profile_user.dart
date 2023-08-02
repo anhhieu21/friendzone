@@ -12,11 +12,14 @@ import 'package:friendzone/presentation/themes/color.dart';
 import 'package:ionicons/ionicons.dart';
 import '../../../utils/formatter.dart';
 import 'info_view.dart';
-import 'menu_more.dart';
+
+const expandedHeight = 280.0;
+const heightBackground = expandedHeight / 2 + kToolbarHeight;
 
 class HeaderProfileUser extends StatefulWidget {
   final Size size;
   final UserModel? user;
+
   const HeaderProfileUser({super.key, required this.size, this.user});
 
   @override
@@ -40,16 +43,17 @@ class _HeaderProfileUserState extends State<HeaderProfileUser>
 
   @override
   Widget build(BuildContext context) {
+    final radiusAvatar = widget.size.width / 7.5;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Stack(children: [
-          SizedBox(height: 140 + widget.size.width / 7.5 - 16.0),
+          SizedBox(height: heightBackground + radiusAvatar),
           BackgroundProfile(
             url: widget.user?.background ?? urlAvatar,
             width: widget.size.width,
-            height: 140,
+            height: heightBackground,
             isViewer: true,
           ),
           Positioned(
@@ -57,70 +61,74 @@ class _HeaderProfileUserState extends State<HeaderProfileUser>
             left: 16.0,
             child: AvatarProfile(
               url: widget.user?.avartar ?? urlAvatar,
-              radius: widget.size.width / 7.5,
+              radius: radiusAvatar,
               isViewer: true,
             ),
           )
         ]),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: _bodyHeader(context),
+        Expanded(
+          child: Container(
+            height: 60,
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: _bodyHeader(context),
+          ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: BlocBuilder<UserPreviewCubit, UserpreviewState>(
-                  builder: (context, state) {
-                    final isFollowed =
-                        state is CheckFollowState ? state.isFollow : false;
-                    return BlocSelector<MyAccountCubit, MyAccountState,
-                        UserModel?>(
-                      selector: (state) {
-                        if (state is MyDataState) return state.user;
-                        return null;
-                      },
-                      builder: (_, user) {
-                        return ElevatedButton(
-                            onPressed: isFollowed
-                                ? () {}
-                                : () => _follow(context, user),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: colorBlue.shade500,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(isFollowed
-                                    ? Ionicons.person_remove
-                                    : Ionicons.person_add),
-                                Text(
-                                  isFollowed ? 'Huỷ theo dõi' : 'Theo dõi',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ],
-                            ));
-                      },
-                    );
-                  },
-                ),
-              ),
-              IconButton(
-                  onPressed: () => context.pushNamed(
-                      Formatter.nameRoute(RoutePath.conversentation),
-                      extra: widget.user),
-                  style: IconButton.styleFrom(
-                    backgroundColor: colorGrey.shade300,
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: BlocBuilder<UserPreviewCubit, UserpreviewState>(
+                    builder: (context, state) {
+                      final isFollowed =
+                          state is CheckFollowState ? state.isFollow : false;
+                      return BlocSelector<MyAccountCubit, MyAccountState,
+                          UserModel?>(
+                        selector: (state) {
+                          if (state is MyDataState) return state.user;
+                          return null;
+                        },
+                        builder: (_, user) {
+                          return ElevatedButton(
+                              onPressed: isFollowed
+                                  ? () {}
+                                  : () => _follow(context, user),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: colorBlue.shade500,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(isFollowed
+                                      ? Ionicons.person_remove
+                                      : Ionicons.person_add),
+                                  Text(
+                                    isFollowed ? 'Huỷ theo dõi' : 'Theo dõi',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ],
+                              ));
+                        },
+                      );
+                    },
                   ),
-                  icon: Icon(
-                    Ionicons.chatbubble,
-                    color: colorBlue.shade500,
-                  )),
-              const MenuDrop()
-            ],
+                ),
+                IconButton(
+                    onPressed: () => context.pushNamed(
+                        Formatter.nameRoute(RoutePath.conversentation),
+                        extra: widget.user),
+                    style: IconButton.styleFrom(
+                      backgroundColor: colorGrey.shade300,
+                    ),
+                    icon: Icon(
+                      Ionicons.chatbubble,
+                      color: colorBlue.shade500,
+                    )),
+              ],
+            ),
           ),
         ),
       ],
@@ -129,74 +137,55 @@ class _HeaderProfileUserState extends State<HeaderProfileUser>
 
   Widget _bodyHeader(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-
-    // final hobbies = [
-    //   'Âm nhạc',
-    //   'Game',
-    //   'Đi dạo',
-    //   'Cú đêm',
-    //   'Không hút thuốc',
-    //   'Chiêm tinh',
-    // ];
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Flexible(
-                flex: 1,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
+        Flexible(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Text(
                       Formatter.emailtoDisplayName(widget.user?.name ?? ''),
                       style: textTheme.bodyLarge!
                           .copyWith(fontWeight: FontWeight.w600),
                     ),
-                    Text(
+                  ),
+                  Expanded(
+                    child: Text(
                       'Flutter is the future',
                       style: textTheme.bodyLarge,
                     ),
-                  ],
-                )),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  InforView(
-                    value: widget.user!.follower.toString(),
-                    label: 'Followers',
-                    callback: () {
-                      BlocProvider.of<UserPreviewCubit>(context, listen: false)
-                          .getListFollower(widget.user!.idUser);
-                      _showFollower(context);
-                    },
-                  ),
-                  const SizedBox(width: 12),
-                  InforView(
-                    value: widget.user!.following.toString(),
-                    label: 'Following',
-                    callback: () {},
                   ),
                 ],
               ),
-            ),
-          ],
+            )),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              InforView(
+                value: widget.user!.follower.toString(),
+                label: 'Followers',
+                callback: () {
+                  BlocProvider.of<UserPreviewCubit>(context, listen: false)
+                      .getListFollower(widget.user!.idUser);
+                  _showFollower(context);
+                },
+              ),
+              const SizedBox(width: 12),
+              InforView(
+                value: widget.user!.following.toString(),
+                label: 'Following',
+                callback: () {},
+              ),
+            ],
+          ),
         ),
-        // Expanded(
-        //   child: Row(
-        //     children: hobbies
-        //         .map((e) => Container(
-        //               padding: const EdgeInsets.all(8.0),
-        //               decoration: BoxDecoration(
-        //                   borderRadius: BorderRadius.circular(16.0),
-        //                   color: colorGrey.shade200),
-        //               child: Text(e),
-        //             ))
-        //         .toList(),
-        //   ),
-        // )
       ],
     );
   }

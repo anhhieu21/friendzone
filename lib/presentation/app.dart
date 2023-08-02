@@ -11,7 +11,7 @@ import 'package:friendzone/presentation/view.dart';
 import 'package:friendzone/presentation/views/chats/view/conversation_screen.dart';
 import 'package:friendzone/presentation/views/home/view/feed_detail_screen.dart';
 import 'package:friendzone/presentation/views/home/view/up_new_feed.dart';
-import 'package:friendzone/presentation/views/home/widgets/post_detail.dart';
+import 'package:friendzone/presentation/views/home/view/post_detail_sscreen.dart';
 import 'package:friendzone/state.dart';
 import 'package:friendzone/state/profile/user/user_cubit.dart';
 import 'package:go_router/go_router.dart';

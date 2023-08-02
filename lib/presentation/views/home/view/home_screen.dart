@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/presentation/view.dart';
+import 'package:friendzone/presentation/views/home/widgets/app_bar_home.dart';
 import 'package:friendzone/state/home/allpost/all_post_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return CustomScrollView(
               controller: scrollController,
               slivers: [
-                CustomSliverAppBar(scrollController: scrollController),
+                AppBarHome(scrollController: scrollController),
                 ListNewFeed(size: size),
                 ListPost(listPost: listPost),
                 SliverToBoxAdapter(

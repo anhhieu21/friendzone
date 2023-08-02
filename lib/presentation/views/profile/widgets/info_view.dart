@@ -18,11 +18,13 @@ class InforView extends StatelessWidget {
       onPressed: callback,
       child: Column(
         children: [
-          Text(
-            value,
-            style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600),
+          Expanded(
+            child: Text(
+              value,
+              style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600),
+            ),
           ),
-          Text(label, style: textTheme.bodyLarge),
+          Expanded(child: Text(label, style: textTheme.bodyLarge)),
         ],
       ),
     );
