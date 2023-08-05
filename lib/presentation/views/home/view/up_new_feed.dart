@@ -3,10 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/data.dart';
+import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/state/home/feed/feed_cubit.dart';
 import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
 class UpNewFeedScreen extends StatelessWidget {
@@ -20,69 +22,80 @@ class UpNewFeedScreen extends StatelessWidget {
         .copyWith(fontWeight: FontWeight.bold);
     return Scaffold(
       appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: kBottomNavigationBarHeight),
-        child: Stack(
-          children: [
-            Positioned(
-                top: 0,
-                right: 16,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    _buttonOption("Nhãn dán", Ionicons.logo_octocat, textStyle),
-                    _buttonOption("Văn bản", Ionicons.text_outline, textStyle),
-                    _buttonOption(
-                        "Gắn thẻ", Ionicons.people_outline, textStyle),
-                  ],
-                )),
-            const ImageView(),
-            Positioned(
-              left: 16,
-              right: 16,
-              bottom: 16,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
+      body: BlocListener<FeedCubit, FeedState>(
+          listener: (_, state) {
+            if (state is FeedLoading) {
+              DialogCustom.instance.showLoading(context, true);
+            }
+            if (state is FeedCreated) {
+              GoRouter.of(context).go(RoutePath.main);
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: kBottomNavigationBarHeight),
+            child: Stack(
+              children: [
+                Positioned(
+                    top: 0,
+                    right: 16,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        _buttonOption(
+                            "Nhãn dán", Ionicons.logo_octocat, textStyle),
+                        _buttonOption(
+                            "Văn bản", Ionicons.text_outline, textStyle),
+                        _buttonOption(
+                            "Gắn thẻ", Ionicons.people_outline, textStyle),
+                      ],
+                    )),
+                const ImageView(),
+                Positioned(
+                  left: 16,
+                  right: 16,
+                  bottom: 16,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Ionicons.settings_outline)),
-                      Text(
-                        "Quyền riêng tư",
-                        style: textStyle,
-                      )
+                      Column(
+                        children: [
+                          IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Ionicons.settings_outline)),
+                          Text(
+                            "Quyền riêng tư",
+                            style: textStyle,
+                          )
+                        ],
+                      ),
+                      BlocSelector<MyAccountCubit, MyAccountState, UserModel?>(
+                        selector: (state) {
+                          if (state is MyDataState) {
+                            return state.user;
+                          }
+                          return null;
+                        },
+                        builder: (_, user) => ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: colorBlue),
+                            onPressed: () => _createFeed(context, user!),
+                            child: const Text(
+                              "Chia sẽ",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )),
+                      ),
                     ],
                   ),
-                  BlocSelector<MyAccountCubit, MyAccountState, UserModel?>(
-                    selector: (state) {
-                      if (state is MyDataState) {
-                        return state.user;
-                      }
-                      return null;
-                    },
-                    builder: (_, user) => ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: colorBlue),
-                        onPressed: () => _createFeed(context, user!),
-                        child: const Text(
-                          "Chia sẽ",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        )),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
+                )
+              ],
+            ),
+          )),
     );
   }
 
   _createFeed(BuildContext context, UserModel userModel) {
-    BlocProvider.of<FeedCubit>(listen: false, context).createStory(userModel);
+    BlocProvider.of<FeedCubit>(listen: false, context).createFeed(userModel);
   }
 
   Widget _buttonOption(String label, IconData iconData, TextStyle style) =>

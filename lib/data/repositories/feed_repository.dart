@@ -28,29 +28,30 @@ class FeedRepository {
     return stories;
   }
 
-  Future<Feed?> createStory(XFile image, UserModel userModel) async {
+  Future<Feed?> createFeed(XFile image, UserModel userModel) async {
     Feed? feed;
     final file = File(image.path);
-    final upLoad =
-        storageRef.child('images/${basename(file.path)}').putFile(file);
 
-    upLoad.snapshotEvents.listen((event) async {
-      switch (event.state) {
+    final imgRef = storageRef.child('images/${basename(file.path)}');
+    try {
+      final upLoadTask = await imgRef.putFile(file);
+      switch (upLoadTask.state) {
         case TaskState.paused:
           if (kDebugMode) {
             print("Upload is paused.");
           }
           break;
         case TaskState.running:
-          final progress = 100.0 * (event.bytesTransferred / event.totalBytes);
+          final progress =
+              100.0 * (upLoadTask.bytesTransferred / upLoadTask.totalBytes);
           if (kDebugMode) {
             print(("Upload is $progress% complete."));
           }
           break;
         case TaskState.success:
-          final url = await event.ref.getDownloadURL();
+          final url = await upLoadTask.ref.getDownloadURL();
           feed = await _insertToFirestore(url, userModel);
-          break;
+          return feed;
 
         case TaskState.canceled:
           if (kDebugMode) {
@@ -60,7 +61,12 @@ class FeedRepository {
         case TaskState.error:
           break;
       }
-    });
+    } on FirebaseException catch (e) {
+      if (kDebugMode) {
+        print(e.message);
+      }
+    }
+
     return feed;
   }
 

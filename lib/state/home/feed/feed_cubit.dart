@@ -29,9 +29,10 @@ class FeedCubit extends Cubit<FeedState> {
     emit(FeedLoaded(_feeds));
   }
 
-  createStory(UserModel userModel) async {
+  createFeed(UserModel userModel) async {
     if (image == null) return;
-    final res = await _repository.createStory(image!, userModel);
+    emit(FeedLoading());
+    final res = await _repository.createFeed(image!, userModel);
     if (res != null) {
       _feeds.add(res);
       emit(FeedLoaded(_feeds));

@@ -27,4 +27,6 @@ class FeedPickImage extends FeedState {
   List<Object> get props => [file];
 }
 
+class FeedLoading extends FeedState {}
+
 class FeedError extends FeedState {}

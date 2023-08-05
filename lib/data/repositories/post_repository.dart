@@ -34,34 +34,33 @@ class PostRepository {
     try {
       //Upload to Firebase
       final upLoad =
-          storageRef.child('images/${basename(file.path)}').putFile(file);
-      upLoad.snapshotEvents.listen((event) async {
-        switch (event.state) {
-          case TaskState.paused:
-            log("Upload is paused.");
-            break;
-          case TaskState.running:
-            final progress =
-                100.0 * (event.bytesTransferred / event.totalBytes);
-            log("Upload is $progress% complete.");
-            break;
-          case TaskState.success:
-            final url = await event.ref.getDownloadURL();
-            await upFireStore(
-                urlImage: [url],
-                content: content,
-                like: like,
-                visible: visible ?? true,
-                userModel: userModel);
-            break;
+          await storageRef.child('images/${basename(file.path)}').putFile(file);
 
-          case TaskState.canceled:
-            log("Upload was canceled");
-            break;
-          case TaskState.error:
-            break;
-        }
-      });
+      switch (upLoad.state) {
+        case TaskState.paused:
+          log("Upload is paused.");
+          break;
+        case TaskState.running:
+          final progress =
+              100.0 * (upLoad.bytesTransferred / upLoad.totalBytes);
+          log("Upload is $progress% complete.");
+          break;
+        case TaskState.success:
+          final url = await upLoad.ref.getDownloadURL();
+          await upFireStore(
+              urlImage: [url],
+              content: content,
+              like: like,
+              visible: visible ?? true,
+              userModel: userModel);
+          return true;
+
+        case TaskState.canceled:
+          log("Upload was canceled");
+          break;
+        case TaskState.error:
+          break;
+      }
 
       return true;
     } on Exception catch (e) {
