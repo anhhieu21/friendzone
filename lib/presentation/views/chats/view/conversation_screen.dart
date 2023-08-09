@@ -5,6 +5,7 @@ import 'package:friendzone/data.dart';
 import 'package:friendzone/data/models/conversation.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/state/chat/chats_cubit.dart';
+import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -56,69 +57,88 @@ class _ConversationScreenState extends State<ConversationScreen> {
               onPressed: () {}, icon: const Icon(Ionicons.ellipsis_vertical))
         ],
       ),
-      body: BlocBuilder<ChatsCubit, ChatsState>(
-        buildWhen: (previous, current) {
-          if (current is ConversationState) {
-            return true;
-          }
-          return false;
-        },
-        builder: (context, state) {
-          if (state is LoadingState) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (state is ConversationState) {
-            var list = state.messages;
-            return BlocBuilder<ChatsCubit, ChatsState>(
-              builder: (_, message) {
-                if (message is MessageState) {
-                  if (message.message.id != list.last.id) {
-                    list.add(message.message);
-                  }
-                }
-                return ListView.builder(
-                    dragStartBehavior: DragStartBehavior.down,
-                    controller: controller,
-                    itemCount: list.length,
-                    itemBuilder: (_, i) => _itemMessage(list[i]));
-              },
-            );
-          }
-          return const SizedBox();
-        },
-      ),
-      bottomNavigationBar: Container(
-        height: 80,
-        color: colorGrey.shade100,
-        padding: const EdgeInsets.fromLTRB(16.0, 4.0, 0, 16.0),
-        child: Row(
-          children: [
-            Expanded(
-              child: TextFormField(
-                controller: textEditingController,
-                decoration: InputDecoration(
-                  filled: true,
-                  hintText: 'message',
-                  hintStyle: const TextStyle(fontSize: 14),
-                  contentPadding: const EdgeInsets.all(16),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
+      body: Stack(
+        children: [
+          BlocBuilder<ChatsCubit, ChatsState>(
+            buildWhen: (previous, current) {
+              if (current is ConversationState) {
+                return true;
+              }
+              return false;
+            },
+            builder: (context, state) {
+              if (state is LoadingState) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (state is ConversationState) {
+                var list = state.messages;
+                return BlocBuilder<ChatsCubit, ChatsState>(
+                  builder: (_, message) {
+                    if (message is MessageState) {
+                      if (list.isEmpty || message.message.id != list.last.id) {
+                        list.add(message.message);
+                      }
+                    }
+                    return ListView.builder(
+                        dragStartBehavior: DragStartBehavior.down,
+                        controller: controller,
+                        itemCount: list.length,
+                        itemBuilder: (_, i) => _itemMessage(list[i]));
+                  },
+                );
+              }
+              return const SizedBox();
+            },
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 80,
+              color: colorGrey.shade100,
+              padding: const EdgeInsets.fromLTRB(16.0, 4.0, 0, 16.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: textEditingController,
+                      decoration: InputDecoration(
+                        filled: true,
+                        hintText: 'message',
+                        hintStyle: const TextStyle(fontSize: 14),
+                        contentPadding: const EdgeInsets.all(16),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  BlocSelector<MyAccountCubit, MyAccountState, UserModel?>(
+                    selector: (state) {
+                      if (state is MyDataState) {
+                        return state.user;
+                      }
+                      return null;
+                    },
+                    builder: (context, user) {
+                      return IconButton(
+                          onPressed: () async {
+                            final value = textEditingController.text;
+                            textEditingController.clear();
+                            await BlocProvider.of<ChatsCubit>(context)
+                                .sendMessage(widget.userModel, value, user!);
+                            jumNewMessage();
+                          },
+                          icon: const Icon(Icons.send));
+                    },
+                  )
+                ],
               ),
             ),
-            IconButton(
-                onPressed: () async {
-                  final value = textEditingController.text;
-                  textEditingController.clear();
-                  await BlocProvider.of<ChatsCubit>(context)
-                      .sendMessage(widget.userModel.idUser, value);
-                  jumNewMessage();
-                },
-                icon: const Icon(Icons.send))
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

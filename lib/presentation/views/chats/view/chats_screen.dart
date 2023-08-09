@@ -26,12 +26,6 @@ class ChatsScreen extends StatelessWidget {
           ],
         ),
         body: BlocBuilder<ChatsCubit, ChatsState>(
-          buildWhen: (previous, current) {
-            if (current is ListConversationState) {
-              return true;
-            }
-            return false;
-          },
           builder: (_, state) {
             if (state is ListConversationState) {
               return ListView.builder(

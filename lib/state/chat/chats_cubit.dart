@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:friendzone/data/models/conversation.dart';
+import 'package:friendzone/data/models/user_model.dart';
 import 'package:friendzone/data/repositories/conversation_repository.dart';
 
 part 'chats_state.dart';
@@ -16,9 +17,10 @@ class ChatsCubit extends Cubit<ChatsState> {
     this._conversationRepository,
   ) : super(ChatsInitial());
 
-  sendMessage(String idReceiver, String message) async {
+  sendMessage(UserModel receiver, String message, UserModel me) async {
     try {
-      await _conversationRepository.sendMessage(idReceiver, message);
+      await _conversationRepository.sendMessage(receiver, message, me);
+      await getListConversation();
     } on FirebaseException catch (e, x) {
       log(x.toString());
     }

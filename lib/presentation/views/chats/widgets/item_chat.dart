@@ -29,7 +29,7 @@ class ItemChat extends StatelessWidget {
         onTap: () => _onTap(context),
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           CachedNetworkImage(
-            imageUrl: urlAvatar,
+            imageUrl: item.image,
             imageBuilder: (context, imageProvider) => CircleAvatar(
               backgroundImage: imageProvider,
               radius: size.width / 14,
@@ -41,7 +41,7 @@ class ItemChat extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  item.message.receiver,
+                  item.receiver,
                   style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
                 Text(item.message.message),
