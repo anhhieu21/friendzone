@@ -4,8 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/data.dart';
 
-import 'package:friendzone/data/models/feed.dart';
-import 'package:friendzone/data/repositories/feed_repository.dart';
 import 'package:image_picker/image_picker.dart';
 
 part 'feed_state.dart';

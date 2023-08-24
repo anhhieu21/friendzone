@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
+import 'package:friendzone/presentation/state/auth/auth_bloc.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:friendzone/state/auth/auth_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 

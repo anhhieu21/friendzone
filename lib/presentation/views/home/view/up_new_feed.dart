@@ -5,9 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
+import 'package:friendzone/presentation/state.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:friendzone/state/home/feed/feed_cubit.dart';
-import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 

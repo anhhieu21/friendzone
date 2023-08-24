@@ -5,8 +5,7 @@ import 'package:friendzone/presentation/shared/widgets/custom_overlayentry.dart'
 import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
-import 'package:friendzone/state.dart';
-import 'package:friendzone/state/settings/language/language_cubit.dart';
+import 'package:friendzone/presentation/state.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 

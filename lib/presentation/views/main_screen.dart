@@ -3,11 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/data/models/menu.dart';
+import 'package:friendzone/presentation/state.dart';
 import 'package:friendzone/presentation/views/view.dart';
-import 'package:friendzone/state/chat/chats_cubit.dart';
-import 'package:friendzone/state/home/allpost/all_post_cubit.dart';
-import 'package:friendzone/state/home/feed/feed_cubit.dart';
-import 'package:friendzone/state/settings/language/language_cubit.dart';
 import 'package:ionicons/ionicons.dart';
 
 import 'chats/view/chats_screen.dart';

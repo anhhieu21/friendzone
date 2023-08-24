@@ -130,7 +130,7 @@ index_generator:
     - path: lib/presentation
       include: ['shared/**']
       name: shared
-    - path: lib
+    - path: lib/presentation
       include: ['state/**']
       name: state
     - path: lib/presentation

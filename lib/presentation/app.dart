@@ -1,26 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/data.dart';
-import 'package:friendzone/data/repositories/conversation_repository.dart';
-import 'package:friendzone/data/repositories/feed_repository.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/themes/theme.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:friendzone/presentation/view.dart';
-import 'package:friendzone/presentation/views/chats/view/conversation_screen.dart';
-import 'package:friendzone/presentation/views/home/view/feed_detail_screen.dart';
-import 'package:friendzone/presentation/views/home/view/up_new_feed.dart';
-import 'package:friendzone/presentation/views/home/view/post_detail_sscreen.dart';
-import 'package:friendzone/presentation/views/settings/change_theme_screen.dart';
-import 'package:friendzone/presentation/views/settings/settings_screen.dart';
-import 'package:friendzone/state.dart';
-import 'package:friendzone/state/profile/user/user_cubit.dart';
-import 'package:friendzone/state/settings/language/language_cubit.dart';
-import 'package:friendzone/state/settings/theme/apptheme_cubit.dart';
+import 'package:friendzone/presentation/state.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'views/profile/view/user_profile_detail_screen.dart';
-import 'views/settings/change_language_screen.dart';
 
 class App extends StatelessWidget {
   App({super.key});

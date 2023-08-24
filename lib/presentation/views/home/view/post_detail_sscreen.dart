@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/constants/constants.dart';
 import 'package:friendzone/data.dart';
-import 'package:friendzone/data/models/comment.dart';
 import 'package:friendzone/presentation/shared/widgets/dialog_custom.dart';
 import 'package:friendzone/presentation/shared/widgets/layout_images.dart';
+import 'package:friendzone/presentation/state.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/home/widgets/post_button_bar.dart';
 import 'package:friendzone/presentation/views/home/widgets/post_comments.dart';
-import 'package:friendzone/state/home/post_cubit/post_cubit_cubit.dart';
-import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
 import 'package:ionicons/ionicons.dart';
 
 class PostDetailScreen extends StatefulWidget {

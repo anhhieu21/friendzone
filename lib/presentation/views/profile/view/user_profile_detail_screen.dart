@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
+import 'package:friendzone/presentation/shared.dart';
+import 'package:friendzone/presentation/state/profile/user/user_cubit.dart';
 
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/view.dart';
 import 'package:friendzone/presentation/views/profile/widgets/header_profile_user.dart';
-import 'package:friendzone/state/profile/user/user_cubit.dart';
 
 const expandedHeight = 340.0;
 
@@ -33,11 +34,12 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
     return Material(
       child: BlocBuilder<UserPreviewCubit, UserpreviewState>(
         buildWhen: (previous, current) {
-          if (current is LoadingState || current is UserDataState) return true;
+          if (current is LoadingUserState || current is UserDataState)
+            return true;
           return false;
         },
         builder: (context, state) {
-          if (state is LoadingState) {
+          if (state is LoadingUserState) {
             return const Center(child: CircularProgressIndicator());
           }
           if (state is UserDataState) {

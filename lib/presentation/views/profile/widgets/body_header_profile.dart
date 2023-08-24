@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:friendzone/data/models/user_model.dart';
 import 'package:friendzone/presentation/routes/path.dart';
+import 'package:friendzone/presentation/state/settings/language/language_cubit.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
-import 'package:friendzone/state/settings/language/language_cubit.dart';
 import 'package:go_router/go_router.dart';
 
 import 'menu_more.dart';

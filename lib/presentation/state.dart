@@ -13,3 +13,7 @@ export 'state/home/post_cubit/post_cubit_state.dart';
 export 'state/post/write_post_cubit.dart';
 export 'state/profile/myaccount/my_account_cubit.dart';
 export 'state/profile/update/update_profile_cubit.dart';
+export 'state/settings/language/language_cubit.dart';
+export 'state/settings/settings_cubit.dart';
+export 'state/settings/theme/apptheme_cubit.dart';
+export 'state/profile/user/user_cubit.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:friendzone/common/constants/list_img_fake.dart';
-import 'package:friendzone/presentation/shared/widgets/custom_app_bar.dart';
+import 'package:friendzone/presentation/state.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -9,8 +9,6 @@ import 'package:friendzone/data.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
-import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
-import 'package:friendzone/state/settings/language/language_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 

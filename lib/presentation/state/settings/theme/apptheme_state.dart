@@ -21,5 +21,5 @@ class ChangedTheme extends AppThemeState {
     required this.theme,
   });
   @override
-  List<Object> get props => [themeData,theme];
+  List<Object> get props => [themeData, theme];
 }

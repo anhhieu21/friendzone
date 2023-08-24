@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/presentation/shared.dart';
+import 'package:friendzone/presentation/state.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:friendzone/state/settings/language/language_cubit.dart';
 import 'package:ionicons/ionicons.dart';
 
 class ChangeLanguageScreen extends StatelessWidget {

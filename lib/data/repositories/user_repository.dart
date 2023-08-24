@@ -8,7 +8,6 @@ import 'package:friendzone/common/constants/list_img_fake.dart';
 import 'dart:developer';
 
 import 'package:friendzone/data.dart';
-import 'package:friendzone/data/models/follower.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:path/path.dart';
 

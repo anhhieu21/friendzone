@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friendzone/presentation/state/home/feed/feed_cubit.dart';
 import 'package:friendzone/presentation/views/home/widgets/new_feed_item.dart';
-import 'package:friendzone/state/home/feed/feed_cubit.dart';
 
 class ListNewFeed extends StatelessWidget {
   final Size size;

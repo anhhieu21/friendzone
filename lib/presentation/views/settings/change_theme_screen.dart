@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/data/models/setting.dart';
 import 'package:friendzone/presentation/shared.dart';
-import 'package:friendzone/state/settings/theme/apptheme_cubit.dart';
+import 'package:friendzone/presentation/state/settings/theme/apptheme_cubit.dart';
 
 class ChangeThemeScreen extends StatelessWidget {
   const ChangeThemeScreen({super.key});

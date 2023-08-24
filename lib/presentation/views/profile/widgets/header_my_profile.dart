@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/presentation/shared.dart';
-import 'package:friendzone/state/profile/user/user_cubit.dart';
+import 'package:friendzone/presentation/state/profile/user/user_cubit.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/profile/widgets/info_view.dart';
 import 'body_header_profile.dart';
