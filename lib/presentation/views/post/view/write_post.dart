@@ -1,11 +1,9 @@
 import 'dart:io';
 
-// import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/data.dart';
-import 'package:friendzone/data/models/post.dart';
 import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/post/widgets/menu_options.dart';

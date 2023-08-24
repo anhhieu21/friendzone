@@ -20,3 +20,6 @@ const savePostMsg = 'Đã lưu bài viết';
 const unSavePostMsg = 'Đã bỏ lưu bài viết';
 const loginFailMsg = 'Đăng nhập không thành công';
 const loginSuccessMsg = 'Đăng nhập thành công';
+
+// key local-storage
+const kTheme = 'theme';

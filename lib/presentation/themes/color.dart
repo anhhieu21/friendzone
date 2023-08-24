@@ -6,7 +6,8 @@ const colorGrey = Colors.grey;
 const colorRed = Colors.red;
 const colorBlack = Colors.black;
 const colorBlue = Colors.blue;
-
+const colorBackgroundApp = Color.fromARGB(255, 43, 43, 43);
+const colorCardView = Color.fromARGB(255, 29, 29, 29);
 final bgBottomNavBar = [
   colorWhite,
   colorWhite,
