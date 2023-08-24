@@ -9,7 +9,9 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await setupFlutterNotifications();
   showFlutterNotification(message);
-  print('Handling a background message ${message.messageId}');
+  if (kDebugMode) {
+    print('Handling a background message ${message.messageId}');
+  }
 }
 
 /// Create a [AndroidNotificationChannel] for heads up notifications

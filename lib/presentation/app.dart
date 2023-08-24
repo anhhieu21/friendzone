@@ -12,8 +12,11 @@ import 'package:friendzone/presentation/views/chats/view/conversation_screen.dar
 import 'package:friendzone/presentation/views/home/view/feed_detail_screen.dart';
 import 'package:friendzone/presentation/views/home/view/up_new_feed.dart';
 import 'package:friendzone/presentation/views/home/view/post_detail_sscreen.dart';
+import 'package:friendzone/presentation/views/settings/change_theme_screen.dart';
+import 'package:friendzone/presentation/views/settings/settings_screen.dart';
 import 'package:friendzone/state.dart';
 import 'package:friendzone/state/profile/user/user_cubit.dart';
+import 'package:friendzone/state/settings/theme/apptheme_cubit.dart';
 import 'package:go_router/go_router.dart';
 
 import 'views/profile/view/user_profile_detail_screen.dart';
@@ -63,21 +66,36 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (_) =>
                 ChatsCubit(RepositoryProvider.of<ConversationRepository>(_)),
+          ),
+          BlocProvider(
+            create: (_) => AppThemeCubit(),
           )
         ],
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () => primaryFocus?.unfocus(),
-          child: MaterialApp.router(
-            title: 'FriendZone',
-            debugShowCheckedModeBanner: false,
-            theme: themeData,
-            routerConfig: router,
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-            ],
-            supportedLocales: const [Locale('en', 'US')],
+          child: BlocSelector<AppThemeCubit, AppThemeState, ThemeData>(
+            selector: (state) {
+              if (state is ChangedTheme) {
+                return state.themeData;
+              }
+              return AppTheme.lightTheme;
+            },
+            builder: (context, theme) {
+              return MaterialApp.router(
+                title: 'FriendZone',
+                debugShowCheckedModeBanner: false,
+                theme: theme,
+                // darkTheme: AppTheme.darkTheme,
+                // themeMode: ThemeMode.system,
+                routerConfig: router,
+                localizationsDelegates: const [
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                ],
+                supportedLocales: const [Locale('en', 'US')],
+              );
+            },
           ),
         ),
       ),
@@ -86,64 +104,59 @@ class App extends StatelessWidget {
 
   final multiblocProvider = [];
   final GoRouter router = GoRouter(
-    // navigatorKey: navigatorKey,
     routes: [
       GoRoute(
-          path: RoutePath.splash,
-          builder: (BuildContext context, GoRouterState state) =>
-              const SplashScreen()),
+          path: RoutePath.splash, builder: (_, state) => const SplashScreen()),
+      GoRoute(path: RoutePath.signin, builder: (_, state) => SignInScreen()),
       GoRoute(
-          path: RoutePath.signin,
-          builder: (BuildContext context, GoRouterState state) =>
-              SignInScreen()),
-      GoRoute(
-          path: RoutePath.signup,
-          builder: (BuildContext context, GoRouterState state) =>
-              const SignUpScreen()),
+          path: RoutePath.signup, builder: (_, state) => const SignUpScreen()),
       GoRoute(
           path: RoutePath.main,
-          builder: (BuildContext context, GoRouterState state) =>
-              const MainScreen(),
+          builder: (_, state) => const MainScreen(),
           routes: [
             GoRoute(
                 path: RoutePath.writepost,
                 name: Formatter.nameRoute(RoutePath.writepost),
-                builder: (BuildContext context, GoRouterState state) =>
-                    WritePost()),
+                builder: (_, state) => WritePost()),
             GoRoute(
                 path: RoutePath.updateProfile,
                 name: Formatter.nameRoute(RoutePath.updateProfile),
-                builder: (BuildContext context, GoRouterState state) =>
+                builder: (_, state) =>
                     UpdateProfileScreen(userDetail: state.extra as UserModel)),
             GoRoute(
                 path: RoutePath.postDetail,
                 name: Formatter.nameRoute(RoutePath.postDetail),
-                builder: (BuildContext context, GoRouterState state) =>
+                builder: (_, state) =>
                     PostDetailScreen(post: state.extra as Post)),
             GoRoute(
                 path: RoutePath.profileDetail,
                 name: Formatter.nameRoute(RoutePath.profileDetail),
-                builder: (BuildContext context, GoRouterState state) =>
+                builder: (_, state) =>
                     ProfileDetailScreen(id: state.extra as String)),
             GoRoute(
                 path: RoutePath.conversentation,
                 name: Formatter.nameRoute(RoutePath.conversentation),
-                builder: (BuildContext context, GoRouterState state) =>
-                    ConversationScreen(
+                builder: (_, state) => ConversationScreen(
                       userModel: state.extra as UserModel,
                     )),
             GoRoute(
                 path: RoutePath.upFeed,
                 name: Formatter.nameRoute(RoutePath.upFeed),
-                builder: (BuildContext context, GoRouterState state) =>
-                    const UpNewFeedScreen()),
+                builder: (_, state) => const UpNewFeedScreen()),
             GoRoute(
                 path: RoutePath.detailFeed,
                 name: Formatter.nameRoute(RoutePath.detailFeed),
-                builder: (BuildContext context, GoRouterState state) =>
-                    FeedDetailScreen(
+                builder: (_, state) => FeedDetailScreen(
                       currentPage: (state.extra ?? 0) as int,
-                    ))
+                    )),
+            GoRoute(
+                path: RoutePath.settings,
+                name: Formatter.nameRoute(RoutePath.settings),
+                builder: (_, state) => const SettingsScreen()),
+            GoRoute(
+                path: RoutePath.changeTheme,
+                name: Formatter.nameRoute(RoutePath.changeTheme),
+                builder: (_, state) => const ChangeThemeScreen())
           ]),
     ],
   );

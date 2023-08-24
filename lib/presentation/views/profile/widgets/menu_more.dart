@@ -4,6 +4,7 @@ import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared/widgets/custom_overlayentry.dart';
 import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
 import 'package:friendzone/presentation/themes/color.dart';
+import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:friendzone/state.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
@@ -27,6 +28,7 @@ class _MenuDropState extends State<MenuDrop> {
     CustomOverlayEntry.instance.hideOverlay();
     switch (value) {
       case More.settings:
+        context.pushNamed(Formatter.nameRoute(RoutePath.settings));
         break;
       case More.signout:
         BlocProvider.of<AuthBloc>(context).add(SignOutRequested());

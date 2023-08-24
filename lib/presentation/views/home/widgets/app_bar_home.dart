@@ -30,16 +30,12 @@ class AppBarHome extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: BlocSelector<MyAccountCubit, MyAccountState, UserModel?>(
               selector: (state) => state is MyDataState ? state.user : null,
-              builder: (context, user) {
-                return CachedNetworkImage(
-                  imageUrl: user?.avartar ?? urlAvatar,
-                  fit: BoxFit.cover,
-                  imageBuilder: (context, imageProvider) => CircleAvatar(
-                    radius: 20,
-                    backgroundImage: imageProvider,
-                  ),
-                );
-              },
+              builder: (context, user) => CircleAvatar(
+                radius: 20,
+                backgroundImage: CachedNetworkImageProvider(
+                  user?.avartar ?? urlAvatar,
+                ),
+              ),
             ),
           ),
           Expanded(

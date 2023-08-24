@@ -7,7 +7,6 @@ import 'package:friendzone/data/models/user_model.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared/widgets/layout_images.dart';
 import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
-import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:friendzone/presentation/views/home/widgets/post_button_bar.dart';
 import 'package:friendzone/state.dart';
@@ -44,7 +43,8 @@ class PostItem extends StatelessWidget {
             onTap: () => _postDetail(context),
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16), color: colorWhite),
+                  borderRadius: BorderRadius.circular(16),
+                  color: Theme.of(context).cardColor),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
