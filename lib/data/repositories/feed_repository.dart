@@ -6,7 +6,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:friendzone/common/constants/constants.dart';
 import 'package:friendzone/data.dart';
-import 'package:friendzone/data/models/feed.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 

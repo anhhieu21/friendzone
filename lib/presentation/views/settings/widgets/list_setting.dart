@@ -40,6 +40,7 @@ class ItemSetting extends StatelessWidget {
       case Settings.navigationbar:
         return;
       case Settings.language:
+        context.pushNamed(Formatter.nameRoute(RoutePath.changeLanguage));
         return;
       case Settings.media:
         return;

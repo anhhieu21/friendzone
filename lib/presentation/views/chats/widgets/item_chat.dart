@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/data/models/conversation.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
+import 'package:friendzone/presentation/state/profile/user/user_cubit.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
-import 'package:friendzone/state/profile/user/user_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:timeago/timeago.dart' as timeago;
 

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/data/models/feed.dart';
 import 'package:friendzone/presentation/shared/widgets/custom_textfield.dart';
+import 'package:friendzone/presentation/state.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
-import 'package:friendzone/state/home/feed/feed_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 

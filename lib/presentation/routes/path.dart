@@ -5,6 +5,7 @@ class RoutePath {
   static const String updateProfile = 'updateProfile';
   static const String settings = 'settings';
   static const String changeTheme = 'changeTheme';
+  static const String changeLanguage = 'changeLanguage';
   static const String postDetail = 'postDetail';
   static const String profileDetail = 'profileDetail';
   static const String conversentation = 'conversentation';

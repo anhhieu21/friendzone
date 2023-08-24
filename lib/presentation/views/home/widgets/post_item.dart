@@ -9,7 +9,7 @@ import 'package:friendzone/presentation/shared/widgets/layout_images.dart';
 import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:friendzone/presentation/views/home/widgets/post_button_bar.dart';
-import 'package:friendzone/state.dart';
+import 'package:friendzone/presentation/state.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 

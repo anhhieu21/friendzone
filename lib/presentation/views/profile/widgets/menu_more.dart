@@ -5,7 +5,7 @@ import 'package:friendzone/presentation/shared/widgets/custom_overlayentry.dart'
 import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
-import 'package:friendzone/state.dart';
+import 'package:friendzone/presentation/state.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -24,22 +24,20 @@ class _MenuDropState extends State<MenuDrop> {
     super.initState();
   }
 
-  _handlerItem(Enum? value) {
+  _handlerItem(String value) {
     CustomOverlayEntry.instance.hideOverlay();
-    switch (value) {
-      case More.settings:
-        context.pushNamed(Formatter.nameRoute(RoutePath.settings));
-        break;
-      case More.signout:
-        BlocProvider.of<AuthBloc>(context).add(SignOutRequested());
-        break;
-      default:
+    if (value == text.settings) {
+      context.pushNamed(Formatter.nameRoute(RoutePath.settings));
+    }
+    if (value == text.signout) {
+      BlocProvider.of<AuthBloc>(context).add(SignOutRequested());
     }
   }
 
   _openPopup() {
     final renderBox = context.findRenderObject() as RenderBox?;
     final offset = renderBox?.localToGlobal(Offset.zero);
+    final menu = [text.settings, text.signout];
     CustomOverlayEntry.instance.showOverlay(
       context,
       child: Positioned(
@@ -50,14 +48,14 @@ class _MenuDropState extends State<MenuDrop> {
               borderRadius: BorderRadius.circular(8.0), color: colorWhite),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: More.values
+            children: menu
                 .map(
                   (e) => OnTapEffect(
                     onTap: () => _handlerItem(e),
                     radius: 8,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(e.name),
+                      child: Text(e),
                     ),
                   ),
                 )

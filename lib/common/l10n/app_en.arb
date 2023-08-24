@@ -1,0 +1,13 @@
+{
+"welcome": "Today, how do you feel ?",
+"language": "Language",
+"english": "English",
+"vietnamese": "Vietnamese",
+"home":"Home",
+"chat":"Chat",
+"friend":"Friend",
+"profile":"Profile",
+"editProfile":"Edit profile",
+"settings":"Settings",
+"signout":"Signout"
+}

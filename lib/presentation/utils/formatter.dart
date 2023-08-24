@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class Formatter {
+  static String locale = 'en_US';
   static String timeAgo(String dateTime) {
     final date = DateTime.tryParse(dateTime)!;
     return timeago.format(date);

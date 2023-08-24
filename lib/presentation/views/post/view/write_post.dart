@@ -5,10 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/presentation/shared/widgets/ontap_effect.dart';
+import 'package:friendzone/presentation/state.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/post/widgets/menu_options.dart';
-import 'package:friendzone/state/post/write_post_cubit.dart';
-import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 

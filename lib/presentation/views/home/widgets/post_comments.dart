@@ -2,10 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/constants/list_img_fake.dart';
+import 'package:friendzone/presentation/state.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
-import 'package:friendzone/state/home/post_cubit/post_cubit_cubit.dart';
-import 'package:friendzone/state/home/post_cubit/post_cubit_state.dart';
 
 class PostComments extends StatelessWidget {
   const PostComments({super.key});

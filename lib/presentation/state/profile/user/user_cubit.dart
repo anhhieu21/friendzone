@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/data.dart';
 import 'package:equatable/equatable.dart';
-import 'package:friendzone/data/models/follower.dart';
 part 'user_state.dart';
 
 class UserPreviewCubit extends Cubit<UserpreviewState> {
@@ -11,7 +10,7 @@ class UserPreviewCubit extends Cubit<UserpreviewState> {
 
   Future<UserModel?> loadInitialData(String idUser) async {
     try {
-      emit(LoadingState());
+      emit(LoadingUserState());
       List<Post> postsPublic = [];
       final user = await _repository.findMe(idUser);
       final post = await _repository.getMyPost(idUser);

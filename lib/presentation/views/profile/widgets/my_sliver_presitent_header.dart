@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/data/models/menu.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 
 class MySliverPersitentHeader extends SliverPersistentHeaderDelegate {
@@ -10,6 +9,11 @@ class MySliverPersitentHeader extends SliverPersistentHeaderDelegate {
       {required this.tabController,
       required this.maxSize,
       required this.minSize});
+  final profileTabBar = [
+    'Tất cả bài viết',
+    'Chỉ mình tôi',
+    'Lưu trữ',
+  ];
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {

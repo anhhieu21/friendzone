@@ -9,7 +9,7 @@ abstract class UserpreviewState extends Equatable {
 
 class UserpreviewInitial extends UserpreviewState {}
 
-class LoadingState extends UserpreviewState {}
+class LoadingUserState extends UserpreviewState {}
 
 class UserDataState extends UserpreviewState {
   final UserModel user;

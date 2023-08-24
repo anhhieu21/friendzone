@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:friendzone/data.dart';
-import 'package:friendzone/data/models/comment.dart';
 
 import 'post_cubit_state.dart';
 

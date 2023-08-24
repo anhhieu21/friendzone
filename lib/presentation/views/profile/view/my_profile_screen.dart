@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
+import 'package:friendzone/presentation/state/profile/myaccount/my_account_cubit.dart';
 
 import 'package:friendzone/presentation/view.dart';
-import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
-
-import '../widgets/my_sliver_presitent_header.dart';
-import '../widgets/tab_post_save.dart';
 
 const expandedHeight = 180.0;
 const collapsedHeight = 120.0;

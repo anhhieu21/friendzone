@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/data/models/post.dart';
+import 'package:friendzone/presentation/state/home/allpost/all_post_cubit.dart';
 import 'package:friendzone/presentation/view.dart';
-import 'package:friendzone/presentation/views/home/widgets/app_bar_home.dart';
-import 'package:friendzone/state/home/allpost/all_post_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

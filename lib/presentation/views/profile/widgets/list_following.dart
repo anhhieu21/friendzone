@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friendzone/presentation/state/profile/user/user_cubit.dart';
 import 'package:friendzone/presentation/themes/color.dart';
-import 'package:friendzone/state/profile/user/user_cubit.dart';
 
 class ListFollowing extends StatelessWidget {
   const ListFollowing({super.key});

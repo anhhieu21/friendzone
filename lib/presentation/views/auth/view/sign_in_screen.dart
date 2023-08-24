@@ -4,9 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/constants/constants.dart';
 import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/routes/path.dart';
+import 'package:friendzone/presentation/state.dart';
 import 'package:friendzone/presentation/view.dart';
-import 'package:friendzone/state/auth/auth_bloc.dart';
-import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
 import 'package:go_router/go_router.dart';
 
 class SignInScreen extends StatelessWidget {

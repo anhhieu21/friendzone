@@ -35,7 +35,7 @@ class BoxAccountCenter extends StatelessWidget {
             subtitleTextStyle:
                 textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500),
           ),
-           Padding(
+          Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: SubItemSetting(
               iconData: Ionicons.document_outline,
@@ -43,7 +43,7 @@ class BoxAccountCenter extends StatelessWidget {
               callback: () {},
             ),
           ),
-           Padding(
+          Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: SubItemSetting(
               iconData: Ionicons.lock_closed_outline,

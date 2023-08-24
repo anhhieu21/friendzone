@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/common/extentions/size_extention.dart';
 import 'package:friendzone/presentation/shared.dart';
+import 'package:friendzone/presentation/state/chat/chats_cubit.dart';
 import 'package:friendzone/presentation/views/chats/widgets/item_chat.dart';
-import 'package:friendzone/state/chat/chats_cubit.dart';
 import 'package:ionicons/ionicons.dart';
 
 class ChatsScreen extends StatelessWidget {
