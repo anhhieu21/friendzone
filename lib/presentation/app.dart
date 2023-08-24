@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:friendzone/data.dart';
 import 'package:friendzone/data/repositories/conversation_repository.dart';
 import 'package:friendzone/data/repositories/feed_repository.dart';
@@ -16,10 +15,12 @@ import 'package:friendzone/presentation/views/settings/change_theme_screen.dart'
 import 'package:friendzone/presentation/views/settings/settings_screen.dart';
 import 'package:friendzone/state.dart';
 import 'package:friendzone/state/profile/user/user_cubit.dart';
+import 'package:friendzone/state/settings/language/language_cubit.dart';
 import 'package:friendzone/state/settings/theme/apptheme_cubit.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'views/profile/view/user_profile_detail_screen.dart';
+import 'views/settings/change_language_screen.dart';
 
 class App extends StatelessWidget {
   App({super.key});
@@ -69,6 +70,9 @@ class App extends StatelessWidget {
           ),
           BlocProvider(
             create: (_) => AppThemeCubit(),
+          ),
+          BlocProvider(
+            create: (_) => LanguageCubit(),
           )
         ],
         child: GestureDetector(
@@ -82,18 +86,31 @@ class App extends StatelessWidget {
               return AppTheme.lightTheme;
             },
             builder: (context, theme) {
-              return MaterialApp.router(
-                title: 'FriendZone',
-                debugShowCheckedModeBanner: false,
-                theme: theme,
-                // darkTheme: AppTheme.darkTheme,
-                // themeMode: ThemeMode.system,
-                routerConfig: router,
-                localizationsDelegates: const [
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                ],
-                supportedLocales: const [Locale('en', 'US')],
+              return BlocSelector<LanguageCubit, LanguageState, Locale>(
+                selector: (state) {
+                  if (state is ChangeLanguage) {
+                    return state.locale;
+                  }
+                  return const Locale('en');
+                },
+                builder: (_, locale) {
+                  return MaterialApp.router(
+                    title: 'FriendZone',
+                    debugShowCheckedModeBanner: false,
+                    theme: theme,
+                    locale: locale,
+                    // darkTheme: AppTheme.darkTheme,
+                    // themeMode: ThemeMode.system,
+                    routerConfig: router,
+                    // supportedLocales: const [
+                    //   Locale('en', 'US'),
+                    //   Locale('vi', 'VN'),
+                    // ],
+                    localizationsDelegates:
+                        AppLocalizations.localizationsDelegates,
+                    supportedLocales: AppLocalizations.supportedLocales,
+                  );
+                },
               );
             },
           ),
@@ -156,7 +173,11 @@ class App extends StatelessWidget {
             GoRoute(
                 path: RoutePath.changeTheme,
                 name: Formatter.nameRoute(RoutePath.changeTheme),
-                builder: (_, state) => const ChangeThemeScreen())
+                builder: (_, state) => const ChangeThemeScreen()),
+            GoRoute(
+                path: RoutePath.changeLanguage,
+                name: Formatter.nameRoute(RoutePath.changeLanguage),
+                builder: (_, state) => ChangeLanguageScreen())
           ]),
     ],
   );

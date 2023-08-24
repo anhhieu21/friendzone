@@ -7,6 +7,8 @@ import 'package:friendzone/presentation/views/view.dart';
 import 'package:friendzone/state/chat/chats_cubit.dart';
 import 'package:friendzone/state/home/allpost/all_post_cubit.dart';
 import 'package:friendzone/state/home/feed/feed_cubit.dart';
+import 'package:friendzone/state/settings/language/language_cubit.dart';
+import 'package:ionicons/ionicons.dart';
 
 import 'chats/view/chats_screen.dart';
 
@@ -23,8 +25,16 @@ class _MainScreenState extends State<MainScreen>
   List<Menu> listNav = [];
   List<Widget> _listView = [];
   StreamController<int> navStream = StreamController<int>();
+
   @override
   void initState() {
+    final menuBottomNavBar = [
+      {'title': text.home, 'iconData': Ionicons.home},
+      {'title': text.chat, 'iconData': Ionicons.chatbubble},
+      {'title': text.friend, 'iconData': Ionicons.people},
+      {'title': text.profile, 'iconData': Ionicons.person_circle},
+    ];
+
     listNav = menuBottomNavBar.map((e) => Menu.fromMap(e)).toList();
     _tabController = TabController(length: listNav.length, vsync: this);
     _listView = [

@@ -10,6 +10,7 @@ import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/utils/formatter.dart';
 import 'package:friendzone/state/profile/myaccount/my_account_cubit.dart';
+import 'package:friendzone/state/settings/language/language_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -51,7 +52,7 @@ class AppBarHome extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16.0),
                     color: colorWhite),
-                child: const Text('Today,how do you feel ?'),
+                child: Text(text.welcome),
               ),
             ),
           ),

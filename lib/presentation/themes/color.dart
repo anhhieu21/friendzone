@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+const colorPrimary = Color.fromARGB(255, 200, 34, 175);
 const colorPinkButton = Colors.pink;
 const colorWhite = Colors.white;
 const colorGrey = Colors.grey;
