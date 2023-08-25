@@ -90,10 +90,6 @@ class App extends StatelessWidget {
                     // darkTheme: AppTheme.darkTheme,
                     // themeMode: ThemeMode.system,
                     routerConfig: router,
-                    // supportedLocales: const [
-                    //   Locale('en', 'US'),
-                    //   Locale('vi', 'VN'),
-                    // ],
                     localizationsDelegates:
                         AppLocalizations.localizationsDelegates,
                     supportedLocales: AppLocalizations.supportedLocales,

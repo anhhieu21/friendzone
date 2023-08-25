@@ -61,7 +61,7 @@ dependencies:
   index_generator: ^3.4.0
   flutter_local_notifications: ^15.1.0+1
   timeago: ^3.4.0
-  video_player: ^2.6.1
+  video_player: ^2.7.0
   google_sign_in: ^6.1.4
   flutter_svg: ^2.0.7
   shared_preferences: ^2.2.0
