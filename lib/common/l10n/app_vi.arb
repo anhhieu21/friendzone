@@ -10,5 +10,41 @@
 "profile":"Cá nhân",
 "editProfile":"Chỉnh sửa hồ sơ",
 "settings":"Cài đặt",
-"signout":"Đăng xuất"
+"signout":"Đăng xuất",
+"comments":"Bình luận",
+"shared":"Chia sẻ",
+"followers":"Người theo dõi",
+"following":"Đang theo dõi",
+"allPost":"Tất cả bài viết",
+"private":"Chỉ mình tôi",
+"saved":"Lưu trữ",
+"theme":"Chủ đề",
+"themeLight":"Sáng",
+"themeDark":"Tối",
+"themeSystem":"Hệ thống",
+"settingPrivacy":"Cài đặt và riêng tư",
+"accountCenter":"Trung tâm tài khoản",
+"notifications":"Thông báo",
+"post":"Bài viết",
+"email":"Email",
+"password":"Mật khẩu",
+"login":"Đăng nhập",
+"forGetPassword":"Quên mật khẩu",
+"haveNotAccount":"Bạn chưa có tài khoản?",
+"register":"Đăng ký ngay",
+"loginWith":"Đăng nhập với",
+"errorEmailField":"Vui lòng nhập email",
+"errorPassField":"Vui lòng nhập mật khẩu",
+"hintPassword":"6 kí tự trở lên",
+"confirmPass":"Xác nhận mật khẩu",
+"hello":"Hi {userName}",
+"@hello": {
+  "description": "A message with a single parameter",
+  "placeholders": {
+    "userName": {
+      "type": "String",
+      "example": "Ares"
+    }
+   }
+ }
 }

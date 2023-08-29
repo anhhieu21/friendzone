@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/state/auth/auth_bloc.dart';
+import 'package:friendzone/presentation/state/settings/language/language_cubit.dart';
 import 'package:friendzone/presentation/themes/color.dart';
+import 'package:friendzone/presentation/views/auth/widgets/password_field.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -91,25 +93,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       CustomTextField(
                         controller: nameController,
-                        label: 'Email',
-                        hint: 'email',
-                        error: 'Vui lòng nhập email',
+                        label: text.email,
+                        hint: text.email.toLowerCase(),
+                        error: text.errorEmailField,
                       ),
-                      CustomTextField(
+                      PasswordField(
                           controller: passController,
-                          label: 'Mật khẩu',
-                          hint: '6 kí tự trở lên',
-                          error: 'Vui lòng nhập mật khẩu'),
-                      CustomTextField(
+                          label: text.password,
+                          hint: text.hintPassword,
+                          error: text.errorPassField),
+                      PasswordField(
                           controller: passConfirmController,
-                          label: 'Xác nhận mật khẩu',
-                          hint: '6 kí tự trở lên',
-                          error: 'Vui lòng nhập mật khẩu'),
+                          label: text.confirmPass,
+                          hint: text.hintPassword,
+                          error:  text.errorPassField),
                       const Spacer(),
                       Expanded(
                         child: SiginButton(
                           onPress: _signUp,
-                          label: 'Đăng ký',
+                          label: text.register,
                         ),
                       ),
                       const SizedBox(height: 30),

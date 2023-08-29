@@ -20,13 +20,20 @@ class BackgroundProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CachedNetworkImage(
-          imageUrl: url,
-          fit: BoxFit.cover,
-          width: width,
-          height: height,
-          errorWidget: (context, url, error) => Container(color: colorGrey),
-        ),
+        url.isEmpty
+            ? Container(
+                color: colorGrey,
+                width: width,
+                height: height,
+              )
+            : CachedNetworkImage(
+                imageUrl: url,
+                fit: BoxFit.cover,
+                width: width,
+                height: height,
+                errorWidget: (context, url, error) =>
+                    Container(color: colorGrey),
+              ),
         if (!isViewer)
           Positioned(
             bottom: 0,

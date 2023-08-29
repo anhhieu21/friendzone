@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friendzone/presentation/state/settings/language/language_cubit.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 
 class MySliverPersitentHeader extends SliverPersistentHeaderDelegate {
@@ -10,9 +11,9 @@ class MySliverPersitentHeader extends SliverPersistentHeaderDelegate {
       required this.maxSize,
       required this.minSize});
   final profileTabBar = [
-    'Tất cả bài viết',
-    'Chỉ mình tôi',
-    'Lưu trữ',
+    text.allPost,
+    text.private,
+    text.saved,
   ];
   @override
   Widget build(
