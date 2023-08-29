@@ -6,6 +6,7 @@ import 'package:friendzone/presentation/shared.dart';
 import 'package:friendzone/presentation/routes/path.dart';
 import 'package:friendzone/presentation/state.dart';
 import 'package:friendzone/presentation/view.dart';
+import 'package:friendzone/presentation/views/auth/widgets/password_field.dart';
 import 'package:go_router/go_router.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -71,41 +72,42 @@ class SignInScreen extends StatelessWidget {
                     children: [
                       const TitleSignIn(),
                       CustomTextField(
+                        keyboardType: TextInputType.emailAddress,
                         controller: nameController,
-                        label: 'Tên đăng nhập',
-                        hint: 'email',
-                        error: 'Vui lòng nhập email',
+                        label: text.email,
+                        hint: text.email.toLowerCase(),
+                        error: text.errorEmailField,
                       ),
-                      CustomTextField(
+                      PasswordField(
                         controller: passController,
-                        label: 'Mật khẩu',
-                        hint: '6 kí tự trở lên',
-                        error: 'Vui lòng nhập mật khẩu',
+                        label: text.password,
+                        hint: text.hintPassword,
+                        error: text.errorPassField,
                       ),
                       Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
                               onPressed: () {},
-                              child: const Text('Quên mật khẩu'))),
+                              child: Text(text.forGetPassword))),
                       const SizedBox(height: 10),
                       SiginButton(
                         onPress: () => _signIn(context),
-                        label: 'Đăng nhập',
+                        label: text.login,
                       ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 40),
-                        child: Text('Hoặc đăng nhập với'),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 40),
+                        child: Text(text.loginWith),
                       ),
                       const SocialButtons(),
                       const SizedBox(height: 30),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Bạn chưa có tài khoản?'),
+                          Text(text.haveNotAccount),
                           TextButton(
                               onPressed: () =>
                                   GoRouter.of(context).go(RoutePath.signup),
-                              child: const Text('Đăng ký ngay'))
+                              child: Text(text.register))
                         ],
                       )
                     ],

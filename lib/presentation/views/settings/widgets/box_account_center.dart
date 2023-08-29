@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friendzone/presentation/state/settings/language/language_cubit.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:friendzone/presentation/views/settings/widgets/sub_item_setting.dart';
 import 'package:ionicons/ionicons.dart';
@@ -27,7 +28,7 @@ class BoxAccountCenter extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            title: const Text('Account center'),
+            title: Text(text.accountCenter),
             subtitle: const Text(
                 'manage the account section and connect experience on FriendZone\'s technologies'),
             titleTextStyle:

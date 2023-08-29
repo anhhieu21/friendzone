@@ -1,25 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
-class CustomTextField extends StatelessWidget {
-  final TextEditingController? controller;
+class PasswordField extends StatefulWidget {
+  final TextEditingController controller;
   final String? label;
   final String hint;
   final String error;
   final String? initialValue;
   final dynamic onChanged;
   final double? padding;
-  final bool? readOnly;
-  final TextInputType? keyboardType;
-  const CustomTextField(
+  const PasswordField(
       {super.key,
-      this.controller,
+      required this.controller,
       this.label,
       required this.hint,
       required this.error,
       this.initialValue,
       this.onChanged,
-      this.readOnly,
-      this.padding, this.keyboardType});
+      this.padding});
+
+  @override
+  State<PasswordField> createState() => _PasswordFieldState();
+}
+
+class _PasswordFieldState extends State<PasswordField> {
+  bool _hidePassword = true;
+  _showPassword() {
+    _hidePassword = !_hidePassword;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +38,7 @@ class CustomTextField extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            label!,
+            widget.label!,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
@@ -37,24 +46,28 @@ class CustomTextField extends StatelessWidget {
           height: 5,
         ),
         TextFormField(
-          keyboardType: keyboardType,
-          readOnly: readOnly ?? false,
-          initialValue: initialValue,
-          controller: controller,
-          onChanged: onChanged,
+          initialValue: widget.initialValue,
+          controller: widget.controller,
+          onChanged: widget.onChanged,
+          obscureText: _hidePassword,
           decoration: InputDecoration(
             filled: true,
-            hintText: hint,
+            hintText: widget.hint,
             hintStyle: const TextStyle(fontSize: 14),
-            contentPadding: EdgeInsets.all(padding ?? 16),
+            contentPadding: EdgeInsets.all(widget.padding ?? 16),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide.none,
             ),
+            suffixIcon: GestureDetector(
+                onTap: _showPassword,
+                child: Icon(_hidePassword
+                    ? Ionicons.eye_off_outline
+                    : Ionicons.eye_outline)),
           ),
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return error;
+              return widget.error;
             }
             return null;
           },

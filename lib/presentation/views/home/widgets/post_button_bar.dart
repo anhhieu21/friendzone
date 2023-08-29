@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:friendzone/data/models/post.dart';
+import 'package:friendzone/presentation/state/settings/language/language_cubit.dart';
 import 'package:friendzone/presentation/themes/color.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -32,7 +33,7 @@ class PostButtonBar extends StatelessWidget {
                   Ionicons.chatbubble_ellipses_outline,
                   color: colorBlue.shade400,
                 ),
-                Text('${post.totalComment} comments')
+                Text('${post.totalComment} ${text.comments}')
               ],
             )),
         IconButton(
@@ -43,7 +44,7 @@ class PostButtonBar extends StatelessWidget {
                   Ionicons.arrow_redo_outline,
                   color: colorBlue.shade400,
                 ),
-                const Text('4 shared')
+                Text(text.shared)
               ],
             )),
       ],

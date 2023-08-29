@@ -169,7 +169,7 @@ class _HeaderProfileUserState extends State<HeaderProfileUser>
             children: [
               InforView(
                 value: widget.user!.follower.toString(),
-                label: 'Followers',
+                label: text.followers,
                 callback: () {
                   BlocProvider.of<UserPreviewCubit>(context, listen: false)
                       .getListFollower(widget.user!.idUser);
@@ -179,7 +179,7 @@ class _HeaderProfileUserState extends State<HeaderProfileUser>
               const SizedBox(width: 12),
               InforView(
                 value: widget.user!.following.toString(),
-                label: 'Following',
+                label: text.following,
                 callback: () {},
               ),
             ],

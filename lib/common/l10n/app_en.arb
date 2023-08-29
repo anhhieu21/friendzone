@@ -10,5 +10,41 @@
 "profile":"Profile",
 "editProfile":"Edit profile",
 "settings":"Settings",
-"signout":"Signout"
+"signout":"Signout",
+"comments":"Comments",
+"shared":"Shared",
+"followers":"Followers",
+"following":"Following",
+"allPost":"All post",
+"private":"Private",
+"saved":"Saved",
+"theme":"Theme",
+"themeLight":"Light",
+"themeDark":"Dark",
+"themeSystem":"System",
+"settingPrivacy":"Setting & privacy",
+"accountCenter":"Account center",
+"notifications":"Notifications",
+"post":"Post",
+"email":"Email",
+"password":"Password",
+"login":"Login",
+"forGetPassword":"For get password",
+"haveNotAccount":"You have not account?",
+"register":"Register",
+"loginWith":"Login with",
+"errorEmailField":"Please enter email",
+"errorPassField":"Please enter password",
+"hintPassword":"at least 6 characters",
+"confirmPass":"Confirm password",
+"hello":"Hi {userName}",
+"@hello": {
+  "description": "A message with a single parameter",
+  "placeholders": {
+    "userName": {
+      "type": "String",
+      "example": "Ares"
+    }
+   }
+ }
 }

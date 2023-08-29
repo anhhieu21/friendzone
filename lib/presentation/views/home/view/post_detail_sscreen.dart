@@ -48,7 +48,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
             child: CustomScrollView(
               slivers: [
                 SliverAppBar(
-                  title: const Text('Post'),
+                  title: Text(text.post),
                   stretch: true,
                   floating: true,
                   actions: [
