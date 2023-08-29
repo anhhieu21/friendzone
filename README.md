@@ -19,7 +19,26 @@ With a focus on essential features reminiscent of Facebook, our platform enables
   main colection ( `post` , `stories`, `users` ).
 - Authencation
 - Storage
-### Structure
+## Feature
+### Auth screen:
+  - Login user account, login with google account
+  - Register with email
+### Main screen:
+  - :joystick: Nav-bar-bottom : navigate [ home, reels, chat, friend search, profile ] 
+  - :newspaper: Home screen:
+      - App bar : you can go write-post screen, follow notification
+      - :memo: Navigate to write-post screen: create your post here text, file ( image or video) , use can up multiple file, emoji
+      - Bellow of app bar :
+          - :camera: Stories : up post show limit in 24h
+          - List post [ page , user ] : the post every-one is show here
+  - :clapper: Reels screen:
+      - Create reel ( video )
+      - Here show short-video of user
+      - Can like, create comment in reel
+  - :left_speech_bubble: Chat screen:
+  - :people_holding_hands: Friend-search screen:
+  - :mechanic: Profile screen:
+## Structure
 ```bash
 ├── app_bloc_observer.dart
 ├── common
