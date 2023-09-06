@@ -7,22 +7,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/domain.dart';
 
-part 'chats_state.dart';
+part 'chat_state.dart';
 
-class ChatsCubit extends Cubit<ChatsState> {
+class ChatCubit extends Cubit<ChatState> {
   final ConversationRepository _conversationRepository;
-  ChatsCubit(
+  ChatCubit(
     this._conversationRepository,
   ) : super(ChatsInitial());
 
-  sendMessage(UserModel receiver, String message, UserModel me) async {
-    try {
-      await _conversationRepository.sendMessage(receiver, message, me);
-      await getListConversation();
-    } on FirebaseException catch (e, x) {
-      log(x.toString());
-    }
-  }
+  
 
   getListConversation() async {
     try {
@@ -47,11 +40,5 @@ class ChatsCubit extends Cubit<ChatsState> {
     });
   }
 
-  listMessage(String idReceiver) async {
-    emit(const LoadingState(true));
-    final listMessage =
-        await _conversationRepository.getListMessage(idReceiver);
-    listMessage.sort((a, b) => a.createdAt.compareTo(b.createdAt));
-    emit(ConversationState(listMessage));
-  }
+  
 }

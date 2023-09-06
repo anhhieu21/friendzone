@@ -3,7 +3,7 @@
 library state;
 
 export 'state/auth/auth_bloc.dart';
-export 'state/chat/chats_cubit.dart';
+export 'state/chat/chat_cubit.dart';
 export 'state/friend_zone/friendzone_bloc.dart';
 export 'state/home/allpost/all_post_cubit.dart';
 export 'state/home/feed/feed_cubit.dart';
