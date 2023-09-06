@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/app_bloc_observer.dart';
 import 'package:friendzone/firebase_options.dart';
 
-import 'presentation/app.dart';
+import 'src/presentation/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
