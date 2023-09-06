@@ -124,15 +124,15 @@ index_generator:
     - '**.g.dart'
     - '{_,**/_}*.dart'
   indexes:
-    - path: lib
+    - path: lib/src
       include: ['data/**']
       name: data
-    - path: lib/presentation
-      include: ['shared/**']
-      name: shared
-    - path: lib/presentation
-      include: ['state/**']
-      name: state
-    - path: lib/presentation
-      include: ['views/**']
-      name: view       
+    - path: lib/src
+      include: ['config/**']
+      name: config   
+    - path: lib/src
+      include: ['utils/**']
+      name: utils        
+    - path: lib/src
+      include: ['domain/**']
+      name: domain
