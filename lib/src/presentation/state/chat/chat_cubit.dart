@@ -11,34 +11,24 @@ part 'chat_state.dart';
 
 class ChatCubit extends Cubit<ChatState> {
   final ConversationRepository _conversationRepository;
+  final UserRepository _userRepository;
   ChatCubit(
     this._conversationRepository,
+    this._userRepository,
   ) : super(ChatsInitial());
-
-  
 
   getListConversation() async {
     try {
       final x = await _conversationRepository.getListConversation();
+      for (var element in x) {
+        final idUser = element.participants
+            .firstWhere((e) => e != FirebaseAuth.instance.currentUser!.uid);
+        final user = await _userRepository.findUser(idUser);
+        element.user = user;
+      }
       emit(ListConversationState(x));
     } on FirebaseException catch (e, x) {
       log(x.toString());
     }
   }
-
-  listenMessage(String idDoc) {
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('conversations')
-        .doc(idDoc)
-        .snapshots()
-        .listen((event) {
-      if (!event.exists) return;
-      final message = Conversation.fromMap(event);
-      emit(MessageState((message.message)));
-    });
-  }
-
-  
 }

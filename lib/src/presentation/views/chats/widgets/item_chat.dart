@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/domain.dart';
-import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/widgets/ontap_effect.dart';
 import 'package:friendzone/src/utils.dart';
 import 'package:go_router/go_router.dart';
@@ -14,9 +12,8 @@ class ItemChat extends StatelessWidget {
   final Conversation item;
   const ItemChat({super.key, required this.size, required this.item});
   _onTap(BuildContext context) {
-    context.read<UserPreviewCubit>().loadInitialData(item.id).then((value) =>
-        context.pushNamed(Formatter.nameRoute(RoutePath.conversentation),
-            extra: value));
+    context.pushNamed(Formatter.nameRoute(RoutePath.conversentation),
+        extra: item.user);
   }
 
   @override
@@ -28,7 +25,7 @@ class ItemChat extends StatelessWidget {
         onTap: () => _onTap(context),
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           CachedNetworkImage(
-            imageUrl: item.image,
+            imageUrl: item.user!.avartar,
             imageBuilder: (context, imageProvider) => CircleAvatar(
               backgroundImage: imageProvider,
               radius: size.width / 14,
@@ -40,7 +37,7 @@ class ItemChat extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  item.receiver,
+                  item.user!.name,
                   style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
                 Text(item.message.message),

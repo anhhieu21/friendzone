@@ -13,7 +13,7 @@ class ConversationCubit extends Cubit<ConversationState> {
   final ConversationRepository _conversationRepository;
   ConversationCubit(this._conversationRepository)
       : super(ConversationInitial()) {
-    listenMessage('xxx');
+    listenMessage();
   }
 
   sendMessage(UserModel receiver, String message, UserModel me) async {
@@ -32,7 +32,7 @@ class ConversationCubit extends Cubit<ConversationState> {
     emit(ListMessageState(listMessage));
   }
 
-  listenMessage(String idDoc) {
+  listenMessage() {
     FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)

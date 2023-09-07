@@ -13,7 +13,7 @@ class UserPreviewCubit extends Cubit<UserpreviewState> {
     try {
       emit(LoadingUserState());
       List<Post> postsPublic = [];
-      final user = await _repository.findMe(idUser);
+      final user = await _repository.findUser(idUser);
       final post = await _repository.getMyPost(idUser);
       final exists = await _repository.checkFollower(idUser);
       postsPublic = post.where((e) => e.visible = true).toList();

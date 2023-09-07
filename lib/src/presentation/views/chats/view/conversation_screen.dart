@@ -29,7 +29,6 @@ class _ConversationScreenState extends State<ConversationScreen> {
   _loadMessages() async {
     final bloc = BlocProvider.of<ConversationCubit>(context, listen: false);
     await bloc.listMessage(widget.userModel.idUser);
-    await bloc.listenMessage(widget.userModel.idUser);
     jumNewMessage();
   }
 
@@ -72,10 +71,13 @@ class _ConversationScreenState extends State<ConversationScreen> {
               if (state is ListMessageState) {
                 var list = state.messages;
                 return BlocBuilder<ConversationCubit, ConversationState>(
-                  builder: (_, message) {
-                    if (message is MessageState) {
-                      if (list.isEmpty || message.message.id != list.last.id) {
-                        list.add(message.message);
+                  builder: (_, messageState) {
+                    if (messageState is MessageState) {
+                      if (messageState.message.idConversation ==
+                                  list.last.idConversation &&
+                              list.isEmpty ||
+                          messageState.message.id != list.last.id) {
+                        list.add(messageState.message);
                       }
                     }
                     return ListView.builder(

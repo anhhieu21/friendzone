@@ -10,13 +10,11 @@ class ConversationRepository {
   _createConversationForReceiver(
       String idReceiver, Conversation conversation, UserModel me,
       [bool isUpdate = false]) async {
-    conversation.receiver = me.name;
-    conversation.image = me.avartar;
     final docConversation = firestore
         .collection('users')
         .doc(idReceiver)
         .collection('conversations')
-        .doc(auth!.uid);
+        .doc(conversation.message.idConversation);
     if (isUpdate) {
       await docConversation.update(conversation.toMap());
     } else {
@@ -29,26 +27,41 @@ class ConversationRepository {
   }
 
   sendMessage(UserModel receiver, String message, UserModel me) async {
-    final docConversation = firestore
+    final ref = firestore
         .collection('users')
-        .doc(auth!.uid)
-        .collection('conversations')
-        .doc(receiver.idUser);
-    final getDoc = await docConversation.get();
+        .doc(me.idUser)
+        .collection('conversations');
+    String idConversation = _createIdConversation(me.idUser, receiver.idUser);
+    final idsConversation = [
+      idConversation,
+      _createIdConversation(receiver.idUser, me.idUser)
+    ];
+    DocumentReference<Map<String, dynamic>> docConversation;
+    bool exists = false;
+
+    for (var e in idsConversation) {
+      docConversation = ref.doc(e);
+      final getDoc = await docConversation.get();
+      exists = getDoc.exists;
+      if (exists) {
+        idConversation = e;
+      }
+    }
+    docConversation = ref.doc(idConversation);
     final autoIdMessage = docConversation.collection('messages').doc().id;
     final lastMessage = ChatMessage(
         id: autoIdMessage,
-        sender: auth!.uid,
+        sender: me.idUser,
         receiver: receiver.idUser,
         message: message,
-        createdAt: DateTime.now());
+        createdAt: DateTime.now(),
+        idConversation: idConversation);
     final conversation = Conversation(
-        id: receiver.idUser,
-        message: lastMessage,
-        receiver: receiver.name,
-        image: receiver.avartar);
-
-    if (!getDoc.exists) {
+      id: idConversation,
+      participants: [me.idUser, receiver.idUser],
+      message: lastMessage,
+    );
+    if (!exists) {
       await docConversation.set(conversation.toMap());
       await _createConversationForReceiver(receiver.idUser, conversation, me);
     } else {
@@ -78,17 +91,27 @@ class ConversationRepository {
 
   Future<List<ChatMessage>> getListMessage(String idReceiver) async {
     final List<ChatMessage> list = [];
-    final docConversation = await firestore
+    final ref = firestore
         .collection('users')
         .doc(auth!.uid)
-        .collection('conversations')
-        .doc(idReceiver)
-        .collection('messages')
-        .get();
-    for (var element in docConversation.docs) {
-      final x = ChatMessage.fromFirestore(element);
-      list.add(x);
+        .collection('conversations');
+    final ids = [
+      _createIdConversation(idReceiver, auth!.uid),
+      _createIdConversation(auth!.uid, idReceiver)
+    ];
+    for (var id in ids) {
+      final docConversation = await ref.doc(id).collection('messages').get();
+      if (docConversation.docs.isNotEmpty) {
+        final x = docConversation.docs
+            .map((e) => ChatMessage.fromFirestore(e))
+            .toList();
+        list.addAll(x);
+      }
     }
     return list;
+  }
+
+  String _createIdConversation(String idUser, String idMe) {
+    return '${idUser.substring(0, 5)}${idMe.substring(0, 5)}';
   }
 }

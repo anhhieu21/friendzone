@@ -55,12 +55,13 @@ class App extends StatelessWidget {
                 UserPreviewCubit(RepositoryProvider.of<UserRepository>(_)),
           ),
           BlocProvider(
-            create: (_) =>
-                ChatCubit(RepositoryProvider.of<ConversationRepository>(_)),
+            create: (_) => ChatCubit(
+                RepositoryProvider.of<ConversationRepository>(_),
+                RepositoryProvider.of<UserRepository>(_)),
           ),
           BlocProvider(
-            create: (_) =>
-                ConversationCubit(RepositoryProvider.of<ConversationRepository>(_)),
+            create: (_) => ConversationCubit(
+                RepositoryProvider.of<ConversationRepository>(_)),
           ),
           BlocProvider(
             create: (_) => AppThemeCubit(),
