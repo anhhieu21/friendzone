@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/src/presentation/widgets/custom_textfield.dart';
 import 'package:ionicons/ionicons.dart';
 
 class FriendZoneScreen extends StatelessWidget {
@@ -12,11 +11,15 @@ class FriendZoneScreen extends StatelessWidget {
         title: Row(
           children: [
             Expanded(
-              child: CustomTextField(
-                controller: controllerSearch,
-                hint: 'tìm kiếm',
-                error: 'error',
-                padding: 6,
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Searching',
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
               ),
             ),
             IconButton(

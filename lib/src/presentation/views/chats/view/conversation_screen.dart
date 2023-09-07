@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/domain.dart';
-import 'package:friendzone/src/presentation/state.dart';
+import 'package:friendzone/src/presentation/state/chat/conversation/conversation_cubit.dart';
+import 'package:friendzone/src/presentation/state/profile/myaccount/my_account_cubit.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -26,9 +27,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
   }
 
   _loadMessages() async {
-    final bloc = BlocProvider.of<ChatsCubit>(context, listen: false);
+    final bloc = BlocProvider.of<ConversationCubit>(context, listen: false);
     await bloc.listMessage(widget.userModel.idUser);
-    await bloc.listenMessage(widget.userModel.idUser);
     jumNewMessage();
   }
 
@@ -57,9 +57,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
       ),
       body: Stack(
         children: [
-          BlocBuilder<ChatsCubit, ChatsState>(
+          BlocBuilder<ConversationCubit, ConversationState>(
             buildWhen: (previous, current) {
-              if (current is ConversationState) {
+              if (current is ListMessageState) {
                 return true;
               }
               return false;
@@ -68,13 +68,16 @@ class _ConversationScreenState extends State<ConversationScreen> {
               if (state is LoadingState) {
                 return const Center(child: CircularProgressIndicator());
               }
-              if (state is ConversationState) {
+              if (state is ListMessageState) {
                 var list = state.messages;
-                return BlocBuilder<ChatsCubit, ChatsState>(
-                  builder: (_, message) {
-                    if (message is MessageState) {
-                      if (list.isEmpty || message.message.id != list.last.id) {
-                        list.add(message.message);
+                return BlocBuilder<ConversationCubit, ConversationState>(
+                  builder: (_, messageState) {
+                    if (messageState is MessageState) {
+                      if (messageState.message.idConversation ==
+                                  list.last.idConversation &&
+                              list.isEmpty ||
+                          messageState.message.id != list.last.id) {
+                        list.add(messageState.message);
                       }
                     }
                     return ListView.builder(
@@ -125,7 +128,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                           onPressed: () async {
                             final value = textEditingController.text;
                             textEditingController.clear();
-                            await BlocProvider.of<ChatsCubit>(context)
+                            await BlocProvider.of<ConversationCubit>(context)
                                 .sendMessage(widget.userModel, value, user!);
                             jumNewMessage();
                           },

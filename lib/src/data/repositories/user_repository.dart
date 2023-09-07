@@ -50,7 +50,7 @@ class UserRepository {
     }
   }
 
-  Future<UserModel> findMe(String idUser) async {
+  Future<UserModel> findUser(String idUser) async {
     final doc = await firestore.collection("users").doc(idUser).get();
     final res = UserModel.fromDocFireStore(doc);
     _userModel = res;

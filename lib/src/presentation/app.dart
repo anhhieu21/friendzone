@@ -4,6 +4,7 @@ import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/presentation/state.dart';
+import 'package:friendzone/src/presentation/state/chat/conversation/conversation_cubit.dart';
 import 'package:friendzone/src/presentation/view.dart';
 import 'package:friendzone/src/utils/formatter.dart';
 
@@ -54,8 +55,13 @@ class App extends StatelessWidget {
                 UserPreviewCubit(RepositoryProvider.of<UserRepository>(_)),
           ),
           BlocProvider(
-            create: (_) =>
-                ChatsCubit(RepositoryProvider.of<ConversationRepository>(_)),
+            create: (_) => ChatCubit(
+                RepositoryProvider.of<ConversationRepository>(_),
+                RepositoryProvider.of<UserRepository>(_)),
+          ),
+          BlocProvider(
+            create: (_) => ConversationCubit(
+                RepositoryProvider.of<ConversationRepository>(_)),
           ),
           BlocProvider(
             create: (_) => AppThemeCubit(),

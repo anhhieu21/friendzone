@@ -43,7 +43,7 @@ class _MainScreenState extends State<MainScreen>
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       BlocProvider.of<AllPostCubit>(context).getAllPost();
       BlocProvider.of<FeedCubit>(context).getFeeds();
-      BlocProvider.of<ChatsCubit>(context).getListConversation();
+      BlocProvider.of<ChatCubit>(context).getListConversation();
     });
     super.initState();
   }

@@ -1,15 +1,15 @@
-part of 'chats_cubit.dart';
+part of 'chat_cubit.dart';
 
-abstract class ChatsState extends Equatable {
-  const ChatsState();
+abstract class ChatState extends Equatable {
+  const ChatState();
 
   @override
   List<Object> get props => [];
 }
 
-class ChatsInitial extends ChatsState {}
+class ChatsInitial extends ChatState {}
 
-class ListConversationState extends ChatsState {
+class ListConversationState extends ChatState {
   final List<Conversation> listConversation;
   const ListConversationState(
     this.listConversation,
@@ -18,16 +18,7 @@ class ListConversationState extends ChatsState {
   List<Object> get props => [listConversation];
 }
 
-class ConversationState extends ChatsState {
-  final List<ChatMessage> messages;
-  const ConversationState(
-    this.messages,
-  );
-  @override
-  List<Object> get props => [messages];
-}
-
-class MessageState extends ChatsState {
+class MessageState extends ChatState {
   final ChatMessage message;
   const MessageState(
     this.message,
@@ -36,7 +27,7 @@ class MessageState extends ChatsState {
   List<Object> get props => [message];
 }
 
-class LoadingState extends ChatsState {
+class LoadingState extends ChatState {
   final bool isLoading;
 
   const LoadingState(this.isLoading);

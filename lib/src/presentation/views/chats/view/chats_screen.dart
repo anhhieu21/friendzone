@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/view.dart';
-import 'package:friendzone/src/presentation/widgets/custom_textfield.dart';
 import 'package:friendzone/src/utils.dart';
 
 import 'package:ionicons/ionicons.dart';
@@ -16,17 +15,22 @@ class ChatsScreen extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: const CustomTextField(
-            hint: 'tìm kiếm',
-            error: 'error',
-            padding: 6,
+          title: TextField(
+            decoration: InputDecoration(
+              hintText: 'Searching',
+              filled: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none,
+              ),
+            ),
           ),
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Ionicons.videocam)),
             IconButton(onPressed: () {}, icon: const Icon(Ionicons.add_outline))
           ],
         ),
-        body: BlocBuilder<ChatsCubit, ChatsState>(
+        body: BlocBuilder<ChatCubit, ChatState>(
           builder: (_, state) {
             if (state is ListConversationState) {
               return ListView.builder(

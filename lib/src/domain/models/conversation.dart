@@ -1,23 +1,23 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:friendzone/src/domain/models/user_model.dart';
 
 class Conversation {
   String id;
-  String receiver;
-  String image;
+  List<String> participants;
   ChatMessage message;
+  UserModel? user;
   Conversation({
     required this.id,
-    required this.receiver,
-    required this.image,
+    required this.participants,
     required this.message,
+    this.user,
   });
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
     result.addAll({'id': id});
     result.addAll({'message': message.toMap()});
-    result.addAll({'receiver': receiver});
-    result.addAll({'image': image});
+    result.addAll({'participants': participants});
     return result;
   }
 
@@ -25,14 +25,14 @@ class Conversation {
     return Conversation(
       id: map['id'] ?? '',
       message: ChatMessage.fromMap(map['message']),
-      receiver: map['receiver'],
-      image: map['image'],
+      participants: List<String>.from((map['participants'] as List)),
     );
   }
 }
 
 class ChatMessage {
   String id;
+  String idConversation;
   String sender;
   String receiver;
   String message;
@@ -43,6 +43,7 @@ class ChatMessage {
     required this.receiver,
     required this.message,
     required this.createdAt,
+    required this.idConversation,
   });
 
   Map<String, dynamic> toMap() {
@@ -53,6 +54,7 @@ class ChatMessage {
     result.addAll({'receiver': receiver});
     result.addAll({'message': message});
     result.addAll({'createdAt': createdAt.millisecondsSinceEpoch});
+    result.addAll({'idConversation': idConversation});
 
     return result;
   }
@@ -65,6 +67,7 @@ class ChatMessage {
       receiver: map['receiver'] ?? '',
       message: map['message'] ?? '',
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
+      idConversation: map['idConversation'],
     );
   }
   factory ChatMessage.fromMap(Map<String, dynamic> map) {
@@ -74,6 +77,7 @@ class ChatMessage {
       receiver: map['receiver'] ?? '',
       message: map['message'] ?? '',
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
+      idConversation: map['idConversation'],
     );
   }
 }

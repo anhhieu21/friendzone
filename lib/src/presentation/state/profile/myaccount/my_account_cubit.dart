@@ -14,7 +14,7 @@ class MyAccountCubit extends Cubit<MyAccountState> {
   UserModel? _user;
 
   myAccountInfo(String idUser) async {
-    _user = await _repository.findMe(idUser);
+    _user = await _repository.findUser(idUser);
     final myPost = await _repository.getMyPost(idUser);
     _postsSave = await _repository.getPostSave();
     _postsPrivate = myPost.where((e) => e.visible = false).toList();
