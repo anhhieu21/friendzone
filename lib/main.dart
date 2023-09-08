@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/app_bloc_observer.dart';
 import 'package:friendzone/firebase_options.dart';
+import 'package:friendzone/src/data/services/fcm.dart';
 
 import 'src/presentation/app.dart';
 
@@ -12,6 +13,7 @@ void main() async {
 
   await Firebase.initializeApp(
       name: 'FriendZone', options: DefaultFirebaseOptions.currentPlatform);
+  await setupFlutterNotifications();
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarBrightness: Brightness.light));
   Bloc.observer = AppBlocObserver();

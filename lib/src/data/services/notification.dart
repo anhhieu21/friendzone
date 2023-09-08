@@ -3,10 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:friendzone/src/data/services/fcm.dart';
 import 'package:friendzone/src/domain/models/conversation.dart';
+import 'package:friendzone/src/domain/models/user_model.dart';
 
-class Notification {
-  Notification._();
-  static final Notification instance = Notification._();
+class AppNotification {
+  AppNotification._();
+  static final AppNotification instance = AppNotification._();
   Future initialize(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
     var androidInitialize =
@@ -23,12 +24,20 @@ class Notification {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('conversations')
         .snapshots()
-        .listen((event) {
+        .listen((event) async {
       final doc = event.docChanges.first.doc;
       if (!doc.exists) return;
+      final idMe = FirebaseAuth.instance.currentUser!.uid;
       final conversation = Conversation.fromMap(doc);
-      showBigTextNotification(
-          title: conversation.user!.name,
+      if (conversation.message.sender == idMe) return;
+      final idUser = conversation.participants.firstWhere((e) => e != idMe);
+      final docUser = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(idUser)
+          .get();
+      final res = UserModel.fromDocFireStore(docUser);
+      await showBigTextNotification(
+          title: res.name,
           body: conversation.message.message,
           fln: flutterLocalNotificationsPlugin);
     });
@@ -42,10 +51,9 @@ class Notification {
       required FlutterLocalNotificationsPlugin fln}) async {
     AndroidNotificationDetails androidPlatformChannelSpecifics =
         const AndroidNotificationDetails(
-      'you_can_name_it_whatever1',
-      'channel_name',
+      'chat_notification_fr', 'channel_chat',
       playSound: true,
-      sound: RawResourceAndroidNotificationSound('notification'),
+      // sound: RawResourceAndroidNotificationSound('notification'),
       importance: Importance.max,
       priority: Priority.high,
     );
