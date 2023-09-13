@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/view.dart';
+import 'package:friendzone/src/presentation/widgets/lazy_load_scrollview.dart';
 import 'package:friendzone/src/utils.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,6 +15,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController scrollController = ScrollController();
+  bool isLoadingList = true;
+  _onEndOfPage() {
+    setState(() => isLoadingList = true);
+    BlocProvider.of<AllPostCubit>(context)
+        .getAllPostNext()
+        .then((value) => setState(() => isLoadingList = false));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    scrollController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +37,22 @@ class _HomeScreenState extends State<HomeScreen> {
         child: BlocBuilder<AllPostCubit, AllPostState>(
           builder: (context, state) {
             final listPost = state is AllPostShow ? state.listPost : <Post>[];
-            return CustomScrollView(
-              controller: scrollController,
-              slivers: [
-                AppBarHome(scrollController: scrollController),
-                ListNewFeed(size: size),
-                ListPost(listPost: listPost),
-                SliverToBoxAdapter(
-                  child: Container(
-                    height: kBottomNavigationBarHeight * 2,
-                  ),
-                )
-              ],
+            return LazyLoadScrollView(
+              isLoading: isLoadingList,
+              onEndOfPage: _onEndOfPage,
+              child: CustomScrollView(
+                controller: scrollController,
+                slivers: [
+                  AppBarHome(scrollController: scrollController),
+                  ListNewFeed(size: size),
+                  ListPost(listPost: listPost),
+                  SliverToBoxAdapter(
+                    child: Container(
+                      height: kBottomNavigationBarHeight * 2,
+                    ),
+                  )
+                ],
+              ),
             );
           },
         ));

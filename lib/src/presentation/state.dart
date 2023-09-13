@@ -8,7 +8,7 @@ export 'state/friend_zone/friendzone_bloc.dart';
 export 'state/home/allpost/all_post_cubit.dart';
 export 'state/home/feed/feed_cubit.dart';
 export 'state/home/home_bloc.dart';
-export 'state/home/post_cubit/post_cubit_cubit.dart';
+export 'state/home/post_cubit/post_cubit.dart';
 export 'state/home/post_cubit/post_cubit_state.dart';
 export 'state/post/write_post_cubit.dart';
 export 'state/profile/myaccount/my_account_cubit.dart';

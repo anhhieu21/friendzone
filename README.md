@@ -40,52 +40,24 @@ With a focus on essential features reminiscent of Facebook, our platform enables
   - :mechanic: Profile screen:
 ## Structure
 ```bash
-├── app_bloc_observer.dart
-├── common
-│   ├── constants
-│   └── extentions
-├── data
-│   ├── models
-│   └── repositories
-├── domain
-├── firebase_options.dart
-├── main.dart
-├── presentation
-│   ├── app.dart
-│   ├── routes
-│   ├── services
-│   ├── themes
-│   ├── utils
-│   ├── view.dart
-│   └── views
-│       ├── auth
-│       │   ├── view
-│       │   └── widgets
-│       ├── chats
-│       │   ├── view
-│       │   └── widgets
-│       ├── friendzone
-│       │   └── view
-│       ├── home
-│       │   ├── view
-│       │   └── widgets
-│       ├── post
-│       │   ├── view
-│       │   └── widgets
-│       ├── profile
-│       │   ├── view
-│       │   └── widgets
-│       └── splash
-└── state
-    ├── auth
-    ├── chat
-    ├── friend_zone
-    ├── home
-    │   ├── allpost
-    │   ├── feed_cubit
-    │   └── post_cubit
-    ├── post
-    └── profile
-        ├── myaccount
-        ├── update
-        └── user
+.
+└── lib
+    ├── src
+    │   ├── config
+    │   │   ├── routes
+    │   │   └── themes
+    │   ├── data
+    │   │   ├── datasource
+    │   │   ├── repositories
+    │   │   └── services
+    │   ├── domain
+    │   │   └── model
+    │   ├── presentation
+    │   │   ├── states
+    │   │   ├── views
+    │   │   └── widgets
+    │   └── utils
+    │       ├── constants
+    │       ├── extentions
+    │       └── l10n
+    └── main

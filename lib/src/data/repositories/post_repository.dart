@@ -12,21 +12,41 @@ class PostRepository {
   final storageRef = FirebaseStorage.instance.ref();
   final firestore = FirebaseFirestore.instance;
   final auth = FirebaseAuth.instance.currentUser;
+
+  late QuerySnapshot querySnapshotAllPost;
   Future<List<Post>> getAllPost() async {
     List<Post> listPost = [];
-    QuerySnapshot querySnapshot = await firestore
-        .collection("post")
-        .where("visible", isEqualTo: true)
-        .where("idUser", isNotEqualTo: auth!.uid)
-        .orderBy("idUser")
-        .orderBy("createdAt", descending: true)
-        .get();
-    for (var doc in querySnapshot.docs) {
+    querySnapshotAllPost = await _queryAllPost().limit(5).get();
+    for (var doc in querySnapshotAllPost.docs) {
       Post post = Post.fromFirestore(doc);
       listPost.add(post);
     }
     return listPost;
   }
+
+  Future<List<Post>> getAllPostNext() async {
+    if (querySnapshotAllPost.docs.isNotEmpty) {
+      final lastVisible =
+          querySnapshotAllPost.docs[querySnapshotAllPost.docs.length - 1];
+      List<Post> listPost = [];
+      QuerySnapshot querySnapshot =
+          await _queryAllPost().startAfterDocument(lastVisible).limit(5).get();
+      querySnapshotAllPost = querySnapshot;
+      for (var doc in querySnapshot.docs) {
+        Post post = Post.fromFirestore(doc);
+        listPost.add(post);
+      }
+      return listPost;
+    }
+    return [];
+  }
+
+  Query _queryAllPost() => firestore
+      .collection("post")
+      .where("visible", isEqualTo: true)
+      .where("idUser", isNotEqualTo: auth!.uid)
+      .orderBy("idUser")
+      .orderBy("createdAt", descending: true);
 
   Future<bool> upPost(File file, String content,
       {int like = 0, bool? visible, required UserModel userModel}) async {
