@@ -2,8 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friendzone/src/data/services/fcm.dart';
+import 'package:friendzone/src/data/services/notification.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/presentation/state.dart';
+import 'package:friendzone/src/presentation/state/cubit/reel_cubit.dart';
 import 'package:friendzone/src/presentation/view.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -44,7 +47,11 @@ class _MainScreenState extends State<MainScreen>
       BlocProvider.of<AllPostCubit>(context).getAllPost();
       BlocProvider.of<FeedCubit>(context).getFeeds();
       BlocProvider.of<ChatCubit>(context).getListConversation();
+      BlocProvider.of<ReelCubit>(context).getReels();
     });
+    AppNotification.instance
+        .initialize(flutterLocalNotificationsPlugin)
+        .then((value) => AppNotification.instance.listenMessage());
     super.initState();
   }
 

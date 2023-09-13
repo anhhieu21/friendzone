@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/data.dart';
+import 'package:friendzone/src/data/repositories/reel_repository.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/state/chat/conversation/conversation_cubit.dart';
+import 'package:friendzone/src/presentation/state/cubit/reel_cubit.dart';
 import 'package:friendzone/src/presentation/view.dart';
+import 'package:friendzone/src/presentation/views/reels/view/create_reel_screen.dart';
 import 'package:friendzone/src/utils/formatter.dart';
 
 import 'package:go_router/go_router.dart';
@@ -24,6 +27,7 @@ class App extends StatelessWidget {
         RepositoryProvider(create: (_) => UserRepository()),
         RepositoryProvider(create: (_) => ConversationRepository()),
         RepositoryProvider(create: (_) => FeedRepository()),
+        RepositoryProvider(create: (_) => ReelRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -68,6 +72,9 @@ class App extends StatelessWidget {
           ),
           BlocProvider(
             create: (_) => LanguageCubit(),
+          ),
+          BlocProvider(
+            create: (_) => ReelCubit(RepositoryProvider.of<ReelRepository>(_)),
           )
         ],
         child: GestureDetector(
@@ -168,7 +175,11 @@ class App extends StatelessWidget {
             GoRoute(
                 path: RoutePath.changeLanguage,
                 name: Formatter.nameRoute(RoutePath.changeLanguage),
-                builder: (_, state) => ChangeLanguageScreen())
+                builder: (_, state) => ChangeLanguageScreen()),
+            GoRoute(
+                path: RoutePath.createReel,
+                name: Formatter.nameRoute(RoutePath.createReel),
+                builder: (_, state) => const CreateReelScreen())
           ]),
     ],
   );
