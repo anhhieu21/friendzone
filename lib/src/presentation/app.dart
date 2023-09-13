@@ -39,8 +39,8 @@ class App extends StatelessWidget {
                   WritePostCubit(RepositoryProvider.of<PostRepository>(_))),
           BlocProvider(
               create: (_) => AllPostCubit(
-                  RepositoryProvider.of<PostRepository>(_),
-                  RepositoryProvider.of<UserRepository>(_))),
+                    RepositoryProvider.of<PostRepository>(_),
+                  )),
           BlocProvider(
               create: (_) =>
                   FeedCubit(RepositoryProvider.of<FeedRepository>(_))),
@@ -51,8 +51,7 @@ class App extends StatelessWidget {
               create: (_) =>
                   MyAccountCubit(RepositoryProvider.of<UserRepository>(_))),
           BlocProvider(
-            create: (_) =>
-                PostCubitCubit(RepositoryProvider.of<PostRepository>(_)),
+            create: (_) => PostCubit(RepositoryProvider.of<PostRepository>(_)),
           ),
           BlocProvider(
             create: (_) =>

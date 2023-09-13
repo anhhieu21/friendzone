@@ -22,7 +22,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   @override
   void initState() {
     widget.post.totalComment =
-        BlocProvider.of<PostCubitCubit>(context, listen: false)
+        BlocProvider.of<PostCubit>(context, listen: false)
                 .state
                 .comments
                 ?.length ??
@@ -166,7 +166,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   _insertComment(BuildContext context, UserModel? user) async {
     if (textEditingController.text.isEmpty) return;
 
-    await context.read<PostCubitCubit>().insertCommentPost(
+    await context.read<PostCubit>().insertCommentPost(
         widget.post.id,
         Comment(
             id: '',

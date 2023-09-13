@@ -12,7 +12,7 @@ class PostComments extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverPadding(
       padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-      sliver: BlocBuilder<PostCubitCubit, PostCubitState>(
+      sliver: BlocBuilder<PostCubit, PostCubitState>(
         builder: (context, state) {
           final list = state.comments ?? [];
           return SliverList.builder(

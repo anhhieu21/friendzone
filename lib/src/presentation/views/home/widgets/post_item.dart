@@ -17,11 +17,11 @@ class PostItem extends StatelessWidget {
   const PostItem({Key? key, required this.item, this.isPreviewUser = false})
       : super(key: key);
   _likePost(BuildContext context, UserModel? user) {
-    BlocProvider.of<PostCubitCubit>(context).likePost(item, user!);
+    BlocProvider.of<PostCubit>(context).likePost(item, user!);
   }
 
   _postDetail(BuildContext context) {
-    context.read<PostCubitCubit>().commentPost(item.id).then((value) {
+    context.read<PostCubit>().commentPost(item.id).then((value) {
       context.pushNamed(Formatter.nameRoute(RoutePath.postDetail), extra: item);
     });
   }
@@ -31,7 +31,7 @@ class PostItem extends StatelessWidget {
     final size = SizeEx(context).screenSize;
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: BlocBuilder<PostCubitCubit, PostCubitState>(
+      child: BlocBuilder<PostCubit, PostCubitState>(
         builder: (context, state) {
           var post = item;
           if (state.post != null && state.post!.id == post.id) {
@@ -50,37 +50,7 @@ class PostItem extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
-                      child: OnTapEffect(
-                        radius: 16,
-                        onTap: isPreviewUser
-                            ? () {}
-                            : () => context.pushNamed(
-                                Formatter.nameRoute(RoutePath.profileDetail),
-                                extra: post.idUser),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 24,
-                              backgroundImage: CachedNetworkImageProvider(
-                                  post.avartarAuthor),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                contentPadding: const EdgeInsets.only(left: 5),
-                                title: Text(
-                                  post.author,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                subtitle: Text(post.createdAt),
-                              ),
-                            ),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Ionicons.ellipsis_horizontal)),
-                          ],
-                        ),
-                      ),
+                      child: Author(isPreviewUser: isPreviewUser, post: post),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -110,6 +80,44 @@ class PostItem extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class Author extends StatelessWidget {
+  final bool isPreviewUser;
+  final Post post;
+  const Author({super.key, required this.isPreviewUser, required this.post});
+
+  @override
+  Widget build(BuildContext context) {
+    return OnTapEffect(
+      radius: 16,
+      onTap: isPreviewUser
+          ? () {}
+          : () => context.pushNamed(
+              Formatter.nameRoute(RoutePath.profileDetail),
+              extra: post.idUser),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 24,
+            backgroundImage: CachedNetworkImageProvider(post.avartarAuthor),
+          ),
+          Expanded(
+            child: ListTile(
+              contentPadding: const EdgeInsets.only(left: 5),
+              title: Text(
+                post.author,
+                style: const TextStyle(fontWeight: FontWeight.w600),
+              ),
+              subtitle: Text(post.createdAt),
+            ),
+          ),
+          IconButton(
+              onPressed: () {}, icon: const Icon(Ionicons.ellipsis_horizontal)),
+        ],
       ),
     );
   }

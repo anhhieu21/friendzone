@@ -4,10 +4,10 @@ import 'package:friendzone/src/domain.dart';
 
 import 'post_cubit_state.dart';
 
-class PostCubitCubit extends Cubit<PostCubitState> {
+class PostCubit extends Cubit<PostCubitState> {
   PostRepository postRepository;
   List<Comment> _comments = [];
-  PostCubitCubit(
+  PostCubit(
     this.postRepository,
   ) : super(const PostCubitState());
 
