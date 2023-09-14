@@ -2,6 +2,13 @@
 
 Friendzone is an app social media like the facebook but it is small app. :shipit:
 With a focus on essential features reminiscent of Facebook, our platform enables users to create profiles, connect with friends, share updates and media, and engage in real-time interactions.  Join us to experience a familiar yet innovative social experience that brings people closer together
+
+
+
+![friendzone-cover](https://github.com/anhhieu21/friendzone/assets/90468680/60d4efdb-4954-4472-8e63-9fb1955a9123)
+
+
+
 ## Getting Started
 
 ### Flutter
