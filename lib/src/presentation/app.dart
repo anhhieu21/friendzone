@@ -5,14 +5,13 @@ import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/data/repositories/reel_repository.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/presentation/state.dart';
-import 'package:friendzone/src/presentation/state/chat/conversation/conversation_cubit.dart';
-import 'package:friendzone/src/presentation/state/cubit/reel_cubit.dart';
 import 'package:friendzone/src/presentation/view.dart';
 import 'package:friendzone/src/presentation/views/reels/view/create_reel_screen.dart';
-import 'package:friendzone/src/utils/formatter.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'state/chat/conversation/conversation_cubit.dart';
+import 'state/cubit/reel_cubit.dart';
 import 'views/profile/view/user_profile_detail_screen.dart';
 
 class App extends StatelessWidget {
@@ -129,55 +128,55 @@ class App extends StatelessWidget {
           builder: (_, state) => const MainScreen(),
           routes: [
             GoRoute(
+                name: RoutePath.routeName(RoutePath.writepost),
                 path: RoutePath.writepost,
-                name: Formatter.nameRoute(RoutePath.writepost),
                 builder: (_, state) => WritePost()),
             GoRoute(
+                name: RoutePath.routeName(RoutePath.updateProfile),
                 path: RoutePath.updateProfile,
-                name: Formatter.nameRoute(RoutePath.updateProfile),
                 builder: (_, state) =>
                     UpdateProfileScreen(userDetail: state.extra as UserModel)),
             GoRoute(
+                name: RoutePath.routeName(RoutePath.postDetail),
                 path: RoutePath.postDetail,
-                name: Formatter.nameRoute(RoutePath.postDetail),
                 builder: (_, state) =>
                     PostDetailScreen(post: state.extra as Post)),
             GoRoute(
+                name: RoutePath.routeName(RoutePath.profileDetail),
                 path: RoutePath.profileDetail,
-                name: Formatter.nameRoute(RoutePath.profileDetail),
                 builder: (_, state) =>
                     ProfileDetailScreen(id: state.extra as String)),
             GoRoute(
+                name: RoutePath.routeName(RoutePath.conversentation),
                 path: RoutePath.conversentation,
-                name: Formatter.nameRoute(RoutePath.conversentation),
                 builder: (_, state) => ConversationScreen(
                       userModel: state.extra as UserModel,
                     )),
             GoRoute(
+                name: RoutePath.routeName(RoutePath.upFeed),
                 path: RoutePath.upFeed,
-                name: Formatter.nameRoute(RoutePath.upFeed),
                 builder: (_, state) => const UpNewFeedScreen()),
             GoRoute(
+                name: RoutePath.routeName(RoutePath.detailFeed),
                 path: RoutePath.detailFeed,
-                name: Formatter.nameRoute(RoutePath.detailFeed),
                 builder: (_, state) => FeedDetailScreen(
                       currentPage: (state.extra ?? 0) as int,
                     )),
             GoRoute(
+                name: RoutePath.routeName(RoutePath.settings),
                 path: RoutePath.settings,
-                name: Formatter.nameRoute(RoutePath.settings),
                 builder: (_, state) => const SettingsScreen()),
             GoRoute(
+                name: RoutePath.routeName(RoutePath.changeTheme),
                 path: RoutePath.changeTheme,
-                name: Formatter.nameRoute(RoutePath.changeTheme),
                 builder: (_, state) => const ChangeThemeScreen()),
             GoRoute(
+                name: RoutePath.routeName(RoutePath.changeLanguage),
                 path: RoutePath.changeLanguage,
-                name: Formatter.nameRoute(RoutePath.changeLanguage),
                 builder: (_, state) => ChangeLanguageScreen()),
             GoRoute(
+                name: RoutePath.routeName(RoutePath.createReel),
                 path: RoutePath.createReel,
-                name: Formatter.nameRoute(RoutePath.createReel),
                 builder: (_, state) => const CreateReelScreen())
           ]),
     ],

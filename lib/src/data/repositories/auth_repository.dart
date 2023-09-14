@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:friendzone/main.dart';
 import 'package:friendzone/src/data.dart';
 
 class AuthRepository {
@@ -38,6 +39,7 @@ class AuthRepository {
   }
 
   Future signInWithSocial(User user) async {
+    await _firebaseAuth.currentUser?.reload();
     await UserRepository().insertUserToFireStore(user);
   }
 
@@ -53,6 +55,7 @@ class AuthRepository {
     try {
       final res = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
+      user = res.user;
       return res.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found' || e.code == "unknown") {
@@ -67,8 +70,10 @@ class AuthRepository {
   Future<void> signOut() async {
     try {
       await _firebaseAuth.signOut();
+      await googleSignIn.signOut();
     } catch (e) {
-      throw Exception(e);
+      print(e.toString());
+      await googleSignIn.signOut();
     }
   }
 }

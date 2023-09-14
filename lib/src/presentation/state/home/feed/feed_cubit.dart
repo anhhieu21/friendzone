@@ -19,8 +19,9 @@ class FeedCubit extends Cubit<FeedState> {
 
   List<Feed> _feeds = [];
   XFile? image;
-  _init() {
-    emit(const FeedLoaded([]));
+  _init() async{
+     _feeds = await _repository.getStories();
+    emit( FeedLoaded(_feeds));
   }
 
   getFeeds() async {

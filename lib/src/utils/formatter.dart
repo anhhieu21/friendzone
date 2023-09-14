@@ -1,4 +1,3 @@
-import 'package:friendzone/src/config.dart';
 import 'package:intl/intl.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -38,9 +37,5 @@ class Formatter {
 
   static String emailtoDisplayName(String value) {
     return value.split('@')[0];
-  }
-
-  static String nameRoute(String path) {
-    return '/${RoutePath.main}/$path';
   }
 }

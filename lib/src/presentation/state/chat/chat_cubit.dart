@@ -14,7 +14,9 @@ class ChatCubit extends Cubit<ChatState> {
   ChatCubit(
     this._conversationRepository,
     this._userRepository,
-  ) : super(ChatsInitial());
+  ) : super(ChatsInitial()) {
+    getListConversation();
+  }
 
   getListConversation() async {
     try {

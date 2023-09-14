@@ -4,7 +4,6 @@ import 'package:friendzone/src/config/routes/path.dart';
 import 'package:friendzone/src/config/themes/color.dart';
 import 'package:friendzone/src/presentation/shared.dart';
 import 'package:friendzone/src/presentation/state.dart';
-import 'package:friendzone/src/utils.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
@@ -27,7 +26,7 @@ class _MenuDropState extends State<MenuDrop> {
   _handlerItem(String value) {
     CustomOverlayEntry.instance.hideOverlay();
     if (value == text.settings) {
-      context.pushNamed(Formatter.nameRoute(RoutePath.settings));
+      context.pushNamed(RoutePath.routeName(RoutePath.settings));
     }
     if (value == text.signout) {
       BlocProvider.of<AuthBloc>(context).add(SignOutRequested());

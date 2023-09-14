@@ -31,48 +31,50 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
   Widget build(BuildContext context) {
     final size = SizeEx(context).screenSize;
     return Material(
-      child: BlocBuilder<UserPreviewCubit, UserpreviewState>(
-        buildWhen: (previous, current) {
-          if (current is LoadingUserState || current is UserDataState)
-            return true;
-          return false;
-        },
-        builder: (context, state) {
-          if (state is LoadingUserState) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (state is UserDataState) {
-            final listPost = state.post;
-            return CustomScrollView(controller: scrollController, slivers: [
-              CustomSliverAppBar(
-                scrollController: scrollController,
-                expandedHeight: expandedHeight,
-                collapsedHeight: kToolbarHeight,
-                expandedTitleScale: 1,
-                titlePadding: EdgeInsets.zero,
-                flexTitle: HeaderProfileUser(
-                  size: size,
-                  user: state.user,
+      child: SafeArea(
+        child: BlocBuilder<UserPreviewCubit, UserpreviewState>(
+          buildWhen: (previous, current) {
+            if (current is LoadingUserState || current is UserDataState)
+              return true;
+            return false;
+          },
+          builder: (context, state) {
+            if (state is LoadingUserState) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (state is UserDataState) {
+              final listPost = state.post;
+              return CustomScrollView(controller: scrollController, slivers: [
+                CustomSliverAppBar(
+                  scrollController: scrollController,
+                  expandedHeight: expandedHeight,
+                  collapsedHeight: kToolbarHeight,
+                  expandedTitleScale: 1,
+                  titlePadding: EdgeInsets.zero,
+                  flexTitle: HeaderProfileUser(
+                    size: size,
+                    user: state.user,
+                  ),
                 ),
-              ),
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                sliver: SliverToBoxAdapter(
-                    child: Container(
-                        width: size.width,
-                        height: 10,
-                        color: colorGrey.shade300)),
-              ),
-              SliverList.builder(
-                  itemCount: listPost.length,
-                  itemBuilder: (context, index) {
-                    final item = listPost[index];
-                    return PostItem(item: item, isPreviewUser: true);
-                  })
-            ]);
-          }
-          return const SizedBox();
-        },
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  sliver: SliverToBoxAdapter(
+                      child: Container(
+                          width: size.width,
+                          height: 10,
+                          color: colorGrey.shade300)),
+                ),
+                SliverList.builder(
+                    itemCount: listPost.length,
+                    itemBuilder: (context, index) {
+                      final item = listPost[index];
+                      return PostItem(item: item, isPreviewUser: true);
+                    })
+              ]);
+            }
+            return const SizedBox();
+          },
+        ),
       ),
     );
   }

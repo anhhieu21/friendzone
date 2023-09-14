@@ -10,6 +10,7 @@ class AllPostCubit extends Cubit<AllPostState> {
   AllPostCubit(this._repoPost) : super(AllPostInitial());
   List<Post> _allPost = [];
   getAllPost() async {
+    _allPost = [];
     _allPost = await _repoPost.getAllPost();
     emit(AllPostShow(_allPost));
   }
@@ -17,6 +18,7 @@ class AllPostCubit extends Cubit<AllPostState> {
   Future getAllPostNext() async {
     final allPost = await _repoPost.getAllPostNext();
     _allPost.addAll(allPost);
+    await Future.delayed(const Duration(seconds: 2));
     emit(AllPostShow(_allPost));
   }
 }

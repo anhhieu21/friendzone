@@ -4,7 +4,6 @@ import 'package:friendzone/src/domain.dart';
 
 import 'package:go_router/go_router.dart';
 
-import '../../../../utils/formatter.dart';
 import 'box_account_center.dart';
 import 'box_pravicy.dart';
 import 'sub_item_setting.dart';
@@ -30,7 +29,7 @@ class ItemSetting extends StatelessWidget {
   _handleItem(BuildContext context, Settings setting) {
     switch (setting) {
       case Settings.theme:
-        context.pushNamed(Formatter.nameRoute(RoutePath.changeTheme));
+        context.pushNamed(RoutePath.routeName(RoutePath.changeTheme));
         return;
       case Settings.news:
         return;
@@ -41,7 +40,7 @@ class ItemSetting extends StatelessWidget {
       case Settings.navigationbar:
         return;
       case Settings.language:
-        context.pushNamed(Formatter.nameRoute(RoutePath.changeLanguage));
+        context.pushNamed(RoutePath.routeName(RoutePath.changeLanguage));
         return;
       case Settings.media:
         return;

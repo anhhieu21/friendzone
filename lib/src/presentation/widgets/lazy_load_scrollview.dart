@@ -62,13 +62,17 @@ class _LazyLoadScrollViewState extends State<LazyLoadScrollView> {
   bool _onNotification(ScrollNotification notification, BuildContext context) {
     if (widget.scrollDirection == notification.metrics.axis) {
       if (notification is ScrollUpdateNotification) {
-        if (notification.metrics.maxScrollExtent >
-                notification.metrics.pixels &&
-            notification.metrics.maxScrollExtent -
-                    notification.metrics.pixels <=
-                widget.scrollOffset) {
+        if (notification.metrics.atEdge) {
           _loadMore();
         }
+        // final currentScrollPosition =
+        //     notification.metrics.pixels + kBottomNavigationBarHeight * 2;
+        // if (notification.metrics.maxScrollExtent > currentScrollPosition &&
+        //     notification.metrics.maxScrollExtent - currentScrollPosition <=
+        //         widget.scrollOffset) {
+        //   _loadMore();
+
+        // }
         return true;
       }
       if (notification is OverscrollNotification) {
