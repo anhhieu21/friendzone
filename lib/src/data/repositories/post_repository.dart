@@ -11,8 +11,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 class PostRepository {
   final storageRef = FirebaseStorage.instance.ref();
   final firestore = FirebaseFirestore.instance;
-  final auth = FirebaseAuth.instance.currentUser;
-
   late QuerySnapshot querySnapshotAllPost;
   Future<List<Post>> getAllPost() async {
     List<Post> listPost = [];
@@ -44,7 +42,7 @@ class PostRepository {
   Query _queryAllPost() => firestore
       .collection("post")
       .where("visible", isEqualTo: true)
-      .where("idUser", isNotEqualTo: auth!.uid)
+      .where("idUser", isNotEqualTo: FirebaseAuth.instance.currentUser!.uid)
       .orderBy("idUser")
       .orderBy("createdAt", descending: true);
 

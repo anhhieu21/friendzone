@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/domain.dart';
-import 'package:friendzone/src/utils.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
@@ -27,8 +26,8 @@ class ItemNewFeed extends StatelessWidget {
               border: Border.all(width: 2, color: colorWhite),
               borderRadius: BorderRadius.circular(25)),
           child: OnTapEffect(
-            onTap: () => context.pushNamed(
-                Formatter.nameRoute(RoutePath.detailFeed),
+            onTap: () => context.pushNamed(RoutePath.routeName(
+                RoutePath.detailFeed),
                 extra: index),
             radius: 20,
             child: Container(
@@ -55,7 +54,7 @@ class ItemAddFeed extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4),
         child: GestureDetector(
-          onTap: () => context.pushNamed(Formatter.nameRoute(RoutePath.upFeed)),
+          onTap: () => context.pushNamed(RoutePath.routeName(RoutePath.upFeed)),
           child: Container(
               width: size.width / 4,
               height: size.height,

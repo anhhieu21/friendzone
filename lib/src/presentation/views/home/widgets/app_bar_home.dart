@@ -38,7 +38,7 @@ class AppBarHome extends StatelessWidget {
           Expanded(
             child: OnTapEffect(
               onTap: () {
-                context.pushNamed(Formatter.nameRoute((RoutePath.writepost)));
+                context.pushNamed(RoutePath.routeName(RoutePath.writepost));
               },
               radius: 16,
               child: Container(
@@ -54,7 +54,7 @@ class AppBarHome extends StatelessWidget {
           ),
           IconButton(
               onPressed: () {
-                context.pushNamed(Formatter.nameRoute((RoutePath.writepost)));
+                context.pushNamed(RoutePath.routeName(RoutePath.routeName(RoutePath.writepost)));
               },
               icon: Icon(
                 Ionicons.create_outline,

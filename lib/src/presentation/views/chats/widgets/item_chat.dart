@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/presentation/widgets/ontap_effect.dart';
-import 'package:friendzone/src/utils.dart';
 import 'package:go_router/go_router.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -12,7 +11,7 @@ class ItemChat extends StatelessWidget {
   final Conversation item;
   const ItemChat({super.key, required this.size, required this.item});
   _onTap(BuildContext context) {
-    context.pushNamed(Formatter.nameRoute(RoutePath.conversentation),
+    context.pushNamed(RoutePath.routeName(RoutePath.conversentation),
         extra: item.user);
   }
 

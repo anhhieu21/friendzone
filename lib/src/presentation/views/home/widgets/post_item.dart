@@ -22,7 +22,7 @@ class PostItem extends StatelessWidget {
 
   _postDetail(BuildContext context) {
     context.read<PostCubit>().commentPost(item.id).then((value) {
-      context.pushNamed(Formatter.nameRoute(RoutePath.postDetail), extra: item);
+      context.pushNamed(RoutePath.routeName(RoutePath.postDetail), extra: item);
     });
   }
 
@@ -96,8 +96,8 @@ class Author extends StatelessWidget {
       radius: 16,
       onTap: isPreviewUser
           ? () {}
-          : () => context.pushNamed(
-              Formatter.nameRoute(RoutePath.profileDetail),
+          : () => context.pushNamed(RoutePath.routeName(
+              RoutePath.profileDetail),
               extra: post.idUser),
       child: Row(
         children: [

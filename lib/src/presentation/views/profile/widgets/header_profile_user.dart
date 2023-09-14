@@ -115,8 +115,8 @@ class _HeaderProfileUserState extends State<HeaderProfileUser>
                   ),
                 ),
                 IconButton(
-                    onPressed: () => context.pushNamed(
-                        Formatter.nameRoute(RoutePath.conversentation),
+                    onPressed: () => context.pushNamed(RoutePath.routeName(
+                        RoutePath.conversentation),
                         extra: widget.user),
                     style: IconButton.styleFrom(
                       backgroundColor: colorGrey.shade300,

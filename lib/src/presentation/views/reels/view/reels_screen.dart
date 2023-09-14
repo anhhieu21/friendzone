@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/presentation/state/cubit/reel_cubit.dart';
-import 'package:friendzone/src/utils.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../domain/models/menu.dart';
@@ -27,7 +26,7 @@ class _ReelsScreenState extends State<ReelsScreen> {
       case MenuReels.comment:
         break;
       case MenuReels.create:
-        context.pushNamed(Formatter.nameRoute(RoutePath.createReel));
+        context.pushNamed(RoutePath.routeName(RoutePath.createReel));
         break;
       default:
     }
