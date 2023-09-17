@@ -77,8 +77,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                       physics: const NeverScrollableScrollPhysics(),
                       controller: _tabController,
                       children: [
-                        MyPosts(size: size, listPost: listPostPublic),
-                        MyPosts(size: size, listPost: listPostPrivate),
+                        TabMyPosts(size: size, listPost: listPostPublic),
+                        TabMyPosts(size: size, listPost: listPostPrivate),
                         TabPostSave(listPost: listPostSave)
                       ]);
                 }

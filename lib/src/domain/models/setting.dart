@@ -67,7 +67,14 @@ class Labels {
       Labels.fromMap(json.decode(source) as Map<String, dynamic>);
 }
 
-enum Themes { light, dark, system }
+enum Themes {
+  light('Light'),
+  dark('Dark'),
+  system('Default system');
+
+  final String label;
+  const Themes(this.label);
+}
 
 enum Settings {
   theme,

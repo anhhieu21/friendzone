@@ -11,7 +11,8 @@ class CustomOverlayEntry {
   ///
   /// [child] is children of stack
   /// Call [hideOverlay] to close
-  void showOverlay(BuildContext context, {required Widget child}) {
+  void showOverlay(BuildContext context,
+      {required Widget child, bool withOpacity = true}) {
     final overlay = Overlay.of(context);
     _overlayEntry = OverlayEntry(
       builder: (context) => Material(
@@ -21,7 +22,8 @@ class CustomOverlayEntry {
             Positioned.fill(
                 child: GestureDetector(
               onTap: hideOverlay,
-              child: Material(color: colorBlack.withOpacity(0.3)),
+              child: Material(
+                  color: colorBlack.withOpacity(!withOpacity ? 0.9 : 0.3)),
             )),
             child
           ],

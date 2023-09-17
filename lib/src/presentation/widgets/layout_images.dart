@@ -1,6 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:friendzone/src/config.dart';
+import 'package:friendzone/src/presentation/shared.dart';
+import 'package:go_router/go_router.dart';
+import 'package:ionicons/ionicons.dart';
 
 class LayoutImages extends StatelessWidget {
   final List<String> images;
@@ -11,17 +15,15 @@ class LayoutImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return images.length == 1 ? layoutFirstImage() : layoutSecondImage();
+    return images.length == 1
+        ? layoutFirstImage(context)
+        : layoutSecondImage(context);
   }
 
-  Widget layoutFirstImage() {
-    return CachedNetworkImage(
-      imageUrl: images.first,
-      fit: BoxFit.cover,
-    );
-  }
+  Widget layoutFirstImage(BuildContext context) =>
+      imageView(context, images.first);
 
-  Widget layoutSecondImage() {
+  Widget layoutSecondImage(BuildContext context) {
     return StaggeredGrid.count(
         crossAxisCount: images.length,
         mainAxisSpacing: 2,
@@ -29,14 +31,77 @@ class LayoutImages extends StatelessWidget {
         children: images
             .map(
               (e) => StaggeredGridTile.count(
-                crossAxisCellCount: e == images.first ? 2 : 1,
-                mainAxisCellCount: e == images.first ? 2 : 1,
-                child: CachedNetworkImage(
-                  imageUrl: e,
-                  fit: BoxFit.cover,
-                ),
-              ),
+                  crossAxisCellCount: e == images.first ? 2 : 1,
+                  mainAxisCellCount: e == images.first ? 2 : 1,
+                  child: imageView(context, e)),
             )
             .toList());
+  }
+
+  Widget imageView(BuildContext context, String url) {
+    final currentPath = GoRouterState.of(context).path;
+    return GestureDetector(
+      onTap: currentPath != RoutePath.postDetail
+          ? null
+          : () => showViewDetail(context, url),
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            image: DecorationImage(
+                fit: BoxFit.cover, image: CachedNetworkImageProvider(url))),
+      ),
+    );
+  }
+
+  showViewDetail(BuildContext context, url) =>
+      CustomOverlayEntry.instance.showOverlay(context,
+          withOpacity: false,
+          child: ImageViewDetail(
+            url: url,
+            backPress: () => CustomOverlayEntry.instance.hideOverlay(),
+            saveImage: () {},
+          ));
+}
+
+class ImageViewDetail extends StatelessWidget {
+  final String url;
+  final VoidCallback backPress;
+  final VoidCallback saveImage;
+  const ImageViewDetail(
+      {super.key,
+      required this.url,
+      required this.backPress,
+      required this.saveImage});
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: Column(children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, kToolbarHeight - 16, 16, 0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              BackButton(color: colorWhite, onPressed: backPress),
+              IconButton(
+                  onPressed: saveImage,
+                  icon: const Icon(
+                    Ionicons.download_outline,
+                    color: colorWhite,
+                  ))
+            ],
+          ),
+        ),
+        const Spacer(),
+        Align(
+            alignment: Alignment.center,
+            child: CachedNetworkImage(imageUrl: url)),
+        const Spacer(),
+      ]),
+    );
   }
 }

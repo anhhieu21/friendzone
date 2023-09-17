@@ -58,12 +58,9 @@ class PostItem extends StatelessWidget {
                         post.content,
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: size.width,
                       height: size.width / 1.5,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
                       child: LayoutImages(images: post.imagesUrl),
                     ),
                     BlocSelector<MyAccountCubit, MyAccountState, UserModel?>(
@@ -96,8 +93,8 @@ class Author extends StatelessWidget {
       radius: 16,
       onTap: isPreviewUser
           ? () {}
-          : () => context.pushNamed(RoutePath.routeName(
-              RoutePath.profileDetail),
+          : () => context.pushNamed(
+              RoutePath.routeName(RoutePath.profileDetail),
               extra: post.idUser),
       child: Row(
         children: [

@@ -32,7 +32,7 @@ class ChangeThemeScreen extends StatelessWidget {
           return Column(children: [
             ...Themes.values.map(
               (e) => RadioListTile<Themes>(
-                title: Text(e.name.toUpperCase()),
+                title: Text(e.label),
                 value: e,
                 groupValue: state is ChangedTheme ? state.theme : Themes.light,
                 onChanged: (value) {

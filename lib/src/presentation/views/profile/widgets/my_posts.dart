@@ -8,10 +8,10 @@ import 'package:friendzone/src/presentation/views/profile/widgets/item_post.dart
 
 const kMaxCrossAxisExtent = 250.0;
 
-class MyPosts extends StatelessWidget {
+class TabMyPosts extends StatelessWidget {
   final Size size;
   final List<Post> listPost;
-  const MyPosts({super.key, required this.size, required this.listPost});
+  const TabMyPosts({super.key, required this.size, required this.listPost});
 
   @override
   Widget build(BuildContext context) {

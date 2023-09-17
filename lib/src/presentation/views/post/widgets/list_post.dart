@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/presentation/state/home/allpost/all_post_cubit.dart';
-import 'package:friendzone/src/presentation/views/home/widgets/post_item.dart';
+import 'package:friendzone/src/presentation/views/post/widgets/post_item.dart';
 import '../../../../domain/models/post.dart';
 import 'package:shimmer/shimmer.dart';
 
