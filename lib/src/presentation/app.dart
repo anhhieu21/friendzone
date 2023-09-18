@@ -1,5 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/data/repositories/reel_repository.dart';
@@ -8,8 +12,6 @@ import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/view.dart';
 import 'package:friendzone/src/presentation/views/reels/view/create_reel_screen.dart';
 
-import 'package:go_router/go_router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'state/chat/conversation/conversation_cubit.dart';
 import 'state/cubit/reel_cubit.dart';
 import 'views/profile/view/user_profile_detail_screen.dart';
@@ -139,8 +141,8 @@ class App extends StatelessWidget {
             GoRoute(
                 name: RoutePath.routeName(RoutePath.postDetail),
                 path: RoutePath.postDetail,
-                builder: (_, state) =>
-                    PostDetailScreen(post: state.extra as Post)),
+                pageBuilder: (_, state) => _slideTransitionPage(
+                    PostDetailScreen(post: state.extra as Post))),
             GoRoute(
                 name: RoutePath.routeName(RoutePath.profileDetail),
                 path: RoutePath.profileDetail,
@@ -181,4 +183,21 @@ class App extends StatelessWidget {
           ]),
     ],
   );
+
+}
+CustomTransitionPage<dynamic> _slideTransitionPage(Widget child) {
+  return CustomTransitionPage(
+      child: child,
+      transitionsBuilder: (BuildContext context, Animation<double> animation,
+          Animation<double> secondaryAnimation, Widget child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      });
 }

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/presentation/shared.dart';
+import 'package:friendzone/src/presentation/widgets/animation_image_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:photo_view/photo_view.dart';
 
 class LayoutImages extends StatelessWidget {
   final List<String> images;
@@ -76,17 +78,16 @@ class ImageViewDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: Column(children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, kToolbarHeight - 16, 16, 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              BackButton(color: colorWhite, onPressed: backPress),
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            leading: BackButton(color: colorWhite, onPressed: backPress),
+            actions: [
               IconButton(
                   onPressed: saveImage,
                   icon: const Icon(
@@ -95,13 +96,16 @@ class ImageViewDetail extends StatelessWidget {
                   ))
             ],
           ),
-        ),
-        const Spacer(),
-        Align(
-            alignment: Alignment.center,
-            child: CachedNetworkImage(imageUrl: url)),
-        const Spacer(),
-      ]),
-    );
+          body: Padding(
+            padding: const EdgeInsets.only(bottom: kBottomNavigationBarHeight),
+            child: AnimationImageView(
+                child: PhotoView(
+              maxScale: PhotoViewComputedScale.contained * 1.5,
+              minScale: PhotoViewComputedScale.contained,
+              initialScale: PhotoViewComputedScale.contained,
+              imageProvider: CachedNetworkImageProvider(url),
+            )),
+          ),
+        ));
   }
 }

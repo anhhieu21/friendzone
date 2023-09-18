@@ -24,3 +24,6 @@ const loginSuccessMsg = 'Đăng nhập thành công';
 // key local-storage
 const kTheme = 'theme';
 const kLanguageCode = 'languageCode';
+
+// duration
+const durationAnimation = Duration(seconds: 1);
