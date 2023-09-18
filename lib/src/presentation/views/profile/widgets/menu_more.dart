@@ -4,6 +4,7 @@ import 'package:friendzone/src/config/routes/path.dart';
 import 'package:friendzone/src/config/themes/color.dart';
 import 'package:friendzone/src/presentation/shared.dart';
 import 'package:friendzone/src/presentation/state.dart';
+import 'package:friendzone/src/presentation/widgets/animation_popup_menu.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
@@ -42,23 +43,25 @@ class _MenuDropState extends State<MenuDrop> {
       child: Positioned(
         top: offset!.dy + 50,
         right: 16,
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.0), color: colorWhite),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: menu
-                .map(
-                  (e) => OnTapEffect(
-                    onTap: () => _handlerItem(e),
-                    radius: 8,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(e),
+        child: AnimationPopupMenu(
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0), color: colorWhite),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: menu
+                  .map(
+                    (e) => OnTapEffect(
+                      onTap: () => _handlerItem(e),
+                      radius: 8,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(e),
+                      ),
                     ),
-                  ),
-                )
-                .toList(),
+                  )
+                  .toList(),
+            ),
           ),
         ),
       ),
