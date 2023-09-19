@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:friendzone/main.dart';
 import 'package:friendzone/src/data.dart';
+import 'package:friendzone/src/utils/constants/constants.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../views/auth/widgets/social_button.dart';
 
@@ -15,6 +15,34 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _repository;
   AuthBloc(this._repository) : super(AuthInitial()) {
+    on<AuthInitialEvent>((event, emit) async {
+      emit(Loading());
+      String? id;
+
+      bool isUserSignedIn = await googleSignIn.isSignedIn();
+      if (isUserSignedIn) {
+        final res = await googleSignIn.signInSilently();
+        final userCredential = await signInWithGoogle(res);
+        id = userCredential.user!.uid;
+      } else {
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        final userName = sharedPreferences.getString(kUserName);
+        final password = sharedPreferences.getString(kPassword);
+
+        if (userName == null || userName.isEmpty) {
+          emit(UnAuthenticated());
+          return;
+        }
+
+        final userRes =
+            await _repository.signInWithFireBase(userName, password!);
+        id = userRes!.uid;
+      }
+
+      emit(Authenticated(id: id));
+    });
+
     on<SignInEvent>((event, emit) async {
       emit(Loading());
       try {
@@ -28,7 +56,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }
 
         if (res != null) {
-          emit(Authenticated());
+          emit(Authenticated(id: res.uid));
+          SharedPreferences sharedPreferences =
+              await SharedPreferences.getInstance();
+          sharedPreferences.setString(kUserName, event.email);
+          sharedPreferences.setString(kPassword, event.password);
         } else {
           emit(UnAuthenticated());
         }
@@ -37,10 +69,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(UnAuthenticated());
       }
     });
-    //
 
     on<SignOutRequested>((event, emit) async {
       emit(Loading());
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      await sharedPreferences.clear();
       await _repository.signOut();
       emit(UnAuthenticated());
     });
@@ -91,9 +125,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     return null;
   }
 
-  Future<UserCredential> signInWithGoogle() async {
+  Future<UserCredential> signInWithGoogle(
+      [GoogleSignInAccount? googleUser]) async {
     // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+    googleUser ??= await googleSignIn.signIn();
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =

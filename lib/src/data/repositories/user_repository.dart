@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/utils.dart';
@@ -20,7 +21,7 @@ class UserRepository {
     List<UserModel> listUser = [];
     QuerySnapshot querySnapshot = await firestore.collection("users").get();
     for (var doc in querySnapshot.docs) {
-      UserModel user = UserModel.fromDocFireStore(doc);
+      UserModel user = UserModel.fromMap(doc.data() as Map);
       listUser.add(user);
     }
     return listUser;
@@ -31,7 +32,7 @@ class UserRepository {
       final doc = firestore.collection('users').doc(user.uid);
 
       final getDoc = await doc.get();
-      if (!getDoc.exists) return;
+      if (getDoc.exists) return;
 
       await doc.set({
         "idUser": user.uid,
@@ -50,11 +51,20 @@ class UserRepository {
     }
   }
 
-  Future<UserModel> findUser(String idUser) async {
-    final doc = await firestore.collection("users").doc(idUser).get();
-    final res = UserModel.fromDocFireStore(doc);
-    _userModel = res;
-    return res;
+  Future<UserModel?> findUser(String idUser) async {
+    try {
+      final doc = await firestore.collection("users").doc(idUser).get();
+      final data = doc.data();
+      if (data == null) return null;
+      final res = UserModel.fromMap(data);
+      _userModel = res;
+      return res;
+    } on FirebaseAuthException catch (e) {
+      if (kDebugMode) {
+        print(e.message);
+      }
+      return null;
+    }
   }
 
   Future<List<Post>> getMyPost(String idUser) async {

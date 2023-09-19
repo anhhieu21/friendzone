@@ -39,7 +39,6 @@ class AuthRepository {
   }
 
   Future signInWithSocial(User user) async {
-    await _firebaseAuth.currentUser?.reload();
     await UserRepository().insertUserToFireStore(user);
   }
 

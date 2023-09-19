@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'auth_bloc.dart';
 
 abstract class AuthState extends Equatable {
@@ -17,8 +18,12 @@ class Loading extends AuthState {
 
 // When the user is authenticated the state is changed to Authenticated.
 class Authenticated extends AuthState {
+  final String id;
+  const Authenticated({
+    required this.id,
+  });
   @override
-  List<Object> get props => [];
+  List<Object> get props => [id];
 }
 
 class SignUpSuccess extends AuthState {

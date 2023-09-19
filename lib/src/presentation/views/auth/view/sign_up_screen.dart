@@ -35,8 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
-  dialogSuccess() {
-    DialogCustom.instance.showLoading(context, false);
+  signUpSuccess() {
     DialogCustom.instance.showDialogCustom(
       context,
       'Đăng ký thành công',
@@ -47,8 +46,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  dialogFailed(BuildContext ctx) {
-    DialogCustom.instance.showLoading(context, false);
+  signUpFailed(BuildContext ctx) {
     DialogCustom.instance.showDialogCustom(
       context,
       'Đăng ký không thành công',
@@ -68,11 +66,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
           child: BlocListener<AuthBloc, AuthState>(
               listener: (ctx, state) {
-                if (state is Loading) {
-                  DialogCustom.instance.showLoading(context, true);
-                }
-                if (state is SignUpSuccess) dialogSuccess();
-                if (state is AuthError) dialogFailed(ctx);
+                if (state is SignUpSuccess) signUpSuccess();
+                if (state is AuthError) signUpFailed(ctx);
               },
               child: Form(
                 key: _keyForm,

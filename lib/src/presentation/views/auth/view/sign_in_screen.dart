@@ -30,14 +30,12 @@ class SignInScreen extends StatelessWidget {
       BlocProvider.of<MyAccountCubit>(context).myAccountInfo(user.uid);
       GoRouter.of(context).go(RoutePath.main);
     } else {
-      DialogCustom.instance.showLoading(context, false);
       DialogCustom.instance.showDialogCustom(context, 'Chưa xác thực email',
           'Vui lòng kiểm tra email và xác thực để tiếp tục !', '', null, null);
     }
   }
 
   _authErro(BuildContext context) {
-    DialogCustom.instance.showLoading(context, false);
     DialogCustom.instance.showDialogCustom(
         context,
         loginFailMsg,
@@ -56,10 +54,6 @@ class SignInScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
           child: BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
-              if (state is Loading) {
-                DialogCustom.instance.showLoading(context, true);
-              }
-
               if (state is Authenticated) _checkVerify(context);
               if (state is AuthError) _authErro(context);
             },
