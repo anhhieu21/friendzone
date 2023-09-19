@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:friendzone/src/utils.dart';
 
 class UserModel {
@@ -25,20 +24,19 @@ class UserModel {
     required this.phone,
   });
 
-  factory UserModel.fromDocFireStore(DocumentSnapshot doc) {
-    Map userFromDB = doc.data() as Map;
+  factory UserModel.fromMap(Map<dynamic, dynamic> map) {
     return UserModel(
-      idUser: userFromDB["idUser"],
+      idUser: map["idUser"],
       avartar:
-          userFromDB["avartar"].isEmpty ? urlAvatar : userFromDB["avartar"],
-      email: userFromDB["email"],
-      name: userFromDB["name"],
-      post: userFromDB["post"],
-      background: userFromDB["background"],
-      bio: userFromDB["bio"],
-      follower: userFromDB['follower'],
-      following: userFromDB['following'],
-      phone: userFromDB['phone'] ?? '0',
+          map["avartar"].isEmpty ? urlAvatar : map["avartar"],
+      email: map["email"],
+      name: map["name"],
+      post: map["post"],
+      background: map["background"],
+      bio: map["bio"],
+      follower: map['follower'],
+      following: map['following'],
+      phone: map['phone'] ?? '0',
     );
   }
   Map<String, dynamic> toMap() {

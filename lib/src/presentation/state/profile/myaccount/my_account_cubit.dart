@@ -13,16 +13,19 @@ class MyAccountCubit extends Cubit<MyAccountState> {
   List<Post> _postsSave = [];
   UserModel? _user;
 
-  myAccountInfo(String idUser) async {
+  Future<bool> myAccountInfo(String idUser) async {
     _postsPrivate = [];
     _postsPublic = [];
     _postsSave = [];
     _user = await _repository.findUser(idUser);
+    
+    if (_user == null) return false;
     final myPost = await _repository.getMyPost(idUser);
     _postsSave = await _repository.getPostSave();
     _postsPrivate = myPost.where((e) => e.visible = false).toList();
     _postsPublic = myPost.where((e) => e.visible = true).toList();
     _emitData();
+    return true;
   }
 
   Future<bool> savePost(Post post) async {

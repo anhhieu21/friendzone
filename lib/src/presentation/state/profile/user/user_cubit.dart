@@ -18,7 +18,7 @@ class UserPreviewCubit extends Cubit<UserpreviewState> {
       final exists = await _repository.checkFollower(idUser);
       postsPublic = post.where((e) => e.visible = true).toList();
 
-      emit(UserDataState(user, postsPublic));
+      emit(UserDataState(user!, postsPublic));
       emit(CheckFollowState(exists));
       return user;
     } catch (error) {

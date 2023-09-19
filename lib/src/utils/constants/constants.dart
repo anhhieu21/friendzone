@@ -26,4 +26,8 @@ const kTheme = 'theme';
 const kLanguageCode = 'languageCode';
 
 // duration
-const durationAnimation = Duration(seconds: 1);
+const durationAnimation = Duration(milliseconds: 500);
+
+// key sharedPreferences
+const kUserName = 'userName';
+const kPassword = 'password';

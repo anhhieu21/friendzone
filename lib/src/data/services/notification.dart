@@ -25,6 +25,7 @@ class AppNotification {
         .collection('conversations')
         .snapshots()
         .listen((event) async {
+      if (event.docChanges.isEmpty) return;
       final doc = event.docChanges.first.doc;
       if (!doc.exists) return;
       final idMe = FirebaseAuth.instance.currentUser!.uid;
@@ -35,7 +36,7 @@ class AppNotification {
           .collection("users")
           .doc(idUser)
           .get();
-      final res = UserModel.fromDocFireStore(docUser);
+      final res = UserModel.fromMap(docUser.data()as Map);
       await showBigTextNotification(
           title: res.name,
           body: conversation.message.message,
