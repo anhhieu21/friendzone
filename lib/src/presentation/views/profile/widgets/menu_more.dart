@@ -46,7 +46,8 @@ class _MenuDropState extends State<MenuDrop> {
         child: AnimationPopupMenu(
           child: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0), color: colorWhite),
+                borderRadius: BorderRadius.circular(8.0),
+                color: Theme.of(context).cardColor),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: menu

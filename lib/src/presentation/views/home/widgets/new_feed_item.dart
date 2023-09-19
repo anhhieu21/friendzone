@@ -22,12 +22,10 @@ class ItemNewFeed extends StatelessWidget {
         child: Container(
           width: size.width / 4,
           margin: const EdgeInsets.only(top: 10),
-          decoration: BoxDecoration(
-              border: Border.all(width: 2, color: colorWhite),
-              borderRadius: BorderRadius.circular(25)),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(25)),
           child: OnTapEffect(
-            onTap: () => context.pushNamed(RoutePath.routeName(
-                RoutePath.detailFeed),
+            onTap: () => context.pushNamed(
+                RoutePath.routeName(RoutePath.detailFeed),
                 extra: index),
             radius: 20,
             child: Container(
@@ -51,23 +49,22 @@ class ItemAddFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4),
-        child: GestureDetector(
-          onTap: () => context.pushNamed(RoutePath.routeName(RoutePath.upFeed)),
-          child: Container(
-              width: size.width / 4,
-              height: size.height,
-              margin: const EdgeInsets.only(top: 10),
-              decoration: BoxDecoration(
-                  color: colorBlue.shade300.withOpacity(0.8),
-                  border: Border.all(width: 2, color: colorWhite),
-                  borderRadius: BorderRadius.circular(25)),
-              child: Icon(
-                Ionicons.add_circle,
-                color: colorWhite,
-                size: size.width / 10,
-              )),
-        ));
+    return GestureDetector(
+      onTap: () => context.pushNamed(RoutePath.routeName(RoutePath.upFeed)),
+      child: Container(
+          width: 50,
+          height: 50,
+          margin: const EdgeInsets.only(top: 10),
+          decoration: BoxDecoration(
+              color: colorBlue.shade300.withOpacity(0.8),
+              borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(26),
+                  bottomRight: Radius.circular(26))),
+          child: const Icon(
+            Ionicons.add_circle,
+            color: colorWhite,
+            size: 40,
+          )),
+    );
   }
 }

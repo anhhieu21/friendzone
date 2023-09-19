@@ -6,17 +6,11 @@ class AppTheme {
   static final lightTheme = ThemeData.light().copyWith(
       scaffoldBackgroundColor: colorGrey.shade100,
       useMaterial3: true,
+      shadowColor: colorGrey.shade300,
+      iconTheme: IconThemeData(color: colorBlack.withOpacity(0.6)),
       textTheme: GoogleFonts.nunitoTextTheme(),
-      appBarTheme: AppBarTheme(
-          backgroundColor: colorGrey.shade100,
-          scrolledUnderElevation: 0,
-          titleTextStyle: const TextStyle(
-              color: colorPinkButton, fontWeight: FontWeight.bold),
-          elevation: 0),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          selectedItemColor: Color.fromARGB(255, 200, 34, 175),
-          unselectedItemColor: Color.fromARGB(255, 68, 68, 68),
-          elevation: 0),
+      appBarTheme: _appBarThemeLight,
+      bottomNavigationBarTheme: _bottomNavBarTheme,
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
               foregroundColor: colorWhite,
@@ -28,17 +22,11 @@ class AppTheme {
       scaffoldBackgroundColor: colorBackgroundApp,
       useMaterial3: true,
       cardColor: colorCardView,
+      shadowColor: colorGrey.shade800,
+      iconTheme: const IconThemeData(color: colorWhite),
       textTheme: GoogleFonts.nunitoTextTheme(ThemeData.dark().textTheme),
-      appBarTheme: const AppBarTheme(
-          backgroundColor: colorBackgroundApp,
-          scrolledUnderElevation: 0,
-          titleTextStyle:
-              TextStyle(color: colorPinkButton, fontWeight: FontWeight.bold),
-          elevation: 0),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          selectedItemColor: Color.fromARGB(255, 200, 34, 175),
-          unselectedItemColor: Color.fromARGB(255, 68, 68, 68),
-          elevation: 0),
+      appBarTheme: _appBarThemeDark,
+      bottomNavigationBarTheme: _bottomNavBarTheme,
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
               foregroundColor: colorWhite,
@@ -46,3 +34,20 @@ class AppTheme {
                   borderRadius: BorderRadius.circular(12)),
               elevation: 0)));
 }
+
+const _bottomNavBarTheme = BottomNavigationBarThemeData(
+    selectedItemColor: Color.fromARGB(255, 200, 34, 175),
+    unselectedItemColor: Color.fromARGB(255, 68, 68, 68),
+    elevation: 0);
+const _appBarThemeDark = AppBarTheme(
+    backgroundColor: colorBackgroundApp,
+    scrolledUnderElevation: 0,
+    titleTextStyle:
+        TextStyle(color: colorPinkButton, fontWeight: FontWeight.bold),
+    elevation: 0);
+final _appBarThemeLight = AppBarTheme(
+    backgroundColor: colorGrey.shade100,
+    scrolledUnderElevation: 0,
+    titleTextStyle:
+        const TextStyle(color: colorPinkButton, fontWeight: FontWeight.bold),
+    elevation: 0);

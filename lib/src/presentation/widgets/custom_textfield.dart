@@ -26,14 +26,16 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 30),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            label!,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+        if (label != null) ...[
+          const SizedBox(height: 30),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              label!,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
+        ],
         const SizedBox(
           height: 5,
         ),

@@ -22,7 +22,7 @@ class AvatarProfile extends StatelessWidget {
           fit: BoxFit.cover,
           imageBuilder: (context, imageProvider) => CircleAvatar(
             radius: radius * 1.05,
-            backgroundColor: colorGrey.shade100,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             child: CircleAvatar(
               radius: radius,
               backgroundImage: imageProvider,

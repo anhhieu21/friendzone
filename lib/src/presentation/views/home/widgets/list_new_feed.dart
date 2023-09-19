@@ -10,8 +10,7 @@ class ListNewFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Container(
-        margin: const EdgeInsets.only(top: 10),
+      child: SizedBox(
         height: size.width * 0.4,
         child: BlocBuilder<FeedCubit, FeedState>(
           buildWhen: (previous, current) {
@@ -22,24 +21,24 @@ class ListNewFeed extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is FeedLoaded) {
-              return state.listFeed.isEmpty
+              final list = state.listFeed;
+              return list.isEmpty
                   ? Align(
                       alignment: Alignment.centerLeft,
                       child: ItemAddFeed(size: size))
-                  : Row(
-                      mainAxisSize: MainAxisSize.min,
+                  : Stack(
+                      alignment: Alignment.center,
                       children: [
-                        ItemAddFeed(size: size),
-                        Expanded(
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: state.listFeed.length,
-                            itemBuilder: (context, index) => ItemNewFeed(
-                                size: size,
-                                item: state.listFeed[index],
-                                index: index),
+                        ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: list.length,
+                          itemBuilder: (context, index) => Padding(
+                            padding: EdgeInsets.only(left: index == 0 ? 50 : 0),
+                            child: ItemNewFeed(
+                                size: size, item: list[index], index: index),
                           ),
                         ),
+                        Positioned(left: 0, child: ItemAddFeed(size: size)),
                       ],
                     );
             } else {
