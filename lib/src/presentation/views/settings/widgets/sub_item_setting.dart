@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/src/config/themes/color.dart';
 import 'package:friendzone/src/presentation/widgets/ontap_effect.dart';
 
 class SubItemSetting extends StatelessWidget {
@@ -25,7 +24,6 @@ class SubItemSetting extends StatelessWidget {
             Icon(
               iconData,
               size: 24,
-              color: colorBlack.withOpacity(0.6),
             ),
             Expanded(
                 child: Padding(

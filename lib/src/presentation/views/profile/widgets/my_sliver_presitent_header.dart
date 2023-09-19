@@ -20,7 +20,7 @@ class MySliverPersitentHeader extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return ColoredBox(
-      color: colorGrey.shade100,
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: TabBar(
         unselectedLabelColor: colorGrey,
         controller: tabController,

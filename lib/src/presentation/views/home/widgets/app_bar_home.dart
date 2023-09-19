@@ -47,14 +47,15 @@ class AppBarHome extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 8.0),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16.0),
-                    color: colorWhite),
+                    color: Theme.of(context).cardColor),
                 child: Text(text.welcome),
               ),
             ),
           ),
           IconButton(
               onPressed: () {
-                context.pushNamed(RoutePath.routeName(RoutePath.routeName(RoutePath.writepost)));
+                context.pushNamed(RoutePath.routeName(
+                    RoutePath.routeName(RoutePath.writepost)));
               },
               icon: Icon(
                 Ionicons.create_outline,
@@ -62,19 +63,13 @@ class AppBarHome extends StatelessWidget {
               )),
         ],
       ),
-      title: Row(
+      title: const Row(
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Friend Zone',
-                style: TextStyle(color: colorPinkButton, fontSize: 20),
-              ),
-              Text(
-                'Good morning ',
-                style: TextStyle(color: colorBlack.withOpacity(0.7)),
-              ),
+              Text('Friend Zone', style: TextStyle(fontSize: 20)),
+              Text('Good morning '),
             ],
           ),
         ],
