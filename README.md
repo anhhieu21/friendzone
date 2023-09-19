@@ -9,8 +9,8 @@ With a focus on essential features reminiscent of Facebook, our platform enables
 ## Dark Mode
 - Processing
   - [x] Change theme ready
-  - [ ] Handle other place
-  - [ ] Done
+  - [x] Handle other place
+  - [ ] Done loading 80%
 ## Getting Started
 
 ### Flutter
