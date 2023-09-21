@@ -3,8 +3,9 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/domain.dart';
+import 'package:friendzone/src/domain/repositories/conversation_repository.dart';
+import 'package:friendzone/src/domain/repositories/user_repository.dart';
 
 part 'chat_state.dart';
 

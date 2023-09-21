@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/domain.dart';
+import 'package:friendzone/src/domain/repositories/feed_repository.dart';
 
 import 'package:image_picker/image_picker.dart';
 
@@ -19,9 +19,9 @@ class FeedCubit extends Cubit<FeedState> {
 
   List<Feed> _feeds = [];
   XFile? image;
-  _init() async{
-     _feeds = await _repository.getStories();
-    emit( FeedLoaded(_feeds));
+  _init() async {
+    _feeds = await _repository.getStories();
+    emit(FeedLoaded(_feeds));
   }
 
   getFeeds() async {

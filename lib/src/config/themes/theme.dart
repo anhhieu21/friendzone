@@ -10,6 +10,9 @@ class AppTheme {
       iconTheme: IconThemeData(color: colorBlack.withOpacity(0.6)),
       textTheme: GoogleFonts.nunitoTextTheme(),
       appBarTheme: _appBarThemeLight,
+      searchBarTheme:
+          SearchBarThemeData(elevation: MaterialStateProperty.all(0.0)),
+      drawerTheme: DrawerThemeData(backgroundColor: colorGrey.shade100 ),
       bottomNavigationBarTheme: _bottomNavBarTheme,
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

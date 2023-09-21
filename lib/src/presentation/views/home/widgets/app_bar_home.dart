@@ -75,12 +75,31 @@ class AppBarHome extends StatelessWidget {
         ],
       ),
       action: [
+        // IconButton(
+        //     onPressed: () {},
+        //     icon: Stack(
+        //       children: [
+        //         Icon(
+        //           Ionicons.notifications_outline,
+        //           color: colorGrey.shade700,
+        //         ),
+        //         Positioned(
+        //             top: 0,
+        //             right: 0,
+        //             child: Icon(
+        //               Ionicons.ellipse,
+        //               size: 10,
+        //               color: colorRed.shade400,
+        //             )),
+        //       ],
+        //     ))
         IconButton(
-            onPressed: () {},
+            onPressed: () =>
+                context.pushNamed(RoutePath.routeName(RoutePath.chat)),
             icon: Stack(
               children: [
                 Icon(
-                  Ionicons.notifications_outline,
+                  Ionicons.chatbubble,
                   color: colorGrey.shade700,
                 ),
                 Positioned(

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/domain.dart';
+import 'package:friendzone/src/domain/repositories/user_repository.dart';
 
 part 'my_account_state.dart';
 
@@ -18,7 +18,7 @@ class MyAccountCubit extends Cubit<MyAccountState> {
     _postsPublic = [];
     _postsSave = [];
     _user = await _repository.findUser(idUser);
-    
+
     if (_user == null) return false;
     final myPost = await _repository.getMyPost(idUser);
     _postsSave = await _repository.getPostSave();

@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/domain.dart';
+import 'package:friendzone/src/domain/repositories/post_repository.dart';
 import 'package:image_picker/image_picker.dart';
 
 part 'write_post_state.dart';

@@ -4,8 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:friendzone/src/data/repositories/conversation_repository.dart';
 import 'package:friendzone/src/domain.dart';
+import 'package:friendzone/src/domain/repositories/conversation_repository.dart';
 
 part 'conversation_state.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/domain.dart';
+import 'package:friendzone/src/domain/repositories/post_repository.dart';
 part 'all_post_state.dart';
 
 class AllPostCubit extends Cubit<AllPostState> {

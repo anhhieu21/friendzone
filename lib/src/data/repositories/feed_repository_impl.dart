@@ -5,15 +5,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:friendzone/src/domain.dart';
+import 'package:friendzone/src/domain/repositories/feed_repository.dart';
 import 'package:friendzone/src/utils.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 
-class FeedRepository {
+class FeedRepositoryImpl implements FeedRepository {
   final storageRef = FirebaseStorage.instance.ref();
   final firestore = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser;
 
+  @override
   Future<List<Feed>> getStories() async {
     final stories = <Feed>[];
     final res = await firestore
@@ -27,6 +29,7 @@ class FeedRepository {
     return stories;
   }
 
+  @override
   Future<Feed?> createFeed(XFile image, UserModel userModel) async {
     Feed? feed;
     final file = File(image.path);

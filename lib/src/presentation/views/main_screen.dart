@@ -30,7 +30,6 @@ class _MainScreenState extends State<MainScreen>
     final menuBottomNavBar = [
       {'title': text.home, 'iconData': Ionicons.home},
       {'title': text.reels, 'iconData': Ionicons.albums},
-      {'title': text.chat, 'iconData': Ionicons.chatbubble},
       {'title': text.friend, 'iconData': Ionicons.people},
       {'title': text.profile, 'iconData': Ionicons.person_circle},
     ];
@@ -40,7 +39,6 @@ class _MainScreenState extends State<MainScreen>
     _listView = [
       const HomeScreen(),
       const ReelsScreen(),
-      const ChatsScreen(),
       FriendZoneScreen(),
       const ProfileScreen()
     ];

@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:friendzone/main.dart';
-import 'package:friendzone/src/data.dart';
+import 'package:friendzone/src/domain/repositories/auth_repository.dart';
 import 'package:friendzone/src/utils/constants/constants.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';

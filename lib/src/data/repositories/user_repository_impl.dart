@@ -4,19 +4,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
-import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/domain.dart';
+import 'package:friendzone/src/domain/repositories/user_repository.dart';
 import 'package:friendzone/src/utils.dart';
 import 'dart:developer';
 
 import 'package:path/path.dart';
 
-class UserRepository {
+class UserRepositoryImpl implements UserRepository {
   final firestore = FirebaseFirestore.instance;
-  final userFromFireBase = AuthRepository.instance.user;
   final _firebaseAuth = FirebaseAuth.instance;
   final storageRef = FirebaseStorage.instance.ref();
   late UserModel _userModel;
+  @override
   Future<List<UserModel>> getAllUser() async {
     List<UserModel> listUser = [];
     QuerySnapshot querySnapshot = await firestore.collection("users").get();
@@ -27,6 +27,7 @@ class UserRepository {
     return listUser;
   }
 
+  @override
   Future<void> insertUserToFireStore(User user) async {
     try {
       final doc = firestore.collection('users').doc(user.uid);
@@ -51,6 +52,7 @@ class UserRepository {
     }
   }
 
+  @override
   Future<UserModel?> findUser(String idUser) async {
     try {
       final doc = await firestore.collection("users").doc(idUser).get();
@@ -67,6 +69,7 @@ class UserRepository {
     }
   }
 
+  @override
   Future<List<Post>> getMyPost(String idUser) async {
     List<Post> list = [];
     QuerySnapshot querySnapshot = await firestore
@@ -81,6 +84,7 @@ class UserRepository {
     return list;
   }
 
+  @override
   Future<bool> updateProfile(
       {String? displayName, String? phone, File? file, String? bio}) async {
     try {
@@ -143,6 +147,7 @@ class UserRepository {
     }
   }
 
+  @override
   Future<bool> followUser(Following following, Follower follower,
       int countFollower, int countFollowing) async {
     final docMe = firestore
@@ -178,6 +183,7 @@ class UserRepository {
     return true;
   }
 
+  @override
   Future<bool> checkFollower(String idUser) async {
     final exists = await firestore
         .collection(kUser)
@@ -188,6 +194,7 @@ class UserRepository {
     return exists.exists;
   }
 
+  @override
   Future<List<Follower>> getFollower(String docId) async {
     final list = <Follower>[];
     final res = await firestore
@@ -202,6 +209,7 @@ class UserRepository {
     return list;
   }
 
+  @override
   Future<List<Follower>> getFollowing(String docId) async {
     final list = <Follower>[];
     final res = await firestore
@@ -216,6 +224,7 @@ class UserRepository {
     return list;
   }
 
+  @override
   Future<bool> savePost(Post post) async {
     final doc = firestore
         .collection(kUser)
@@ -231,6 +240,7 @@ class UserRepository {
     return true;
   }
 
+  @override
   Future unSavePost(Post post) async {
     await firestore
         .collection(kUser)
@@ -240,6 +250,7 @@ class UserRepository {
         .delete();
   }
 
+  @override
   Future<List<Post>> getPostSave() async {
     List<Post> list = [];
     final querySnapshot = await firestore

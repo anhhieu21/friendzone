@@ -11,6 +11,7 @@ class RoutePath {
   static const String profileDetail = 'main/profileDetail';
   static const String conversentation = 'main/conversentation';
   static const String upFeed = 'main/upFeed';
+  static const String chat = 'main/chat';
   static const String detailFeed = 'main/detailFeed';
   static const String signin = '/signin';
   static const String signup = '/signup';

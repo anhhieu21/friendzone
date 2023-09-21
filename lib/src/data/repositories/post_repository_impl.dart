@@ -5,13 +5,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:collection/collection.dart';
 import 'package:friendzone/src/domain.dart';
+import 'package:friendzone/src/domain/repositories/post_repository.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-class PostRepository {
+class PostRepositoryImpl implements PostRepository {
   final storageRef = FirebaseStorage.instance.ref();
   final firestore = FirebaseFirestore.instance;
   late QuerySnapshot querySnapshotAllPost;
+  @override
   Future<List<Post>> getAllPost() async {
     List<Post> listPost = [];
     querySnapshotAllPost = await _queryAllPost().limit(5).get();
@@ -22,6 +24,7 @@ class PostRepository {
     return listPost;
   }
 
+  @override
   Future<List<Post>> getAllPostNext() async {
     if (querySnapshotAllPost.docs.isNotEmpty) {
       final lastVisible =
@@ -46,6 +49,7 @@ class PostRepository {
       .orderBy("idUser")
       .orderBy("createdAt", descending: true);
 
+  @override
   Future<bool> upPost(File file, String content,
       {int like = 0, bool? visible, required UserModel userModel}) async {
     try {
@@ -86,6 +90,7 @@ class PostRepository {
     }
   }
 
+  @override
   Future<bool> upFireStore(
       {required List<String> urlImage,
       required String content,
@@ -119,6 +124,7 @@ class PostRepository {
     }
   }
 
+  @override
   Future likePost(Post post, UserModel user) async {
     final likeCount = int.parse(post.like) + 1;
     try {
@@ -156,6 +162,7 @@ class PostRepository {
         .update({"like": '$likeCount'});
   }
 
+  @override
   Future<Like?> getLikePost(Post post) async {
     try {
       final docLike = await firestore.collection("like").doc(post.id).get();
@@ -177,6 +184,7 @@ class PostRepository {
         {'avartar': avartar ?? '', 'posts': FieldValue.arrayUnion(posts)});
   }
 
+  @override
   Future<List<Comment>> getComments(String idPost) async {
     List<Comment> comments = [];
     // QuerySnapshot querySnapshot = await firestore
@@ -196,6 +204,7 @@ class PostRepository {
     return comments;
   }
 
+  @override
   Future<Comment> insertComments(String idPost, Comment comment) async {
     final autoID =
         firestore.collection("post").doc(idPost).collection('comment').doc().id;

@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:friendzone/src/data.dart';
+import 'package:friendzone/src/data/repositories/reel_repository_impl.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:friendzone/src/config.dart';
-import 'package:friendzone/src/data.dart';
-import 'package:friendzone/src/data/repositories/reel_repository.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/view.dart';
@@ -23,49 +23,51 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (_) => AuthRepository.instance),
-        RepositoryProvider(create: (_) => PostRepository()),
-        RepositoryProvider(create: (_) => UserRepository()),
-        RepositoryProvider(create: (_) => ConversationRepository()),
-        RepositoryProvider(create: (_) => FeedRepository()),
-        RepositoryProvider(create: (_) => ReelRepository()),
+        RepositoryProvider(create: (_) => AuthRepositoryImpl()),
+        RepositoryProvider(create: (_) => PostRepositoryImpl()),
+        RepositoryProvider(create: (_) => UserRepositoryImpl()),
+        RepositoryProvider(create: (_) => ConversationRepositoryImpl()),
+        RepositoryProvider(create: (_) => FeedRepositoryImpl()),
+        RepositoryProvider(create: (_) => ReelRepositoryImpl()),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => AuthBloc(RepositoryProvider.of<AuthRepository>(_)),
+            create: (_) =>
+                AuthBloc(RepositoryProvider.of<AuthRepositoryImpl>(_)),
           ),
           BlocProvider(
               create: (_) =>
-                  WritePostCubit(RepositoryProvider.of<PostRepository>(_))),
+                  WritePostCubit(RepositoryProvider.of<PostRepositoryImpl>(_))),
           BlocProvider(
               create: (_) => AllPostCubit(
-                    RepositoryProvider.of<PostRepository>(_),
+                    RepositoryProvider.of<PostRepositoryImpl>(_),
                   )),
           BlocProvider(
               create: (_) =>
-                  FeedCubit(RepositoryProvider.of<FeedRepository>(_))),
+                  FeedCubit(RepositoryProvider.of<FeedRepositoryImpl>(_))),
+          BlocProvider(
+              create: (_) => UpdateProfileCubit(
+                  RepositoryProvider.of<UserRepositoryImpl>(_))),
           BlocProvider(
               create: (_) =>
-                  UpdateProfileCubit(RepositoryProvider.of<UserRepository>(_))),
+                  MyAccountCubit(RepositoryProvider.of<UserRepositoryImpl>(_))),
           BlocProvider(
-              create: (_) =>
-                  MyAccountCubit(RepositoryProvider.of<UserRepository>(_))),
-          BlocProvider(
-            create: (_) => PostCubit(RepositoryProvider.of<PostRepository>(_)),
+            create: (_) =>
+                PostCubit(RepositoryProvider.of<PostRepositoryImpl>(_)),
           ),
           BlocProvider(
             create: (_) =>
-                UserPreviewCubit(RepositoryProvider.of<UserRepository>(_)),
+                UserPreviewCubit(RepositoryProvider.of<UserRepositoryImpl>(_)),
           ),
           BlocProvider(
             create: (_) => ChatCubit(
-                RepositoryProvider.of<ConversationRepository>(_),
-                RepositoryProvider.of<UserRepository>(_)),
+                RepositoryProvider.of<ConversationRepositoryImpl>(_),
+                RepositoryProvider.of<UserRepositoryImpl>(_)),
           ),
           BlocProvider(
             create: (_) => ConversationCubit(
-                RepositoryProvider.of<ConversationRepository>(_)),
+                RepositoryProvider.of<ConversationRepositoryImpl>(_)),
           ),
           BlocProvider(
             create: (_) => AppThemeCubit(),
@@ -74,7 +76,12 @@ class App extends StatelessWidget {
             create: (_) => LanguageCubit(),
           ),
           BlocProvider(
-            create: (_) => ReelCubit(RepositoryProvider.of<ReelRepository>(_)),
+            create: (_) =>
+                ReelCubit(RepositoryProvider.of<ReelRepositoryImpl>(_)),
+          ),
+          BlocProvider(
+            create: (_) =>
+                FriendzoneBloc(RepositoryProvider.of<UserRepositoryImpl>(_)),
           )
         ],
         child: GestureDetector(
@@ -179,12 +186,16 @@ class App extends StatelessWidget {
             GoRoute(
                 name: RoutePath.routeName(RoutePath.createReel),
                 path: RoutePath.createReel,
-                builder: (_, state) => const CreateReelScreen())
+                builder: (_, state) => const CreateReelScreen()),
+            GoRoute(
+                name: RoutePath.routeName(RoutePath.chat),
+                path: RoutePath.chat,
+                builder: (_, state) => const ChatsScreen())
           ]),
     ],
   );
-
 }
+
 CustomTransitionPage<dynamic> _slideTransitionPage(Widget child) {
   return CustomTransitionPage(
       child: child,

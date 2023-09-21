@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:friendzone/src/domain/models/conversation.dart';
 import 'package:friendzone/src/domain/models/user_model.dart';
+import 'package:friendzone/src/domain/repositories/conversation_repository.dart';
 
-class ConversationRepository {
+class ConversationRepositoryImpl implements ConversationRepository {
   final firestore = FirebaseFirestore.instance;
   final auth = FirebaseAuth.instance.currentUser;
 
@@ -26,7 +27,9 @@ class ConversationRepository {
         .set(conversation.message.toMap());
   }
 
-  sendMessage(UserModel receiver, String message, UserModel me) async {
+  @override
+  Future<void> sendMessage(
+      UserModel receiver, String message, UserModel me) async {
     final ref = firestore
         .collection('users')
         .doc(me.idUser)
@@ -75,6 +78,7 @@ class ConversationRepository {
         .set(lastMessage.toMap());
   }
 
+  @override
   Future<List<Conversation>> getListConversation() async {
     final List<Conversation> list = [];
     final docConversation = await firestore
@@ -89,6 +93,7 @@ class ConversationRepository {
     return list;
   }
 
+  @override
   Future<List<ChatMessage>> getListMessage(String idReceiver) async {
     final List<ChatMessage> list = [];
     final ref = firestore

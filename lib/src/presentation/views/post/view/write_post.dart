@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/config.dart';
-import 'package:friendzone/src/data/repositories/post_repository.dart';
+import 'package:friendzone/src/data/repositories/post_repository_impl.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/presentation/shared.dart';
 import 'package:friendzone/src/presentation/state.dart';
@@ -37,7 +37,8 @@ class WritePost extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = SizeEx(context).screenSize;
     return BlocProvider(
-      create: (_) => WritePostCubit(RepositoryProvider.of<PostRepository>(_)),
+      create: (_) =>
+          WritePostCubit(RepositoryProvider.of<PostRepositoryImpl>(_)),
       child: Scaffold(
           appBar: AppBar(title: const Text('Post')),
           body: BlocListener<WritePostCubit, WritePostState>(
