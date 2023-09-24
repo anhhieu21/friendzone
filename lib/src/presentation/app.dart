@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/data/repositories/reel_repository_impl.dart';
+import 'package:friendzone/src/presentation/views/chats/view/new_conversation_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:friendzone/src/config.dart';
@@ -190,7 +191,11 @@ class App extends StatelessWidget {
             GoRoute(
                 name: RoutePath.routeName(RoutePath.chat),
                 path: RoutePath.chat,
-                builder: (_, state) => const ChatsScreen())
+                builder: (_, state) => const ChatsScreen()),
+            GoRoute(
+                name: RoutePath.routeName(RoutePath.newConversation),
+                path: RoutePath.newConversation,
+                builder: (_, state) => NewConversationScreen())
           ]),
     ],
   );
