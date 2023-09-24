@@ -6,7 +6,8 @@ import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/presentation/state/chat/conversation/conversation_cubit.dart';
 import 'package:friendzone/src/presentation/state/profile/myaccount/my_account_cubit.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:timeago/timeago.dart' as timeago;
+
+import '../widgets/item_chat_msg.dart';
 
 class ConversationScreen extends StatefulWidget {
   final UserModel userModel;
@@ -37,16 +38,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
         (_) => controller.jumpTo(controller.position.maxScrollExtent));
   }
 
-  _isMe(ChatMessage chatMessage) =>
-      chatMessage.sender != widget.userModel.idUser;
-  _crossAxisAlignment(item) =>
-      _isMe(item) ? CrossAxisAlignment.end : CrossAxisAlignment.start;
-  _backgroundColorItem(item) =>
-      _isMe(item) ? colorBlue.shade500 : colorGrey.shade400;
-  _colorText(item) => _isMe(item) ? colorWhite : colorBlack;
-
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.userModel.name),
@@ -80,11 +74,18 @@ class _ConversationScreenState extends State<ConversationScreen> {
                         list.add(messageState.message);
                       }
                     }
-                    return ListView.builder(
-                        dragStartBehavior: DragStartBehavior.down,
-                        controller: controller,
-                        itemCount: list.length,
-                        itemBuilder: (_, i) => _itemMessage(list[i]));
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: kBottomNavigationBarHeight + 20),
+                      child: ListView.builder(
+                          dragStartBehavior: DragStartBehavior.down,
+                          controller: controller,
+                          itemCount: list.length,
+                          itemBuilder: (_, i) => ItemMsg(
+                                item: list[i],
+                                user: widget.userModel,
+                              )),
+                    );
                   },
                 );
               }
@@ -96,22 +97,35 @@ class _ConversationScreenState extends State<ConversationScreen> {
             left: 0,
             right: 0,
             child: Container(
-              height: 80,
+              height: kBottomNavigationBarHeight + 20,
               color: colorGrey.shade100,
-              padding: const EdgeInsets.fromLTRB(16.0, 4.0, 0, 16.0),
+              padding: const EdgeInsets.fromLTRB(0, 4.0, 0, 16.0),
               child: Row(
                 children: [
+                  IconButton(
+                      style: IconButton.styleFrom(
+                          backgroundColor: theme.cardColor),
+                      onPressed: () async {
+                        textEditingController.clear();
+                        jumNewMessage();
+                        _showAlbum();
+                      },
+                      icon: const Icon(Icons.photo_rounded)),
                   Expanded(
-                    child: TextFormField(
-                      controller: textEditingController,
-                      decoration: InputDecoration(
-                        filled: true,
-                        hintText: 'message',
-                        hintStyle: const TextStyle(fontSize: 14),
-                        contentPadding: const EdgeInsets.all(16),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none,
+                    child: SizedBox(
+                      height: 40,
+                      child: TextFormField(
+                        controller: textEditingController,
+                        decoration: InputDecoration(
+                          filled: true,
+                          hintText: 'message',
+                          hintStyle: const TextStyle(fontSize: 14),
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 16.0),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: BorderSide.none,
+                          ),
                         ),
                       ),
                     ),
@@ -144,39 +158,17 @@ class _ConversationScreenState extends State<ConversationScreen> {
     );
   }
 
-  Widget _itemMessage(ChatMessage item) => Padding(
-        padding: EdgeInsets.fromLTRB(
-            !_isMe(item) ? 8.0 : 80, 8, _isMe(item) ? 8.0 : 80, 8),
-        child: Column(
-          crossAxisAlignment: _crossAxisAlignment(item),
-          children: [
-            Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                    color: _backgroundColorItem(item),
-                    borderRadius: BorderRadius.only(
-                      topLeft: const Radius.circular(16),
-                      topRight: const Radius.circular(16),
-                      bottomLeft:
-                          _isMe(item) ? const Radius.circular(16) : Radius.zero,
-                      bottomRight: !_isMe(item)
-                          ? const Radius.circular(16)
-                          : Radius.zero,
-                    )),
-                child: Column(
-                  crossAxisAlignment: _crossAxisAlignment(item),
-                  children: [
-                    Text(
-                      item.message,
-                      style: TextStyle(color: _colorText(item)),
-                    ),
-                    Text(
-                      timeago.format(item.createdAt),
-                      style: TextStyle(color: _colorText(item)),
-                    ),
-                  ],
-                )),
-          ],
-        ),
-      );
+  _showAlbum() {
+    showModalBottomSheet(
+        context: context,
+        isDismissible: true,
+        useSafeArea: true,
+        builder: (_) => DraggableScrollableSheet(
+              expand: true,
+              builder:
+                  (BuildContext context, ScrollController scrollController) {
+                return Container();
+              },
+            ));
+  }
 }
