@@ -12,8 +12,7 @@ abstract class UserRepository {
 
   Future<List<Post>> getMyPost(String idUser);
 
-  Future<bool> updateProfile(
-      {String? displayName, String? phone, File? file, String? bio});
+  Future<bool> updateProfile({required UserModel user, File? file,bool isUpdateBackground});
 
   Future<bool> followUser(Following following, Follower follower,
       int countFollower, int countFollowing);

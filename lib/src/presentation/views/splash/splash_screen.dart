@@ -46,14 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
       listener: (context, state) {
         if (state is Authenticated) _listenAuthState(state.id);
         if (state is Loading) {
-          CustomOverlayEntry.instance.showOverlay(context,
-              child: Center(
-                child: CircularProgressIndicator(
-                    backgroundColor: colorPrimary.withOpacity(0.3),
-                    color: colorPrimary,
-                    strokeWidth: 6,
-                    strokeCap: StrokeCap.round),
-              ));
+          CustomOverlayEntry.instance.loadingCircularProgressIndicator(context);
         }
         if (state is AuthError || state is UnAuthenticated) {
           CustomOverlayEntry.instance.hideOverlay();

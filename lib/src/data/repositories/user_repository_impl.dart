@@ -15,7 +15,6 @@ class UserRepositoryImpl implements UserRepository {
   final firestore = FirebaseFirestore.instance;
   final _firebaseAuth = FirebaseAuth.instance;
   final storageRef = FirebaseStorage.instance.ref();
-  late UserModel _userModel;
   @override
   Future<List<UserModel>> getAllUser() async {
     List<UserModel> listUser = [];
@@ -59,7 +58,6 @@ class UserRepositoryImpl implements UserRepository {
       final data = doc.data();
       if (data == null) return null;
       final res = UserModel.fromMap(data);
-      _userModel = res;
       return res;
     } on FirebaseAuthException catch (e) {
       if (kDebugMode) {
@@ -86,54 +84,47 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<bool> updateProfile(
-      {String? displayName, String? phone, File? file, String? bio}) async {
+      {required UserModel user,
+      File? file,
+      bool isUpdateBackground = false}) async {
     try {
-      final user = UserModel(
-          idUser: _userModel.idUser,
-          avartar: _userModel.avartar,
-          email: _userModel.email,
-          name: displayName!.isEmpty ? _userModel.name : displayName,
-          background: _userModel.background,
-          follower: _userModel.follower,
-          following: _userModel.following,
-          bio: bio ?? _userModel.bio,
-          phone: phone!.isEmpty ? _userModel.phone : phone);
       String? urlImage;
       if (file != null) {
-        final upLoad =
-            storageRef.child('avatar/${basename(file.path)}').putFile(file);
-        upLoad.snapshotEvents.listen((event) async {
-          switch (event.state) {
-            case TaskState.paused:
-              log("Upload is paused.");
-              break;
-            case TaskState.running:
-              final progress =
-                  100.0 * (event.bytesTransferred / event.totalBytes);
-              log("Upload is $progress% complete.");
-              break;
-            case TaskState.success:
-              urlImage = await event.ref.getDownloadURL();
-              if (urlImage != null) {
-                user.avartar = urlImage!;
-                await _firebaseAuth.currentUser!.updatePhotoURL(urlImage);
-                await _firebaseAuth.currentUser!.updateDisplayName(displayName);
-                await firestore
-                    .collection("users")
-                    .doc(_firebaseAuth.currentUser!.uid)
-                    .update(user.toMap());
-              }
-              break;
+        final upLoad = await storageRef
+            .child('avatar/${basename(file.path)}')
+            .putFile(file);
+        switch (upLoad.state) {
+          case TaskState.paused:
+            log("Upload is paused.");
+            return false;
+          case TaskState.running:
+            final progress =
+                100.0 * (upLoad.bytesTransferred / upLoad.totalBytes);
+            log("Upload is $progress% complete.");
+            return false;
+          case TaskState.success:
+            urlImage = await upLoad.ref.getDownloadURL();
+            if (isUpdateBackground) {
+              user.background = urlImage;
+            } else {
+              user.avartar = urlImage;
+              await _firebaseAuth.currentUser!.updatePhotoURL(urlImage);
+              await _firebaseAuth.currentUser!.updateDisplayName(user.name);
+            }
+            await firestore
+                .collection("users")
+                .doc(_firebaseAuth.currentUser!.uid)
+                .update(user.toMap());
+            return true;
 
-            case TaskState.canceled:
-              log("Upload was canceled");
-              break;
-            case TaskState.error:
-              break;
-          }
-        });
+          case TaskState.canceled:
+            log("Upload was canceled");
+            return false;
+          case TaskState.error:
+            return false;
+        }
       } else {
-        await _firebaseAuth.currentUser!.updateDisplayName(displayName);
+        await _firebaseAuth.currentUser!.updateDisplayName(user.name);
         await firestore
             .collection("users")
             .doc(_firebaseAuth.currentUser!.uid)

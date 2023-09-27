@@ -9,6 +9,8 @@ abstract class UpdateProfileState extends Equatable {
 
 class UpdateProfileInitial extends UpdateProfileState {}
 
+class UpdatingProfile extends UpdateProfileState {}
+
 class UpdateProfileSuccess extends UpdateProfileState {
   const UpdateProfileSuccess();
 
@@ -18,8 +20,9 @@ class UpdateProfileSuccess extends UpdateProfileState {
 
 class UpdateProfileChoseImage extends UpdateProfileState {
   final File file;
-  const UpdateProfileChoseImage(this.file);
+  final bool isUpdateBackground;
+  const UpdateProfileChoseImage(this.file, this.isUpdateBackground);
 
   @override
-  List<Object> get props => [file];
+  List<Object> get props => [file,isUpdateBackground];
 }

@@ -12,8 +12,8 @@ import 'package:ionicons/ionicons.dart';
 enum MenuChat {
   chat(label: 'Chat', icon: Ionicons.chatbubbles),
   privateChat(label: 'Private chat', icon: Ionicons.shield),
-  archiveChat(label: 'Archive chat', icon: Ionicons.archive),
-  waitingChat(label: 'Waiting chat', icon: Ionicons.chatbubble_ellipses);
+  archiveChat(label: 'Archived', icon: Ionicons.archive),
+  waitingChat(label: 'Chat request', icon: Ionicons.chatbubble_ellipses);
 
   final String label;
   final IconData icon;

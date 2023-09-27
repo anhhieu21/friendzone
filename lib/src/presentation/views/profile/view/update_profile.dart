@@ -19,8 +19,20 @@ class UpdateProfileScreen extends StatelessWidget {
   final TextEditingController controllerBio = TextEditingController();
   final stream = FirebaseAuth.instance.authStateChanges();
   _updatedUser(BuildContext context) async {
-    BlocProvider.of<UpdateProfileCubit>(context).updateProfile(
-        displayName: controllerName.text, phone: controllerPhone.text);
+    final name = controllerName.text.trim();
+    final phone = controllerPhone.text.trim();
+    final bio = controllerBio.text.trim();
+    if (name.isNotEmpty) {
+      userDetail.name = name;
+    }
+    if (phone.isNotEmpty) {
+      userDetail.phone = phone;
+    }
+    if (bio.isNotEmpty) {
+      userDetail.bio = bio;
+    }
+    BlocProvider.of<UpdateProfileCubit>(context)
+        .updateProfile(userModel: userDetail);
   }
 
   _choseImage(BuildContext context) {
@@ -48,10 +60,15 @@ class UpdateProfileScreen extends StatelessWidget {
                 children: [
                   BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
                       listener: (context, state) {
+                    if (state is UpdatingProfile) {
+                      CustomOverlayEntry.instance
+                          .loadingCircularProgressIndicator(context);
+                    }
                     if (state is UpdateProfileSuccess) {
                       context
                           .read<MyAccountCubit>()
                           .myAccountInfo(userDetail.idUser);
+                      CustomOverlayEntry.instance.hideOverlay();
                     }
                   }, builder: (_, state) {
                     if (state is UpdateProfileChoseImage) {
@@ -88,20 +105,19 @@ class UpdateProfileScreen extends StatelessWidget {
               CustomTextField(
                   controller: controllerPhone,
                   label: 'Liên lạc',
-                  hint: 'số điện thoại',
+                  hint: userDetail.phone,
                   error: 'error'),
               CustomTextField(
                 label: 'Email',
-                hint: userDetail.email.toString(),
+                hint: userDetail.email,
                 error: 'error',
                 readOnly: true,
               ),
               CustomTextField(
                 controller: controllerBio,
                 label: 'Bio',
-                hint: userDetail.bio.toString(),
+                hint: userDetail.bio ?? '',
                 error: 'error',
-                readOnly: true,
               )
             ],
           )),

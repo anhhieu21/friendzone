@@ -16,6 +16,7 @@ class RoutePath {
   static const String signin = '/signin';
   static const String signup = '/signup';
   static const String newConversation = 'main/newConversation';
+  static const String updateBackground = 'main/updateBackground';
 
   static routeName(String path) => path.substring(5);
 }

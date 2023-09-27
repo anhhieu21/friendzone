@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friendzone/src/config/routes/path.dart';
 import 'package:friendzone/src/config/themes/color.dart';
 import 'package:friendzone/src/presentation/shared.dart';
 import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/view.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../domain/models/user_model.dart';
 
@@ -20,10 +22,21 @@ class HeaderMyProfile extends StatelessWidget {
       children: [
         Stack(children: [
           SizedBox(height: 140 + size.width / 7.5 - 16.0),
-          BackgroundProfile(
-            url: user.background,
-            width: size.width,
-            height: 140,
+          BlocListener<UpdateProfileCubit, UpdateProfileState>(
+            listener: (_, state) {
+              if (state is UpdateProfileChoseImage) {
+                if (state.isUpdateBackground) {
+                  context.pushNamed(
+                      RoutePath.routeName(RoutePath.updateBackground));
+                }
+              }
+            },
+            child: BackgroundProfile(
+              url: user.background,
+              width: size.width,
+              height: 140,
+              callback: () => _choseImage(context),
+            ),
           ),
           Positioned(
             bottom: 0,
@@ -75,4 +88,11 @@ class HeaderMyProfile extends StatelessWidget {
         constraints: BoxConstraints(maxHeight: size.height * 0.8),
         builder: (_) => const ShowFollower());
   }
+
+  _choseImage(BuildContext context) {
+    BlocProvider.of<UpdateProfileCubit>(context)
+        .choseImage(isUpdateBackground: true);
+  }
+
+ 
 }

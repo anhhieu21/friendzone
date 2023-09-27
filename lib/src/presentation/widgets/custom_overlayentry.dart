@@ -37,4 +37,15 @@ class CustomOverlayEntry {
     _overlayEntry?.remove();
     _overlayEntry = null;
   }
+
+  void loadingCircularProgressIndicator(BuildContext context) {
+    showOverlay(context,
+        child: Center(
+          child: CircularProgressIndicator(
+              backgroundColor: colorPrimary.withOpacity(0.3),
+              color: colorPrimary,
+              strokeWidth: 6,
+              strokeCap: StrokeCap.round),
+        ));
+  }
 }

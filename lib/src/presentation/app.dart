@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/data/repositories/reel_repository_impl.dart';
 import 'package:friendzone/src/presentation/views/chats/view/new_conversation_screen.dart';
+import 'package:friendzone/src/presentation/views/profile/view/update_background_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:friendzone/src/config.dart';
@@ -22,104 +23,41 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider(create: (_) => AuthRepositoryImpl()),
-        RepositoryProvider(create: (_) => PostRepositoryImpl()),
-        RepositoryProvider(create: (_) => UserRepositoryImpl()),
-        RepositoryProvider(create: (_) => ConversationRepositoryImpl()),
-        RepositoryProvider(create: (_) => FeedRepositoryImpl()),
-        RepositoryProvider(create: (_) => ReelRepositoryImpl()),
-      ],
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (_) =>
-                AuthBloc(RepositoryProvider.of<AuthRepositoryImpl>(_)),
-          ),
-          BlocProvider(
-              create: (_) =>
-                  WritePostCubit(RepositoryProvider.of<PostRepositoryImpl>(_))),
-          BlocProvider(
-              create: (_) => AllPostCubit(
-                    RepositoryProvider.of<PostRepositoryImpl>(_),
-                  )),
-          BlocProvider(
-              create: (_) =>
-                  FeedCubit(RepositoryProvider.of<FeedRepositoryImpl>(_))),
-          BlocProvider(
-              create: (_) => UpdateProfileCubit(
-                  RepositoryProvider.of<UserRepositoryImpl>(_))),
-          BlocProvider(
-              create: (_) =>
-                  MyAccountCubit(RepositoryProvider.of<UserRepositoryImpl>(_))),
-          BlocProvider(
-            create: (_) =>
-                PostCubit(RepositoryProvider.of<PostRepositoryImpl>(_)),
-          ),
-          BlocProvider(
-            create: (_) =>
-                UserPreviewCubit(RepositoryProvider.of<UserRepositoryImpl>(_)),
-          ),
-          BlocProvider(
-            create: (_) => ChatCubit(
-                RepositoryProvider.of<ConversationRepositoryImpl>(_),
-                RepositoryProvider.of<UserRepositoryImpl>(_)),
-          ),
-          BlocProvider(
-            create: (_) => ConversationCubit(
-                RepositoryProvider.of<ConversationRepositoryImpl>(_)),
-          ),
-          BlocProvider(
-            create: (_) => AppThemeCubit(),
-          ),
-          BlocProvider(
-            create: (_) => LanguageCubit(),
-          ),
-          BlocProvider(
-            create: (_) =>
-                ReelCubit(RepositoryProvider.of<ReelRepositoryImpl>(_)),
-          ),
-          BlocProvider(
-            create: (_) =>
-                FriendzoneBloc(RepositoryProvider.of<UserRepositoryImpl>(_)),
-          )
-        ],
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () => primaryFocus?.unfocus(),
-          child: BlocSelector<AppThemeCubit, AppThemeState, ThemeData>(
-            selector: (state) {
-              if (state is ChangedTheme) {
-                return state.themeData;
-              }
-              return AppTheme.lightTheme;
-            },
-            builder: (context, theme) {
-              return BlocSelector<LanguageCubit, LanguageState, Locale>(
-                selector: (state) {
-                  if (state is ChangeLanguage) {
-                    return state.locale;
-                  }
-                  return const Locale('en');
-                },
-                builder: (_, locale) {
-                  return MaterialApp.router(
-                    title: 'FriendZone',
-                    debugShowCheckedModeBanner: false,
-                    theme: theme,
-                    locale: locale,
-                    // darkTheme: AppTheme.darkTheme,
-                    // themeMode: ThemeMode.system,
-                    routerConfig: router,
-                    localizationsDelegates:
-                        AppLocalizations.localizationsDelegates,
-                    supportedLocales: AppLocalizations.supportedLocales,
-                  );
-                },
-              );
-            },
-          ),
+    return MultiBlocRepoAndProvider(
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => primaryFocus?.unfocus(),
+        child: BlocSelector<AppThemeCubit, AppThemeState, ThemeData>(
+          selector: (state) {
+            if (state is ChangedTheme) {
+              return state.themeData;
+            }
+            return AppTheme.lightTheme;
+          },
+          builder: (context, theme) {
+            return BlocSelector<LanguageCubit, LanguageState, Locale>(
+              selector: (state) {
+                if (state is ChangeLanguage) {
+                  return state.locale;
+                }
+                return const Locale('en');
+              },
+              builder: (_, locale) {
+                return MaterialApp.router(
+                  title: 'FriendZone',
+                  debugShowCheckedModeBanner: false,
+                  theme: theme,
+                  locale: locale,
+                  // darkTheme: AppTheme.darkTheme,
+                  // themeMode: ThemeMode.system,
+                  routerConfig: router,
+                  localizationsDelegates:
+                      AppLocalizations.localizationsDelegates,
+                  supportedLocales: AppLocalizations.supportedLocales,
+                );
+              },
+            );
+          },
         ),
       ),
     );
@@ -195,7 +133,11 @@ class App extends StatelessWidget {
             GoRoute(
                 name: RoutePath.routeName(RoutePath.newConversation),
                 path: RoutePath.newConversation,
-                builder: (_, state) => NewConversationScreen())
+                builder: (_, state) => NewConversationScreen()),
+            GoRoute(
+                name: RoutePath.routeName(RoutePath.updateBackground),
+                path: RoutePath.updateBackground,
+                builder: (_, state) => UpdateBackgroundScreen())
           ]),
     ],
   );
@@ -216,4 +158,75 @@ CustomTransitionPage<dynamic> _slideTransitionPage(Widget child) {
           child: child,
         );
       });
+}
+
+class MultiBlocRepoAndProvider extends StatelessWidget {
+  final Widget child;
+  const MultiBlocRepoAndProvider({super.key, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider(create: (_) => AuthRepositoryImpl()),
+          RepositoryProvider(create: (_) => PostRepositoryImpl()),
+          RepositoryProvider(create: (_) => UserRepositoryImpl()),
+          RepositoryProvider(create: (_) => ConversationRepositoryImpl()),
+          RepositoryProvider(create: (_) => FeedRepositoryImpl()),
+          RepositoryProvider(create: (_) => ReelRepositoryImpl()),
+        ],
+        child: MultiBlocProvider(providers: [
+          BlocProvider(
+            create: (_) =>
+                AuthBloc(RepositoryProvider.of<AuthRepositoryImpl>(_)),
+          ),
+          BlocProvider(
+              create: (_) =>
+                  WritePostCubit(RepositoryProvider.of<PostRepositoryImpl>(_))),
+          BlocProvider(
+              create: (_) => AllPostCubit(
+                    RepositoryProvider.of<PostRepositoryImpl>(_),
+                  )),
+          BlocProvider(
+              create: (_) =>
+                  FeedCubit(RepositoryProvider.of<FeedRepositoryImpl>(_))),
+          BlocProvider(
+              create: (_) => UpdateProfileCubit(
+                  RepositoryProvider.of<UserRepositoryImpl>(_))),
+          BlocProvider(
+              create: (_) =>
+                  MyAccountCubit(RepositoryProvider.of<UserRepositoryImpl>(_))),
+          BlocProvider(
+            create: (_) =>
+                PostCubit(RepositoryProvider.of<PostRepositoryImpl>(_)),
+          ),
+          BlocProvider(
+            create: (_) =>
+                UserPreviewCubit(RepositoryProvider.of<UserRepositoryImpl>(_)),
+          ),
+          BlocProvider(
+            create: (_) => ChatCubit(
+                RepositoryProvider.of<ConversationRepositoryImpl>(_),
+                RepositoryProvider.of<UserRepositoryImpl>(_)),
+          ),
+          BlocProvider(
+            create: (_) => ConversationCubit(
+                RepositoryProvider.of<ConversationRepositoryImpl>(_)),
+          ),
+          BlocProvider(
+            create: (_) => AppThemeCubit(),
+          ),
+          BlocProvider(
+            create: (_) => LanguageCubit(),
+          ),
+          BlocProvider(
+            create: (_) =>
+                ReelCubit(RepositoryProvider.of<ReelRepositoryImpl>(_)),
+          ),
+          BlocProvider(
+            create: (_) =>
+                FriendzoneBloc(RepositoryProvider.of<UserRepositoryImpl>(_)),
+          )
+        ], child: child));
+  }
 }

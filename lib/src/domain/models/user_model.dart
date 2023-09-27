@@ -27,8 +27,7 @@ class UserModel {
   factory UserModel.fromMap(Map<dynamic, dynamic> map) {
     return UserModel(
       idUser: map["idUser"],
-      avartar:
-          map["avartar"].isEmpty ? urlAvatar : map["avartar"],
+      avartar: map["avartar"].isEmpty ? urlAvatar : map["avartar"],
       email: map["email"],
       name: map["name"],
       post: map["post"],
@@ -42,11 +41,13 @@ class UserModel {
   Map<String, dynamic> toMap() {
     return {
       "avartar": avartar,
+      "background": background,
       "email": email,
       "name": name,
       // "follower": follower,
       // "following": following,
       "phone": phone,
+      "bio": bio,
     };
   }
 }

@@ -8,12 +8,13 @@ class BackgroundProfile extends StatelessWidget {
   final double width;
   final double height;
   final bool isViewer;
+  final VoidCallback? callback;
   const BackgroundProfile({
     super.key,
     required this.url,
     required this.width,
     required this.height,
-    this.isViewer = false,
+    this.isViewer = false, this.callback,
   });
 
   @override
@@ -44,7 +45,7 @@ class BackgroundProfile extends StatelessWidget {
               padding: const EdgeInsets.all(4),
               style: IconButton.styleFrom(
                   backgroundColor: colorGrey.withOpacity(0.6)),
-              onPressed: () {},
+              onPressed:callback,
               icon: const Icon(Ionicons.pencil, color: colorWhite, size: 18),
             ),
           )
