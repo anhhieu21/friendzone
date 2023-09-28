@@ -25,7 +25,7 @@ class UpNewFeedScreen extends StatelessWidget {
             if (state is FeedLoading) {
               DialogCustom.instance.showLoading(context, true);
             }
-            if (state is FeedCreated) {
+            if (state is FeedLoaded) {
               GoRouter.of(context).go(RoutePath.main);
             }
           },

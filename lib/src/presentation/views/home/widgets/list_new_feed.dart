@@ -23,9 +23,8 @@ class ListNewFeed extends StatelessWidget {
             if (state is FeedLoaded) {
               final list = state.listFeed;
               return list.isEmpty
-                  ? Align(
-                      alignment: Alignment.centerLeft,
-                      child: ItemAddFeed(size: size))
+                  ? const Align(
+                      alignment: Alignment.centerLeft, child: ItemAddFeed())
                   : Stack(
                       alignment: Alignment.center,
                       children: [
@@ -38,13 +37,12 @@ class ListNewFeed extends StatelessWidget {
                                 size: size, item: list[index], index: index),
                           ),
                         ),
-                        Positioned(left: 0, child: ItemAddFeed(size: size)),
+                        const Positioned(left: 0, child: ItemAddFeed()),
                       ],
                     );
             } else {
-              return Align(
-                  alignment: Alignment.centerLeft,
-                  child: ItemAddFeed(size: size));
+              return const Align(
+                  alignment: Alignment.centerLeft, child: ItemAddFeed());
             }
           },
         ),

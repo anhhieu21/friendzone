@@ -23,29 +23,44 @@ class ItemNewFeed extends StatelessWidget {
           width: size.width / 4,
           margin: const EdgeInsets.only(top: 10),
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(25)),
-          child: OnTapEffect(
-            onTap: () => context.pushNamed(
-                RoutePath.routeName(RoutePath.detailFeed),
-                extra: index),
-            radius: 20,
-            child: Container(
-                margin: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(
-                        item.imagesUrl.first,
-                      )),
-                )),
+          child: Stack(
+            children: [
+              OnTapEffect(
+                onTap: () => context.pushNamed(
+                    RoutePath.routeName(RoutePath.detailFeed),
+                    extra: index),
+                radius: 20,
+                child: Container(
+                    margin: const EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: CachedNetworkImageProvider(
+                            item.imagesUrl.first,
+                          )),
+                    )),
+              ),
+              Positioned(
+                  top: 6,
+                  left: 6,
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: colorBlue,
+                    child: CircleAvatar(
+                      radius: 18,
+                      backgroundImage:
+                          CachedNetworkImageProvider(item.avartarAuthor),
+                    ),
+                  ))
+            ],
           ),
         ));
   }
 }
 
 class ItemAddFeed extends StatelessWidget {
-  final Size size;
-  const ItemAddFeed({super.key, required this.size});
+  const ItemAddFeed({super.key});
 
   @override
   Widget build(BuildContext context) {
