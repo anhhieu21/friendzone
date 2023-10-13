@@ -1,14 +1,17 @@
 import 'dart:async';
 
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/data.dart';
+import 'package:friendzone/src/data/repositories/weather_repository_impl.dart';
 import 'package:friendzone/src/data/services/fcm.dart';
 import 'package:friendzone/src/data/services/notification.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/presentation/state.dart';
 
 import 'package:friendzone/src/presentation/view.dart';
+import 'package:friendzone/src/utils.dart';
 import 'package:ionicons/ionicons.dart';
 
 class MainScreen extends StatefulWidget {
@@ -24,9 +27,11 @@ class _MainScreenState extends State<MainScreen>
   List<Menu> listNav = [];
   List<Widget> _listView = [];
   StreamController<int> navStream = StreamController<int>();
-
   @override
   void initState() {
+    final remoteConfig = FirebaseRemoteConfig.instance;
+    WeatherRepositoryImpl.keyApiWeather =
+        remoteConfig.getString(kKeyApiWeather);
     final menuBottomNavBar = [
       {'title': text.home, 'iconData': Ionicons.home},
       {'title': text.reels, 'iconData': Ionicons.albums},

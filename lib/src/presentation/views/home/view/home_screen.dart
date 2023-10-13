@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friendzone/src/data/repositories/weather_repository_impl.dart';
 import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/view.dart';
 import 'package:friendzone/src/presentation/widgets/lazy_load_scrollview.dart';
@@ -12,9 +13,11 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin{
+class _HomeScreenState extends State<HomeScreen>
+    with AutomaticKeepAliveClientMixin {
   final ScrollController scrollController = ScrollController();
   bool isLoadingList = true;
+  final w = WeatherRepositoryImpl.instance;
   _onEndOfPage() async {
     setState(() => isLoadingList = true);
     BlocProvider.of<AllPostCubit>(context)
@@ -32,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
   Widget build(BuildContext context) {
     super.build(context);
     final size = SizeEx(context).screenSize;
+    w.currentLocation();
     return RefreshIndicator(
       onRefresh: () => BlocProvider.of<AllPostCubit>(context).getAllPost(),
       child: LazyLoadScrollView(
@@ -53,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
       ),
     );
   }
-  
+
   @override
   bool get wantKeepAlive => true;
 }
