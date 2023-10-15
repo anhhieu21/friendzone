@@ -1,6 +1,8 @@
+import 'package:friendzone/src/domain/models/weather.dart';
+
 abstract class WeatherRepository {
   ///Access current weather data for any location
-  Future currentWeatherData() async {}
+  Future<WeatherModel> currentWeatherData();
 
   ///- Hourly forecast is available for 4 days
   ///
@@ -9,5 +11,5 @@ abstract class WeatherRepository {
   ///- JSON and XML formats
   ///
   ///- Included in the Developer, Professional and Enterprise subscription plans
-  Future availableFor4Days() async {}
+  Future availableFor4Days();
 }

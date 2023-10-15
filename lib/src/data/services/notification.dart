@@ -36,11 +36,11 @@ class AppNotification {
           .collection("users")
           .doc(idUser)
           .get();
-      final res = UserModel.fromMap(docUser.data()as Map);
-      await showBigTextNotification(
-          title: res.name,
-          body: conversation.message.message,
-          fln: flutterLocalNotificationsPlugin);
+      // final res = UserModel.fromMap(docUser.data()as Map);
+      // await showBigTextNotification(
+      //     title: res.name,
+      //     body: conversation.message.message,
+      //     fln: flutterLocalNotificationsPlugin);
     });
   }
 

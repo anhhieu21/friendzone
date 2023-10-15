@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/data/repositories/reel_repository_impl.dart';
+import 'package:friendzone/src/data/repositories/weather_repository_impl.dart';
+import 'package:friendzone/src/presentation/state/weather/weather_cubit.dart';
 import 'package:friendzone/src/presentation/views/chats/view/new_conversation_screen.dart';
 import 'package:friendzone/src/presentation/views/profile/view/update_background_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -174,6 +176,7 @@ class MultiBlocRepoAndProvider extends StatelessWidget {
           RepositoryProvider(create: (_) => ConversationRepositoryImpl()),
           RepositoryProvider(create: (_) => FeedRepositoryImpl()),
           RepositoryProvider(create: (_) => ReelRepositoryImpl()),
+          RepositoryProvider(create: (_) => WeatherRepositoryImpl()),
         ],
         child: MultiBlocProvider(providers: [
           BlocProvider(
@@ -226,6 +229,10 @@ class MultiBlocRepoAndProvider extends StatelessWidget {
           BlocProvider(
             create: (_) =>
                 FriendzoneBloc(RepositoryProvider.of<UserRepositoryImpl>(_)),
+          ),
+             BlocProvider(
+            create: (_) =>
+                WeatherCubit(RepositoryProvider.of<WeatherRepositoryImpl>(_)),
           )
         ], child: child));
   }

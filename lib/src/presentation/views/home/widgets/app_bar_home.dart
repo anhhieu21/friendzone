@@ -6,6 +6,7 @@ import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/domain/models/user_model.dart';
 import 'package:friendzone/src/presentation/shared.dart';
 import 'package:friendzone/src/presentation/state.dart';
+import 'package:friendzone/src/presentation/state/weather/weather_cubit.dart';
 import 'package:friendzone/src/utils.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
@@ -63,16 +64,33 @@ class AppBarHome extends StatelessWidget {
               )),
         ],
       ),
-      title: const Row(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Friend Zone', style: TextStyle(fontSize: 20)),
-              Text('Good morning '),
-            ],
-          ),
-        ],
+      title: BlocBuilder<WeatherCubit, WeatherState>(
+        builder: (context, state) {
+          if (state is CurrentWeather) {
+            final weatherroot = state.weatherModel;
+            final weather = weatherroot.weather![0]!;
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  getIconData(weather.main),
+                  size: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('${weatherroot.main!.feelslike.round()}°C'),
+                      Text(weather.description!),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          }
+          return const SizedBox();
+        },
       ),
       action: [
         // IconButton(
@@ -114,5 +132,18 @@ class AppBarHome extends StatelessWidget {
             ))
       ],
     );
+  }
+
+  IconData getIconData(String? value) {
+    switch (value) {
+      case 'Rain':
+        return Ionicons.rainy_outline;
+      case 'Snow':
+        return Ionicons.snow_outline;
+      case 'Clouds':
+        return Ionicons.cloud_outline;
+      default:
+        return Ionicons.sunny_outline;
+    }
   }
 }
