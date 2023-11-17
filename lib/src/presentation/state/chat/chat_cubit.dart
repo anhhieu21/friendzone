@@ -16,7 +16,6 @@ class ChatCubit extends Cubit<ChatState> {
     this._conversationRepository,
     this._userRepository,
   ) : super(ChatsInitial()) {
-    print('object');
     getListConversation();
   }
 

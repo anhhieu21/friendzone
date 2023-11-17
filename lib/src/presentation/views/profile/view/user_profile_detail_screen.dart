@@ -34,8 +34,9 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
       child: SafeArea(
         child: BlocBuilder<UserPreviewCubit, UserpreviewState>(
           buildWhen: (previous, current) {
-            if (current is LoadingUserState || current is UserDataState)
+            if (current is LoadingUserState || current is UserDataState) {
               return true;
+            }
             return false;
           },
           builder: (context, state) {

@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTheme {
   static final lightTheme = ThemeData.light().copyWith(
       scaffoldBackgroundColor: colorGrey.shade100,
-      useMaterial3: true,
       shadowColor: colorGrey.shade300,
       iconTheme: IconThemeData(color: colorBlack.withOpacity(0.6)),
       textTheme: GoogleFonts.nunitoTextTheme(),
@@ -23,7 +22,6 @@ class AppTheme {
 
   static final darkTheme = ThemeData.dark().copyWith(
       scaffoldBackgroundColor: colorBackgroundApp,
-      useMaterial3: true,
       cardColor: colorCardView,
       shadowColor: colorGrey.shade800,
       iconTheme: const IconThemeData(color: colorWhite),
