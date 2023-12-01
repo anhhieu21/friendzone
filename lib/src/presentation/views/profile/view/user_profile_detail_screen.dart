@@ -48,7 +48,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
               return CustomScrollView(controller: scrollController, slivers: [
                 CustomSliverAppBar(
                   scrollController: scrollController,
-                  expandedHeight: expandedHeight,
+                  expandedHeight: expandedHeight + 100,
                   collapsedHeight: kToolbarHeight,
                   expandedTitleScale: 1,
                   titlePadding: EdgeInsets.zero,

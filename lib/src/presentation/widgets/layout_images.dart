@@ -46,11 +46,12 @@ class LayoutImages extends StatelessWidget {
       onTap: currentPath != RoutePath.postDetail
           ? null
           : () => showViewDetail(context, url),
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            image: DecorationImage(
-                fit: BoxFit.cover, image: CachedNetworkImageProvider(url))),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: CachedNetworkImage(
+          imageUrl: url,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

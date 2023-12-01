@@ -51,7 +51,7 @@ class Main {
 
   Main.fromJson(Map<String, dynamic> json) {
     temp = json['temp'];
-    feelslike = json['feels_like'];
+    feelslike = json['feels_like'].toDouble();
     tempmin = json['temp_min'];
     tempmax = json['temp_max'];
     pressure = json['pressure'];

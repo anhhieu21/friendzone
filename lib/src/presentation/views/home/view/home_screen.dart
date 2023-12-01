@@ -44,10 +44,8 @@ class _HomeScreenState extends State<HomeScreen>
             AppBarHome(scrollController: scrollController),
             ListNewFeed(size: size),
             ListPost(isLoading: isLoadingList),
-            SliverToBoxAdapter(
-              child: Container(
-                height: kBottomNavigationBarHeight,
-              ),
+            const SliverToBoxAdapter(
+              child: SizedBox(height: 80),
             )
           ],
         ),

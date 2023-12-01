@@ -5,15 +5,9 @@ class TitleSignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ListTile(
-      title: Text(
-        'Hello Hiếu,',
-        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-      ),
-      subtitle: Text(
-        'Cùng nhau khám phá FriendZone nhé !',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      ),
+    return const Text(
+      'Hello !',
+      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
     );
   }
 }

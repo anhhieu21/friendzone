@@ -11,14 +11,11 @@ class AppTheme {
       appBarTheme: _appBarThemeLight,
       searchBarTheme:
           SearchBarThemeData(elevation: MaterialStateProperty.all(0.0)),
-      drawerTheme: DrawerThemeData(backgroundColor: colorGrey.shade100 ),
+      drawerTheme: DrawerThemeData(backgroundColor: colorGrey.shade100),
       bottomNavigationBarTheme: _bottomNavBarTheme,
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-              foregroundColor: colorWhite,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)),
-              elevation: 0)));
+              foregroundColor: colorWhite, elevation: 0)));
 
   static final darkTheme = ThemeData.dark().copyWith(
       scaffoldBackgroundColor: colorBackgroundApp,

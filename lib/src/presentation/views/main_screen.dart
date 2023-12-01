@@ -6,10 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/data/services/fcm.dart';
 import 'package:friendzone/src/data/services/notification.dart';
-import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/presentation/state.dart';
 
 import 'package:friendzone/src/presentation/view.dart';
+import 'package:friendzone/src/presentation/views/profile/widgets/nav_bar.dart';
 import 'package:ionicons/ionicons.dart';
 
 class MainScreen extends StatefulWidget {
@@ -22,9 +22,9 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
-  List<Menu> listNav = [];
   List<Widget> _listView = [];
   StreamController<int> navStream = StreamController<int>();
+  List<NavBarItemData> menuBottomNavBar = [];
   @override
   void initState() {
     final remoteConfig = FirebaseRemoteConfig.instance;
@@ -32,19 +32,20 @@ class _MainScreenState extends State<MainScreen>
       fetchTimeout: const Duration(minutes: 1),
       minimumFetchInterval: const Duration(hours: 1),
     ));
-    final menuBottomNavBar = [
-      {'title': text.home, 'iconData': Ionicons.home},
-      {'title': text.reels, 'iconData': Ionicons.albums},
-      {'title': text.friend, 'iconData': Ionicons.people},
-      {'title': text.profile, 'iconData': Ionicons.person_circle},
+    menuBottomNavBar = [
+      NavBarItemData(text.home, Ionicons.home, 110, const Color(0xff01b87d)),
+      NavBarItemData(text.reels, Ionicons.albums, 110, const Color(0xff594ccf)),
+      NavBarItemData(
+          text.friend, Ionicons.people, 115, const Color(0xff09a8d9)),
+      NavBarItemData(
+          text.profile, Ionicons.person_circle, 100, const Color(0xffcf4c7a)),
     ];
-
-    listNav = menuBottomNavBar.map((e) => Menu.fromMap(e)).toList();
-    _tabController = TabController(length: listNav.length, vsync: this);
+    _tabController =
+        TabController(length: menuBottomNavBar.length, vsync: this);
     _listView = [
       const HomeScreen(),
       const ReelsScreen(),
-      FriendZoneScreen(),
+      const FriendZoneScreen(),
       const ProfileScreen()
     ];
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -59,26 +60,22 @@ class _MainScreenState extends State<MainScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
-      body: TabBarView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: _tabController,
-        children: _listView,
-      ),
-      bottomNavigationBar: StreamBuilder<int>(
-          stream: navStream.stream,
-          builder: (context, snapshot) {
-            return BottomNavigationBar(
-                currentIndex: snapshot.data ?? _tabController.index,
-                onTap: (value) {
-                  _tabController.index = value;
-                  navStream.sink.add(value);
-                },
-                items: listNav
-                    .map((e) => BottomNavigationBarItem(
-                        icon: Icon(e.iconData), label: e.title))
-                    .toList());
-          }),
-    );
+        extendBody: true,
+        body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: _tabController,
+          children: _listView,
+        ),
+        bottomNavigationBar: StreamBuilder<int>(
+            stream: navStream.stream,
+            builder: (context, snapshot) {
+              return NavBar(
+                  currentIndex: snapshot.data ?? _tabController.index,
+                  itemTapped: (value) {
+                    _tabController.index = value;
+                    navStream.sink.add(value);
+                  },
+                  items: menuBottomNavBar);
+            }));
   }
 }
