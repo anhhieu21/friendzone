@@ -34,8 +34,9 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
       child: SafeArea(
         child: BlocBuilder<UserPreviewCubit, UserpreviewState>(
           buildWhen: (previous, current) {
-            if (current is LoadingUserState || current is UserDataState)
+            if (current is LoadingUserState || current is UserDataState) {
               return true;
+            }
             return false;
           },
           builder: (context, state) {
@@ -47,7 +48,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
               return CustomScrollView(controller: scrollController, slivers: [
                 CustomSliverAppBar(
                   scrollController: scrollController,
-                  expandedHeight: expandedHeight,
+                  expandedHeight: expandedHeight + 100,
                   collapsedHeight: kToolbarHeight,
                   expandedTitleScale: 1,
                   titlePadding: EdgeInsets.zero,

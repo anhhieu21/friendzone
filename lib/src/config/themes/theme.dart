@@ -5,25 +5,20 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTheme {
   static final lightTheme = ThemeData.light().copyWith(
       scaffoldBackgroundColor: colorGrey.shade100,
-      useMaterial3: true,
       shadowColor: colorGrey.shade300,
       iconTheme: IconThemeData(color: colorBlack.withOpacity(0.6)),
       textTheme: GoogleFonts.nunitoTextTheme(),
       appBarTheme: _appBarThemeLight,
       searchBarTheme:
           SearchBarThemeData(elevation: MaterialStateProperty.all(0.0)),
-      drawerTheme: DrawerThemeData(backgroundColor: colorGrey.shade100 ),
+      drawerTheme: DrawerThemeData(backgroundColor: colorGrey.shade100),
       bottomNavigationBarTheme: _bottomNavBarTheme,
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-              foregroundColor: colorWhite,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)),
-              elevation: 0)));
+              foregroundColor: colorWhite, elevation: 0)));
 
   static final darkTheme = ThemeData.dark().copyWith(
       scaffoldBackgroundColor: colorBackgroundApp,
-      useMaterial3: true,
       cardColor: colorCardView,
       shadowColor: colorGrey.shade800,
       iconTheme: const IconThemeData(color: colorWhite),

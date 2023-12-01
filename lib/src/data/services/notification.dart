@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:friendzone/src/data/services/fcm.dart';
 import 'package:friendzone/src/domain/models/conversation.dart';
-import 'package:friendzone/src/domain/models/user_model.dart';
 
 class AppNotification {
   AppNotification._();
@@ -36,11 +34,11 @@ class AppNotification {
           .collection("users")
           .doc(idUser)
           .get();
-      final res = UserModel.fromMap(docUser.data()as Map);
-      await showBigTextNotification(
-          title: res.name,
-          body: conversation.message.message,
-          fln: flutterLocalNotificationsPlugin);
+      // final res = UserModel.fromMap(docUser.data()as Map);
+      // await showBigTextNotification(
+      //     title: res.name,
+      //     body: conversation.message.message,
+      //     fln: flutterLocalNotificationsPlugin);
     });
   }
 

@@ -67,7 +67,9 @@ class SignInScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const TitleSignIn(),
+                      const Align(
+                          alignment: Alignment.centerLeft,
+                          child: TitleSignIn()),
                       CustomTextField(
                         keyboardType: TextInputType.emailAddress,
                         controller: nameController,

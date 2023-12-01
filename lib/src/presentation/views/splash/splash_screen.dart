@@ -64,20 +64,15 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(24.0),
-          child: OnTapEffect(
-              onTap: () => context.push(RoutePath.signin),
-              radius: 16,
-              child: Ink(
-                  padding: const EdgeInsets.all(16.0),
-                  decoration: BoxDecoration(
-                      color: colorPinkButton,
-                      borderRadius: BorderRadius.circular(16.0)),
-                  child: const Text(
-                    'Sign In',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: colorWhite, fontWeight: FontWeight.w600),
-                  ))),
+          child: FilledButton(
+            onPressed: () => context.push(RoutePath.signin),
+            style: FilledButton.styleFrom(backgroundColor: colorPinkButton),
+            child: const Text(
+              'Sign In',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: colorWhite, fontWeight: FontWeight.w600),
+            ),
+          ),
         ),
       ),
     );

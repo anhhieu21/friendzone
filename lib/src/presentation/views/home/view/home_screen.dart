@@ -12,7 +12,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin{
+class _HomeScreenState extends State<HomeScreen>
+    with AutomaticKeepAliveClientMixin {
   final ScrollController scrollController = ScrollController();
   bool isLoadingList = true;
   _onEndOfPage() async {
@@ -43,17 +44,15 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
             AppBarHome(scrollController: scrollController),
             ListNewFeed(size: size),
             ListPost(isLoading: isLoadingList),
-            SliverToBoxAdapter(
-              child: Container(
-                height: kBottomNavigationBarHeight,
-              ),
+            const SliverToBoxAdapter(
+              child: SizedBox(height: 80),
             )
           ],
         ),
       ),
     );
   }
-  
+
   @override
   bool get wantKeepAlive => true;
 }

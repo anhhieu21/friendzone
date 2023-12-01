@@ -15,6 +15,9 @@ const kFollower = 'follower';
 const kFollowing = 'following';
 const kPostSave = 'postSave';
 
+//key config
+const kKeyApiWeather = 'keyApiWeather';
+
 // message
 const savePostMsg = 'Đã lưu bài viết';
 const unSavePostMsg = 'Đã bỏ lưu bài viết';

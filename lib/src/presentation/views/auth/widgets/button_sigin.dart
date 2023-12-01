@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:friendzone/src/config.dart';
-import 'package:friendzone/src/utils.dart';
 
 class SiginButton extends StatelessWidget {
   final Function() onPress;
@@ -9,29 +8,15 @@ class SiginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = SizeEx(context).screenSize;
-
-    return Container(
-      width: size.width,
-      height: 55,
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-            color: colorPinkButton.withOpacity(0.3),
-            blurRadius: 20,
-            offset: const Offset(0, 5)),
-      ]),
-      child: ElevatedButton(
-        onPressed: onPress,
-        style: ElevatedButton.styleFrom(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            elevation: 0,
-            backgroundColor: colorPinkButton.shade300),
-        child: Text(
-          label,
-          style:
-              const TextStyle(fontWeight: FontWeight.bold, color: colorWhite),
-        ),
+    return FilledButton(
+      onPressed: onPress,
+      style: ElevatedButton.styleFrom(
+          minimumSize: const Size(double.infinity, 45),
+          elevation: 0,
+          backgroundColor: colorPinkButton.shade300),
+      child: Text(
+        label,
+        style: const TextStyle(fontWeight: FontWeight.bold, color: colorWhite),
       ),
     );
   }

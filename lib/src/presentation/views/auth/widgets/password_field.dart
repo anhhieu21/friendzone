@@ -55,8 +55,7 @@ class _PasswordFieldState extends State<PasswordField> {
             hintText: widget.hint,
             hintStyle: const TextStyle(fontSize: 14),
             contentPadding: EdgeInsets.all(widget.padding ?? 16),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+            border: const OutlineInputBorder(
               borderSide: BorderSide.none,
             ),
             suffixIcon: GestureDetector(
