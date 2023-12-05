@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:collection/collection.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/domain/repositories/post_repository.dart';
+import 'package:friendzone/src/utils/constants/constants.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -148,7 +149,7 @@ class PostRepositoryImpl implements PostRepository {
         }
       }
       return post;
-    } on FirebaseException catch (e) {
+    } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
@@ -163,9 +164,9 @@ class PostRepositoryImpl implements PostRepository {
   }
 
   @override
-  Future<Like?> getLikePost(Post post) async {
+  Future<Like?> getLikePost(String id) async {
     try {
-      final docLike = await firestore.collection("like").doc(post.id).get();
+      final docLike = await firestore.collection("like").doc(id).get();
       final res = Like.fromFirestore(docLike);
       return res;
     } catch (e) {
@@ -217,4 +218,18 @@ class PostRepositoryImpl implements PostRepository {
         .set(comment.toMap());
     return comment;
   }
+
+  @override
+  Future<bool> isSaved(String id) async {
+    final firebaseAuth = FirebaseAuth.instance;
+    final doc = firestore
+        .collection(kUser)
+        .doc(firebaseAuth.currentUser!.uid)
+        .collection(kPostSave)
+        .doc(id);
+    final getDoc = await doc.get();
+    return getDoc.exists;
+  }
+
+
 }

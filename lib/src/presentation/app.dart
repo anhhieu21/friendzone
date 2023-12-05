@@ -229,7 +229,7 @@ class MultiBlocRepoAndProvider extends StatelessWidget {
             create: (_) =>
                 FriendzoneBloc(RepositoryProvider.of<UserRepositoryImpl>(_)),
           ),
-             BlocProvider(
+          BlocProvider(
             create: (_) =>
                 WeatherCubit(RepositoryProvider.of<WeatherRepositoryImpl>(_)),
           )

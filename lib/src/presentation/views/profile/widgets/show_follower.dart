@@ -20,6 +20,12 @@ class _ShowFollowerState extends State<ShowFollower>
   }
 
   @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [

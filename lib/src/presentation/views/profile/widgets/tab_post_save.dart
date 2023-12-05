@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:friendzone/src/config/routes/path.dart';
 import 'package:friendzone/src/presentation/views/profile/widgets/item_post_save.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../domain/models/post.dart';
 
@@ -9,14 +11,16 @@ class TabPostSave extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ListView.builder(
-          itemCount: listPost.length,
-          itemBuilder: (context, index) {
-            final item = listPost[index];
-            return ItemPostSave(post: item);
-          }),
-    );
+    return ListView.builder(
+        itemCount: listPost.length,
+        itemBuilder: (context, index) {
+          final item = listPost[index];
+          return InkWell(
+              onTap: () {
+                context.pushNamed(RoutePath.routeName(RoutePath.postDetail),
+                    extra: item);
+              },
+              child: ItemPostSave(post: item));
+        });
   }
 }

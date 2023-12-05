@@ -21,7 +21,7 @@ class Like {
     Map map = doc.data() as Map;
     return Like(
       id: map['id'] ?? '',
-      idsUser: List<String>.from(map['idsUser']),
+      idsUser: List<String>.from(map['idsUser'] ?? []),
     );
   }
 }

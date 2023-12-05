@@ -26,6 +26,11 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = SizeEx(context).screenSize;
     return SafeArea(

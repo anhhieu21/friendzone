@@ -12,3 +12,5 @@ class Menu {
 }
 
 enum MenuReels { like, comment, create }
+
+enum MenuPost { like, comment, share }

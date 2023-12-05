@@ -255,4 +255,5 @@ class UserRepositoryImpl implements UserRepository {
     }
     return list;
   }
+  
 }
