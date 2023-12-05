@@ -19,9 +19,11 @@ abstract class PostRepository {
 
   Future likePost(Post post, UserModel user);
 
-  Future<Like?> getLikePost(Post post);
+  Future<Like?> getLikePost(String id);
 
   Future<List<Comment>> getComments(String idPost);
 
   Future<Comment> insertComments(String idPost, Comment comment);
+
+  Future<bool> isSaved(String id);
 }

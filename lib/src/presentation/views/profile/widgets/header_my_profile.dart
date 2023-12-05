@@ -82,7 +82,7 @@ class HeaderMyProfile extends StatelessWidget {
 
   _showFollower(BuildContext context) async {
     final size = MediaQuery.of(context).size;
-    showBottomSheet(
+    showModalBottomSheet(
         context: context,
         backgroundColor: colorWhite.withOpacity(0.98),
         constraints: BoxConstraints(maxHeight: size.height * 0.8),
@@ -93,6 +93,4 @@ class HeaderMyProfile extends StatelessWidget {
     BlocProvider.of<UpdateProfileCubit>(context)
         .choseImage(isUpdateBackground: true);
   }
-
- 
 }

@@ -25,6 +25,7 @@ class _MainScreenState extends State<MainScreen>
   List<Widget> _listView = [];
   StreamController<int> navStream = StreamController<int>();
   List<NavBarItemData> menuBottomNavBar = [];
+  
   @override
   void initState() {
     final remoteConfig = FirebaseRemoteConfig.instance;

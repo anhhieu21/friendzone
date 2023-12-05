@@ -69,7 +69,7 @@ class PostItem extends StatelessWidget {
                       return null;
                     }, builder: (_, state) {
                       return PostButtonBar(
-                          post: post, callBack: (_) => _likePost(_, state));
+                          post: post, callBack: (value) => _likePost(_, state));
                     })
                   ],
                 ),

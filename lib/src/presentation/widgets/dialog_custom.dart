@@ -15,6 +15,7 @@ class DialogCustom {
       showDialog(
           context: context,
           barrierColor: Colors.transparent,
+          barrierDismissible: false,
           builder: (_) {
             Future.delayed(
                 duration ?? const Duration(seconds: 3), () => context.pop());

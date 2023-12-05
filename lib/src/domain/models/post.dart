@@ -38,6 +38,7 @@ class Post extends Feed {
     return {
       "id": id,
       'idUser': idUser,
+      'avartarAuthor': avartarAuthor,
       'content': content,
       'imageUrl': imagesUrl,
       'author': author,
