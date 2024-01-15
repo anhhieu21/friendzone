@@ -69,14 +69,16 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                   ],
                 ),
                 BodyPost(post: post, liked: state.isLiked ?? false),
-                const PostComments(),
+                PostComments(
+                  list: state.comments ?? [],
+                ),
               ],
             );
           })),
           Container(
-            height: 80,
             color: colorGrey.shade100,
-            padding: const EdgeInsets.fromLTRB(16.0, 4.0, 0, 16.0),
+            padding: EdgeInsets.fromLTRB(
+                16.0, 4.0, 0, MediaQuery.of(context).viewInsets.bottom),
             child: Row(
               children: [
                 Expanded(
@@ -84,7 +86,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                     controller: textEditingController,
                     decoration: InputDecoration(
                       filled: true,
-                      hintText: 'comment',
+                      hintText: 'commentx',
                       hintStyle: const TextStyle(fontSize: 14),
                       contentPadding: const EdgeInsets.all(16),
                       border: OutlineInputBorder(

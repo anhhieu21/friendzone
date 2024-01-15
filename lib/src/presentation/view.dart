@@ -13,7 +13,7 @@ export 'views/chats/widgets/item_list_conversation.dart';
 export 'views/friendzone/view/friend_zone_screen.dart';
 export 'views/home/view/feed_detail_screen.dart';
 export 'views/home/view/home_screen.dart';
-export 'views/post/view/post_detail_sscreen.dart';
+export 'views/post/view/post_detail_screen.dart';
 export 'views/home/view/up_new_feed.dart';
 export 'views/home/widgets/app_bar_home.dart';
 export 'views/home/widgets/list_new_feed.dart';

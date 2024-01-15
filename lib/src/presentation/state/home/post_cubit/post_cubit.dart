@@ -15,15 +15,16 @@ class PostCubit extends Cubit<PostCubitState> {
 
   Future<void> init(String id) async {
     String? liked;
+    _comments = await postRepository.getComments(id);
     final save = await postRepository.isSaved(id);
-
     final res = await postRepository.getLikePost(id);
     final idUser = FirebaseAuth.instance.currentUser!.uid;
     if (res != null) {
       liked = res.idsUser.firstWhereOrNull((e) => e == idUser);
     }
 
-    emit(state.copyWith(isSaved: save, isLiked: liked != null));
+    emit(state.copyWith(
+        isSaved: save, isLiked: liked != null, comments: _comments));
   }
 
   Future<void> likePost(Post post, UserModel userModel) async {
@@ -40,7 +41,6 @@ class PostCubit extends Cubit<PostCubitState> {
     try {
       final res = await postRepository.getComments(idPost);
       _comments = res;
-      emit(state.copyWith(comments: res));
     } catch (error) {
       emit(state.copyWith(error: error.toString()));
     }
@@ -50,7 +50,6 @@ class PostCubit extends Cubit<PostCubitState> {
     try {
       final res = await postRepository.insertComments(idPost, comment);
       _comments.add(res);
-      emit(state.copyWith(comments: _comments));
     } catch (error) {
       emit(state.copyWith(error: error.toString()));
     }

@@ -45,12 +45,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDAxYGXyK3NrVrEXeIIGNPGUDKNfoDsUyo',
-    appId: '1:817118585641:web:38b31217e02959be02cd38',
+    appId: '1:817118585641:web:fa14d1a9c13fd0b802cd38',
     messagingSenderId: '817118585641',
     projectId: 'travelzone-908f0',
     authDomain: 'travelzone-908f0.firebaseapp.com',
     storageBucket: 'travelzone-908f0.appspot.com',
-    measurementId: 'G-J36XJKJ1S9',
+    measurementId: 'G-9RL8YPCNS7',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -67,10 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '817118585641',
     projectId: 'travelzone-908f0',
     storageBucket: 'travelzone-908f0.appspot.com',
-    androidClientId:
-        '817118585641-2ekgan795urfdfvd7mt31ar5supo3cfn.apps.googleusercontent.com',
-    iosClientId:
-        '817118585641-62v0c4i2jebegi1p529eu9isp7npnrrk.apps.googleusercontent.com',
+    androidClientId: '817118585641-2ekgan795urfdfvd7mt31ar5supo3cfn.apps.googleusercontent.com',
+    iosClientId: '817118585641-62v0c4i2jebegi1p529eu9isp7npnrrk.apps.googleusercontent.com',
     iosBundleId: 'com.example.friendzone',
   );
 
@@ -80,10 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '817118585641',
     projectId: 'travelzone-908f0',
     storageBucket: 'travelzone-908f0.appspot.com',
-    androidClientId:
-        '817118585641-2ekgan795urfdfvd7mt31ar5supo3cfn.apps.googleusercontent.com',
-    iosClientId:
-        '817118585641-62v0c4i2jebegi1p529eu9isp7npnrrk.apps.googleusercontent.com',
+    androidClientId: '817118585641-2ekgan795urfdfvd7mt31ar5supo3cfn.apps.googleusercontent.com',
+    iosClientId: '817118585641-62v0c4i2jebegi1p529eu9isp7npnrrk.apps.googleusercontent.com',
     iosBundleId: 'com.example.friendzone',
   );
 }

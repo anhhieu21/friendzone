@@ -31,7 +31,7 @@ class PostButtonBar extends StatelessWidget {
               ],
             )),
         IconButton(
-            onPressed: () {},
+            onPressed: () => callBack(MenuPost.comment),
             icon: Row(
               children: [
                 Icon(
@@ -42,7 +42,7 @@ class PostButtonBar extends StatelessWidget {
               ],
             )),
         IconButton(
-            onPressed: () {},
+            onPressed: () => callBack(MenuPost.share),
             icon: Row(
               children: [
                 Icon(

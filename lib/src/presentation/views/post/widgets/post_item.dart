@@ -21,9 +21,22 @@ class PostItem extends StatelessWidget {
   }
 
   _postDetail(BuildContext context) {
-    context.read<PostCubit>().commentPost(item.id).then((value) {
-      context.pushNamed(RoutePath.routeName(RoutePath.postDetail), extra: item);
-    });
+    context.pushNamed(RoutePath.routeName(RoutePath.postDetail), extra: item);
+  }
+
+  _handleButtonBar(BuildContext context,
+      {required MenuPost value, UserModel? user}) {
+    switch (value) {
+      case MenuPost.like:
+        _likePost(context, user);
+        break;
+      case MenuPost.comment:
+        _postDetail(context);
+        break;
+      case MenuPost.share:
+        break;
+      default:
+    }
   }
 
   @override
@@ -69,7 +82,9 @@ class PostItem extends StatelessWidget {
                       return null;
                     }, builder: (_, state) {
                       return PostButtonBar(
-                          post: post, callBack: (value) => _likePost(_, state));
+                          post: post,
+                          callBack: (value) =>
+                              _handleButtonBar(_, value: value, user: state));
                     })
                   ],
                 ),
