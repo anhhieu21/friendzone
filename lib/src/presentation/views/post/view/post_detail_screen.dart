@@ -68,7 +68,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                     )
                   ],
                 ),
-                BodyPost(post: post, liked: state.isLiked ?? false),
+                BodyPost(post: post),
                 PostComments(
                   list: state.comments ?? [],
                 ),
@@ -132,11 +132,9 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
 
 class BodyPost extends StatelessWidget {
   final Post post;
-  final bool liked;
   const BodyPost({
     super.key,
     required this.post,
-    required this.liked,
   });
   @override
   Widget build(BuildContext context) {
@@ -197,7 +195,6 @@ class BodyPost extends StatelessWidget {
             }, builder: (_, state) {
               return PostButtonBar(
                   post: post,
-                  liked: liked,
                   callBack: (value) =>
                       _handleCallBack(context, value, post, state!));
             }),

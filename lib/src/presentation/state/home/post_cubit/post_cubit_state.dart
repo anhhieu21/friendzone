@@ -5,27 +5,24 @@ class PostCubitState {
   final Post? post;
   final List<Comment>? comments;
   final bool? isSaved;
-  final bool? isLiked;
   const PostCubitState({
     this.error,
     this.post,
     this.comments,
     this.isSaved,
-    this.isLiked,
   });
 
-  PostCubitState copyWith(
-      {String? error,
-      Post? post,
-      List<Comment>? comments,
-      bool? isSaved,
-      bool? isLiked}) {
+  PostCubitState copyWith({
+    String? error,
+    Post? post,
+    List<Comment>? comments,
+    bool? isSaved,
+  }) {
     return PostCubitState(
       error: error ?? this.error,
       post: post,
       comments: comments,
       isSaved: isSaved,
-      isLiked: isLiked,
     );
   }
 }

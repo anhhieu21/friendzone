@@ -17,7 +17,7 @@ abstract class PostRepository {
       required UserModel userModel,
       bool? visible});
 
-  Future likePost(Post post, UserModel user);
+  Future<Post?> likePost(Post post, UserModel user);
 
   Future<Like?> getLikePost(String id);
 

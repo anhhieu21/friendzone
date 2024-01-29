@@ -12,7 +12,10 @@ class ListPost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AllPostCubit, AllPostState>(builder: (context, state) {
+    return BlocBuilder<AllPostCubit, AllPostState>(
+        buildWhen: (previous, current) {
+      return current is AllPostShow;
+    }, builder: (context, state) {
       final listPost = state is AllPostShow ? state.listPost : <Post>[];
       return SliverList(
           delegate: SliverChildBuilderDelegate(childCount: listPost.length,
@@ -30,50 +33,57 @@ class ListPost extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         PostItem(item: item),
-        if (isLoadItem)
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Shimmer.fromColors(
-              baseColor: colorGrey.shade100,
-              highlightColor: colorGrey.shade300,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                          color: colorWhite,
-                          borderRadius: BorderRadius.circular(16.0))),
-                  const SizedBox(width: 8.0),
-                  Expanded(
-                      child: Column(
-                    children: [
-                      Container(
-                          height: 20,
-                          decoration: BoxDecoration(
-                              color: colorWhite,
-                              borderRadius: BorderRadius.circular(16.0))),
-                      Container(
-                          height: 20,
-                          margin: const EdgeInsets.only(
-                              right: 50, top: 8, bottom: 8),
-                          decoration: BoxDecoration(
-                              color: colorWhite,
-                              borderRadius: BorderRadius.circular(16.0))),
-                      Container(
-                          height: 20,
-                          margin: const EdgeInsets.only(right: 50),
-                          decoration: BoxDecoration(
-                              color: colorWhite,
-                              borderRadius: BorderRadius.circular(16.0))),
-                    ],
-                  ))
-                ],
-              ),
-            ),
-          )
+        if (isLoadItem) const ItemLoading(),
       ],
+    );
+  }
+}
+
+class ItemLoading extends StatelessWidget {
+  const ItemLoading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Shimmer.fromColors(
+        baseColor: colorGrey.shade100,
+        highlightColor: colorGrey.shade300,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                    color: colorWhite,
+                    borderRadius: BorderRadius.circular(16.0))),
+            const SizedBox(width: 8.0),
+            Expanded(
+                child: Column(
+              children: [
+                Container(
+                    height: 20,
+                    decoration: BoxDecoration(
+                        color: colorWhite,
+                        borderRadius: BorderRadius.circular(16.0))),
+                Container(
+                    height: 20,
+                    margin: const EdgeInsets.only(right: 50, top: 8, bottom: 8),
+                    decoration: BoxDecoration(
+                        color: colorWhite,
+                        borderRadius: BorderRadius.circular(16.0))),
+                Container(
+                    height: 20,
+                    margin: const EdgeInsets.only(right: 50),
+                    decoration: BoxDecoration(
+                        color: colorWhite,
+                        borderRadius: BorderRadius.circular(16.0))),
+              ],
+            ))
+          ],
+        ),
+      ),
     );
   }
 }

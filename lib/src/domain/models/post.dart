@@ -7,6 +7,7 @@ class Post extends Feed {
   String like;
   bool visible;
   int totalComment = 0;
+  bool isLiked;
   Post({
     required super.id,
     required super.idUser,
@@ -17,6 +18,7 @@ class Post extends Feed {
     required this.content,
     required this.like,
     required this.visible,
+    this.isLiked =false,
   });
 
   factory Post.fromFirestore(DocumentSnapshot doc) {

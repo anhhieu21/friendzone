@@ -126,16 +126,14 @@ class PostRepositoryImpl implements PostRepository {
   }
 
   @override
-  Future likePost(Post post, UserModel user) async {
-    final likeCount = int.parse(post.like) + 1;
+  Future<Post?> likePost(Post post, UserModel user) async {
+    var likeCount = int.parse(post.like) + 1;
     try {
       final docLike = firestore.collection("like").doc(post.id);
       final getDocLike = await docLike.get();
       if (!getDocLike.exists) {
         final like = Like(id: post.id, idsUser: [user.idUser]);
         await docLike.set(like.toMap());
-        await _updateLike(post, likeCount);
-        post.like = likeCount.toString();
       } else {
         final x = Like.fromFirestore(getDocLike)
             .idsUser
@@ -144,15 +142,22 @@ class PostRepositoryImpl implements PostRepository {
           await docLike.update({
             "idsUser": FieldValue.arrayUnion([user.idUser]),
           });
-          await _updateLike(post, likeCount);
-          post.like = likeCount.toString();
+        } else {
+          likeCount -= 2;
+          docLike.update({
+            "idsUser": FieldValue.arrayRemove([user.idUser])
+          });
+          post.isLiked = false;
         }
       }
+      await _updateLike(post, likeCount);
+      post.like = likeCount.toString();
       return post;
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
+      return null;
     }
   }
 
@@ -230,6 +235,4 @@ class PostRepositoryImpl implements PostRepository {
     final getDoc = await doc.get();
     return getDoc.exists;
   }
-
-
 }

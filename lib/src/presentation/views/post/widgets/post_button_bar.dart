@@ -7,10 +7,8 @@ import 'package:ionicons/ionicons.dart';
 
 class PostButtonBar extends StatelessWidget {
   final Post post;
-  final bool? liked;
   final Function(MenuPost menuPost) callBack;
-  const PostButtonBar(
-      {super.key, required this.post, required this.callBack, this.liked});
+  const PostButtonBar({super.key, required this.post, required this.callBack});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +20,7 @@ class PostButtonBar extends StatelessWidget {
             icon: Row(
               children: [
                 Icon(
-                  liked != null && liked!
-                      ? Ionicons.heart
-                      : Ionicons.heart_outline,
+                  post.isLiked ? Ionicons.heart : Ionicons.heart_outline,
                   color: colorBlue.shade400,
                 ),
                 Text(post.like)

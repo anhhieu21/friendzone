@@ -232,7 +232,7 @@ class MultiBlocRepoAndProvider extends StatelessWidget {
           BlocProvider(
             create: (_) =>
                 WeatherCubit(RepositoryProvider.of<WeatherRepositoryImpl>(_)),
-          )
+          ),
         ], child: child));
   }
 }
