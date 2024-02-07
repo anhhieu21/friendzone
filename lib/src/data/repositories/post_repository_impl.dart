@@ -17,11 +17,12 @@ class PostRepositoryImpl implements PostRepository {
   @override
   Future<List<Post>> getAllPost() async {
     List<Post> listPost = [];
-    querySnapshotAllPost = await _queryAllPost().limit(5).get();
+    querySnapshotAllPost = await _queryAllPost().limit(20).get();
     for (var doc in querySnapshotAllPost.docs) {
       Post post = Post.fromFirestore(doc);
       listPost.add(post);
     }
+    // listPost.sort((a, b) => a.createdAt.compareTo(b.createdAt));
     return listPost;
   }
 
@@ -32,12 +33,13 @@ class PostRepositoryImpl implements PostRepository {
           querySnapshotAllPost.docs[querySnapshotAllPost.docs.length - 1];
       List<Post> listPost = [];
       QuerySnapshot querySnapshot =
-          await _queryAllPost().startAfterDocument(lastVisible).limit(5).get();
+          await _queryAllPost().startAfterDocument(lastVisible).limit(20).get();
       querySnapshotAllPost = querySnapshot;
       for (var doc in querySnapshot.docs) {
         Post post = Post.fromFirestore(doc);
         listPost.add(post);
       }
+      // listPost.sort((a, b) => a.createdAt.compareTo(b.createdAt));
       return listPost;
     }
     return [];
@@ -46,8 +48,6 @@ class PostRepositoryImpl implements PostRepository {
   Query _queryAllPost() => firestore
       .collection("post")
       .where("visible", isEqualTo: true)
-      .where("idUser", isNotEqualTo: FirebaseAuth.instance.currentUser!.uid)
-      .orderBy("idUser")
       .orderBy("createdAt", descending: true);
 
   @override

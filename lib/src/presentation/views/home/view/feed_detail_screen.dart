@@ -78,24 +78,27 @@ class ItemPage extends StatelessWidget {
               onPressed: () => context.pop(), icon: const Icon(Ionicons.close))
         ],
       ),
-      body: Center(
-        child: CachedNetworkImage(
-          imageUrl: item.imagesUrl.first,
-        ),
+      body: Column(
+        children: [
+          Expanded(
+            child: CachedNetworkImage(
+              imageUrl: item.imagesUrl.first,
+            ),
+          ),
+          _bottomAction(context),
+        ],
       ),
-      bottomNavigationBar: _bottomAction(),
     );
   }
 
-  Widget _bottomAction() {
+  Widget _bottomAction(context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 0, 8, 16),
-      height: kBottomNavigationBarHeight,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           const Expanded(child: CustomTextField(hint: 'hint', error: 'error')),
-          IconButton(onPressed: () {}, icon: const Icon(Ionicons.chatbubble))
+          IconButton(onPressed: () {}, icon: const Icon(Ionicons.send))
         ],
       ),
     );

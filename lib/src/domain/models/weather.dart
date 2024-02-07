@@ -195,7 +195,7 @@ class Weather {
 }
 
 class Wind {
-  double? speed;
+  dynamic speed;
   int? deg;
 
   Wind({this.speed, this.deg});

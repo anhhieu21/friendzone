@@ -37,8 +37,9 @@ class ItemNewFeed extends StatelessWidget {
                       image: DecorationImage(
                           fit: BoxFit.cover,
                           image: CachedNetworkImageProvider(
-                            item.imagesUrl.first,
-                          )),
+                              item.imagesUrl.first,
+                              maxHeight: 200,
+                              maxWidth: 200)),
                     )),
               ),
               Positioned(

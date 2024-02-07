@@ -51,6 +51,8 @@ class LayoutImages extends StatelessWidget {
         child: CachedNetworkImage(
           imageUrl: url,
           fit: BoxFit.cover,
+          maxHeightDiskCache: 400,
+          memCacheHeight: 400,
         ),
       ),
     );
