@@ -68,10 +68,10 @@ class _VideoReelState extends State<VideoReel> {
               return Stack(
                 alignment: Alignment.center,
                 children: [
-                  // AspectRatio(
-                  //   aspectRatio: 16 / 9,
-                  //   child: VideoPlayer(_controller),
-                  // ),
+                  AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: VideoPlayer(_controller),
+                  ),
                   Positioned(
                     child: AnimatedOpacity(
                       opacity: isShow ? 1 : 0,

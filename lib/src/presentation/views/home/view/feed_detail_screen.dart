@@ -27,6 +27,12 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> {
   }
 
   @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<FeedCubit, FeedState>(buildWhen: (previous, current) {
       if (current is FeedLoaded) {
