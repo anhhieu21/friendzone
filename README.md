@@ -5,17 +5,14 @@ With a focus on essential features reminiscent of Facebook, our platform enables
 
 
 ## Light Mode 
-![friendzone-cover](https://github.com/anhhieu21/friendzone/assets/90468680/60d4efdb-4954-4472-8e63-9fb1955a9123)
-## Dark Mode
-- Processing
-  - [x] Change theme ready
-  - [x] Handle other place
-  - [ ] Done loading 80%
-## Getting Started
+![friendzone-cover](https://github.com/anhhieu21/friendzone/assets/90468680/c811e516-a115-4813-80b5-91be1b0f8447)
 
+## Dark Mode
+
+## Getting Started
 ### Flutter
-- Version : v3.10.4
-- Dart : v3.0.3
+- Version : v3.16.9
+- Dart : v3.2.6
 - State management :
   `Bloc` https://bloclibrary.dev/#/
 - Router :
@@ -25,7 +22,7 @@ With a focus on essential features reminiscent of Facebook, our platform enables
 - Add project.
 - Config project with project firebase.
 - Firestore :
-  main colection ( `post` , `stories`, `users` ).
+  main colection ( `post`, `reel`, `stories`, `users` ).
 - Authencation
 - Storage
 ## Feature
@@ -33,7 +30,7 @@ With a focus on essential features reminiscent of Facebook, our platform enables
   - Login user account, login with google account
   - Register with email
 ### Main screen:
-  - :joystick: Nav-bar-bottom : navigate [ home, reels, chat, friend search, profile ] 
+  - :joystick: Nav-bar-bottom : navigate [ home, reels, friend search, profile ] 
   - :newspaper: Home screen:
       - App bar : you can go write-post screen, follow notification
       - :memo: Navigate to write-post screen: create your post here text, file ( image or video) , use can up multiple file, emoji
@@ -45,8 +42,13 @@ With a focus on essential features reminiscent of Facebook, our platform enables
       - Here show short-video of user
       - Can like, create comment in reel
   - :left_speech_bubble: Chat screen:
+      - Chat with your friends
   - :people_holding_hands: Friend-search screen:
   - :mechanic: Profile screen:
+      - Edit your info
+      - Upload your avatar and cover
+      - All your post in here
+      - Again enjoy post saved
 ## Structure
 ```bash
 .
