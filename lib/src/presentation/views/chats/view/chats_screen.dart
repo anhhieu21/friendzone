@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendzone/src/config/themes/color.dart';
+import 'package:friendzone/src/core/config/themes/color.dart';
 import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/views/chats/view/chats_option_screen.dart';
 import 'package:friendzone/src/presentation/widgets/ontap_effect.dart';

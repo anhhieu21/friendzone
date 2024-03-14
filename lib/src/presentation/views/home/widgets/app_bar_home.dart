@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/domain/models/user_model.dart';
@@ -30,7 +29,7 @@ class AppBarHome extends StatelessWidget {
               selector: (state) => state is MyDataState ? state.user : null,
               builder: (context, user) => CircleAvatar(
                 radius: 20,
-                backgroundImage: CachedNetworkImageProvider(
+                backgroundImage: NetworkImage(
                   user?.avartar ?? urlAvatar,
                 ),
               ),

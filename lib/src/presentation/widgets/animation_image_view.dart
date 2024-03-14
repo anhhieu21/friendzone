@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:friendzone/src/utils/constants/constants.dart';
+import 'package:friendzone/src/core/utils/constants/constants.dart';
 
 class AnimationImageView extends StatefulWidget {
   final Widget child;

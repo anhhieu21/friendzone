@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzone/src/config.dart';
 import 'package:ionicons/ionicons.dart';
@@ -17,17 +16,18 @@ class AvatarProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CachedNetworkImage(
-          imageUrl: url,
+        // TODO: add image circle
+        Image.network(
+          url,
           fit: BoxFit.cover,
-          imageBuilder: (context, imageProvider) => CircleAvatar(
-            radius: radius * 1.05,
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            child: CircleAvatar(
-              radius: radius,
-              backgroundImage: imageProvider,
-            ),
-          ),
+          // imageBuilder: (context, imageProvider) => CircleAvatar(
+          //   radius: radius * 1.05,
+          //   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          //   child: CircleAvatar(
+          //     radius: radius,
+          //     backgroundImage: imageProvider,
+          //   ),
+          // ),
         ),
         if (!isViewer)
           Positioned(

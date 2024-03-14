@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/domain.dart';
@@ -12,8 +11,12 @@ class ItemNewFeed extends StatelessWidget {
   final Size size;
   final Feed item;
   final int index;
-  const ItemNewFeed(
-      {super.key, required this.size, required this.item, required this.index});
+  const ItemNewFeed({
+    super.key,
+    required this.size,
+    required this.item,
+    required this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +34,20 @@ class ItemNewFeed extends StatelessWidget {
                     extra: index),
                 radius: 20,
                 child: Container(
-                    margin: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: CachedNetworkImageProvider(
+                  margin: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.blue,
+                    image: item.imagesUrl.isNotEmpty
+                        ? DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
                               item.imagesUrl.first,
-                              maxHeight: 200,
-                              maxWidth: 200)),
-                    )),
+                            ),
+                          )
+                        : null,
+                  ),
+                ),
               ),
               Positioned(
                   top: 6,
@@ -50,8 +57,7 @@ class ItemNewFeed extends StatelessWidget {
                     backgroundColor: colorBlue,
                     child: CircleAvatar(
                       radius: 18,
-                      backgroundImage:
-                          CachedNetworkImageProvider(item.avartarAuthor),
+                      backgroundImage: NetworkImage(item.avartarAuthor),
                     ),
                   ))
             ],

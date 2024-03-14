@@ -1,10 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ionicons/ionicons.dart';
 
-import '../../../../config/themes/color.dart';
-import '../../../../utils/constants/list_img_fake.dart';
+import '../../../../core/config/themes/color.dart';
+import '../../../../core/utils/constants/list_img_fake.dart';
 
 class ToolBarReel extends StatelessWidget {
   const ToolBarReel({super.key});
@@ -18,7 +17,7 @@ class ToolBarReel extends StatelessWidget {
         child: Row(
           children: [
             const CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider(urlAvatar),
+                backgroundImage: NetworkImage(urlAvatar),
                 radius: 30),
             Expanded(
                 child: Row(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../../../../config/themes/color.dart';
+import '../../../../core/config/themes/color.dart';
 import '../../../state/settings/language/language_cubit.dart';
 import 'sub_item_setting.dart';
 

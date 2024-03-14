@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendzone/src/config/routes/path.dart';
-import 'package:friendzone/src/config/themes/color.dart';
+import 'package:friendzone/src/core/config/routes/path.dart';
+import 'package:friendzone/src/core/config/themes/color.dart';
 import 'package:friendzone/src/presentation/shared.dart';
 import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/widgets/animation_popup_menu.dart';

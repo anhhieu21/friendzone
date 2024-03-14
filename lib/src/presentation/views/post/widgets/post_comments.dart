@@ -1,6 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:friendzone/src/config/themes/color.dart';
+import 'package:friendzone/src/core/config/themes/color.dart';
 import 'package:friendzone/src/domain/models/comment.dart';
 import 'package:friendzone/src/utils.dart';
 
@@ -23,7 +22,7 @@ class PostComments extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 16,
-                  backgroundImage: CachedNetworkImageProvider(urlAvatar),
+                  backgroundImage: NetworkImage(urlAvatar),
                 ),
                 const SizedBox(width: 8.0),
                 Expanded(

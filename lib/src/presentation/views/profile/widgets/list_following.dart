@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/presentation/state.dart';
 
-import '../../../../config/themes/color.dart';
+import '../../../../core/config/themes/color.dart';
 
 class ListFollowing extends StatelessWidget {
   const ListFollowing({super.key});

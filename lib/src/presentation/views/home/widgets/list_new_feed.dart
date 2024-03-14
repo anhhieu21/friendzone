@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/presentation/state/home/feed/feed_cubit.dart';
@@ -78,9 +77,9 @@ class EmptyFeedList extends StatelessWidget {
                 child: BlocBuilder<MyAccountCubit, MyAccountState>(
                   builder: (context, state) {
                     if (state is MyDataState) {
-                      return CachedNetworkImage(
+                      return Image.network(
                         width: size.width / 4,
-                        imageUrl: state.user.avartar,
+                        state.user.avartar,
                         fit: BoxFit.cover,
                       );
                     }

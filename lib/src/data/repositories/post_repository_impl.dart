@@ -4,9 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:collection/collection.dart';
+import 'package:friendzone/src/core/utils/compress_file.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/domain/repositories/post_repository.dart';
-import 'package:friendzone/src/utils/constants/constants.dart';
+import 'package:friendzone/src/core/utils/constants/constants.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -55,8 +56,10 @@ class PostRepositoryImpl implements PostRepository {
       {int like = 0, bool? visible, required UserModel userModel}) async {
     try {
       //Upload to Firebase
-      final upLoad =
-          await storageRef.child('images/${basename(file.path)}').putFile(file);
+      final fileCompress = await CompressFile.compressAndGetFile(file, file.path);
+      final upLoad = await storageRef
+          .child('images/${basename(fileCompress.path)}')
+          .putFile(fileCompress);
 
       switch (upLoad.state) {
         case TaskState.paused:

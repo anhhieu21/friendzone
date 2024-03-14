@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:ionicons/ionicons.dart';
 
-import '../../../../config/themes/color.dart';
+import '../../../../core/config/themes/color.dart';
 import '../../../../domain/models/menu.dart';
 
 const edge = 16.0;

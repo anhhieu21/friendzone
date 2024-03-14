@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzone/src/domain/models/user_model.dart';
@@ -73,7 +72,7 @@ class _FriendZoneScreenState extends State<FriendZoneScreen> {
                   children: [
                     CircleAvatar(
                       radius: 25,
-                      backgroundImage: CachedNetworkImageProvider(e.avartar),
+                      backgroundImage: NetworkImage(e.avartar),
                     ),
                     const SizedBox(
                       width: 8.0,

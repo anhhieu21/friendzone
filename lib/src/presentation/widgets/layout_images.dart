@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:friendzone/src/config.dart';
@@ -7,6 +6,7 @@ import 'package:friendzone/src/presentation/widgets/animation_image_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class LayoutImages extends StatelessWidget {
   final List<String> images;
@@ -48,11 +48,10 @@ class LayoutImages extends StatelessWidget {
           : () => showViewDetail(context, url),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
-        child: CachedNetworkImage(
-          imageUrl: url,
+        child: FadeInImage.memoryNetwork(
+          placeholder: kTransparentImage,
+          image: url,
           fit: BoxFit.cover,
-          maxHeightDiskCache: 400,
-          memCacheHeight: 400,
         ),
       ),
     );
@@ -106,7 +105,7 @@ class ImageViewDetail extends StatelessWidget {
               maxScale: PhotoViewComputedScale.contained * 1.5,
               minScale: PhotoViewComputedScale.contained,
               initialScale: PhotoViewComputedScale.contained,
-              imageProvider: CachedNetworkImageProvider(url),
+              imageProvider: NetworkImage(url),
             )),
           ),
         ));

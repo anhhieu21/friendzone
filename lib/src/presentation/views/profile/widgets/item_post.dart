@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/domain/models/post.dart';
@@ -24,7 +23,7 @@ class ItemPost extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 image: DecorationImage(
-                    image: CachedNetworkImageProvider(
+                    image: NetworkImage(
                       item.imagesUrl.first,
                     ),
                     fit: BoxFit.cover)),

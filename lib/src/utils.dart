@@ -2,8 +2,8 @@
 
 library utils;
 
-export 'utils/constants/constants.dart';
-export 'utils/constants/list_img_fake.dart';
-export 'utils/extentions/dark_mode.dart';
-export 'utils/extentions/size_extention.dart';
-export 'utils/formatter.dart';
+export 'core/utils/constants/constants.dart';
+export 'core/utils/constants/list_img_fake.dart';
+export 'core/utils/extentions/dark_mode.dart';
+export 'core/utils/extentions/size_extention.dart';
+export 'core/utils/formatter.dart';

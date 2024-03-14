@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:friendzone/src/presentation/state.dart';
 
-import '../../../../config/themes/color.dart';
+import '../../../../core/config/themes/color.dart';
 
 class MySliverPersitentHeader extends SliverPersistentHeaderDelegate {
   final TabController tabController;

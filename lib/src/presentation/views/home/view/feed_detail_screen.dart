@@ -1,10 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/domain/models/feed.dart';
 import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/widgets/custom_textfield.dart';
-import 'package:friendzone/src/utils/formatter.dart';
+import 'package:friendzone/src/core/utils/formatter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -66,7 +65,7 @@ class ItemPage extends StatelessWidget {
         title: Row(mainAxisSize: MainAxisSize.min, children: [
           CircleAvatar(
             radius: 24,
-            backgroundImage: CachedNetworkImageProvider(item.avartarAuthor),
+            backgroundImage: NetworkImage(item.avartarAuthor),
           ),
           Expanded(
             child: ListTile(
@@ -87,8 +86,8 @@ class ItemPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: CachedNetworkImage(
-              imageUrl: item.imagesUrl.first,
+            child: Image.network(
+              item.imagesUrl.first,
             ),
           ),
           _bottomAction(context),

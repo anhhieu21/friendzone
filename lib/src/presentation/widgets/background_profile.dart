@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzone/src/config.dart';
 import 'package:ionicons/ionicons.dart';
@@ -14,7 +13,8 @@ class BackgroundProfile extends StatelessWidget {
     required this.url,
     required this.width,
     required this.height,
-    this.isViewer = false, this.callback,
+    this.isViewer = false,
+    this.callback,
   });
 
   @override
@@ -27,12 +27,12 @@ class BackgroundProfile extends StatelessWidget {
                 width: width,
                 height: height,
               )
-            : CachedNetworkImage(
-                imageUrl: url,
+            : Image.network(
+                url,
                 fit: BoxFit.cover,
                 width: width,
                 height: height,
-                errorWidget: (context, url, error) =>
+                errorBuilder: (context, url, error) =>
                     Container(color: colorGrey),
               ),
         if (!isViewer)
@@ -45,7 +45,7 @@ class BackgroundProfile extends StatelessWidget {
               padding: const EdgeInsets.all(4),
               style: IconButton.styleFrom(
                   backgroundColor: colorGrey.withOpacity(0.6)),
-              onPressed:callback,
+              onPressed: callback,
               icon: const Icon(Ionicons.pencil, color: colorWhite, size: 18),
             ),
           )

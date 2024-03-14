@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/domain.dart';
@@ -23,7 +22,7 @@ class ItemPostSave extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
                 image: DecorationImage(
-                    image: CachedNetworkImageProvider(post.imagesUrl.first),
+                    image: NetworkImage(post.imagesUrl.first),
                     fit: BoxFit.cover)),
           ),
           Expanded(

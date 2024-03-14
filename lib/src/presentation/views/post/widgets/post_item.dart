@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/config.dart';
@@ -115,7 +114,7 @@ class Author extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 24,
-            backgroundImage: CachedNetworkImageProvider(post.avartarAuthor),
+            backgroundImage: NetworkImage(post.avartarAuthor),
           ),
           Expanded(
             child: ListTile(

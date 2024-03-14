@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/src/config/routes/path.dart';
+import 'package:friendzone/src/core/config/routes/path.dart';
 import 'package:friendzone/src/presentation/views/profile/widgets/item_post_save.dart';
 import 'package:go_router/go_router.dart';
 

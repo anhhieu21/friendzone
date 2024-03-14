@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/domain.dart';
@@ -39,12 +38,13 @@ class ItemListConversation extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            CachedNetworkImage(
-              imageUrl: item.user!.avartar,
-              imageBuilder: (context, imageProvider) => CircleAvatar(
-                backgroundImage: imageProvider,
-                radius: size.width / 14,
-              ),
+            // TODO: add avartar
+            Image.network(
+              item.user!.avartar,
+              // imageBuilder: (context, imageProvider) => CircleAvatar(
+              //   backgroundImage: imageProvider,
+              //   radius: size.width / 14,
+              // ),
             ),
             const SizedBox(width: 8),
             Expanded(

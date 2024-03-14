@@ -2,6 +2,6 @@
 
 library config;
 
-export 'config/routes/path.dart';
-export 'config/themes/color.dart';
-export 'config/themes/theme.dart';
+export 'core/config/routes/path.dart';
+export 'core/config/themes/color.dart';
+export 'core/config/themes/theme.dart';

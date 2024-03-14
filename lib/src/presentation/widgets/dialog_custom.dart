@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/src/config/themes/color.dart';
+import 'package:friendzone/src/core/config/themes/color.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 

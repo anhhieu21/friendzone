@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:friendzone/src/core/utils/compress_file.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/domain/repositories/feed_repository.dart';
 import 'package:friendzone/src/utils.dart';
@@ -34,9 +35,13 @@ class FeedRepositoryImpl implements FeedRepository {
     Feed? feed;
     final file = File(image.path);
 
-    final imgRef = storageRef.child('images/${basename(file.path)}');
     try {
-      final upLoadTask = await imgRef.putFile(file);
+      //Upload to Firebase
+      final fileCompress =
+          await CompressFile.compressAndGetFile(file, file.path);
+      final upLoadTask = await storageRef
+          .child('images/${basename(fileCompress.path)}')
+          .putFile(fileCompress);
       switch (upLoadTask.state) {
         case TaskState.paused:
           if (kDebugMode) {

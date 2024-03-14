@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:friendzone/src/core/utils/compress_file.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/domain/repositories/user_repository.dart';
 import 'package:friendzone/src/utils.dart';
@@ -90,9 +91,11 @@ class UserRepositoryImpl implements UserRepository {
     try {
       String? urlImage;
       if (file != null) {
-        final upLoad = await storageRef
-            .child('avatar/${basename(file.path)}')
-            .putFile(file);
+       //Upload to Firebase
+      final fileCompress = await CompressFile.compressAndGetFile(file, file.path);
+      final upLoad = await storageRef
+          .child('images/${basename(fileCompress.path)}')
+          .putFile(fileCompress);
         switch (upLoad.state) {
           case TaskState.paused:
             log("Upload is paused.");
