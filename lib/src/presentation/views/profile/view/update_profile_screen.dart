@@ -79,8 +79,7 @@ class UpdateProfileScreen extends StatelessWidget {
                       } else {
                         return CircleAvatar(
                           radius: size.width / 8,
-                          backgroundImage:
-                              NetworkImage(userDetail.avartar),
+                          backgroundImage: NetworkImage(userDetail.avartar),
                         );
                       }
                     }),

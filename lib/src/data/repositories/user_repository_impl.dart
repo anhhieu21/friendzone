@@ -91,11 +91,12 @@ class UserRepositoryImpl implements UserRepository {
     try {
       String? urlImage;
       if (file != null) {
-       //Upload to Firebase
-      final fileCompress = await CompressFile.compressAndGetFile(file, file.path);
-      final upLoad = await storageRef
-          .child('images/${basename(fileCompress.path)}')
-          .putFile(fileCompress);
+        //Upload to Firebase
+        final fileCompress =
+            await CompressFile.compressAndGetFile(file, file.path);
+        final upLoad = await storageRef
+            .child('images/${basename(fileCompress.path)}')
+            .putFile(fileCompress);
         switch (upLoad.state) {
           case TaskState.paused:
             log("Upload is paused.");
@@ -258,5 +259,4 @@ class UserRepositoryImpl implements UserRepository {
     }
     return list;
   }
-  
 }

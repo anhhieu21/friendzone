@@ -4,5 +4,4 @@ class PostUseCase {
   final PostRepository _repository;
 
   const PostUseCase(this._repository);
-
 }

@@ -56,7 +56,8 @@ class PostRepositoryImpl implements PostRepository {
       {int like = 0, bool? visible, required UserModel userModel}) async {
     try {
       //Upload to Firebase
-      final fileCompress = await CompressFile.compressAndGetFile(file, file.path);
+      final fileCompress =
+          await CompressFile.compressAndGetFile(file, file.path);
       final upLoad = await storageRef
           .child('images/${basename(fileCompress.path)}')
           .putFile(fileCompress);

@@ -24,5 +24,5 @@ class UpdateProfileChoseImage extends UpdateProfileState {
   const UpdateProfileChoseImage(this.file, this.isUpdateBackground);
 
   @override
-  List<Object> get props => [file,isUpdateBackground];
+  List<Object> get props => [file, isUpdateBackground];
 }

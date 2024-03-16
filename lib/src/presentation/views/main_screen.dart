@@ -25,7 +25,7 @@ class _MainScreenState extends State<MainScreen>
   List<Widget> _listView = [];
   StreamController<int> navStream = StreamController<int>();
   List<NavBarItemData> menuBottomNavBar = [];
-  
+
   @override
   void initState() {
     final remoteConfig = FirebaseRemoteConfig.instance;
@@ -61,22 +61,24 @@ class _MainScreenState extends State<MainScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        extendBody: true,
-        body: TabBarView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: _tabController,
-          children: _listView,
-        ),
-        bottomNavigationBar: StreamBuilder<int>(
-            stream: navStream.stream,
-            builder: (context, snapshot) {
-              return NavBar(
-                  currentIndex: snapshot.data ?? _tabController.index,
-                  itemTapped: (value) {
-                    _tabController.index = value;
-                    navStream.sink.add(value);
-                  },
-                  items: menuBottomNavBar);
-            }));
+      extendBody: true,
+      body: TabBarView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: _tabController,
+        children: _listView,
+      ),
+      bottomNavigationBar: StreamBuilder<int>(
+        stream: navStream.stream,
+        builder: (context, snapshot) {
+          return NavBar(
+              currentIndex: snapshot.data ?? _tabController.index,
+              itemTapped: (value) {
+                _tabController.index = value;
+                navStream.sink.add(value);
+              },
+              items: menuBottomNavBar);
+        },
+      ),
+    );
   }
 }

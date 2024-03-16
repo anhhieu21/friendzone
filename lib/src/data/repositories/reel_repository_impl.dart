@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:friendzone/src/domain/models/reel.dart';
 import 'package:friendzone/src/domain/repositories/reel_repository.dart';
 
-class ReelRepositoryImpl implements ReelRepository{
+class ReelRepositoryImpl implements ReelRepository {
   final firestore = FirebaseFirestore.instance;
 
   @override

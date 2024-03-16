@@ -4,5 +4,4 @@ class ReelUseCase {
   final ReelRepository _repository;
 
   const ReelUseCase(this._repository);
-
 }

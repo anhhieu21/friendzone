@@ -17,8 +17,7 @@ class ToolBarReel extends StatelessWidget {
         child: Row(
           children: [
             const CircleAvatar(
-                backgroundImage: NetworkImage(urlAvatar),
-                radius: 30),
+                backgroundImage: NetworkImage(urlAvatar), radius: 30),
             Expanded(
                 child: Row(
               children: [

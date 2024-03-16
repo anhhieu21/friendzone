@@ -39,7 +39,7 @@ class FeedCubit extends Cubit<FeedState> {
     if (res != null) {
       _feeds.add(res);
       emit(FeedLoaded(_feeds));
-    
+
       return;
     } else {
       emit(FeedError());

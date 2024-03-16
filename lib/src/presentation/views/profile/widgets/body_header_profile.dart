@@ -39,8 +39,8 @@ class BodyHeaderProfile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-                onPressed: () => context.pushNamed(RoutePath.routeName(
-                    RoutePath.updateProfile),
+                onPressed: () => context.pushNamed(
+                    RoutePath.routeName(RoutePath.updateProfile),
                     extra: user),
                 style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),

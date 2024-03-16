@@ -167,8 +167,7 @@ class BodyPost extends StatelessWidget {
                   ),
                   CircleAvatar(
                     radius: 14,
-                    backgroundImage:
-                        NetworkImage(post.avartarAuthor),
+                    backgroundImage: NetworkImage(post.avartarAuthor),
                   ),
                 ],
               ),

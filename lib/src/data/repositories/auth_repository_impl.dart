@@ -6,8 +6,6 @@ import 'package:friendzone/src/data.dart';
 import 'package:friendzone/src/domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-
-
   final _firebaseAuth = FirebaseAuth.instance;
   final storageRef = FirebaseStorage.instance.ref();
   final fireStore = FirebaseFirestore.instance.collection('users');

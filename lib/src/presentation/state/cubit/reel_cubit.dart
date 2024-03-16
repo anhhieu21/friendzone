@@ -6,7 +6,7 @@ import 'package:friendzone/src/domain/repositories/reel_repository.dart';
 part 'reel_state.dart';
 
 class ReelCubit extends Cubit<ReelState> {
-   ReelRepository _reelRepository;
+  ReelRepository _reelRepository;
   ReelCubit(this._reelRepository) : super(ReelInitial()) {
     getReels();
   }

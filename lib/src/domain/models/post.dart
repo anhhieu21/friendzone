@@ -18,7 +18,7 @@ class Post extends Feed {
     required this.content,
     required this.like,
     required this.visible,
-    this.isLiked =false,
+    this.isLiked = false,
   });
 
   factory Post.fromFirestore(DocumentSnapshot doc) {
