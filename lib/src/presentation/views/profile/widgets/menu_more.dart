@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/core/config/routes/path.dart';
-import 'package:friendzone/src/core/config/themes/color.dart';
 import 'package:friendzone/src/presentation/shared.dart';
 import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/widgets/animation_popup_menu.dart';
@@ -79,10 +78,10 @@ class _MenuDropState extends State<MenuDrop> {
       },
       child: IconButton(
         onPressed: _openPopup,
-        style: IconButton.styleFrom(
-          backgroundColor: colorGrey.shade300,
+        style: IconButton.styleFrom(),
+        icon: const Icon(
+          Ionicons.ellipsis_horizontal,
         ),
-        icon: Icon(Ionicons.ellipsis_horizontal, color: colorBlue.shade500),
       ),
     );
   }

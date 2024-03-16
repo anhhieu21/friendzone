@@ -30,7 +30,6 @@ class MainChat extends StatelessWidget {
                 IconButton(
                   onPressed: () => _newConversaation(context),
                   icon: const Icon(Ionicons.pencil),
-                  style: IconButton.styleFrom(backgroundColor: colorWhite),
                 ),
                 Expanded(
                   child: BlocSelector<FriendzoneBloc, FriendzoneState,

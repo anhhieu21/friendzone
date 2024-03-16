@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/data/repositories/post_repository_impl.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/presentation/shared.dart';
@@ -111,14 +110,8 @@ class WritePost extends StatelessWidget {
                                                 contentController.text,
                                                 value ?? true,
                                                 user),
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  colorBlue.shade200,
-                                            ),
                                             child: const Text(
                                               'Đăng bài viết',
-                                              style:
-                                                  TextStyle(color: colorWhite),
                                             ),
                                           );
                                         },
@@ -137,17 +130,15 @@ class WritePost extends StatelessWidget {
                               height: size.width / 3,
                               width: size.width / 3,
                               decoration: BoxDecoration(
-                                  color: colorBlue.shade200,
                                   borderRadius: BorderRadius.circular(12)),
-                              child: Column(
+                              child: const Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(
                                     Ionicons.add_circle,
                                     size: 45,
-                                    color: colorGrey.shade200,
                                   ),
-                                  const Text('Chọn ảnh')
+                                  Text('Chọn ảnh')
                                 ],
                               ),
                             ),

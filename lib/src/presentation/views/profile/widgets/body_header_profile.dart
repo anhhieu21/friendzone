@@ -43,13 +43,12 @@ class BodyHeaderProfile extends StatelessWidget {
                     RoutePath.routeName(RoutePath.updateProfile),
                     extra: user),
                 style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    backgroundColor: colorGrey.shade300),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                ),
                 child: Text(
                   text.editProfile,
                   maxLines: 1,
-                  style: TextStyle(
-                      color: colorBlue.shade500, fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontWeight: FontWeight.w600),
                 )),
             const SizedBox(
               width: 10,

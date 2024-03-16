@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:ionicons/ionicons.dart';
 
-import '../../../../core/config/themes/color.dart';
 import '../../../../core/utils/constants/list_img_fake.dart';
 
 class ToolBarReel extends StatelessWidget {
@@ -30,7 +29,6 @@ class ToolBarReel extends StatelessWidget {
                         const Text('Solomon ares'),
                         TextButton(
                             style: TextButton.styleFrom(
-                                backgroundColor: colorGrey.shade300,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16.0)),
                             onPressed: () {},

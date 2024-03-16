@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 
-import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/presentation/shared.dart';
 import 'package:friendzone/src/presentation/state.dart';
@@ -75,7 +74,6 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
             );
           })),
           Container(
-            color: colorGrey.shade100,
             padding: EdgeInsets.fromLTRB(
                 16.0, 4.0, 0, MediaQuery.of(context).viewInsets.bottom),
             child: Row(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/src/core/config/themes/color.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -40,8 +39,8 @@ class DialogCustom {
         context: context,
         builder: (_) {
           return AlertDialog(
-            titleTextStyle: const TextStyle(
-                fontWeight: FontWeight.w600, color: colorBlack, fontSize: 16),
+            titleTextStyle:
+                const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
             title: Text(
               title,
               textAlign: TextAlign.center,
@@ -81,20 +80,18 @@ class DialogCustom {
         ? Navigator.pop(context)
         : showDialog(
             context: context,
-            builder: (_) => Dialog(
+            builder: (_) => const Dialog(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        CircularProgressIndicator(
-                          color: colorPinkButton.shade400,
-                        ),
-                        const SizedBox(
+                        CircularProgressIndicator(),
+                        SizedBox(
                           width: 8,
                         ),
-                        const Text(
+                        Text(
                           'Vui lòng đợi !',
                         )
                       ],
@@ -118,8 +115,6 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       onPressed: onPress,
-      style:
-          ElevatedButton.styleFrom(backgroundColor: colorPinkButton.shade300),
       icon: icon,
       label: Text(
         label,

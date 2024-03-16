@@ -37,17 +37,14 @@ class _CreateReelScreenState extends State<CreateReelScreen> {
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            color: colorWhite,
-            boxShadow: [
-              const BoxShadow(
-                color: colorWhite,
+            boxShadow: const [
+              BoxShadow(
                 blurRadius: 2,
                 spreadRadius: 1,
               ),
               BoxShadow(
-                color: colorGrey.withOpacity(0.1),
                 blurRadius: 5,
-                offset: const Offset(0, 2),
+                offset: Offset(0, 2),
                 spreadRadius: 2,
               )
             ]),

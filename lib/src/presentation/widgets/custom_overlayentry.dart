@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/src/core/config/themes/color.dart';
 
 class CustomOverlayEntry {
   static final instance = CustomOverlayEntry._();
@@ -22,8 +21,7 @@ class CustomOverlayEntry {
             Positioned.fill(
                 child: GestureDetector(
               onTap: hideOverlay,
-              child: Material(
-                  color: colorBlack.withOpacity(!withOpacity ? 0.9 : 0.3)),
+              child: const Material(),
             )),
             child
           ],
@@ -40,12 +38,9 @@ class CustomOverlayEntry {
 
   void loadingCircularProgressIndicator(BuildContext context) {
     showOverlay(context,
-        child: Center(
+        child: const Center(
           child: CircularProgressIndicator(
-              backgroundColor: colorPrimary.withOpacity(0.3),
-              color: colorPrimary,
-              strokeWidth: 6,
-              strokeCap: StrokeCap.round),
+              strokeWidth: 6, strokeCap: StrokeCap.round),
         ));
   }
 }

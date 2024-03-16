@@ -54,7 +54,6 @@ class ItemNewFeed extends StatelessWidget {
                   left: 6,
                   child: CircleAvatar(
                     radius: 20,
-                    backgroundColor: colorBlue,
                     child: CircleAvatar(
                       radius: 18,
                       backgroundImage: NetworkImage(item.avartarAuthor),
@@ -77,14 +76,12 @@ class ItemAddFeed extends StatelessWidget {
           width: 50,
           height: 50,
           margin: const EdgeInsets.only(top: 10),
-          decoration: BoxDecoration(
-              color: colorBlue.shade300.withOpacity(0.8),
-              borderRadius: const BorderRadius.only(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
                   topRight: Radius.circular(26),
                   bottomRight: Radius.circular(26))),
           child: const Icon(
             Ionicons.add_circle,
-            color: colorWhite,
             size: 40,
           )),
     );

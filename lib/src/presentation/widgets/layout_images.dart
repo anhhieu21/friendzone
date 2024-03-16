@@ -88,13 +88,12 @@ class ImageViewDetail extends StatelessWidget {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            leading: BackButton(color: colorWhite, onPressed: backPress),
+            leading: BackButton(onPressed: backPress),
             actions: [
               IconButton(
                   onPressed: saveImage,
                   icon: const Icon(
                     Ionicons.download_outline,
-                    color: colorWhite,
                   ))
             ],
           ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../../../../core/config/themes/color.dart';
 import '../../../state/settings/language/language_cubit.dart';
 import 'sub_item_setting.dart';
 
@@ -58,8 +57,8 @@ class BoxAccountCenter extends StatelessWidget {
               onPressed: () {},
               child: Text(
                 'More in account center',
-                style: textTheme.bodyLarge!
-                    .copyWith(color: colorBlue, fontWeight: FontWeight.w600),
+                style:
+                    textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600),
               ))
         ],
       ),

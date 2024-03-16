@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/presentation/state/settings/language/language_cubit.dart';
 
@@ -21,7 +20,6 @@ class PostButtonBar extends StatelessWidget {
               children: [
                 Icon(
                   post.isLiked ? Ionicons.heart : Ionicons.heart_outline,
-                  color: colorBlue.shade400,
                 ),
                 Text(post.like)
               ],
@@ -30,9 +28,8 @@ class PostButtonBar extends StatelessWidget {
             onPressed: () => callBack(MenuPost.comment),
             icon: Row(
               children: [
-                Icon(
+                const Icon(
                   Ionicons.chatbubble_ellipses_outline,
-                  color: colorBlue.shade400,
                 ),
                 Text('${post.totalComment} ${text.comments}')
               ],
@@ -41,9 +38,8 @@ class PostButtonBar extends StatelessWidget {
             onPressed: () => callBack(MenuPost.share),
             icon: Row(
               children: [
-                Icon(
+                const Icon(
                   Ionicons.arrow_redo_outline,
-                  color: colorBlue.shade400,
                 ),
                 Text(text.shared)
               ],

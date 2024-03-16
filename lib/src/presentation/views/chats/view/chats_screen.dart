@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendzone/src/core/config/themes/color.dart';
 import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/views/chats/view/chats_option_screen.dart';
 import 'package:friendzone/src/presentation/widgets/ontap_effect.dart';
@@ -127,7 +126,6 @@ class ItemMenuChat extends StatelessWidget {
                   Container(
                       padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
-                          color: colorGrey.shade100,
                           borderRadius: BorderRadius.circular(10.0)),
                       child: Icon(iconData)),
                   Expanded(
@@ -146,11 +144,10 @@ class ItemMenuChat extends StatelessWidget {
                 height: 30,
                 width: 6,
                 decoration: const BoxDecoration(
-                    color: colorPrimary,
                     borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(12.0),
-                      bottomRight: Radius.circular(12.0),
-                    )),
+                  topRight: Radius.circular(12.0),
+                  bottomRight: Radius.circular(12.0),
+                )),
               ),
             ),
         ],

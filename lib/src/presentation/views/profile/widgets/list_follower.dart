@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/presentation/state.dart';
 
-import '../../../../core/config/themes/color.dart';
-
 class ListFollower extends StatelessWidget {
   const ListFollower({super.key});
 
@@ -33,10 +31,7 @@ class ListFollower extends StatelessWidget {
                       const SizedBox(width: 8),
                       Expanded(child: Text(item.name)),
                       TextButton(
-                          onPressed: () {},
-                          style:
-                              TextButton.styleFrom(backgroundColor: colorWhite),
-                          child: const Text('Theo dõi'))
+                          onPressed: () {}, child: const Text('Theo dõi'))
                     ],
                   ),
                 );

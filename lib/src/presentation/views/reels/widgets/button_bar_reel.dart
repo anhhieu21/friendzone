@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:ionicons/ionicons.dart';
 
-import '../../../../core/config/themes/color.dart';
 import '../../../../domain/models/menu.dart';
 
 const edge = 16.0;
@@ -37,9 +36,9 @@ class ButtonBarReel extends StatelessWidget {
                   height: 35,
                   child: ElevatedButton.icon(
                       style: IconButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(26.0)),
-                          backgroundColor: colorGrey.withOpacity(0.4)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(26.0)),
+                      ),
                       onPressed: () => onPressed(e.func as MenuReels),
                       label: Text(e.title),
                       icon: Icon(e.iconData)),

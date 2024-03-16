@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/core/config/routes/path.dart';
-import 'package:friendzone/src/core/config/themes/color.dart';
 import 'package:friendzone/src/presentation/shared.dart';
 import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/view.dart';
@@ -84,7 +83,6 @@ class HeaderMyProfile extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     showModalBottomSheet(
         context: context,
-        backgroundColor: colorWhite.withOpacity(0.98),
         constraints: BoxConstraints(maxHeight: size.height * 0.8),
         builder: (_) => const ShowFollower());
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/src/config.dart';
 import 'package:ionicons/ionicons.dart';
 
 class AvatarProfile extends StatelessWidget {
@@ -36,12 +35,9 @@ class AvatarProfile extends StatelessWidget {
             child: IconButton(
               constraints: BoxConstraints(maxWidth: radius, maxHeight: radius),
               padding: const EdgeInsets.all(4),
-              style: IconButton.styleFrom(
-                  backgroundColor: colorGrey.withOpacity(0.6)),
               onPressed: () {},
               icon: const Icon(
                 Ionicons.camera,
-                color: colorWhite,
                 size: 18,
               ),
             ),

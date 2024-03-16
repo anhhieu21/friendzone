@@ -1,6 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -14,11 +13,12 @@ class MenuOptions extends StatelessWidget {
       child: DropdownButton2<Enum>(
           onChanged: (value) => onChanged(value),
           buttonStyleData: ButtonStyleData(
-              width: 150,
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.0),
-                  color: colorGrey.shade200)),
+            width: 150,
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+          ),
           dropdownStyleData: DropdownStyleData(
               offset: const Offset(0, -10),
               decoration:

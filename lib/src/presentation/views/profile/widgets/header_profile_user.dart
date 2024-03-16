@@ -93,9 +93,7 @@ class _HeaderProfileUserState extends State<HeaderProfileUser>
                               onPressed: isFollowed
                                   ? () {}
                                   : () => _follow(context, user),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: colorBlue.shade500,
-                              ),
+                              style: ElevatedButton.styleFrom(),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -118,12 +116,9 @@ class _HeaderProfileUserState extends State<HeaderProfileUser>
                     onPressed: () => context.pushNamed(
                         RoutePath.routeName(RoutePath.conversentation),
                         extra: widget.user),
-                    style: IconButton.styleFrom(
-                      backgroundColor: colorGrey.shade300,
-                    ),
-                    icon: Icon(
+                    style: IconButton.styleFrom(),
+                    icon: const Icon(
                       Ionicons.chatbubble,
-                      color: colorBlue.shade500,
                     )),
               ],
             ),
@@ -192,7 +187,6 @@ class _HeaderProfileUserState extends State<HeaderProfileUser>
     final size = MediaQuery.of(context).size;
     showBottomSheet(
         context: context,
-        backgroundColor: colorWhite.withOpacity(0.98),
         constraints: BoxConstraints(maxHeight: size.height * 0.8),
         builder: (_) => const ShowFollower());
   }

@@ -75,8 +75,6 @@ class UpNewFeedScreen extends StatelessWidget {
                           return null;
                         },
                         builder: (_, user) => ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: colorBlue),
                             onPressed: () => _createFeed(context, user!),
                             child: const Text(
                               "Chia sẽ",

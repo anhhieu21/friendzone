@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/src/core/config/themes/color.dart';
 import 'package:friendzone/src/domain/models/comment.dart';
 import 'package:friendzone/src/utils.dart';
 
@@ -32,7 +31,6 @@ class PostComments extends StatelessWidget {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            color: colorGrey.shade200,
                             borderRadius: BorderRadius.circular(12.0)),
                         padding: const EdgeInsets.all(8.0),
                         child: Column(

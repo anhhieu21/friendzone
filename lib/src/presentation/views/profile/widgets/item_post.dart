@@ -36,16 +36,16 @@ class ItemPost extends StatelessWidget {
               child: Container(
                   decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                   colors: [
-                    colorGrey.withOpacity(0.0),
-                    colorGrey.withOpacity(0.1),
-                    colorGrey.withOpacity(0.3),
-                    colorGrey.withOpacity(0.5),
+                    // colorGrey.withOpacity(0.0),
+                    // colorGrey.withOpacity(0.1),
+                    // colorGrey.withOpacity(0.3),
+                    // colorGrey.withOpacity(0.5),
                   ],
                   tileMode: TileMode.clamp,
-                  begin: const Alignment(0.0, 0.0),
-                  end: const Alignment(0.0, 0.6),
+                  begin: Alignment(0.0, 0.0),
+                  end: Alignment(0.0, 0.6),
                 ),
               ))),
           Positioned(
@@ -57,21 +57,18 @@ class ItemPost extends StatelessWidget {
                 children: [
                   IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Ionicons.heart_outline,
-                        color: colorBlue.shade400,
                       )),
                   IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Ionicons.chatbubble_ellipses_outline,
-                        color: colorBlue.shade400,
                       )),
                   IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Ionicons.arrow_redo_outline,
-                        color: colorBlue.shade400,
                       )),
                 ],
               ))

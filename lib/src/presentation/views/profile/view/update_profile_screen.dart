@@ -7,7 +7,6 @@ import 'package:friendzone/src/utils.dart';
 
 import 'package:ionicons/ionicons.dart';
 
-import '../../../../core/config/themes/color.dart';
 import '../../../../domain/models/user_model.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
@@ -88,9 +87,8 @@ class UpdateProfileScreen extends StatelessWidget {
                       right: 0,
                       child: IconButton(
                           onPressed: () => _choseImage(context),
-                          icon: Icon(
+                          icon: const Icon(
                             Ionicons.camera,
-                            color: colorBlue.shade400,
                             size: 30,
                           )),
                     )

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/src/config.dart';
 import 'package:ionicons/ionicons.dart';
 
 class BackgroundProfile extends StatelessWidget {
@@ -23,7 +22,6 @@ class BackgroundProfile extends StatelessWidget {
       children: [
         url.isEmpty
             ? Container(
-                color: colorGrey,
                 width: width,
                 height: height,
               )
@@ -32,8 +30,7 @@ class BackgroundProfile extends StatelessWidget {
                 fit: BoxFit.cover,
                 width: width,
                 height: height,
-                errorBuilder: (context, url, error) =>
-                    Container(color: colorGrey),
+                errorBuilder: (context, url, error) => Container(),
               ),
         if (!isViewer)
           Positioned(
@@ -43,10 +40,8 @@ class BackgroundProfile extends StatelessWidget {
               constraints:
                   BoxConstraints(maxWidth: width / 12, maxHeight: width / 12),
               padding: const EdgeInsets.all(4),
-              style: IconButton.styleFrom(
-                  backgroundColor: colorGrey.withOpacity(0.6)),
               onPressed: callback,
-              icon: const Icon(Ionicons.pencil, color: colorWhite, size: 18),
+              icon: const Icon(Ionicons.pencil, size: 18),
             ),
           )
       ],

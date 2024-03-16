@@ -66,11 +66,10 @@ class _SplashScreenState extends State<SplashScreen> {
           padding: const EdgeInsets.all(24.0),
           child: FilledButton(
             onPressed: () => context.push(RoutePath.signin),
-            style: FilledButton.styleFrom(backgroundColor: colorPinkButton),
             child: const Text(
               'Sign In',
               textAlign: TextAlign.center,
-              style: TextStyle(color: colorWhite, fontWeight: FontWeight.w600),
+              style: TextStyle(fontWeight: FontWeight.w600),
             ),
           ),
         ),

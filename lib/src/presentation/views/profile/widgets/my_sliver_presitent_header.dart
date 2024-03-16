@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:friendzone/src/presentation/state.dart';
 
-import '../../../../core/config/themes/color.dart';
-
 class MySliverPersitentHeader extends SliverPersistentHeaderDelegate {
   final TabController tabController;
   final double maxSize;
@@ -22,7 +20,6 @@ class MySliverPersitentHeader extends SliverPersistentHeaderDelegate {
     return ColoredBox(
       color: Theme.of(context).scaffoldBackgroundColor,
       child: TabBar(
-        unselectedLabelColor: colorGrey,
         controller: tabController,
         dividerColor: Colors.transparent,
         tabs: List.generate(

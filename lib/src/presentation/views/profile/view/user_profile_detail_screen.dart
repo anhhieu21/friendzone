@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/presentation/shared.dart';
 import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/view.dart';
@@ -60,10 +59,11 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                 SliverPadding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   sliver: SliverToBoxAdapter(
-                      child: Container(
-                          width: size.width,
-                          height: 10,
-                          color: colorGrey.shade300)),
+                    child: SizedBox(
+                      width: size.width,
+                      height: 10,
+                    ),
+                  ),
                 ),
                 SliverList.builder(
                     itemCount: listPost.length,

@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/presentation/state/chat/conversation/conversation_cubit.dart';
 import 'package:friendzone/src/presentation/state/profile/myaccount/my_account_cubit.dart';
@@ -104,7 +103,6 @@ class _ConversationScreenState extends State<ConversationScreen> {
             right: 0,
             child: Container(
               height: kBottomNavigationBarHeight + 20,
-              color: colorGrey.shade100,
               padding: const EdgeInsets.fromLTRB(0, 4.0, 0, 16.0),
               child: Row(
                 children: [

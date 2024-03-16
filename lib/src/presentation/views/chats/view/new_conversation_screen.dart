@@ -27,7 +27,6 @@ class NewConversationScreen extends StatelessWidget {
                   contentPadding: const EdgeInsets.only(right: 8.0),
                   filled: true,
                   hintText: 'searching',
-                  fillColor: colorWhite,
                   border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(16.0)),

@@ -36,8 +36,9 @@ class ChangeLanguageScreen extends StatelessWidget {
                         children: [
                           Expanded(child: Text(e['name'].toString())),
                           text.localeName == e['code']
-                              ? const Icon(Ionicons.checkmark_circle_sharp,
-                                  color: colorBlue)
+                              ? const Icon(
+                                  Ionicons.checkmark_circle_sharp,
+                                )
                               : const Icon(Ionicons.ellipse_outline)
                         ],
                       ),

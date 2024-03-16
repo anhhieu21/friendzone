@@ -80,8 +80,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: IconButton(
                           onPressed: () => context.go(RoutePath.signin),
                           alignment: Alignment.center,
-                          style:
-                              IconButton.styleFrom(backgroundColor: colorGrey),
                           icon: const Icon(Ionicons.chevron_back),
                         ),
                       ),
