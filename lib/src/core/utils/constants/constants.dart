@@ -46,7 +46,7 @@ const kIconBtnSize = 24.0; // default
 const kHeightCover = kToolbarHeight * 3.2;
 const kHeightAppBar = kHeightCover;
 
-const kBottomSize = kToolbarHeight * 2.5;
+const kAppBarBottomSize = kToolbarHeight * 2.5;
 
 // Gradient
 LinearGradient kGradient = LinearGradient(

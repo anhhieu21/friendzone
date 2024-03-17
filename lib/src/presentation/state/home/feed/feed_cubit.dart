@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/domain.dart';
 import 'package:friendzone/src/domain/repositories/feed_repository.dart';
+import 'package:friendzone/src/utils.dart';
 
 import 'package:image_picker/image_picker.dart';
 
@@ -21,6 +22,7 @@ class FeedCubit extends Cubit<FeedState> {
   XFile? image;
   _init() async {
     _feeds = await _repository.getStories();
+    _feeds.insert(0, feedWelcome());
     emit(FeedLoaded(_feeds));
   }
 
@@ -53,3 +55,11 @@ class FeedCubit extends Cubit<FeedState> {
     emit(FeedPickImage(File(image!.path)));
   }
 }
+
+Feed feedWelcome() => Feed(
+    id: 'id_friend_zone',
+    idUser: 'id_friend_zone',
+    imagesUrl: [],
+    author: 'FriendZone',
+    createdAt: '',
+    avartarAuthor: urlAvatar);

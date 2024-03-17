@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friendzone/src/core/utils/extentions/build_context_extention.dart';
 import 'package:ionicons/ionicons.dart';
 
 class BackgroundProfile extends StatelessWidget {
@@ -18,10 +19,12 @@ class BackgroundProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorBox = context.theme.colorScheme.primaryContainer;
     return Stack(
       children: [
         url.isEmpty
-            ? SizedBox(
+            ? Container(
+                color: colorBox,
                 width: width,
                 height: height,
               )
@@ -30,7 +33,11 @@ class BackgroundProfile extends StatelessWidget {
                 fit: BoxFit.cover,
                 width: width,
                 height: height,
-                errorBuilder: (context, url, error) => Container(),
+                errorBuilder: (context, url, error) => Container(
+                  color: colorBox,
+                  width: width,
+                  height: height,
+                ),
               ),
         if (!isViewer)
           Positioned(

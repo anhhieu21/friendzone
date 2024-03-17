@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendzone/src/core/utils/constants/gap.dart';
+import 'package:friendzone/src/config.dart';
 import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/view.dart';
+import 'package:friendzone/src/presentation/views/profile/widgets/header_profile.dart';
+import 'package:friendzone/src/presentation/views/profile/widgets/my_bottom_appbar.dart';
 import 'package:friendzone/src/utils.dart';
-
-const expandedHeight = 180.0;
-const collapsedHeight = 120.0;
+import 'package:go_router/go_router.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -45,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen>
       },
       builder: (context, state) {
         return NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          headerSliverBuilder: (_, innerBoxIsScrolled) {
             return [
               if (state is MyDataState)
                 SliverAppBar(
@@ -55,48 +55,25 @@ class _ProfileScreenState extends State<ProfileScreen>
                   toolbarHeight: kHeightAppBar,
                   flexibleSpace: SizedBox(
                     width: size.width,
-                    child: HeaderMyProfile(
-                      user: state.user,
+                    child: BlocListener<UpdateProfileCubit, UpdateProfileState>(
+                      listener: (_, state) {
+                        if (state is UpdateProfileChoseImage) {
+                          if (state.isUpdateBackground) {
+                            context.pushNamed(RoutePath.routeName(
+                                RoutePath.updateBackground));
+                          }
+                        }
+                      },
+                      child: HeaderProfile(
+                        user: state.user,
+                        callback: () => _choseImage(context),
+                      ),
                     ),
                   ),
                   forceElevated: innerBoxIsScrolled,
                   bottom: PreferredSize(
-                    preferredSize: const Size.fromHeight(kBottomSize),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: Gap.s),
-                          child: BodyHeaderProfile(user: state.user),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            InforView(
-                              value: state.user.follower.toString(),
-                              label: text.followers,
-                              callback: () async {
-                                BlocProvider.of<UserPreviewCubit>(context,
-                                        listen: false)
-                                    .getListFollower(state.user.idUser);
-                                _showFollower(context);
-                              },
-                            ),
-                            InforView(
-                              value: state.user.following.toString(),
-                              label: text.following,
-                              callback: () async {
-                                BlocProvider.of<UserPreviewCubit>(context,
-                                        listen: false)
-                                    .getListFollower(state.user.idUser);
-                                _showFollower(context);
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                      preferredSize: const Size.fromHeight(kAppBarBottomSize),
+                      child: MyBottomAppBar(user: state.user)),
                 ),
               SliverPersistentHeader(
                 pinned: true,
@@ -132,11 +109,8 @@ class _ProfileScreenState extends State<ProfileScreen>
     );
   }
 
-  _showFollower(BuildContext context) async {
-    final size = MediaQuery.of(context).size;
-    showModalBottomSheet(
-        context: context,
-        constraints: BoxConstraints(maxHeight: size.height * 0.8),
-        builder: (_) => const ShowFollower());
+  _choseImage(BuildContext context) {
+    BlocProvider.of<UpdateProfileCubit>(context)
+        .choseImage(isUpdateBackground: true);
   }
 }
