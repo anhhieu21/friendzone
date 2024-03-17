@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friendzone/src/utils.dart';
 
 class InforView extends StatelessWidget {
   final String value;
@@ -13,18 +14,17 @@ class InforView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final textTheme = context.theme.textTheme;
     return TextButton(
       onPressed: callback,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
-            child: Text(
-              value,
-              style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600),
-            ),
+          Text(
+            value,
+            style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600),
           ),
-          Expanded(child: Text(label, style: textTheme.bodyLarge)),
+          Text(label, style: textTheme.bodyLarge),
         ],
       ),
     );

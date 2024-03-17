@@ -10,7 +10,7 @@ class WaitingChat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = SizeEx(context).screenSize;
+    final size = context.screenSize;
     return BlocBuilder<ChatCubit, ChatState>(
       builder: (_, state) => Column(children: [
         if (state is ListConversationState)

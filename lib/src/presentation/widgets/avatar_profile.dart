@@ -15,30 +15,21 @@ class AvatarProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // TODO: add image circle
-        Image.network(
-          url,
-          fit: BoxFit.cover,
-          // imageBuilder: (context, imageProvider) => CircleAvatar(
-          //   radius: radius * 1.05,
-          //   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          //   child: CircleAvatar(
-          //     radius: radius,
-          //     backgroundImage: imageProvider,
-          //   ),
-          // ),
+        CircleAvatar(
+          radius: radius * 1.05,
+          child: CircleAvatar(
+            radius: radius,
+            backgroundImage: NetworkImage(url),
+          ),
         ),
         if (!isViewer)
           Positioned(
-            bottom: -5,
+            bottom: 0,
             right: 0,
-            child: IconButton(
-              constraints: BoxConstraints(maxWidth: radius, maxHeight: radius),
-              padding: const EdgeInsets.all(4),
+            child: IconButton.filledTonal(
               onPressed: () {},
               icon: const Icon(
                 Ionicons.camera,
-                size: 18,
               ),
             ),
           )

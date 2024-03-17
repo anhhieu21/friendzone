@@ -43,10 +43,8 @@ class _MenuDropState extends State<MenuDrop> {
         top: offset!.dy + 50,
         right: 16,
         child: AnimationPopupMenu(
-          child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: Theme.of(context).cardColor),
+          child: Card(
+            elevation: 0.5,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: menu
@@ -76,9 +74,8 @@ class _MenuDropState extends State<MenuDrop> {
           GoRouter.of(context).go(RoutePath.splash);
         }
       },
-      child: IconButton(
+      child: IconButton.filledTonal(
         onPressed: _openPopup,
-        style: IconButton.styleFrom(),
         icon: const Icon(
           Ionicons.ellipsis_horizontal,
         ),

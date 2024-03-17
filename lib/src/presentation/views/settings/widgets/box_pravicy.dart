@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:friendzone/src/utils.dart';
 
 class BoxPravicyCheck extends StatelessWidget {
   const BoxPravicyCheck({super.key});
@@ -12,7 +13,7 @@ class BoxPravicyCheck extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16.0),
+        borderRadius: kBorderRadius,
         color: theme.cardColor,
         boxShadow: [
           BoxShadow(

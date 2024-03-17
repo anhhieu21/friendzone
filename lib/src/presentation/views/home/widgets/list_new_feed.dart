@@ -1,104 +1,99 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friendzone/src/config.dart';
+import 'package:friendzone/src/core/utils/constants/gap.dart';
 import 'package:friendzone/src/presentation/state/home/feed/feed_cubit.dart';
-import 'package:friendzone/src/presentation/state/profile/myaccount/my_account_cubit.dart';
 import 'package:friendzone/src/presentation/views/home/widgets/new_feed_item.dart';
+import 'package:friendzone/src/presentation/widgets/image_view.dart';
 import 'package:friendzone/src/utils.dart';
+import 'package:go_router/go_router.dart';
 
 class ListNewFeed extends StatelessWidget {
-  final Size size;
-  const ListNewFeed({super.key, required this.size});
+  const ListNewFeed({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final size = context.screenSize;
     return SliverToBoxAdapter(
-      child: SizedBox(
-        height: size.width * 0.4,
-        child: BlocBuilder<FeedCubit, FeedState>(
-          buildWhen: (previous, current) {
-            if (current is FeedLoaded) {
-              return true;
-            }
-            return false;
-          },
-          builder: (context, state) {
-            if (state is FeedLoaded) {
-              final list = state.listFeed;
-              return list.isEmpty
-                  ? const EmptyFeedList()
-                  : Stack(
-                      alignment: Alignment.center,
+      child: BlocBuilder<FeedCubit, FeedState>(
+        buildWhen: (previous, current) {
+          if (current is FeedLoaded) {
+            return true;
+          }
+          return false;
+        },
+        builder: (context, state) {
+          if (state is FeedLoaded) {
+            final list = state.listFeed;
+            return list.isEmpty
+                ? Padding(
+                    padding: const EdgeInsets.all(Gap.s),
+                    child: Row(
                       children: [
-                        ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: list.length,
-                          itemBuilder: (context, index) => Padding(
-                            padding: EdgeInsets.only(left: index == 0 ? 50 : 0),
-                            child: ItemNewFeed(
-                                size: size, item: list[index], index: index),
+                        SizedBox(
+                          width: size.width / 4,
+                          height: size.width / 2.5,
+                          child: Card(
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  flex: 7,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      const Positioned(
+                                        top: 0,
+                                        left: 0,
+                                        right: 0,
+                                        bottom: kIconBtnSize,
+                                        child: ImageViewNetwork(
+                                          src: urlAvatar,
+                                          borderRadius: kBorderRadiusOnTop,
+                                        ),
+                                      ),
+                                      Positioned(
+                                        bottom: 0,
+                                        child: IconButton.filledTonal(
+                                          onPressed: () => context.pushNamed(
+                                            RoutePath.routeName(
+                                                RoutePath.upFeed),
+                                          ),
+                                          icon: const Icon(Icons.add),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 3,
+                                  child: Text(
+                                    'Create\nstory',
+                                    textAlign: TextAlign.center,
+                                    style: context.theme.textTheme.titleSmall,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                        const Positioned(left: 0, child: ItemAddFeed()),
                       ],
-                    );
-            } else {
-              return const EmptyFeedList();
-            }
-          },
-        ),
+                    ),
+                  )
+                : SizedBox(
+                    height: size.width / 2.5,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: list.length,
+                      itemBuilder: (context, index) => ItemNewFeed(
+                        item: list[index],
+                        index: index,
+                      ),
+                    ),
+                  );
+          }
+          return const SizedBox();
+        },
       ),
-    );
-  }
-}
-
-class EmptyFeedList extends StatelessWidget {
-  const EmptyFeedList({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final size = SizeEx(context).screenSize;
-    return Stack(
-      alignment: Alignment.centerLeft,
-      children: [
-        Container(
-          width: size.width / 4,
-          margin: const EdgeInsets.only(top: 10, left: 58),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(25),
-          ),
-          child: Column(children: [
-            Flexible(
-              flex: 6,
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(25),
-                    topRight: Radius.circular(25)),
-                child: BlocBuilder<MyAccountCubit, MyAccountState>(
-                  builder: (context, state) {
-                    if (state is MyDataState) {
-                      return Image.network(
-                        width: size.width / 4,
-                        state.user.avartar,
-                        fit: BoxFit.cover,
-                      );
-                    }
-                    return const SizedBox();
-                  },
-                ),
-              ),
-            ),
-            const Flexible(
-              flex: 4,
-              child: Padding(
-                padding: EdgeInsets.all(8),
-                child: Text('Post your feel'),
-              ),
-            )
-          ]),
-        ),
-        const Positioned(left: 0, child: ItemAddFeed()),
-      ],
     );
   }
 }

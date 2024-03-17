@@ -41,7 +41,7 @@ class _HeaderProfileUserState extends State<HeaderProfileUser>
 
   @override
   Widget build(BuildContext context) {
-    final radiusAvatar = widget.size.width / 7.5;
+    final radiusAvatar = widget.size.width / 8;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,

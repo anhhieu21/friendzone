@@ -21,7 +21,6 @@ class CustomOverlayEntry {
             Positioned.fill(
                 child: GestureDetector(
               onTap: hideOverlay,
-              child: const Material(),
             )),
             child
           ],

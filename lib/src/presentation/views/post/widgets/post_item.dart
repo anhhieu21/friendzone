@@ -40,7 +40,7 @@ class PostItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = SizeEx(context).screenSize;
+    final size = context.screenSize;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: BlocBuilder<PostCubit, PostCubitState>(
@@ -51,10 +51,7 @@ class PostItem extends StatelessWidget {
           }
           return GestureDetector(
             onTap: () => _postDetail(context),
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Theme.of(context).cardColor),
+            child: Card(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(

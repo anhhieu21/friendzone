@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friendzone/src/utils.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../../../state/settings/language/language_cubit.dart';
@@ -15,7 +16,7 @@ class BoxAccountCenter extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16.0),
+        borderRadius: kBorderRadius,
         color: theme.cardColor,
         boxShadow: [
           BoxShadow(

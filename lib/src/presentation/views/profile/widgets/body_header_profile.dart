@@ -38,20 +38,14 @@ class BodyHeaderProfile extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-                onPressed: () => context.pushNamed(
-                    RoutePath.routeName(RoutePath.updateProfile),
-                    extra: user),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                ),
-                child: Text(
-                  text.editProfile,
-                  maxLines: 1,
-                  style: const TextStyle(fontWeight: FontWeight.w600),
-                )),
-            const SizedBox(
-              width: 10,
+            FilledButton.tonal(
+              onPressed: () => context.pushNamed(
+                  RoutePath.routeName(RoutePath.updateProfile),
+                  extra: user),
+              child: Text(
+                text.editProfile,
+                maxLines: 1,
+              ),
             ),
             const MenuDrop()
           ],

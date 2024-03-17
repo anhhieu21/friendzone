@@ -39,7 +39,7 @@ class UpdateProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = SizeEx(context).screenSize;
+    final size = context.screenSize;
 
     return Scaffold(
       appBar: AppBar(

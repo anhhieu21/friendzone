@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:friendzone/src/domain.dart';
+import 'package:friendzone/src/utils.dart';
 import 'package:ionicons/ionicons.dart';
 
 class MenuOptions extends StatelessWidget {
@@ -16,13 +17,12 @@ class MenuOptions extends StatelessWidget {
             width: 150,
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16.0),
+              borderRadius: kBorderRadius,
             ),
           ),
           dropdownStyleData: DropdownStyleData(
               offset: const Offset(0, -10),
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(16.0))),
+              decoration: BoxDecoration(borderRadius: kBorderRadius)),
           isExpanded: true,
           hint: const Text('Tuỳ chọn '),
           items: const [

@@ -135,7 +135,7 @@ class BodyPost extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    final size = SizeEx(context).screenSize;
+    final size = context.screenSize;
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.all(16.0),

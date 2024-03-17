@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -34,3 +35,30 @@ const durationAnimation = Duration(milliseconds: 500);
 // key sharedPreferences
 const kUserName = 'userName';
 const kPassword = 'password';
+
+// Border radius
+BorderRadius kBorderRadius = BorderRadius.circular(16.0);
+const kBorderRadiusOnTop = BorderRadius.vertical(top: Radius.circular(16.0));
+
+// Button size
+const kIconBtnSize = 24.0; // default
+
+const kHeightCover = kToolbarHeight * 3.2;
+const kHeightAppBar = kHeightCover;
+
+const kBottomSize = kToolbarHeight * 2.5;
+
+// Gradient
+LinearGradient kGradient = LinearGradient(
+  // begin: Alignment.topCenter,
+  tileMode: TileMode.clamp,
+  // end: Alignment.bottomCenter,
+  begin: const Alignment(0.0, 0.0),
+  end: const Alignment(0.0, 0.6),
+  colors: [
+    Colors.grey.withOpacity(0.0),
+    Colors.grey.withOpacity(0.1),
+    Colors.grey.withOpacity(0.3),
+    Colors.grey.withOpacity(0.5),
+  ],
+);
