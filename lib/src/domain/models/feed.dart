@@ -38,11 +38,3 @@ class Feed {
     );
   }
 }
-
-Feed feedWelcome() => Feed(
-    id: 'id_friend_zone',
-    idUser: '',
-    imagesUrl: [],
-    author: 'FriendZone',
-    createdAt: '',
-    avartarAuthor: 'assets/icons/logo.jpg');

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/config.dart';
+import 'package:friendzone/src/core/utils/constants/gap.dart';
 import 'package:friendzone/src/domain/models/user_model.dart';
 import 'package:friendzone/src/presentation/shared.dart';
 import 'package:friendzone/src/presentation/state.dart';
@@ -9,6 +10,17 @@ import 'package:friendzone/src/presentation/state/weather/weather_cubit.dart';
 import 'package:friendzone/src/utils.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
+
+enum WeatherType {
+  sunny(Ionicons.sunny_outline),
+  clouds(Ionicons.cloud_outline),
+  rain(Ionicons.rainy_outline),
+  snow(Ionicons.snow_outline);
+
+  final IconData iconData;
+
+  const WeatherType(this.iconData);
+}
 
 class AppBarHome extends StatelessWidget {
   final ScrollController scrollController;
@@ -24,7 +36,7 @@ class AppBarHome extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: Gap.s),
             child: BlocSelector<MyAccountCubit, MyAccountState, UserModel?>(
               selector: (state) => state is MyDataState ? state.user : null,
               builder: (context, user) => CircleAvatar(
@@ -44,22 +56,23 @@ class AppBarHome extends StatelessWidget {
               child: Container(
                 height: 40,
                 alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.only(left: 8.0),
+                padding: const EdgeInsets.only(left: Gap.s),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16.0),
+                    borderRadius: kBorderRadius,
                     color: Theme.of(context).cardColor),
                 child: Text(text.welcome),
               ),
             ),
           ),
           IconButton(
-              onPressed: () {
-                context.pushNamed(RoutePath.routeName(
-                    RoutePath.routeName(RoutePath.writepost)));
-              },
-              icon: const Icon(
-                Ionicons.create_outline,
-              )),
+            onPressed: () {
+              context.pushNamed(RoutePath.routeName(
+                  RoutePath.routeName(RoutePath.writepost)));
+            },
+            icon: const Icon(
+              Ionicons.create_outline,
+            ),
+          ),
         ],
       ),
       title: BlocBuilder<WeatherCubit, WeatherState>(
@@ -68,19 +81,22 @@ class AppBarHome extends StatelessWidget {
             final weatherroot = state.weatherModel;
             final weather = weatherroot.weather![0]!;
             return Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(
-                  getIconData(weather.main),
-                  size: 30,
-                ),
+                Icon(getIconData(weather.main)),
                 Padding(
-                  padding: const EdgeInsets.only(left: 4.0),
+                  padding: const EdgeInsets.only(left: Gap.xs),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('${weatherroot.main!.feelslike.round()}°C'),
-                      Text(weather.description!),
+                      Text(
+                        '${weatherroot.main!.feelslike.round()}°C',
+                        style: context.theme.textTheme.titleMedium,
+                      ),
+                      Text(
+                        weather.description!,
+                        style: context.theme.textTheme.titleSmall,
+                      ),
                     ],
                   ),
                 ),
@@ -91,55 +107,25 @@ class AppBarHome extends StatelessWidget {
         },
       ),
       action: [
-        // IconButton(
-        //     onPressed: () {},
-        //     icon: Stack(
-        //       children: [
-        //         Icon(
-        //           Ionicons.notifications_outline,
-        //           color: colorGrey.shade700,
-        //         ),
-        //         Positioned(
-        //             top: 0,
-        //             right: 0,
-        //             child: Icon(
-        //               Ionicons.ellipse,
-        //               size: 10,
-        //               color: colorRed.shade400,
-        //             )),
-        //       ],
-        //     ))
         IconButton(
-            onPressed: () =>
-                context.pushNamed(RoutePath.routeName(RoutePath.chat)),
-            icon: const Stack(
-              children: [
-                Icon(
-                  Ionicons.chatbubble,
-                ),
-                Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Icon(
-                      Ionicons.ellipse,
-                      size: 10,
-                    )),
-              ],
-            ))
+          onPressed: () =>
+              context.pushNamed(RoutePath.routeName(RoutePath.chat)),
+          icon: const Badge(
+            child: Icon(
+              Ionicons.chatbubble,
+            ),
+          ),
+        ),
       ],
     );
   }
 
   IconData getIconData(String? value) {
-    switch (value) {
-      case 'Rain':
-        return Ionicons.rainy_outline;
-      case 'Snow':
-        return Ionicons.snow_outline;
-      case 'Clouds':
-        return Ionicons.cloud_outline;
-      default:
-        return Ionicons.sunny_outline;
-    }
+    return WeatherType.values
+        .firstWhere(
+          (element) => element.name.toLowerCase() == value?.toLowerCase(),
+          orElse: () => WeatherType.sunny,
+        )
+        .iconData;
   }
 }

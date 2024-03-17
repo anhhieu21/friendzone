@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:friendzone/src/config.dart';
+import 'package:friendzone/src/core/utils/extentions/build_context_extention.dart';
 import 'package:friendzone/src/domain.dart';
 
 import 'package:go_router/go_router.dart';
@@ -8,12 +9,10 @@ import 'package:ionicons/ionicons.dart';
 import '../../../widgets/ontap_effect.dart';
 
 class ItemNewFeed extends StatelessWidget {
-  final Size size;
   final Feed item;
   final int index;
   const ItemNewFeed({
     super.key,
-    required this.size,
     required this.item,
     required this.index,
   });
@@ -23,7 +22,7 @@ class ItemNewFeed extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4),
         child: Container(
-          width: size.width / 4,
+          width: context.screenSize.width / 4,
           margin: const EdgeInsets.only(top: 10),
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(25)),
           child: Stack(

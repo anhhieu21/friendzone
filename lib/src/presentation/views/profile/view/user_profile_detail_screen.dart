@@ -28,7 +28,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = SizeEx(context).screenSize;
+    final size = context.screenSize;
     return Material(
       child: SafeArea(
         child: BlocBuilder<UserPreviewCubit, UserpreviewState>(

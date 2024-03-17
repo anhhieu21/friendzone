@@ -5,6 +5,7 @@ import 'package:friendzone/src/domain/models/user_model.dart';
 import 'package:friendzone/src/presentation/shared.dart';
 import 'package:friendzone/src/presentation/state/friend_zone/friendzone_bloc.dart';
 import 'package:friendzone/src/presentation/widgets/item_friend.dart';
+import 'package:friendzone/src/utils.dart';
 import 'package:go_router/go_router.dart';
 
 class NewConversationScreen extends StatelessWidget {
@@ -28,8 +29,7 @@ class NewConversationScreen extends StatelessWidget {
                   filled: true,
                   hintText: 'searching',
                   border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(16.0)),
+                      borderSide: BorderSide.none, borderRadius: kBorderRadius),
                   prefixIcon: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [

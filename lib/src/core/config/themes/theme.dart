@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:friendzone/src/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'color_schemes.g.dart';
 
 class AppTheme {
   static final lightTheme = ThemeData(
+    useMaterial3: true,
     colorScheme: lightColorScheme,
     shadowColor: lightColorScheme.shadow,
+    cardTheme: CardTheme(
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: kBorderRadius),
+    ),
     textTheme: GoogleFonts.nunitoTextTheme(),
     appBarTheme: _appBarTheme,
     searchBarTheme: SearchBarThemeData(
@@ -20,6 +26,7 @@ class AppTheme {
   );
 
   static final darkTheme = ThemeData(
+    useMaterial3: true,
     colorScheme: darkColorScheme,
     shadowColor: lightColorScheme.shadow,
     textTheme: GoogleFonts.nunitoTextTheme(ThemeData.dark().textTheme),

@@ -21,9 +21,6 @@ class FeedCubit extends Cubit<FeedState> {
   XFile? image;
   _init() async {
     _feeds = await _repository.getStories();
-    if (_feeds.isEmpty) {
-      _feeds.add(feedWelcome());
-    }
     emit(FeedLoaded(_feeds));
   }
 

@@ -20,7 +20,7 @@ class UpdateBackgroundScreen extends StatelessWidget {
   final StreamController<bool> _checkBoxController = StreamController<bool>();
   @override
   Widget build(BuildContext context) {
-    final size = SizeEx(context).screenSize;
+    final size = context.screenSize;
     final theme = Theme.of(context);
     return BlocSelector<MyAccountCubit, MyAccountState, UserModel?>(
         selector: (state) {

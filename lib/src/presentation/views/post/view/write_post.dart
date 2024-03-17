@@ -34,7 +34,7 @@ class WritePost extends StatelessWidget {
   final TextEditingController contentController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final size = SizeEx(context).screenSize;
+    final size = context.screenSize;
     return BlocProvider(
       create: (_) =>
           WritePostCubit(RepositoryProvider.of<PostRepositoryImpl>(_)),

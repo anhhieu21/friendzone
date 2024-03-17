@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/presentation/views/chats/view/chats_option_screen.dart';
 import 'package:friendzone/src/presentation/widgets/ontap_effect.dart';
+import 'package:friendzone/src/utils.dart';
 
 import 'package:ionicons/ionicons.dart';
 
@@ -120,7 +121,7 @@ class ItemMenuChat extends StatelessWidget {
               padding: const EdgeInsets.all(12.0),
               decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
-                  borderRadius: BorderRadius.circular(16.0)),
+                  borderRadius: kBorderRadius),
               child: Row(
                 children: [
                   Container(

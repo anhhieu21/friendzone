@@ -21,7 +21,7 @@ class BackgroundProfile extends StatelessWidget {
     return Stack(
       children: [
         url.isEmpty
-            ? Container(
+            ? SizedBox(
                 width: width,
                 height: height,
               )
@@ -36,12 +36,9 @@ class BackgroundProfile extends StatelessWidget {
           Positioned(
             bottom: 0,
             right: 0,
-            child: IconButton(
-              constraints:
-                  BoxConstraints(maxWidth: width / 12, maxHeight: width / 12),
-              padding: const EdgeInsets.all(4),
+            child: IconButton.filledTonal(
               onPressed: callback,
-              icon: const Icon(Ionicons.pencil, size: 18),
+              icon: const Icon(Ionicons.pencil),
             ),
           )
       ],
