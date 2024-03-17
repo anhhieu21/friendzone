@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:friendzone/src/config.dart';
-import 'package:friendzone/src/core/utils/extentions/build_context_extention.dart';
+import 'package:friendzone/src/core/utils/constants/gap.dart';
 import 'package:friendzone/src/domain.dart';
+import 'package:friendzone/src/presentation/widgets/image_view.dart';
+import 'package:friendzone/src/utils.dart';
 
 import 'package:go_router/go_router.dart';
-import 'package:ionicons/ionicons.dart';
 
 import '../../../widgets/ontap_effect.dart';
 
@@ -20,11 +21,10 @@ class ItemNewFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4),
-        child: Container(
-          width: context.screenSize.width / 4,
-          margin: const EdgeInsets.only(top: 10),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(25)),
+      padding: const EdgeInsets.symmetric(horizontal: Gap.xs),
+      child: SizedBox(
+        width: context.screenSize.width / 4,
+        child: Card(
           child: Stack(
             children: [
               OnTapEffect(
@@ -33,10 +33,8 @@ class ItemNewFeed extends StatelessWidget {
                     extra: index),
                 radius: 20,
                 child: Container(
-                  margin: const EdgeInsets.all(2),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.blue,
+                    borderRadius: kBorderRadius,
                     image: item.imagesUrl.isNotEmpty
                         ? DecorationImage(
                             fit: BoxFit.cover,
@@ -60,7 +58,9 @@ class ItemNewFeed extends StatelessWidget {
                   ))
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 
@@ -69,20 +69,57 @@ class ItemAddFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => context.pushNamed(RoutePath.routeName(RoutePath.upFeed)),
-      child: Container(
-          width: 50,
-          height: 50,
-          margin: const EdgeInsets.only(top: 10),
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(26),
-                  bottomRight: Radius.circular(26))),
-          child: const Icon(
-            Ionicons.add_circle,
-            size: 40,
-          )),
+    final size = context.screenSize;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: Gap.xs),
+      child: Row(
+        children: [
+          SizedBox(
+            width: size.width / 4,
+            child: Card(
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 7,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        const Positioned(
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: kIconBtnSize,
+                          child: ImageViewNetwork(
+                            src: urlAvatar,
+                            borderRadius: kBorderRadiusOnTop,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          child: IconButton.filledTonal(
+                            onPressed: () => context.pushNamed(
+                              RoutePath.routeName(RoutePath.upFeed),
+                            ),
+                            icon: const Icon(Icons.add),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Flexible(
+                    flex: 3,
+                    child: Text(
+                      'Create\nstory',
+                      textAlign: TextAlign.center,
+                      style: context.theme.textTheme.titleSmall,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -49,8 +49,6 @@ class App extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   theme: theme,
                   locale: locale,
-                  // darkTheme: AppTheme.darkTheme,
-                  // themeMode: ThemeMode.system,
                   routerConfig: router,
                   localizationsDelegates:
                       AppLocalizations.localizationsDelegates,

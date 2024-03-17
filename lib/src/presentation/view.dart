@@ -28,7 +28,6 @@ export 'views/post/widgets/menu_options.dart';
 export 'views/profile/view/my_profile_screen.dart';
 export 'views/profile/view/update_profile_screen.dart';
 export 'views/profile/widgets/body_header_profile.dart';
-export 'views/profile/widgets/header_my_profile.dart';
 export 'views/profile/widgets/info_view.dart';
 export 'views/profile/widgets/item_post.dart';
 export 'views/profile/widgets/item_post_save.dart';

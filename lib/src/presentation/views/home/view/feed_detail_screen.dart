@@ -33,23 +33,27 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FeedCubit, FeedState>(buildWhen: (previous, current) {
-      if (current is FeedLoaded) {
-        return true;
-      }
-      return false;
-    }, builder: (context, state) {
-      if (state is FeedLoaded) {
-        return PageView.builder(
+    return BlocBuilder<FeedCubit, FeedState>(
+      buildWhen: (previous, current) {
+        if (current is FeedLoaded) {
+          return true;
+        }
+        return false;
+      },
+      builder: (context, state) {
+        if (state is FeedLoaded) {
+          return PageView.builder(
             controller: _pageController,
             itemCount: state.listFeed.length,
             itemBuilder: (_, index) {
               final item = state.listFeed[index];
               return ItemPage(item: item);
-            });
-      }
-      return const SizedBox();
-    });
+            },
+          );
+        }
+        return const SizedBox();
+      },
+    );
   }
 }
 

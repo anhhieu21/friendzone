@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:friendzone/src/config.dart';
-import 'package:friendzone/src/presentation/state.dart';
 import 'package:friendzone/src/utils.dart';
 
-import 'package:go_router/go_router.dart';
-
 import '../../../../domain/models/user_model.dart';
-import 'menu_more.dart';
 
 class BodyHeaderProfile extends StatelessWidget {
   final UserModel user;
-  const BodyHeaderProfile({super.key, required this.user});
+  final Widget action;
+  const BodyHeaderProfile(
+      {super.key, required this.user, required this.action});
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
           child: Column(
@@ -35,21 +32,7 @@ class BodyHeaderProfile extends StatelessWidget {
             ],
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FilledButton.tonal(
-              onPressed: () => context.pushNamed(
-                  RoutePath.routeName(RoutePath.updateProfile),
-                  extra: user),
-              child: Text(
-                text.editProfile,
-                maxLines: 1,
-              ),
-            ),
-            const MenuDrop()
-          ],
-        ),
+        action,
       ],
     );
   }
